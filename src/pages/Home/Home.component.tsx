@@ -3,6 +3,8 @@ import React from 'react'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
+import Typography from '../../components/atoms/Typography'
+import Input from '../../components/atoms/Input'
 
 const Home = () => (
   <Container 
@@ -10,9 +12,13 @@ const Home = () => (
     fullCentered
   >
     <Paper>
-      <h1>Home</h1>
+      <Typography>Bem Vindo!</Typography>
+      <Input 
+        type='text'
+      />
+      <br/>
       <Button>
-        Login
+        Entrar
       </Button>
     </Paper>
   </Container>

@@ -7,7 +7,7 @@ import {
 
 import Home from './pages/Home'
 
-const App2 = () => (
+const App = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
@@ -15,4 +15,4 @@ const App2 = () => (
   </BrowserRouter>
 )
 
-export default App2
+export default App
