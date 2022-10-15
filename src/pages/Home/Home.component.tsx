@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import * as UserService from '../../services/Users'
 
@@ -10,15 +10,15 @@ import Input from '../../components/atoms/Input'
 import {useUser} from '../../context/User'
 
 const Home = () => {
-  const {state, dispatch} = useUser()
-  console.log(state)
+  const {dispatch} = useUser()
+  const [cpf, setCpf] = useState<string>('')
+
   const handleSubmit = (cpf: string) => {
     UserService.getByCpf(cpf)
       .then((response) => {
-        console.log(response)
         dispatch({
           type: 'ADD_USER',
-          payload: response,
+          payload: response
         })
       })
   }
@@ -32,11 +32,13 @@ const Home = () => {
         <Typography>Bem Vindo!</Typography>
         <Input 
           type='text'
+          value={cpf}
+          onChange={(e) => setCpf(e.target.value)}
         />
         <br/>
         <Button
           type='button'
-          onClick={() => handleSubmit('03874857085')}
+          onClick={() => handleSubmit(cpf)}
         >
           Entrar
         </Button>
