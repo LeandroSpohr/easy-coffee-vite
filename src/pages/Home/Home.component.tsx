@@ -27,12 +27,12 @@ const Home = () => {
           type='text'
         />
         <br/>
-        <button
+        <Button
           type='button'
           onClick={() => handleSubmit('03874857085')}
         >
           Entrar
-        </button>
+        </Button>
       </Paper>
     </Container>
   )}
