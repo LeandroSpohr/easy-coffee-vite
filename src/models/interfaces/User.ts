@@ -6,3 +6,8 @@ export default interface UserInterface {
   createdAt: string
   updatedAt: string
 }
+
+export interface UserContextInterface {
+  hasUser: boolean,
+  user: UserInterface | null
+}
