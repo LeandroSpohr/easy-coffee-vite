@@ -1,7 +1,8 @@
 import React from 'react'
 import Input from './Input.style'
+import { StyledComponentPropsWithRef } from 'styled-components'
 
-interface InputInterface {
+interface InputInterface extends StyledComponentPropsWithRef <typeof Input>{
   type: string
   name?: string
 }
