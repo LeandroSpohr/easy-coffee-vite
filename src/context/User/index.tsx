@@ -2,6 +2,7 @@ import React, { useContext, createContext, useReducer } from 'react'
 import reducer from './reducer'
 import { UserContextInterface } from '../../models/interfaces/User'
 import {ActionTypes} from './types'
+import initialValues from './initialValues'
 
 type Context = {
   state: UserContextInterface
@@ -12,15 +13,10 @@ type ContextProps = {
   children?: React.ReactNode
 };
 
-const initialState: UserContextInterface = {
-  hasUser: false,
-  user: null
-}
-
 const UserContext = createContext<Context>({} as Context)
 
 export const UserProvider = ({children}: ContextProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialValues)
 
   const value = {
     state,

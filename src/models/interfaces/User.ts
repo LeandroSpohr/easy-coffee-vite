@@ -1,3 +1,5 @@
+import CartInterface from './Cart'
+
 export default interface UserInterface {
   id: string
   cpf: string
@@ -10,4 +12,5 @@ export default interface UserInterface {
 export interface UserContextInterface {
   hasUser: boolean,
   user: UserInterface | null
+  cart: CartInterface[]
 }
