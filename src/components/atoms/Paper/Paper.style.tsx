@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components'
 
-import { colors } from '../../../assets/variables'
+import { colors } from '../../../assets/styles/variables'
 
 const { lightBrown } = colors
 
