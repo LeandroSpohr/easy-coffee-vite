@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { colors, sizes } from '../../../assets/styles/variables'
+import { colors, fontSizes } from '../../../assets/styles/variables'
 
 const { white } = colors
-const { size40 } = sizes
+const { fontSize42 } = fontSizes
 
 const Typography = styled.h1`
   color: ${white};
-  font-size: ${size40};
+  font-size: ${fontSize42};
 `
 
 export default Typography
