@@ -9,8 +9,13 @@ export const useFormats = () => {
     !fullName ? '' : fullName.split(' ')[0]
   ), [])
 
+  const formatDateDDMMYYYY = (data: Date) => (
+    `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`
+  )
+
   return {
     formatCurrency,
     getFisrtName,
+    formatDateDDMMYYYY
   }
 }
