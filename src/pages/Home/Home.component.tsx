@@ -9,7 +9,6 @@ import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Input from '../../components/atoms/Input'
 import { useUser } from '../../context/User'
-import FilterBox from '../../components/molecules/FilterBox'
 
 const Home = () => {
   const { dispatch } = useUser()
@@ -28,10 +27,15 @@ const Home = () => {
   }
 
   return (
-    <Container>
-      <FilterBox description={'Buscar'} handleSubmit={() => console.log('hello')}>
-        <Typography>Filtros</Typography>
-      </FilterBox>
+    <Container fullHeight fullCentered>
+      <Paper>
+        <Typography>Bem Vindo!</Typography>
+        <Input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
+        <br />
+        <Button type="button" onClick={() => handleSubmit(cpf)}>
+          Entrar
+        </Button>
+      </Paper>
     </Container>
   )
 }
