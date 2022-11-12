@@ -14,12 +14,13 @@ const FilterBox = styled.div`
   button {
     display: none;
   }
+  justify-content: space-between;
 
   ${({ active }: FilterBoxInterface) =>
     active &&
     css`
       width: 100%;
-      height: 15rem;
+      height: 22rem;
       button {
         display: flex;
         height: 5rem;
