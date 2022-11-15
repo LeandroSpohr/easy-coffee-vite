@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-key */
 import React from 'react'
 import {StyledComponentPropsWithRef} from 'styled-components'
-import Table from './Table.style'
+import {Table, THead, TBody, TR, TH, TD} from './Table.style'
 
 interface TableInterface extends StyledComponentPropsWithRef<typeof Table> {
-  data: any
-  columns: any
+  data: string[][]
+  columns: string[]
 }
 
 const TableComponent = ({
@@ -15,23 +13,23 @@ const TableComponent = ({
   ...rest
 }: TableInterface) => (
   <Table {...rest}>
-    <thead>
-      <tr>
-        {columns && columns.map((head: {field: string | number, header: string | number} ) => (
-          <th>{head.header ? head.header : head.field}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {data && data.map((row: string) => (
-        <tr>
-          {columns.map((col: {field: number} ) => (
-            <td>{row[col.field]}</td>
+    <THead>
+      <TR>
+        {columns.length ? columns.map((col: string ) => (
+          <TH key={col}>{col}</TH>
+        )): null}
+      </TR>
+    </THead>
+    <TBody>
+      {data.length ? data.map((dat: string[],e: number) => (
+        <TR key={e}>
+          {columns.map((col, i: number) => (
+            <TD key={i}>{dat[i]}</TD>
           ))}
-        </tr>
-      ))}
-    </tbody>
-    {data ? null : <p>Sem dados para mostrar!</p>}
+        </TR>
+      )): null}
+    </TBody>
+    {data.length ? null : <TBody><TR><TH>Sem dados para mostrar</TH></TR></TBody>}
   </Table>
 )
 
