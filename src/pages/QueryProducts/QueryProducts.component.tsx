@@ -8,6 +8,10 @@ import ProductInterface from '../../models/interfaces/Product'
 import Typography from '../../components/atoms/Typography'
 import ProductCard from '../../components/molecules/ProductCard'
 
+import { sizes } from '../../assets/styles/variables'
+
+const { size150, size200 } = sizes
+
 const QueryProducts = () => {
   const [products, setProducts] = useState<ProductInterface[]>([])
 
@@ -26,8 +30,8 @@ const QueryProducts = () => {
               key={'productCard' + product.id}
               fluid
               imgUrl={product.imgUrl}
-              imgMaxWidth={'20rem'}
-              imgMaxHeight={'15rem'}
+              imgMaxWidth={size200}
+              imgMaxHeight={size150}
               title={product.description}
               price={product.value}
               handleSubmit={function (): void {

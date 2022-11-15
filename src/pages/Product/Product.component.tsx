@@ -11,6 +11,10 @@ import ProductCard from '../../components/molecules/ProductCard'
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 
+import { sizes } from '../../assets/styles/variables'
+
+const { size150, size200 } = sizes
+
 const Product = () => {
   const { state } = useUser()
   const { getFirstName } = useFormats()
@@ -31,8 +35,8 @@ const Product = () => {
               key={'productCard' + product.id}
               fluid
               imgUrl={product.imgUrl}
-              imgMaxWidth={'20rem'}
-              imgMaxHeight={'15rem'}
+              imgMaxWidth={size200}
+              imgMaxHeight={size150}
               title={product.description}
               price={product.value}
               handleSubmit={function (): void {
