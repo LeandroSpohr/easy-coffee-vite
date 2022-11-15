@@ -6,6 +6,7 @@ import ProductCard from './ProductCard.style'
 import { useFormats } from '../../../utils/useFormats'
 
 type ProductCardComponentInterface = {
+  fluid?: boolean
   imgUrl: string
   imgMaxWidth?: number | string
   imgMaxHeight?: number | string
@@ -25,11 +26,12 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
   buttonText,
   price,
   handleSubmit,
+  fluid,
 }) => {
   const { formatCurrency } = useFormats()
 
   return (
-    <ProductCard>
+    <ProductCard fluid={fluid}>
       <Image source={imgUrl} maxWidth={imgMaxWidth} maxHeight={imgMaxHeight} />
       <Typography as="h2"> {title} </Typography>
       <Typography as="p"> {description} </Typography>

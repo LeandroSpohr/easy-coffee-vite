@@ -23,9 +23,11 @@ const QueryProducts = () => {
         {products.map((product) => (
           <Col lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
             <ProductCard
+              key={'productCard' + product.id}
+              fluid
               imgUrl={product.imgUrl}
-              imgMaxWidth={'150px'}
-              imgMaxHeight={'150px'}
+              imgMaxWidth={'20rem'}
+              imgMaxHeight={'15rem'}
               title={product.description}
               price={product.value}
               handleSubmit={function (): void {
