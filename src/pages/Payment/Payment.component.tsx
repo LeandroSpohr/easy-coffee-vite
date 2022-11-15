@@ -12,7 +12,7 @@ import Table from '../../components/atoms/Table'
 import { useUser } from '../../context/User'
 
 const Payment = () => {
-  const { formatDateDDMMYYYY } = useFormats()
+  const { formatDateDDMMYYYY, formatCurrency } = useFormats()
   const [payments, setPayments] = useState<PaymentInterface[]>([])
   const { state } = useUser()
 
@@ -21,24 +21,22 @@ const Payment = () => {
       .then(setPayments)
   }, [])
 
-  const dados = payments.map((item) => (
-    {...item, dateHour: formatDateDDMMYYYY(item.dateHour as Date)}
+  const data = payments.map((item) => (
+    [
+      formatDateDDMMYYYY(new Date(item.dateHour)),
+      formatCurrency(item.totalValue)
+    ]
   ))
 
-  const colunas = [
-    {field: 'totalValue', header: 'Gastos'},
-    {field: 'dateHour', header: 'Data/Hora'}
-  ]
-
+  const columns = ['Data', 'Gastos']
+  
   return (
     <>
       <Typography>Histórico de Pagamentos</Typography>
-      
-      <Table 
-        data={dados} 
-        columns={colunas}
+      <Table
+        data={data}
+        columns={columns}
       />
-      
     </>
   )
 }
