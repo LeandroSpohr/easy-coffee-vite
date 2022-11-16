@@ -8,16 +8,11 @@ import ProductInterface from '../../models/interfaces/Product'
 import Typography from '../../components/atoms/Typography'
 import ProductCard from '../../components/molecules/ProductCard'
 
-import { useUser } from '../../context/User'
-import { useFormats } from '../../utils/useFormats'
-
 import { sizes } from '../../assets/styles/variables'
 
 const { size150, size200 } = sizes
 
-const Product = () => {
-  const { state } = useUser()
-  const { getFirstName } = useFormats()
+const QueryProducts = () => {
   const [products, setProducts] = useState<ProductInterface[]>([])
 
   useEffect(() => {
@@ -26,8 +21,8 @@ const Product = () => {
 
   return (
     <>
-      <Typography>Olá {getFirstName(state.user?.name)}</Typography>
-      <Typography>Produtos</Typography>
+      {/* <QueryTemplate> */}
+      <Typography>Temos isso para voc&#234;: </Typography>
       <Row>
         {products.map((product) => (
           <Col lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
@@ -46,8 +41,9 @@ const Product = () => {
           </Col>
         ))}
       </Row>
+      {/* </QueryTemplate> */}
     </>
   )
 }
 
-export default Product
+export default QueryProducts
