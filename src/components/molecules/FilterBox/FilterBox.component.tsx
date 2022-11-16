@@ -5,29 +5,28 @@ import Container from '../../atoms/Container/'
 import FilterBox from './FilterBox.style'
 
 interface FilterBoxComponentInterface extends StyledComponentPropsWithRef<typeof FilterBox> {
-  children?: JSX.Element | JSX.Element[]
+  children: JSX.Element[]
   handleSubmit: () => void
-  description: string
+  toggleText: string
+  submitText: string
 }
 
 const FilterBoxComponent: React.FC<FilterBoxComponentInterface> = ({
   children,
   handleSubmit,
-  description,
+  toggleText,
+  submitText,
   ...rest
 }) => {
   const [active, setActive] = useState(false)
 
   return (
-    <FilterBox
-      active={active}
-      onClick={() => {
-        setActive(!active), console.log(!active)
-      }}
-      {...rest}
-    >
+    <FilterBox active={active} {...rest}>
+      <Button onClick={() => setActive(!active)}>{toggleText}</Button>
       <Container>{children}</Container>
-      <Button onClick={handleSubmit}>{description}</Button>
+      <Button id="submitButton" onClick={handleSubmit}>
+        {submitText}
+      </Button>
     </FilterBox>
   )
 }

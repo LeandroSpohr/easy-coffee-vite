@@ -9,22 +9,32 @@ interface FilterBoxInterface {
 }
 
 const FilterBox = styled.div`
-  display: flex;
   background-color: ${lightBrown};
-  button {
+
+  div {
     display: none;
   }
-  justify-content: space-between;
+
+  #submitButton {
+    display: none;
+  }
 
   ${({ active }: FilterBoxInterface) =>
     active &&
     css`
+      display: initial
       width: 100%;
-      height: 22rem;
+
+      div {
+        display: initial;
+      }
+
       button {
         display: flex;
-        height: 5rem;
-        width: 5rem;
+      }
+
+      #submitButton {
+        display: initial;
       }
     `};
 `
