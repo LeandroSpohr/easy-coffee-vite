@@ -3,7 +3,7 @@ import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/va
 
 const Button = styled.button`
   border: none;
-  width: ${sizes.size150};
+  padding: ${sizes.size14} ${sizes.size20};
   height: ${sizes.size48};
   background: ${colors.brown};
   border-radius: ${sizes.size15};

@@ -22,4 +22,10 @@ const ProductCard = styled.div`
     `};
 `
 
+export const InfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  bottom: 0;
+`
+
 export default ProductCard

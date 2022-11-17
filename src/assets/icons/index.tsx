@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {MdOutlineShoppingCart} from 'react-icons/md'
+import {MdOutlineShoppingCart, MdAdd} from 'react-icons/md'
 
 import { colors, sizes } from '../styles/variables'
 
@@ -21,5 +21,9 @@ interface IconInterface {
 // SGV icons
 
 export const CartIcon = styled(MdOutlineShoppingCart).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const AddIcon = styled(MdAdd).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `

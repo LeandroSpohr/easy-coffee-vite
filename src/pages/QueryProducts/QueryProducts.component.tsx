@@ -10,6 +10,7 @@ import Container from '../../components/atoms/Container'
 import ProductCard from '../../components/molecules/ProductCard'
 import {ColWrapper} from './QueryProducts.styles'
 
+import { AddIcon } from '../../assets/icons'
 import { sizes } from '../../assets/styles/variables'
 
 const { size150 } = sizes
@@ -35,6 +36,7 @@ const QueryProducts = () => {
               imgMaxHeight={size150}
               title={product.description}
               price={product.value}
+              buttonText={<AddIcon />}
               handleSubmit={() => null}
             ></ProductCard>
           </ColWrapper>
