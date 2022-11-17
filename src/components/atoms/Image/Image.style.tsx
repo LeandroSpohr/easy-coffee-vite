@@ -5,10 +5,8 @@ interface ImageInterface {
 }
 
 const Image = styled.img<ImageInterface>`
-  ${({ maxWidth }: ImageInterface) =>
-    css`
-      max-width: ${maxWidth};
-    `};
+  max-width: ${({maxWidth}: ImageInterface) => (!maxWidth ? '100%' : maxWidth)};
+
   ${({ maxHeight }: ImageInterface) =>
     css`
       max-height: ${maxHeight};

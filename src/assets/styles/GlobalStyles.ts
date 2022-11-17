@@ -1,7 +1,7 @@
 import {createGlobalStyle} from 'styled-components'
 import coffeBean from '../images/coffee_bean.svg'
 
-import { colors, sizes } from '../styles/variables'
+import { colors, sizes, fontSizes } from '../styles/variables'
 import { device } from '../../config/device'
 
 const { veryLightGray } = colors
@@ -32,6 +32,26 @@ const GlobalStyle = createGlobalStyle`
     background-image: url(${coffeBean});
     background-size: cover;
     height: 100vh;
+  }
+
+  h1 {
+    font-size: ${fontSizes.fontSize32};
+  }
+
+  h2 {
+    font-size: ${fontSizes.fontSize24};
+  }
+
+  h3 {
+    font-size: ${fontSizes.fontSize18};
+  }
+
+  h4 {
+    font-size: ${fontSizes.fontSize16};
+  }
+
+  p {
+    font-size: ${fontSizes.fontSize14};
   }
 `
 

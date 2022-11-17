@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col } from 'react-grid-system'
+import { Row } from 'react-grid-system'
 
 import * as ProductService from '../../services/Product'
 
 import ProductInterface from '../../models/interfaces/Product'
 
 import Typography from '../../components/atoms/Typography'
+import Container from '../../components/atoms/Container'
 import ProductCard from '../../components/molecules/ProductCard'
+import {ColWrapper} from './QueryProducts.styles'
 
 import { sizes } from '../../assets/styles/variables'
 
-const { size150, size200 } = sizes
+const { size150 } = sizes
 
 const QueryProducts = () => {
   const [products, setProducts] = useState<ProductInterface[]>([])
@@ -20,29 +22,26 @@ const QueryProducts = () => {
   }, [])
 
   return (
-    <>
+    <Container displayBlock>
       {/* <QueryTemplate> */}
-      <Typography>Temos isso para voc&#234;: </Typography>
+      <Typography>Produtos: </Typography>
       <Row>
         {products.map((product) => (
-          <Col lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
+          <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
             <ProductCard
               key={'productCard' + product.id}
               fluid
               imgUrl={product.imgUrl}
-              imgMaxWidth={size200}
               imgMaxHeight={size150}
               title={product.description}
               price={product.value}
-              handleSubmit={function (): void {
-                throw new Error('Function not implemented.')
-              }}
+              handleSubmit={() => null}
             ></ProductCard>
-          </Col>
+          </ColWrapper>
         ))}
       </Row>
       {/* </QueryTemplate> */}
-    </>
+    </Container>
   )
 }
 
