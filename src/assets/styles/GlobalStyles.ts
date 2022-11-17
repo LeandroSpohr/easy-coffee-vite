@@ -30,7 +30,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${veryLightGray};
     background-image: url(${coffeBean});
-    background-size: cover;
     height: 100vh;
   }
 
