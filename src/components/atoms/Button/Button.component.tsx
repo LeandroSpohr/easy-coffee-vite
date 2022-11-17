@@ -10,7 +10,11 @@ const ButtonComponent = ({
   children,
   ...rest
 }: ButtonInterface) => (
-  <Button {...rest}>{children}</Button>
+  <Button {...rest}>
+    <label>
+      {children}
+    </label>
+  </Button>
 )
 
 export default ButtonComponent

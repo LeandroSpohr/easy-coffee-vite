@@ -8,7 +8,13 @@ import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Input from '../../components/atoms/Input'
+import Image from '../../components/atoms/Image'
+
+import coffeeCup from '../../assets/images/coffeeCup.svg'
+import { Wrapper, FieldContainer } from './Home.styles'
+
 import { useUser } from '../../context/User'
+import { colors } from '../../assets/styles/variables'
 
 const Home = () => {
   const { dispatch } = useUser()
@@ -28,10 +34,19 @@ const Home = () => {
 
   return (
     <Container fullHeight fullCentered>
-      <Paper>
-        <Typography>Bem Vindo!</Typography>
-        <Input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
-        <br />
+      <Paper fullCentered>
+        <Wrapper>
+          <Image src={coffeeCup} maxHeight='200px' maxWidth={3} />
+          <Typography color={colors.brown}>Easy Coffee</Typography>
+        </Wrapper>
+        <FieldContainer>
+          <Input
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            placeholder="Informe seu CPF"
+          />
+        </FieldContainer>
         <Button type="button" onClick={() => handleSubmit(cpf)}>
           Entrar
         </Button>

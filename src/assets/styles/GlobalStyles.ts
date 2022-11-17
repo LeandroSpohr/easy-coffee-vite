@@ -4,7 +4,7 @@ import coffeBean from '../images/coffee_bean.svg'
 import { colors, sizes } from '../styles/variables'
 import { device } from '../../config/device'
 
-const { brown } = colors
+const { veryLightGray } = colors
 const { size100Percent } = sizes
 
 const GlobalStyle = createGlobalStyle`
@@ -28,9 +28,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${brown};
+    background-color: ${veryLightGray};
     background-image: url(${coffeBean});
-    background-size: 600px;
+    background-size: cover;
     height: 100vh;
   }
 `

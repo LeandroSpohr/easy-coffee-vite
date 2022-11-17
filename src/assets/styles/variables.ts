@@ -1,10 +1,14 @@
 interface ColorsInterface {
-  darkBrown: string
+  veryDarkBorwn: string
+  darkGray: string
   brown: string
   lightBrown: string
   veryLightBrown: string
+  gray: string
+  lightGray: string
   white: string
-  black: string 
+  black: string
+  veryLightGray: string
 }
 
 interface FontSizesInterface {
@@ -115,12 +119,16 @@ interface ZIndexInterface {
 }
 
 export const colors: ColorsInterface = {
-  darkBrown: '#240f04',
-  brown: '#5c3015',
-  lightBrown: '#9f5524',
-  veryLightBrown: '#bc906a',
+  veryDarkBorwn: '#240f04',
+  brown: '#6b451e',
+  lightBrown: '#977452',
+  veryLightBrown: '#ce9f6e',
+  darkGray: '#676363',
+  gray: '#747778',
+  lightGray: '#a7a7a7',
   white: '#FFF',
-  black: '#000'
+  black: '#000',
+  veryLightGray: '#E7E7E7'
 }
 
 export const zIndex: ZIndexInterface = {
