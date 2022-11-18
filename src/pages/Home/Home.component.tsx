@@ -29,7 +29,7 @@ const Home = () => {
           payload: response,
         })
       })
-      .then(() => navigate('/produtos'))
+      .then(() => navigate('/consultar-produtos'))
   }
 
   return (
