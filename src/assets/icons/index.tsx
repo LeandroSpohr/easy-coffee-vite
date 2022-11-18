@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {MdOutlineShoppingCart, MdAdd} from 'react-icons/md'
+import {MdOutlineShoppingCart, MdAdd, MdOutlineExitToApp, MdArrowBackIosNew} from 'react-icons/md'
 
 import { colors, sizes } from '../styles/variables'
 
@@ -25,5 +25,13 @@ export const CartIcon = styled(MdOutlineShoppingCart).attrs(defaultConfig)`
 `
 
 export const AddIcon = styled(MdAdd).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const ExitIcon = styled(MdOutlineExitToApp).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const LeftArrowIcon = styled(MdArrowBackIosNew).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `

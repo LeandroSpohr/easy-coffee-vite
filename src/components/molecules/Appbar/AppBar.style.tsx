@@ -1,17 +1,29 @@
 import styled from 'styled-components'
-// interface AppBarInterface {
-//   fullHeight?: boolean
-//   fullCentered?: boolean
-// }
-import { colors } from '../../../assets/styles/variables'
+import { colors, sizes } from '../../../assets/styles/variables'
 
-const { black } = colors
+const { transparentBrown } = colors
 
-const AppBar = styled.nav`
-  background-color: ${black};
+const AppBar = styled.header`
+  display: flex;
+  position: absolute;
+  align-items: center;
+  background-color: ${transparentBrown};
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 0 0 ${sizes.size10} ${sizes.size10};
+  padding: ${sizes.size5};
+`
+
+export const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: auto;
+  align-items: center;
+`
+
+export const ActionsWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: ${sizes.size100};
 `
 
 export default AppBar

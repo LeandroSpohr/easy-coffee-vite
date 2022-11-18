@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import Home from '../pages/Home'
-import Product from '../pages/Product'
 import QueryProducts from '../pages/QueryProducts'
+import Cart from '../pages/Cart'
 
 import { useUser } from '../context/User'
 import MainTemplate from '../components/templates/MainTemplate'
@@ -30,12 +30,12 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="produtos" element={
           <PrivateRoute>
-            <Product />
+            <QueryProducts />
           </PrivateRoute>
         }/>
-        <Route path="consultar-produtos" element={
+        <Route path="carrinho" element={
           <PrivateRoute>
-            <QueryProducts />
+            <Cart />
           </PrivateRoute>
         }/>
         <Route path="*" element={<Navigate to={'/'} replace/>} />
