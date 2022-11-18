@@ -3,7 +3,7 @@ import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'
 import Image from '../../atoms/Image'
 
-import ProductCard, {InfoWrapper} from './ProductCard.style'
+import ProductCard, {InfoWrapper, ImageWrapper, ActionWrapper} from './ProductCard.style'
 import { useFormats } from '../../../utils/useFormats'
 
 type ProductCardComponentInterface = {
@@ -33,14 +33,18 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
 
   return (
     <ProductCard fluid={fluid}>
-      <Image source={imgUrl} maxWidth={imgMaxWidth} maxHeight={imgMaxHeight} />
+      <ImageWrapper>
+        <Image source={imgUrl} maxWidth={imgMaxWidth} maxHeight={imgMaxHeight} />
+      </ImageWrapper>
       <InfoWrapper>
         <div>
           <Typography as="h3"> {title} </Typography>
           <Typography as="p"> {description} </Typography>
           <Typography as="p"> {formatCurrency(price)} </Typography>
         </div>
-        <Button onClick={() => handleSubmit()}>{buttonText}</Button>
+        <ActionWrapper>
+          <Button circle onClick={() => handleSubmit()}>{buttonText}</Button>
+        </ActionWrapper>
       </InfoWrapper>
     </ProductCard>
   )

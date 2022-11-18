@@ -11,9 +11,10 @@ import ProductCard from '../../components/molecules/ProductCard'
 import {ColWrapper} from './QueryProducts.styles'
 
 import { AddIcon } from '../../assets/icons'
-import { sizes } from '../../assets/styles/variables'
+import { sizes, colors } from '../../assets/styles/variables'
 
-const { size150 } = sizes
+const { size150, size30 } = sizes
+const { brown } = colors
 
 const QueryProducts = () => {
   const [products, setProducts] = useState<ProductInterface[]>([])
@@ -24,8 +25,7 @@ const QueryProducts = () => {
 
   return (
     <Container displayBlock>
-      {/* <QueryTemplate> */}
-      <Typography>Produtos: </Typography>
+      <Typography color={brown}>Produtos</Typography>
       <Row>
         {products.map((product) => (
           <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
@@ -36,13 +36,12 @@ const QueryProducts = () => {
               imgMaxHeight={size150}
               title={product.description}
               price={product.value}
-              buttonText={<AddIcon />}
+              buttonText={<AddIcon size={size30} />}
               handleSubmit={() => null}
             ></ProductCard>
           </ColWrapper>
         ))}
       </Row>
-      {/* </QueryTemplate> */}
     </Container>
   )
 }

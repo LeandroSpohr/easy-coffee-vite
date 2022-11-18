@@ -22,6 +22,16 @@ const ProductCard = styled.div`
     `};
 `
 
+export const ImageWrapper = styled.div`
+  height: ${sizes.size150};
+  text-align: center;
+`
+
+export const ActionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-around;
