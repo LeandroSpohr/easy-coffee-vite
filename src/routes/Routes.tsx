@@ -1,11 +1,10 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import QueryProducts from '../pages/QueryProducts'
 import Cart from '../pages/Cart'
 
-import { useUser } from '../context/User'
 import MainTemplate from '../components/templates/MainTemplate'
 
 interface PrivateRouteInterface {
@@ -13,16 +12,13 @@ interface PrivateRouteInterface {
 }
 
 const AppRoutes = () => {
-  const {state} = useUser()
   const PrivateRoute = (
     { children }: PrivateRouteInterface,
-  ): JSX.Element => (state.hasUser ? (
+  ): JSX.Element => (
     <MainTemplate>
       { children }
     </MainTemplate>
-  ) : (
-    <Navigate to={'/'} replace/>
-  ))
+  ) 
 
   return (
     <BrowserRouter>
@@ -38,7 +34,6 @@ const AppRoutes = () => {
             <Cart />
           </PrivateRoute>
         }/>
-        <Route path="*" element={<Navigate to={'/'} replace/>} />
       </Routes>
     </BrowserRouter>
   )

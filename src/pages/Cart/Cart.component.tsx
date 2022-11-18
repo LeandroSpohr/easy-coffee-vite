@@ -1,53 +1,65 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Row, Col } from 'react-grid-system'
-
-import * as ProductService from '../../services/Product'
-
-import ProductInterface from '../../models/interfaces/Product'
 
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
+import Container from '../../components/atoms/Container'
+import Button from '../../components/atoms/Button'
 
 import {useUser} from '../../context/User'
 import { useFormats } from '../../utils/useFormats' 
 
+import {ItemlWrapper, ContentWrapper} from './Cart.styles'
+import { colors } from '../../assets/styles/variables'
+
+const { brown } = colors
 
 const Cart = () => {
-    
-    const {formatCurrency} = useFormats()
-    const [products, setProducts] = useState<ProductInterface[]>([])
-  
-    useEffect(() => {
-      ProductService.getAll()
-        .then(setProducts)
-    }, [])
+  const {formatCurrency} = useFormats()
+  const {state} = useUser()
 
-    return (
-            <>
-      <Typography>Carrinho</Typography>
-      <Row>
-        {products.map((product) => (
-          <Col key={'col' + product.id}>
-            <Paper fluid key={'paper' + product.id}>
-              <img style={{maxWidth: '150px', maxHeight: '150px'}} src={product.imgUrl} alt={product.description} />
-              <Typography as='h4'>
-                {product.description}
-              </Typography>
-              <Typography as='h5'>
-                {formatCurrency(product.value)}
-              </Typography>
+  const printTitle = (value: string) => (<Typography as='h4'>
+    {value}
+  </Typography>)
+
+  const printValue = (value: string | number) => (<Typography color={brown} as='h4'>
+    {value}
+  </Typography>)
+
+  return (
+    <Container displayBlock fullHeight>
+      <Typography color={brown}>Carrinho</Typography>
+      <ContentWrapper>
+        <ItemlWrapper>
+          <Button>Limpar Carrinho</Button>
+        </ItemlWrapper>
+        {state.cart.map((cartProduct) => (
+          <ItemlWrapper key={'item' + cartProduct.product.id}>
+            <Paper key={'paper' + cartProduct.product.id}>
+              <Row key={'row' + cartProduct.product.id}>
+                <Col key={'col' + cartProduct.product.id}>
+                  {printTitle(cartProduct.product.description)}
+                  {printValue(formatCurrency(cartProduct.product.value))}
+                </Col>
+                <Col>
+                  {printTitle('Qtd')}
+                  {printValue(cartProduct.quantity)}
+                </Col>
+                <Col>
+                  {printTitle('Total')}
+                  {printValue(formatCurrency(cartProduct.product.value * cartProduct.quantity))}
+                </Col>
+                <Col>
+                  <Button>Pagar</Button>
+                </Col>
+              </Row>
             </Paper>
-          </Col>
+          </ItemlWrapper>
         ))}
-        <Col>
-        <Typography as='h5'>Quantidade</Typography>
-        </Col>
-        <Col>
-        <Typography as='h5'>Total</Typography>
-        </Col>
-      </Row>
-    </>
-    )
+        <Button>Pagar Tudo</Button>
+      </ContentWrapper>
+    </Container>
+  )
 }
 
 export default Cart
