@@ -5,6 +5,7 @@ import {
   MdOutlineExitToApp,
   MdArrowBackIosNew, 
   MdClose,
+  MdOutlineAccountBox,
 } from 'react-icons/md'
 
 import { colors, sizes } from '../styles/variables'
@@ -43,5 +44,9 @@ export const LeftArrowIcon = styled(MdArrowBackIosNew).attrs(defaultConfig)`
 `
 
 export const CloseIcon = styled(MdClose).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const AccountIcon = styled(MdOutlineAccountBox).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `

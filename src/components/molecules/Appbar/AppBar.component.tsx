@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import AppBar, {InfoWrapper, ActionsWrapper} from './AppBar.style'
-import {CartIcon, ExitIcon, LeftArrowIcon} from '../../../assets/icons'
+import {CartIcon, ExitIcon, LeftArrowIcon, AccountIcon} from '../../../assets/icons'
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
@@ -38,6 +38,9 @@ const AppBarComponent = () => {
         </Typography>
       </InfoWrapper>
       <ActionsWrapper>
+        <Link to="/minha-conta">
+          <AccountIcon size={sizes.size28} />
+        </Link>
         <Link to="/carrinho">
           <CartIcon size={sizes.size28} />
         </Link>

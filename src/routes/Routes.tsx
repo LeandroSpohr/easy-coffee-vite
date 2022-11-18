@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import QueryProducts from '../pages/QueryProducts'
 import Cart from '../pages/Cart'
+import MyAccount from '../pages/MyAccount'
 
 import MainTemplate from '../components/templates/MainTemplate'
 
@@ -32,6 +33,11 @@ const AppRoutes = () => {
         <Route path="carrinho" element={
           <PrivateRoute>
             <Cart />
+          </PrivateRoute>
+        }/>
+        <Route path="minha-conta" element={
+          <PrivateRoute>
+            <MyAccount />
           </PrivateRoute>
         }/>
       </Routes>

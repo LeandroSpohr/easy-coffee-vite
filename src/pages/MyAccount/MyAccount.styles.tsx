@@ -2,8 +2,18 @@ import styled from 'styled-components'
 
 import { sizes, colors } from '../../assets/styles/variables'
 
+interface WrapperInterface {
+  centered?: boolean
+}
+
 export const ItemlWrapper = styled.div`
   margin-bottom: ${sizes.size15};
+`
+
+export const FlexWrapper = styled.div<WrapperInterface>`
+  display: flex;
+  justify-content: flex-end;
+  justify-content: ${({centered}: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
 `
 
 export const ContentWrapper = styled.div`
