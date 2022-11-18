@@ -52,6 +52,11 @@ const GlobalStyle = createGlobalStyle`
   p {
     font-size: ${fontSizes.fontSize14};
   }
+
+  .custom-toast {
+    font-family: 'Roboto', sans-serif;
+    font-size: ${fontSizes.fontSize14};
+  }
 `
 
 export default GlobalStyle
