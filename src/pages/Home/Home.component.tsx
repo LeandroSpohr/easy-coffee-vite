@@ -14,7 +14,10 @@ import coffeeCup from '../../assets/images/coffeeCup.svg'
 import { Wrapper, FieldContainer } from './Home.styles'
 
 import { useUser } from '../../context/User'
-import { colors } from '../../assets/styles/variables'
+import { colors, sizes } from '../../assets/styles/variables'
+
+const { brown } = colors
+const { size200 } = sizes
 
 const Home = () => {
   const { dispatch } = useUser()
@@ -36,8 +39,8 @@ const Home = () => {
     <Container fullHeight fullCentered>
       <Paper fullCentered>
         <Wrapper>
-          <Image src={coffeeCup} maxHeight='200px' maxWidth={3} />
-          <Typography color={colors.brown}>Easy Coffee</Typography>
+          <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+          <Typography color={brown}>Easy Coffee</Typography>
         </Wrapper>
         <FieldContainer>
           <Input
