@@ -34,7 +34,7 @@ export const ActionWrapper = styled.div`
 
 export const InfoWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   bottom: 0;
 `
 
