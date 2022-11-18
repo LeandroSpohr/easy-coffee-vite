@@ -2,17 +2,17 @@ import styled, { css } from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
 
-const { lightBrown } = colors
-const { size5 } = sizes
+const { veryLightBrown } = colors
 
 interface ProductCardInterface {
   fluid?: boolean
 }
 
 const ProductCard = styled.div`
-  background-color: ${lightBrown};
+  background-color: ${veryLightBrown};
   color: white;
-  border-radius: ${size5};
+  border-radius: ${sizes.size20};
+  padding: ${sizes.size10};
 
   ${({ fluid }: ProductCardInterface) =>
     fluid &&
@@ -20,6 +20,22 @@ const ProductCard = styled.div`
       width: 100%;
       height: 100%;
     `};
+`
+
+export const ImageWrapper = styled.div`
+  height: ${sizes.size150};
+  text-align: center;
+`
+
+export const ActionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
 `
 
 export default ProductCard

@@ -1,1 +1,1 @@
-export { default } from './AppBar.style'
+export { default } from './AppBar.component'

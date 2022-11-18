@@ -1,27 +1,51 @@
 import React from 'react'
-import { Link, Navigate } from 'react-router-dom'
-import AppBar from './AppBar.style'
+import { Link, useNavigate } from 'react-router-dom'
+
+import AppBar, {InfoWrapper, ActionsWrapper} from './AppBar.style'
+import {CartIcon, ExitIcon, LeftArrowIcon, AccountIcon} from '../../../assets/icons'
+import { sizes } from '../../../assets/styles/variables'
+
 import Typography from '../../atoms/Typography'
-import Button from '../../atoms/Button'
-import Cart from '../../../assets/images/cart.svg'
-import { clearUser } from '../../../context/User/actions'
-import { useNavigate } from 'react-router-dom'
+
+import { useUser } from '../../../context/User'
+
+import { useFormats } from '../../../utils/useFormats'
+
 const AppBarComponent = () => {
+  const {state, dispatch} = useUser()
   const navigate = useNavigate()
+  const { getFirstName } = useFormats()
+
+  const goBack = () => {
+    navigate(-1)
+  }
 
   const logout = () => {
-    clearUser()
+    dispatch({
+      type: 'CLEAR_USER'
+    })
     navigate('/')
   }
+
   return (
     <AppBar>
-      <Link to="/carrinho">
-        <img src={Cart} />
-      </Link>
-      <Typography>EASY-COFFEE</Typography>
-      <Link to="/">
-        <Button onClick={() => logout()}>LogOff</Button>
-      </Link>
+      <InfoWrapper>
+        <span onClick={() => goBack()} >
+          <LeftArrowIcon size={sizes.size28} />
+        </span>
+        <Typography>
+          Olá {getFirstName(state.user?.name)}
+        </Typography>
+      </InfoWrapper>
+      <ActionsWrapper>
+        <Link to="/minha-conta">
+          <AccountIcon size={sizes.size30} />
+        </Link>
+        <Link to="/carrinho">
+          <CartIcon size={sizes.size30} />
+        </Link>
+        <ExitIcon size={sizes.size30} onClick={() => logout()} />
+      </ActionsWrapper>
     </AppBar>
   )
 }

@@ -1,16 +1,22 @@
 import React from 'react'
-import { toast , ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Toast = () => {
+const Toast = () => (
+  <ToastContainer
+    position="top-right"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+    className="custom-toast"
+  />
+)
 
-  toast.success('Compra evetuada com sucesso')
-
-  return (
-    <>
-      <ToastContainer/>
-    </>
-  )
-}
 
 export default Toast
