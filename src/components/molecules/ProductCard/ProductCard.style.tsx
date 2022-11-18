@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
 
-const { veryLightBrown } = colors
+const { veryLightBrown, veryDarkBorwn } = colors
 
 interface ProductCardInterface {
   fluid?: boolean
@@ -11,8 +11,9 @@ interface ProductCardInterface {
 const ProductCard = styled.div`
   background-color: ${veryLightBrown};
   color: white;
-  border-radius: ${sizes.size10};
+  border-radius: ${sizes.size20};
   padding: ${sizes.size10};
+  box-shadow: ${sizes.size2} ${sizes.size2} ${sizes.size2} ${veryDarkBorwn};
 
   ${({ fluid }: ProductCardInterface) =>
     fluid &&

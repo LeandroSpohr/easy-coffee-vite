@@ -8,7 +8,7 @@ import ProductInterface from '../../models/interfaces/Product'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import ProductCard from '../../components/molecules/ProductCard'
-import {ColWrapper} from './QueryProducts.styles'
+import {ColWrapper, ContentWrapper} from './QueryProducts.styles'
 
 import { AddIcon } from '../../assets/icons'
 import { sizes, colors } from '../../assets/styles/variables'
@@ -24,24 +24,26 @@ const QueryProducts = () => {
   }, [])
 
   return (
-    <Container displayBlock>
+    <Container displayBlock fullHeight>
       <Typography color={brown}>Produtos</Typography>
-      <Row>
-        {products.map((product) => (
-          <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
-            <ProductCard
-              key={'productCard' + product.id}
-              fluid
-              imgUrl={product.imgUrl}
-              imgMaxHeight={size150}
-              title={product.description}
-              price={product.value}
-              buttonText={<AddIcon size={size30} />}
-              handleSubmit={() => null}
-            ></ProductCard>
-          </ColWrapper>
-        ))}
-      </Row>
+      <ContentWrapper>
+        <Row>
+          {products.map((product) => (
+            <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
+              <ProductCard
+                key={'productCard' + product.id}
+                fluid
+                imgUrl={product.imgUrl}
+                imgMaxHeight={size150}
+                title={product.description}
+                price={product.value}
+                buttonText={<AddIcon size={size30} />}
+                handleSubmit={() => null}
+              ></ProductCard>
+            </ColWrapper>
+          ))}
+        </Row>
+      </ContentWrapper>
     </Container>
   )
 }
