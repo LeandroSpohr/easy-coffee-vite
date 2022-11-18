@@ -21,9 +21,9 @@ const { size150, size30 } = sizes
 const { brown } = colors
 
 const QueryProducts = () => {
-  const { state, dispatch } = useUser()
+  const { dispatch } = useUser()
   const [products, setProducts] = useState<ProductInterface[]>([])
-  console.log(state)
+
   const addToCart = (product: ProductInterface) => {
     const productCart: CartInterface = {
       product,

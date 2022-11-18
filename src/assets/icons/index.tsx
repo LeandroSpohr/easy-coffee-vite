@@ -1,5 +1,11 @@
 import styled from 'styled-components'
-import {MdOutlineShoppingCart, MdAdd, MdOutlineExitToApp, MdArrowBackIosNew} from 'react-icons/md'
+import {
+  MdOutlineShoppingCart, 
+  MdAdd, 
+  MdOutlineExitToApp,
+  MdArrowBackIosNew, 
+  MdClose,
+} from 'react-icons/md'
 
 import { colors, sizes } from '../styles/variables'
 
@@ -33,5 +39,9 @@ export const ExitIcon = styled(MdOutlineExitToApp).attrs(defaultConfig)`
 `
 
 export const LeftArrowIcon = styled(MdArrowBackIosNew).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const CloseIcon = styled(MdClose).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `
