@@ -23,7 +23,7 @@ export const InfoWrapper = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  width: ${sizes.size100};
+  width: ${sizes.size150};
 `
 
 export default AppBar

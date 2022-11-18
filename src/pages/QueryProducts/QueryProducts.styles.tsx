@@ -12,5 +12,5 @@ export const ContentWrapper = styled.div`
   padding: ${sizes.size15};
   border-radius: ${sizes.size20} ${sizes.size20} 0 0;
   background-color: ${colors.transparentBrown};
-  height: 100%;
+  min-height: 100%;
 `

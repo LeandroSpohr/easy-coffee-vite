@@ -39,12 +39,12 @@ const AppBarComponent = () => {
       </InfoWrapper>
       <ActionsWrapper>
         <Link to="/minha-conta">
-          <AccountIcon size={sizes.size28} />
+          <AccountIcon size={sizes.size30} />
         </Link>
         <Link to="/carrinho">
-          <CartIcon size={sizes.size28} />
+          <CartIcon size={sizes.size30} />
         </Link>
-        <ExitIcon size={sizes.size28} onClick={() => logout()} />
+        <ExitIcon size={sizes.size30} onClick={() => logout()} />
       </ActionsWrapper>
     </AppBar>
   )

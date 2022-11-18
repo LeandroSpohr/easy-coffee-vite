@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import * as PurchaseService from '../../services/Purchase'
+import * as PaymentService from '../../services/Payment'
 
 import PurchaseInterface from '../../models/interfaces/Purchase'
 
@@ -23,7 +25,7 @@ const MyAccount = () => {
   const {formatCurrency} = useFormats()
   const navigate = useNavigate()
   const {state} = useUser()
-  console.log(state)
+
   const userId = state.user ? state.user.id : ''
 
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
@@ -42,6 +44,25 @@ const MyAccount = () => {
 
   const goBack = () => {
     navigate(-1)
+  }
+
+  const payPurchase = (purchaseId: string) => {
+    const purchaseIds = [purchaseId]
+    PaymentService.payPurchases(userId, purchaseIds)
+      .then(() => {
+        toast.success('Compra paga com sucesso!')
+        const updatedPurchases = purchases.filter((purchase) => purchase.id !== purchaseId)
+        setPurchases([...updatedPurchases])
+      })
+  }
+
+  const payAllPurchases = () => {
+    const purchaseIds = purchases.map((purchase) => purchase.id)
+    PaymentService.payPurchases(userId, purchaseIds)
+      .then(() => {
+        toast.success('Compras pagas com sucesso!')
+        setPurchases([])
+      })
   }
 
   return (
@@ -68,7 +89,7 @@ const MyAccount = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button>Pagar</Button>
+                        <Button onClick={() => payPurchase(purchase.id)}>Pagar</Button>
                       </FlexWrapper>
                     </Col>
                   </Row>
@@ -76,7 +97,7 @@ const MyAccount = () => {
               </ItemlWrapper>
             ))}
             <FlexWrapper>
-              <Button>Pagar Todas</Button>
+              <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
             </FlexWrapper>
           </>
         )
@@ -90,7 +111,9 @@ const MyAccount = () => {
                 </ItemlWrapper>
               </FlexWrapper>
               <FlexWrapper centered>
-                <Button onClick={() => goBack()}>Voltar</Button>
+                <ItemlWrapper>
+                  <Button onClick={() => goBack()}>Voltar</Button>
+                </ItemlWrapper>
               </FlexWrapper>
             </>
           )}

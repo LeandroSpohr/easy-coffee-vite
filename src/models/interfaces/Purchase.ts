@@ -13,3 +13,8 @@ export default interface PurchaseInterface {
   createdAt: string
   updatedAt: string
 }
+
+export interface PurchaseInputInterface {
+  productId: string
+  quantity: number
+}

@@ -2,6 +2,10 @@ import React from 'react'
 import { Row, Col } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 
+import * as PurchaseService from '../../services/Purchase'
+
+import {PurchaseInputInterface} from '../../models/interfaces/Purchase'
+
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
@@ -21,6 +25,7 @@ const Cart = () => {
   const {state, dispatch} = useUser()
   const navigate = useNavigate()
 
+  const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
 
   const printTitle = (value: string) => (<Typography as='h4'>
@@ -46,6 +51,16 @@ const Cart = () => {
 
   const goBack = () => {
     navigate(-1)
+  }
+
+  const finalize = () => {
+    const input: PurchaseInputInterface[] = state.cart.map((cartProduct) => ({
+      productId: cartProduct.product.id,
+      quantity: cartProduct.quantity,
+    }))
+
+    PurchaseService.savePurchases(userId, input)
+      .then(() => clearCart())
   }
 
   return (
@@ -85,7 +100,7 @@ const Cart = () => {
               </ItemlWrapper>
             ))}
             <FlexWrapper>
-              <Button>Finalizar Compra</Button>
+              <Button onClick={() => finalize()}>Finalizar Compra</Button>
             </FlexWrapper>
           </>
         )
@@ -99,7 +114,12 @@ const Cart = () => {
                 </ItemlWrapper>
               </FlexWrapper>
               <FlexWrapper centered>
-                <Button onClick={() => goBack()}>Voltar</Button>
+                <ItemlWrapper>
+                  <Button onClick={() => goBack()}>Voltar</Button>
+                </ItemlWrapper>
+                <ItemlWrapper>
+                  <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
+                </ItemlWrapper>
               </FlexWrapper>
             </>
           )}
