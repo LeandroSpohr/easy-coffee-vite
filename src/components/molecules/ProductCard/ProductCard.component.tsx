@@ -2,7 +2,8 @@ import React from 'react'
 import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'
 import Image from '../../atoms/Image'
-import ProductCard from './ProductCard.style'
+
+import ProductCard, {InfoWrapper, ImageWrapper, ActionWrapper} from './ProductCard.style'
 import { useFormats } from '../../../utils/useFormats'
 
 type ProductCardComponentInterface = {
@@ -12,7 +13,7 @@ type ProductCardComponentInterface = {
   imgMaxHeight?: number | string
   title: string
   description?: string
-  buttonText?: string
+  buttonText?: string | JSX.Element
   price: number
   handleSubmit: () => void
 }
@@ -32,12 +33,19 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
 
   return (
     <ProductCard fluid={fluid}>
-      <Image source={imgUrl} maxWidth={imgMaxWidth} maxHeight={imgMaxHeight} />
-      <Typography as="h2"> {title} </Typography>
-      <Typography as="p"> {description} </Typography>
-      <Typography as="p"> {buttonText} </Typography>
-      <Typography as="p"> {formatCurrency(price)} </Typography>
-      <Button onClick={() => handleSubmit()} />
+      <ImageWrapper>
+        <Image source={imgUrl} maxWidth={imgMaxWidth} maxHeight={imgMaxHeight} />
+      </ImageWrapper>
+      <InfoWrapper>
+        <div>
+          <Typography as="h3"> {title} </Typography>
+          <Typography as="p"> {description} </Typography>
+          <Typography as="p"> {formatCurrency(price)} </Typography>
+        </div>
+        <ActionWrapper>
+          <Button circle onClick={() => handleSubmit()}>{buttonText}</Button>
+        </ActionWrapper>
+      </InfoWrapper>
     </ProductCard>
   )
 }

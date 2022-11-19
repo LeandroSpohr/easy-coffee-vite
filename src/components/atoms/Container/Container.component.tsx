@@ -5,6 +5,7 @@ type ContainerComponentInterface = {
   children?: JSX.Element | JSX.Element[]
   fullHeight?: boolean
   fullCentered?: boolean
+  displayBlock?: boolean
 };
 
 const ContainerComponent: React.FC<
@@ -12,12 +13,14 @@ const ContainerComponent: React.FC<
 > = ({
   children,
   fullHeight,
-  fullCentered
+  fullCentered,
+  displayBlock
 }) => (
   <Container 
     fullHeight={fullHeight}
-    fullCentered={fullCentered
-    }>
+    fullCentered={fullCentered}
+    displayBlock={displayBlock}
+  >
     {children}
   </Container>
 )
