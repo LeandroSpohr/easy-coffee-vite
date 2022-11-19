@@ -4,6 +4,7 @@ import Paper from './Paper.style'
 
 interface PaperComponentInterface extends StyledComponentPropsWithRef<typeof Paper> {
   fluid?: boolean
+  fullCentered?: boolean
 }
 
 const PaperComponent: React.FC<
@@ -11,9 +12,14 @@ const PaperComponent: React.FC<
 > = ({
   children,
   fluid,
+  fullCentered,
   ...rest
 }) => (
-  <Paper fluid={fluid} {...rest}>
+  <Paper
+    fluid={fluid}
+    fullCentered={fullCentered}
+    {...rest}
+  >
     {children}
   </Paper>
 )
