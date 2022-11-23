@@ -11,6 +11,13 @@ const Button = styled.button<ButtonInterface>`
   min-height: ${sizes.size48};
   background: ${colors.brown};
   border-radius: ${sizes.size15};
+  cursor: pointer;
+  
+  :active{
+      transform: scale(1);
+      box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
+      background: ${colors.transparentBrown};
+    }
 
   ${({ circle }: ButtonInterface) =>
     circle && css`
@@ -24,6 +31,7 @@ const Button = styled.button<ButtonInterface>`
     text-transform: uppercase;
     font-weight: ${fontWeights.size700};
     font-size: ${fontSizes.fontSize18};
+    cursor: pointer;
   }
 `
 
