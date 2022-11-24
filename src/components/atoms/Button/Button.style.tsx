@@ -14,7 +14,8 @@ const Button = styled.button<ButtonInterface>`
   cursor: pointer;
   
   :active{
-      transform: scale(1);
+      transition: 0.01s;
+      transform: scale(0.90);
       box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
       background: ${colors.transparentBrown};
     }
