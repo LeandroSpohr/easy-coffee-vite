@@ -16,7 +16,7 @@ const Button = styled.button<ButtonInterface>`
   :active{
       transition: 0.01s;
       transform: scale(0.90);
-      box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
+      box-shadow: inset ${sizes.size2} ${sizes.size1} ${sizes.size14} ${sizes.size1} ${colors.veryDarkBorwn};
       background: ${colors.transparentBrown};
     }
 
