@@ -36,6 +36,7 @@ interface FontSizesInterface {
 }
 
 interface SizesInterface {
+  size1: string
   size2: string
   size3: string
   size4: string
@@ -165,6 +166,7 @@ export const fontSizes: FontSizesInterface = {
 }
 
 export const sizes: SizesInterface = {
+  size1: '0.06rem',
   size2: '0.2rem',
   size3: '0.3rem',
   size4: '0.4rem',

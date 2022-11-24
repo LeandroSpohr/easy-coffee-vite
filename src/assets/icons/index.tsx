@@ -34,9 +34,10 @@ export const CartIcon = styled(MdOutlineShoppingCart).attrs(defaultConfig)`
   :active{
     transition: 0.01s;
     transform: scale(0.80);
-    box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
+    box-shadow: inset ${sizes.size2} ${sizes.size1} ${sizes.size14} ${sizes.size1} ${colors.veryDarkBorwn};
     background: ${colors.transparentBrown};
     border-radius: 50%;
+    padding: ${sizes.size5};
   }
 `
 
@@ -53,9 +54,10 @@ export const ExitIcon = styled(MdOutlineExitToApp).attrs(defaultConfig)`
   :active{
     transition: 0.01s;
     transform: scale(0.80);
-    box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
+    box-shadow: inset ${sizes.size2} ${sizes.size1} ${sizes.size14} ${sizes.size1} ${colors.veryDarkBorwn};
     background: ${colors.transparentBrown};
     border-radius: 50%;
+    padding: ${sizes.size3};
   }
 `
 
@@ -66,9 +68,10 @@ export const LeftArrowIcon = styled(MdArrowBackIosNew).attrs(defaultConfig)`
   :active{
     transition: 0.01s;
     transform: scale(0.80);
-    box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
+    box-shadow: inset ${sizes.size2} ${sizes.size1} ${sizes.size14} ${sizes.size1} ${colors.veryDarkBorwn};
     background: ${colors.transparentBrown};
     border-radius: 50%;
+    padding: ${sizes.size3};
   }
 `
 
@@ -85,8 +88,9 @@ export const AccountIcon = styled(MdOutlineAccountBox).attrs(defaultConfig)`
   :active{
     transition: 0.01s;
     transform: scale(0.80);
-    box-shadow: inset 3px 2px 22px 1px ${colors.veryDarkBorwn};
+    box-shadow: inset ${sizes.size2} ${sizes.size1} ${sizes.size14} ${sizes.size1} ${colors.veryDarkBorwn};
     background: ${colors.transparentBrown};
     border-radius: 50%;
+    padding: ${sizes.size3};
   }
 `
