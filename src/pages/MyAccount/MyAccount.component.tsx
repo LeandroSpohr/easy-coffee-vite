@@ -12,6 +12,7 @@ import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
+import QRCode from '../../components/atoms/QRCode'
 
 import {useUser} from '../../context/User'
 import { useFormats } from '../../utils/useFormats' 
@@ -27,8 +28,12 @@ const MyAccount = () => {
   const {state} = useUser()
 
   const userId = state.user ? state.user.id : ''
+  const prefixUrl = 'https://www.google.com/search?q='
 
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
+  const [payValue, setPayValue] = useState<number>()
+
+  const pixUrl = prefixUrl.concat((payValue || 0) + '')
 
   const printTitle = (value: string) => (<Typography as='h4'>
     {value}
@@ -38,37 +43,58 @@ const MyAccount = () => {
     {value}
   </Typography>)
 
-  useEffect(() => {
-    PurchaseService.getAllOpen(userId).then(setPurchases)
-  }, [])
-
   const goBack = () => {
     navigate(-1)
   }
 
-  const payPurchase = (purchaseId: string) => {
+  const payPurchase = (purchaseId: string, value: number) => {
     const purchaseIds = [purchaseId]
     PaymentService.payPurchases(userId, purchaseIds)
       .then(() => {
-        toast.success('Compra paga com sucesso!')
+        setPayValue(value)
+        toast.success('Status da compra alterado com sucesso, prossiga com o pagamento via PIX!')
         const updatedPurchases = purchases.filter((purchase) => purchase.id !== purchaseId)
         setPurchases(updatedPurchases)
       })
   }
 
+  const getTotalValue = (purchases: PurchaseInterface[]) => {
+    return purchases.reduce((accumulator, purchase) => {
+      return +accumulator + +purchase.value
+    }, 0)
+  }
+
   const payAllPurchases = () => {
     const purchaseIds = purchases.map((purchase) => purchase.id)
+    const purchasesValue = getTotalValue(purchases)
     PaymentService.payPurchases(userId, purchaseIds)
       .then(() => {
-        toast.success('Compras pagas com sucesso!')
+        setPayValue(purchasesValue)
+        toast.success('Status das compras alterado com sucesso, prossiga com o pagamento via PIX!', {
+          autoClose: 5000
+        })
         setPurchases([])
       })
   }
+
+  useEffect(() => {
+    PurchaseService.getAllOpen(userId).then(setPurchases)
+  }, [])
 
   return (
     <Container displayBlock fullHeight>
       <Typography color={brown}>Compras em aberto</Typography>
       <ContentWrapper>
+        <FlexWrapper centered>
+          <QRCode value={pixUrl} />
+        </FlexWrapper>
+        <FlexWrapper centered>
+          <ItemlWrapper>
+            <Typography as='h2'>
+              {formatCurrency(payValue)}
+            </Typography>
+          </ItemlWrapper>
+        </FlexWrapper>
         {purchases.length ? (
           <>
             {purchases.map((purchase) => (
@@ -89,7 +115,7 @@ const MyAccount = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button onClick={() => payPurchase(purchase.id)}>Pagar</Button>
+                        <Button onClick={() => payPurchase(purchase.id, purchase.value)}>Pagar</Button>
                       </FlexWrapper>
                     </Col>
                   </Row>
@@ -97,6 +123,11 @@ const MyAccount = () => {
               </ItemlWrapper>
             ))}
             <FlexWrapper>
+              <ItemlWrapper>
+                <Typography as='h4'>
+                  Total {formatCurrency(getTotalValue(purchases))}
+                </Typography>
+              </ItemlWrapper>
               <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
             </FlexWrapper>
           </>

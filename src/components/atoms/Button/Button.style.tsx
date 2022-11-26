@@ -15,7 +15,6 @@ const Button = styled.button<ButtonInterface>`
   :active{
     transition: 100ms;
     transform: scale(0.80);
-    border-radius: 50%;
   }
 
   ${({ circle }: ButtonInterface) =>
@@ -23,6 +22,12 @@ const Button = styled.button<ButtonInterface>`
       min-height: auto;
       padding: ${sizes.size10};
       border-radius: 50%;
+
+      :active{
+        transition: 100ms;
+        transform: scale(0.80);
+        border-radius: 50%;
+      }
     `};
 
   label {
