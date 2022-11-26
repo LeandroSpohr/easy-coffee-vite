@@ -52,7 +52,7 @@ const MyAccount = () => {
       .then(() => {
         toast.success('Compra paga com sucesso!')
         const updatedPurchases = purchases.filter((purchase) => purchase.id !== purchaseId)
-        setPurchases([...updatedPurchases])
+        setPurchases(updatedPurchases)
       })
   }
 
@@ -72,10 +72,10 @@ const MyAccount = () => {
         {purchases.length ? (
           <>
             {purchases.map((purchase) => (
-              <ItemlWrapper key={'item' + purchase.product.id}>
-                <Paper key={'paper' + purchase.product.id}>
-                  <Row key={'row' + purchase.product.id}>
-                    <Col key={'col' + purchase.product.id}>
+              <ItemlWrapper key={'item' + purchase.id}>
+                <Paper key={'paper' + purchase.id}>
+                  <Row key={'row' + purchase.id}>
+                    <Col key={'col' + purchase.id}>
                       {printTitle('Produto')}
                       {printValue(purchase.product.description)}
                     </Col>
