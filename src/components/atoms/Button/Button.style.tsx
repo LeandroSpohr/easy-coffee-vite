@@ -11,6 +11,11 @@ const Button = styled.button<ButtonInterface>`
   min-height: ${sizes.size48};
   background: ${colors.brown};
   border-radius: ${sizes.size15};
+  color: ${colors.white};
+  text-transform: uppercase;
+  font-weight: ${fontWeights.size700};
+  font-size: ${fontSizes.fontSize18};
+  display:flex;
 
   :active{
     transition: 100ms;
@@ -29,13 +34,6 @@ const Button = styled.button<ButtonInterface>`
         border-radius: 50%;
       }
     `};
-
-  label {
-    color: ${colors.white};
-    text-transform: uppercase;
-    font-weight: ${fontWeights.size700};
-    font-size: ${fontSizes.fontSize18};
-  }
 `
 
 export default Button
