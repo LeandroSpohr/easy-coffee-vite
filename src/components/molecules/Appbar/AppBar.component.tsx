@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import AppBar, {InfoWrapper, ActionsWrapper} from './AppBar.style'
+import AppBar, {InfoWrapper, ActionsWrapper, IcoWrapper} from './AppBar.style'
 import {CartIcon, ExitIcon, LeftArrowIcon, AccountIcon} from '../../../assets/icons'
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
+import Badge from '../../atoms/Badge'
 
 import { useUser } from '../../../context/User'
 
@@ -27,6 +28,12 @@ const AppBarComponent = () => {
     navigate('/')
   }
 
+  const getBadgeNumber = () => {
+    if (state.cart.length) {
+      return state.cart.length
+    }
+  }
+
   return (
     <AppBar>
       <InfoWrapper>
@@ -39,12 +46,21 @@ const AppBarComponent = () => {
       </InfoWrapper>
       <ActionsWrapper>
         <Link to="/minha-conta">
-          <AccountIcon size={sizes.size30} />
+          <IcoWrapper>
+            <AccountIcon size={sizes.size30} />
+          </IcoWrapper>
         </Link>
         <Link to="/carrinho">
-          <CartIcon size={sizes.size30} />
+          <IcoWrapper>
+            <CartIcon size={sizes.size30} />
+            <Badge className="badge">
+              {getBadgeNumber()}
+            </Badge>
+          </IcoWrapper>
         </Link>
-        <ExitIcon size={sizes.size30} onClick={() => logout()} />
+        <IcoWrapper>
+          <ExitIcon size={sizes.size30} onClick={() => logout()} />
+        </IcoWrapper>
       </ActionsWrapper>
     </AppBar>
   )
