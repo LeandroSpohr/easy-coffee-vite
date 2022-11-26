@@ -1,18 +1,18 @@
 import React from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom'
 
-import Home from './pages/Home'
+import { UserProvider } from './context/User'
+
+import Toast from './components/atoms/Toast'
+import PageLoader from './components/molecules/PageLoader'
+
+import AppRoutes from './routes/Routes'
 
 const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
-  </BrowserRouter>
+  <UserProvider>
+    <Toast />
+    <PageLoader />
+    <AppRoutes />
+  </UserProvider>
 )
 
 export default App
