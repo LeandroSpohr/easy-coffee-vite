@@ -20,6 +20,22 @@ export const InfoWrapper = styled.div`
   align-items: center;
 `
 
+export const IcoWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  :active{
+    transition: 100ms;
+    transform: scale(0.80);
+    border-radius: 50%;
+  }
+
+  .badge {
+    position: absolute;
+    top: ${sizes.size4};
+  }
+`
+
 export const ActionsWrapper = styled.div`
   display: flex;
   justify-content: space-around;

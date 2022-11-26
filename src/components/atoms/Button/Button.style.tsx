@@ -12,11 +12,22 @@ const Button = styled.button<ButtonInterface>`
   background: ${colors.brown};
   border-radius: ${sizes.size15};
 
+  :active{
+    transition: 100ms;
+    transform: scale(0.80);
+  }
+
   ${({ circle }: ButtonInterface) =>
     circle && css`
       min-height: auto;
       padding: ${sizes.size10};
       border-radius: 50%;
+
+      :active{
+        transition: 100ms;
+        transform: scale(0.80);
+        border-radius: 50%;
+      }
     `};
 
   label {

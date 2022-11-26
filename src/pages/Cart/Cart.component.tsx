@@ -60,7 +60,10 @@ const Cart = () => {
     }))
 
     PurchaseService.savePurchases(userId, input)
-      .then(() => clearCart())
+      .then(() => {
+        clearCart()
+        navigate('/minha-conta')
+      })
   }
 
   return (
