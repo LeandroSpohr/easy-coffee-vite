@@ -13,9 +13,7 @@ const ButtonComponent = ({
   ...rest
 }: ButtonInterface) => (
   <Button circle={circle} {...rest}>
-    <label>
-      {children}
-    </label>
+    {children}
   </Button>
 )
 
