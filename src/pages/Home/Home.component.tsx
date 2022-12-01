@@ -42,17 +42,22 @@ const Home = () => {
           <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
           <Typography color={brown}>Easy Coffee</Typography>
         </Wrapper>
-        <FieldContainer>
-          <Input
-            type="text"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            placeholder="Informe seu CPF"
-          />
-        </FieldContainer>
-        <Button type="button" onClick={() => handleSubmit(cpf)}>
-          Entrar
-        </Button>
+        <form>
+          <FieldContainer>
+            <Input
+              type="text"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              placeholder="Informe seu CPF"
+            />
+          </FieldContainer>
+          <Button type="submit" onClick={(event) => {
+            event.preventDefault()
+            handleSubmit(cpf)
+          }}>
+            Entrar
+          </Button>
+        </form>
       </Paper>
     </Container>
   )
