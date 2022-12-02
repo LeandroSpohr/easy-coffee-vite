@@ -38,4 +38,12 @@ export const InfoWrapper = styled.div`
   bottom: 0;
 `
 
+export const EndPage = styled.div`
+  display: inline-block;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`
+
 export default ProductCard
