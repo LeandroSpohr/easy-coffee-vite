@@ -13,8 +13,6 @@ import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import QRCode from '../../components/atoms/QRCode'
-import NumericInput from '../../components/atoms/NumericInput'
-
 
 import {useUser} from '../../context/User'
 import { useFormats } from '../../utils/useFormats' 
@@ -110,14 +108,6 @@ const MyAccount = () => {
                     <Col>
                       {printTitle('Qtd')}
                       {printValue(purchase.quantity)}
-                    </Col>
-                    <Col>
-                      <FlexWrapper>
-                        <NumericInput type={'number'} min="1" onClick={() => payPurchase(purchase.id, purchase.value)}>Pagar</NumericInput>                      
-                        {printTitle('Remover')}
-                        {printValue(purchase.quantity)}
-                      </FlexWrapper>
-
                     </Col>
                     <Col>
                       {printTitle('Total')}

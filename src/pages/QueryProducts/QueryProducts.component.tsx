@@ -17,7 +17,6 @@ import { useUser } from '../../context/User'
 import { AddIcon } from '../../assets/icons'
 import { sizes, colors } from '../../assets/styles/variables'
 
-
 const { size150, size30 } = sizes
 const { brown } = colors
 
