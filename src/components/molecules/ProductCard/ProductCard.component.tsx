@@ -44,7 +44,7 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
           <Typography as="p"> {formatCurrency(price)} </Typography>
         </div>
 
-        <NumericInput type='number'/>
+        <NumericInput type='number' min='1'/>
 
         <ActionWrapper>
           <Button circle onClick={() => handleSubmit()}>{buttonText}</Button>
