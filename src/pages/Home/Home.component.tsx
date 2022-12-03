@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
-
+import {ItemlWrapper, ContentWrapper, FlexWrapper} from '../Cart/Cart.styles'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
@@ -42,22 +42,22 @@ const Home = () => {
           <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
           <Typography color={brown}>Easy Coffee</Typography>
         </Wrapper>
-        <form>
-          <FieldContainer>
-            <Input
-              type="text"
-              value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
-              placeholder="Informe seu CPF"
-            />
-          </FieldContainer>
-          <Button type="submit" onClick={(event) => {
-            event.preventDefault()
-            handleSubmit(cpf)
-          }}>
-            Entrar
+        <FieldContainer>
+          <Input
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            placeholder="Informe seu CPF"
+          />
+        </FieldContainer>
+        <Container displayBlock>
+          <Button type="button" style={{width: '100%'}} onClick={() => handleSubmit(cpf)}>
+          Entrar
           </Button>
-        </form>
+          <Button type="button" style={{width: '100%', marginTop: '5%'}} onClick={() => handleSubmit('00000000000')}>
+          Convidado
+          </Button>
+        </Container>
       </Paper>
     </Container>
   )
