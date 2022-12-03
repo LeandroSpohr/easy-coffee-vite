@@ -23,6 +23,11 @@ export const InfoWrapper = styled.div`
 export const IcoWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding-Right: ${sizes.size5};
+  padding-Left: ${sizes.size5};
+  position: relative;
+  margin-Right: ${sizes.size8};
+  margin-Left: ${sizes.size5};
 
   :active{
     transition: 100ms;

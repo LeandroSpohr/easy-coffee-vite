@@ -13,6 +13,7 @@ import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import QRCode from '../../components/atoms/QRCode'
+import { sizes } from '../../assets/styles/variables'
 
 import {useUser} from '../../context/User'
 import { useFormats } from '../../utils/useFormats' 
@@ -21,6 +22,7 @@ import {ItemlWrapper, ContentWrapper, FlexWrapper} from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 
 const { brown } = colors
+const { size310, size50, size10 } = sizes
 
 const MyAccount = () => {
   const {formatCurrency} = useFormats()
@@ -83,8 +85,11 @@ const MyAccount = () => {
 
   return (
     <Container displayBlock fullHeight>
-      <Typography color={brown}>Compras em aberto</Typography>
-      <ContentWrapper>
+      <Paper style={{ width: size310, height: size50, padding: size10, backgroundColor: '#6b451ee6',
+        borderRadius: '1rem 1rem 0rem 0rem'}}>
+        <Typography>Compras em aberto</Typography>
+      </Paper>
+      <ContentWrapper style={{margin: '0', borderRadius: '0rem 1rem'}}>
         <FlexWrapper centered>
           <QRCode value={pixUrl} />
         </FlexWrapper>

@@ -17,8 +17,10 @@ import { useFormats } from '../../utils/useFormats'
 import {ItemlWrapper, ContentWrapper, FlexWrapper} from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
+import { sizes } from '../../assets/styles/variables'
 
 const { brown } = colors
+const { size150, size50, size10 } = sizes
 
 const Cart = () => {
   const {formatCurrency} = useFormats()
@@ -68,8 +70,11 @@ const Cart = () => {
 
   return (
     <Container displayBlock fullHeight>
-      <Typography color={brown}>Carrinho</Typography>
-      <ContentWrapper>
+      <Paper style={{ width: size150, height: size50, padding: size10, backgroundColor: '#6b451ee6',
+        borderRadius: '1rem 1rem 0rem 0rem'}}>
+        <Typography>Carrinho</Typography>
+      </Paper>
+      <ContentWrapper style={{margin: '0rem', borderRadius: '0rem 1rem'}}>
         {hasItems ? (
           <>
             <ItemlWrapper>

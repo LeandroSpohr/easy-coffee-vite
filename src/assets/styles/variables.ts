@@ -1,5 +1,5 @@
 interface ColorsInterface {
-  veryDarkBorwn: string
+  veryDarkBrown: string
   darkGray: string
   brown: string
   transparentBrown: string
@@ -85,6 +85,7 @@ interface SizesInterface {
   size200: string
   size250: string
   size300: string
+  size310: string
   size380: string
   size400: string
   size420: string
@@ -123,7 +124,7 @@ interface ZIndexInterface {
 }
 
 export const colors: ColorsInterface = {
-  veryDarkBorwn: '#240f04',
+  veryDarkBrown: '#240f04',
   brown: '#6b451e',
   transparentBrown: '#6b451ee6',
   lightBrown: '#977452',
@@ -217,6 +218,7 @@ export const sizes: SizesInterface = {
   size200: '20rem',
   size250: '25rem',
   size300: '30rem',
+  size310: '31rem',
   size380: '38rem',
   size400: '40rem',
   size420: '42rem',

@@ -5,6 +5,7 @@ import Paper from './Paper.style'
 interface PaperComponentInterface extends StyledComponentPropsWithRef<typeof Paper> {
   fluid?: boolean
   fullCentered?: boolean
+  backgroundColor?: string
 }
 
 const PaperComponent: React.FC<

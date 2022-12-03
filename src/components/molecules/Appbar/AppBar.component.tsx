@@ -38,7 +38,7 @@ const AppBarComponent = () => {
     <AppBar>
       <InfoWrapper>
         <span onClick={() => goBack()} >
-          <LeftArrowIcon size={sizes.size28} />
+          <LeftArrowIcon size={sizes.size32} />
         </span>
         <Typography>
           Olá {getFirstName(state.user?.name)}

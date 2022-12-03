@@ -15,10 +15,10 @@ import {ColWrapper, ContentWrapper} from './QueryProducts.styles'
 import { useUser } from '../../context/User'
 
 import { AddIcon } from '../../assets/icons'
-import { sizes, colors } from '../../assets/styles/variables'
+import { sizes, colors, margins } from '../../assets/styles/variables'
+import Paper from '../../components/atoms/Paper'
 
-const { size150, size30 } = sizes
-const { brown } = colors
+const { size150, size30, size50, size10 } = sizes
 
 const QueryProducts = () => {
   const { dispatch } = useUser()
@@ -42,8 +42,12 @@ const QueryProducts = () => {
 
   return (
     <Container displayBlock fullHeight>
-      <Typography color={brown}>Produtos</Typography>
-      <ContentWrapper>
+      <Paper style={{ 
+        width: size150, height: size50, padding: size10, backgroundColor: '#6b451ee6',
+        borderRadius: '1rem 1rem 0rem 0rem'}}>
+        <Typography>Produtos</Typography>
+      </Paper>
+      <ContentWrapper style={{margin: '0', borderRadius: '0rem 1rem'}}>
         <Row>
           {products.map((product) => (
             <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>

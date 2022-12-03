@@ -10,6 +10,7 @@ import Typography from '../../components/atoms/Typography'
 import Table from '../../components/atoms/Table'
 
 import { useUser } from '../../context/User'
+import Paper from '../../components/atoms/Paper'
 
 const Payment = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
@@ -32,7 +33,7 @@ const Payment = () => {
   
   return (
     <>
-      <Typography>Histórico de Pagamentos</Typography>
+        <Typography>Histórico de Pagamentos</Typography>
       <Table
         data={data}
         columns={columns}
