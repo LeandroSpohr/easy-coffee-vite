@@ -1,4 +1,4 @@
-import React from 'react'
+  import React from 'react'
 import { Row, Col } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 
@@ -122,6 +122,9 @@ const Cart = () => {
                 </ItemlWrapper>
                 <ItemlWrapper>
                   <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
+                </ItemlWrapper>
+                <ItemlWrapper>
+                  <Button onClick={() => goBack()}>Continuar Compras</Button>
                 </ItemlWrapper>
               </FlexWrapper>
             </>
