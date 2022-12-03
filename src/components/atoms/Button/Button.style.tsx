@@ -15,7 +15,6 @@ const Button = styled.button<ButtonInterface>`
   text-transform: uppercase;
   font-weight: ${fontWeights.size700};
   font-size: ${fontSizes.fontSize18};
-  display:flex;
 
   :active{
     transition: 100ms;
@@ -27,6 +26,7 @@ const Button = styled.button<ButtonInterface>`
       min-height: auto;
       padding: ${sizes.size10};
       border-radius: 50%;
+      display:flex;
 
       :active{
         transition: 100ms;
