@@ -12,13 +12,11 @@ const {
   size8,
   size12, 
   size20, 
-  size100Percent,
 } = sizes
 
 const NumericInput = styled.input`
   border: none;
   background: ${brown};
-  width: ${size100Percent};
   padding: ${size8} ${size12};
   border-radius: ${size20};
   border: 1px solid ${veryLightBrown};
