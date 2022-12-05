@@ -1,18 +1,18 @@
-interface ColorsInterface {
-  veryDarkBorwn: string
-  darkGray: string
-  brown: string
-  transparentBrown: string
-  lightBrown: string
-  veryLightBrown: string
-  gray: string
-  lightGray: string
-  lightGrayOpacity: string
-  white: string
-  black: string
-  blackOpacity: string
-  veryLightGray: string
-  red: string
+export interface ColorsInterface {
+  veryDarkBrown: string | null
+  darkGray: string | null
+  brown: string | null
+  transparentBrown: string | null
+  lightBrown: string | null
+  veryLightBrown: string | null
+  gray: string | null
+  lightGray: string | null
+  lightGrayOpacity: string | null
+  white: string | null
+  black: string | null
+  blackOpacity: string | null
+  veryLightGray: string | null
+  red: string | null
 }
 
 interface FontSizesInterface {
@@ -123,20 +123,20 @@ interface ZIndexInterface {
 }
 
 export const colors: ColorsInterface = {
-  veryDarkBorwn: '#240f04',
-  brown: '#6b451e',
-  transparentBrown: '#6b451ee6',
-  lightBrown: '#977452',
-  veryLightBrown: '#ce9f6e',
-  darkGray: '#676363',
-  gray: '#747778',
-  lightGray: '#a7a7a7',
-  lightGrayOpacity: '#a7a7a7ab',
-  white: '#FFF',
-  black: '#000',
-  blackOpacity: '#0000004D',
-  veryLightGray: '#E7E7E7',
-  red: '#CC2727'
+  white: localStorage.getItem('white'),
+  veryLightGray: localStorage.getItem('veryLightGray'),
+  lightGrayOpacity: localStorage.getItem('lightGrayOpacity'),
+  lightGray: localStorage.getItem('lightGray'),
+  gray: localStorage.getItem('gray'),
+  darkGray: localStorage.getItem('darkGray'),
+  red: localStorage.getItem('red'),
+  transparentBrown: localStorage.getItem('transparentBrown'),
+  veryLightBrown: localStorage.getItem('veryLightBrown'),
+  lightBrown: localStorage.getItem('lightBrown'),
+  brown: localStorage.getItem('brown'),
+  veryDarkBrown: localStorage.getItem('veryDarkBrown'),
+  blackOpacity: localStorage.getItem('blackOpacity'),
+  black: localStorage.getItem('black'),
 }
 
 export const zIndex: ZIndexInterface = {

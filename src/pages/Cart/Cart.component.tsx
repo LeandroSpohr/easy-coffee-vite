@@ -4,37 +4,37 @@ import { useNavigate } from 'react-router-dom'
 
 import * as PurchaseService from '../../services/Purchase'
 
-import {PurchaseInputInterface} from '../../models/interfaces/Purchase'
+import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
 
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 
-import {useUser} from '../../context/User'
-import { useFormats } from '../../utils/useFormats' 
+import { useUser } from '../../context/User'
+import { useFormats } from '../../utils/useFormats'
 
-import {ItemlWrapper, ContentWrapper, FlexWrapper} from './Cart.styles'
+import { ItemlWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
 
-const { brown } = colors
+const { brown, black } = colors
 
 const Cart = () => {
-  const {formatCurrency} = useFormats()
-  const {state, dispatch} = useUser()
+  const { formatCurrency } = useFormats()
+  const { state, dispatch } = useUser()
   const navigate = useNavigate()
 
   const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
 
-  const printTitle = (value: string) => (<Typography as='h4'>
-    {value}
-  </Typography>)
+  const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
 
-  const printValue = (value: string | number) => (<Typography color={brown} as='h4'>
-    {value}
-  </Typography>)
+  const printValue = (value: string | number) => (
+    <Typography color={black} as="h4">
+      {value}
+    </Typography>
+  )
 
   const removeOne = (productId: string) => {
     dispatch({
@@ -59,11 +59,10 @@ const Cart = () => {
       quantity: cartProduct.quantity,
     }))
 
-    PurchaseService.savePurchases(userId, input)
-      .then(() => {
-        clearCart()
-        navigate('/minha-conta')
-      })
+    PurchaseService.savePurchases(userId, input).then(() => {
+      clearCart()
+      navigate('/minha-conta')
+    })
   }
 
   return (
@@ -95,7 +94,9 @@ const Cart = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button circle onClick={() => removeOne(cartProduct.product.id)}><CloseIcon /></Button>
+                        <Button circle onClick={() => removeOne(cartProduct.product.id)}>
+                          <CloseIcon />
+                        </Button>
                       </FlexWrapper>
                     </Col>
                   </Row>
@@ -106,26 +107,23 @@ const Cart = () => {
               <Button onClick={() => finalize()}>Finalizar Compra</Button>
             </FlexWrapper>
           </>
-        )
-          : (
-            <>
-              <FlexWrapper centered>
-                <ItemlWrapper>
-                  <Typography as='h3'>
-                    Seu carrinho está vazio
-                  </Typography>
-                </ItemlWrapper>
-              </FlexWrapper>
-              <FlexWrapper centered>
-                <ItemlWrapper>
-                  <Button onClick={() => goBack()}>Voltar</Button>
-                </ItemlWrapper>
-                <ItemlWrapper>
-                  <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
-                </ItemlWrapper>
-              </FlexWrapper>
-            </>
-          )}
+        ) : (
+          <>
+            <FlexWrapper centered>
+              <ItemlWrapper>
+                <Typography as="h3">Seu carrinho está vazio</Typography>
+              </ItemlWrapper>
+            </FlexWrapper>
+            <FlexWrapper centered>
+              <ItemlWrapper>
+                <Button onClick={() => goBack()}>Voltar</Button>
+              </ItemlWrapper>
+              <ItemlWrapper>
+                <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
+              </ItemlWrapper>
+            </FlexWrapper>
+          </>
+        )}
       </ContentWrapper>
     </Container>
   )

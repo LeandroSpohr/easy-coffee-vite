@@ -15,6 +15,7 @@ import { Wrapper, FieldContainer } from './Home.styles'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import ChangeThemeButton from '../../components/atoms/ChangeThemeButton'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -36,30 +37,36 @@ const Home = () => {
   }
 
   return (
-    <Container fullHeight fullCentered>
-      <Paper fullCentered>
-        <Wrapper>
-          <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
-          <Typography color={brown}>Easy Coffee</Typography>
-        </Wrapper>
-        <form>
-          <FieldContainer>
-            <Input
-              type="text"
-              value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
-              placeholder="Informe seu CPF"
-            />
-          </FieldContainer>
-          <Button type="submit" onClick={(event) => {
-            event.preventDefault()
-            handleSubmit(cpf)
-          }}>
-            Entrar
-          </Button>
-        </form>
-      </Paper>
-    </Container>
+    <>
+      <ChangeThemeButton />
+      <Container fullHeight fullCentered>
+        <Paper fullCentered>
+          <Wrapper>
+            <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+            <Typography color={brown}>Easy Coffee</Typography>
+          </Wrapper>
+          <form>
+            <FieldContainer>
+              <Input
+                type="text"
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)}
+                placeholder="Informe seu CPF"
+              />
+            </FieldContainer>
+            <Button
+              type="submit"
+              onClick={(event) => {
+                event.preventDefault()
+                handleSubmit(cpf)
+              }}
+            >
+              Entrar
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+    </>
   )
 }
 
