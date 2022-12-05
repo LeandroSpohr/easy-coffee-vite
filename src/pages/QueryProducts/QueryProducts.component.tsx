@@ -24,10 +24,10 @@ const QueryProducts = () => {
   const { dispatch } = useUser()
   const [products, setProducts] = useState<ProductInterface[]>([])
 
-  const addToCart = (product: ProductInterface, value: number) => {
+  const addToCart = (product: ProductInterface) => {
     const productCart: CartInterface = {
       product,
-      quantity: value,
+      quantity: 1,
     }
     dispatch({
       type: 'ADD_PRODUCT_TO_CART',
@@ -55,7 +55,7 @@ const QueryProducts = () => {
                 title={product.description}
                 price={product.value}
                 buttonText={<AddIcon size={size30} />}
-                handleSubmit={() => addToCart(product, 5)}
+                handleSubmit={() => addToCart(product)}
               ></ProductCard>
             </ColWrapper>
           ))}
