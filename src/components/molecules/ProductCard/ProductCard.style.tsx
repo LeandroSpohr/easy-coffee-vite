@@ -28,7 +28,7 @@ export const ImageWrapper = styled.div`
 `
 
 export const ActionWrapper = styled.div`
-  display: flex;
+  display: flex-end;
   align-items: center;
 `
 
@@ -36,6 +36,13 @@ export const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   bottom: 0;
+`
+
+export const LowPaper = styled.div`
+  display: flex;
+  justify-content: center ;
+  bottom: 0;
+  width: ${sizes.size100Percent};
 `
 
 export default ProductCard
