@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import * as PurchaseService from '../../services/Purchase'
 
 import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
+import CartInterface from '../../models/interfaces/Cart'
 
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
+import NumericInput from '../../components/atoms/NumericInput'
 
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
@@ -44,6 +46,16 @@ const Cart = () => {
     dispatch({
       type: 'REMOVE_PRODUCT_TO_CART',
       payload: productId,
+    })
+  }
+
+  const changeOne = (cartProduct: CartInterface, value: string) => {
+    dispatch({
+      type: 'CHANGE_QUANTITY',
+      payload: {
+        product: cartProduct.product,
+        quantity: +value,
+      },
     })
   }
 
@@ -90,7 +102,14 @@ const Cart = () => {
                     </Col>
                     <Col>
                       {printTitle('Qtd')}
-                      {printValue(cartProduct.quantity)}
+                      {<NumericInput
+                        size={1}
+                        min={1}
+                        max={15}
+                        step={1}
+                        value={cartProduct.quantity}
+                        onChange={(event) => changeOne(cartProduct, event.target.value)}
+                      />}
                     </Col>
                     <Col>
                       {printTitle('Total')}

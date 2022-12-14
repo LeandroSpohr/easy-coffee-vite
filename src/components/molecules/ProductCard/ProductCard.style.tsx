@@ -13,6 +13,8 @@ const ProductCard = styled.div`
   color: white;
   border-radius: ${sizes.size20};
   padding: ${sizes.size10};
+  display: inline-grid;
+  flex-flow: column;
 
   ${({ fluid }: ProductCardInterface) =>
     fluid &&
@@ -28,21 +30,16 @@ export const ImageWrapper = styled.div`
 `
 
 export const ActionWrapper = styled.div`
-  display: flex-end;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: ${sizes.size10};
 `
 
 export const InfoWrapper = styled.div`
   display: flex;
+  flex-flow: column;
   justify-content: space-between;
-  bottom: 0;
-`
-
-export const LowPaper = styled.div`
-  display: flex;
-  justify-content: center ;
-  bottom: 0;
-  width: ${sizes.size100Percent};
 `
 
 export default ProductCard

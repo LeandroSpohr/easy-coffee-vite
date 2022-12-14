@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import {
   MdOutlineShoppingCart, 
-  MdAdd, 
+  MdAdd,
+  MdRemove,
   MdOutlineExitToApp,
   MdArrowBackIosNew, 
   MdClose,
@@ -32,6 +33,10 @@ export const CartIcon = styled(MdOutlineShoppingCart).attrs(defaultConfig)`
 `
 
 export const AddIcon = styled(MdAdd).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const RemoveIcon = styled(MdRemove).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `
 

@@ -37,26 +37,28 @@ const Home = () => {
   return (
     <Container fullHeight fullCentered>
       <Paper fullCentered>
-        <Wrapper>
-          <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
-          <Typography color={brown}>Easy Coffee</Typography>
-        </Wrapper>
-        <FieldContainer>
-          <Input
-            type="text"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            placeholder="Informe seu CPF"
-          />
-        </FieldContainer>
-        <Container displayBlock>
-          <Button type="button" style={{width: '100%'}} onClick={() => handleSubmit(cpf)}>
-          Entrar
-          </Button>
-          <Button type="button" style={{width: '100%', marginTop: '5%'}} onClick={() => handleSubmit('00000000000')}>
-          Convidado
-          </Button>
-        </Container>
+        <form>
+          <Wrapper>
+            <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+            <Typography color={brown}>Easy Coffee</Typography>
+          </Wrapper>
+          <FieldContainer>
+            <Input
+              type="text"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              placeholder="Informe seu CPF"
+            />
+          </FieldContainer>
+          <Container displayBlock>
+            <Button type="submit" onClick={(e) => {
+              e.preventDefault()
+              handleSubmit(cpf)
+            }}>
+            Entrar
+            </Button>
+          </Container>
+        </form>
       </Paper>
     </Container>
   )

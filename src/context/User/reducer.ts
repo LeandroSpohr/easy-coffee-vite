@@ -44,6 +44,17 @@ export const reducer = (state: UserContextInterface, action: ActionTypes): UserC
       cart: []
     }
 
+  case 'CHANGE_QUANTITY':
+    return {
+      ...state,
+      cart: state.cart.map((item) => {
+        if (item.product.id === action.payload.product.id) {
+          return action.payload
+        }
+        return item
+      })
+    }
+
   default:
     return state
   }

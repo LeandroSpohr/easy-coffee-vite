@@ -2,7 +2,6 @@ import React from 'react'
 import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'
 import Image from '../../atoms/Image'
-import NumericInput from '../../atoms/NumericInput'
 
 import ProductCard, {InfoWrapper, ImageWrapper, ActionWrapper } from './ProductCard.style'
 import { useFormats } from '../../../utils/useFormats'
@@ -17,7 +16,7 @@ type ProductCardComponentInterface = {
   buttonText?: string | JSX.Element
   price: number
   handleSubmit: () => void
-  inputQuantities?: JSX.Element 
+  inputQuantity?: JSX.Element 
 }
 
 const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
@@ -30,7 +29,7 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
   price,
   handleSubmit,
   fluid,
-
+  inputQuantity,
 }) => {
   const { formatCurrency } = useFormats()
  
@@ -46,11 +45,11 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
           <Typography as="p"> {formatCurrency(price)} </Typography>
         </div>
         <div>
-          <NumericInput type='number' min='1' max='50' step='1'/>
+          <ActionWrapper>
+            {inputQuantity}
+            <Button circle onClick={() => handleSubmit()}>{buttonText}</Button>
+          </ActionWrapper>
         </div>
-        <ActionWrapper>
-          <Button circle onClick={() => handleSubmit()}>{buttonText}</Button>
-        </ActionWrapper>
       </InfoWrapper>
     </ProductCard>
   )
