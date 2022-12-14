@@ -28,12 +28,9 @@ const MyAccount = () => {
   const {state} = useUser()
 
   const userId = state.user ? state.user.id : ''
-  const prefixUrl = 'https://www.google.com/search?q='
 
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
   const [payValue, setPayValue] = useState<number>()
-
-  const pixUrl = prefixUrl.concat((payValue || 0) + '')
 
   const printTitle = (value: string) => (<Typography as='h4'>
     {value}
@@ -86,7 +83,12 @@ const MyAccount = () => {
       <Typography color={brown}>Compras em aberto</Typography>
       <ContentWrapper>
         <FlexWrapper centered>
-          <QRCode value={pixUrl} />
+          <QRCode 
+            pixkey='26442024000194'
+            merchant='Facil Promotora de Vendas e Servicos Ltda'
+            city='PASSO FUNDO'
+            amount={payValue}
+          />
         </FlexWrapper>
         <FlexWrapper centered>
           <ItemWrapper>

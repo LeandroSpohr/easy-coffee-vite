@@ -1,19 +1,28 @@
 import React from 'react'
-import QRCode, {QRCodeProps} from 'react-qr-code'
+import PIX from 'react-qrcode-pix'
 
 import {Wrapper} from './QRCode.style'
 
-interface QRCodeInterface extends QRCodeProps {
-  value: string
-  size?: number
+interface PixProps {
+  pixkey: string
+  merchant: string
+  city: string
+  amount?: number
 }
 
 const QRCodeComponent = ({
-  value,
-  size
-}: QRCodeInterface) => (
+  pixkey,
+  merchant,
+  city,
+  amount,
+}: PixProps) => (
   <Wrapper>
-    <QRCode value={value} size={size} />
+    <PIX
+      pixkey={pixkey}
+      merchant={merchant}
+      city={city}
+      amount={amount}
+    />
   </Wrapper>
 )
 
