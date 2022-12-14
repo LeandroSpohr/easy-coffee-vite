@@ -19,10 +19,10 @@ const AppRoutes = () => {
     <MainTemplate>
       { children }
     </MainTemplate>
-  ) 
+  )
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/easy-coffee-vite/'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="produtos" element={

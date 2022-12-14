@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
-import {ItemlWrapper, ContentWrapper, FlexWrapper} from '../Cart/Cart.styles'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'

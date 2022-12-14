@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Row, Col } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,7 +14,7 @@ import Button from '../../components/atoms/Button'
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 
-import { ItemlWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
+import { ItemWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
 
@@ -28,6 +28,10 @@ const Cart = () => {
   const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
 
+  const totalValue = state.cart.reduce((accumulator, cartProduct) => {
+    return +accumulator + (+cartProduct.product.value * +cartProduct.quantity)
+  }, 0)
+
   const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
 
   const printValue = (value: string | number) => (
@@ -35,22 +39,6 @@ const Cart = () => {
       {value}
     </Typography>
   )
-
-  const [totalValue, onChangeTotalValue] = useState(0)
-
-  const setTotalValue = () => {
-    let newTotalValue = 0
-    state.cart.map((cartProduct) => {
-      const productFinalValue = cartProduct.product.value * cartProduct.quantity
-      newTotalValue += productFinalValue
-    })
-
-    onChangeTotalValue(newTotalValue)
-  }
-
-  useEffect(() => {
-    setTotalValue()
-  })
 
   const removeOne = (productId: string) => {
     dispatch({
@@ -87,13 +75,13 @@ const Cart = () => {
       <ContentWrapper>
         {hasItems ? (
           <>
-            <ItemlWrapper>
+            <ItemWrapper>
               <FlexWrapper>
                 <Button onClick={() => clearCart()}>Limpar Carrinho</Button>
               </FlexWrapper>
-            </ItemlWrapper>
+            </ItemWrapper>
             {state.cart.map((cartProduct) => (
-              <ItemlWrapper key={'item' + cartProduct.product.id}>
+              <ItemWrapper key={'item' + cartProduct.product.id}>
                 <Paper key={'paper' + cartProduct.product.id}>
                   <Row key={'row' + cartProduct.product.id}>
                     <Col key={'col' + cartProduct.product.id}>
@@ -117,29 +105,31 @@ const Cart = () => {
                     </Col>
                   </Row>
                 </Paper>
-              </ItemlWrapper>
+              </ItemWrapper>
             ))}
             <FlexWrapper>
-              <Typography style={{ marginLeft: '5%', marginRight: '1%' }} as="h1">
-                Total: {formatCurrency(totalValue)}
-              </Typography>
+              <ItemWrapper>
+                <Typography as="h4">
+                  Total: {formatCurrency(totalValue)}
+                </Typography>
+              </ItemWrapper>
               <Button onClick={() => finalize()}>Finalizar Compra</Button>
             </FlexWrapper>
           </>
         ) : (
           <>
             <FlexWrapper centered>
-              <ItemlWrapper>
+              <ItemWrapper>
                 <Typography as="h3">Seu carrinho está vazio</Typography>
-              </ItemlWrapper>
+              </ItemWrapper>
             </FlexWrapper>
             <FlexWrapper centered>
-              <ItemlWrapper>
+              <ItemWrapper>
                 <Button onClick={() => goBack()}>Voltar</Button>
-              </ItemlWrapper>
-              <ItemlWrapper>
+              </ItemWrapper>
+              <ItemWrapper>
                 <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
-              </ItemlWrapper>
+              </ItemWrapper>
             </FlexWrapper>
           </>
         )}

@@ -17,7 +17,7 @@ import QRCode from '../../components/atoms/QRCode'
 import {useUser} from '../../context/User'
 import { useFormats } from '../../utils/useFormats' 
 
-import {ItemlWrapper, ContentWrapper, FlexWrapper} from './MyAccount.styles'
+import {ItemWrapper, ContentWrapper, FlexWrapper} from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 
 const { brown } = colors
@@ -89,16 +89,16 @@ const MyAccount = () => {
           <QRCode value={pixUrl} />
         </FlexWrapper>
         <FlexWrapper centered>
-          <ItemlWrapper>
+          <ItemWrapper>
             <Typography as='h2'>
               {formatCurrency(payValue)}
             </Typography>
-          </ItemlWrapper>
+          </ItemWrapper>
         </FlexWrapper>
         {purchases.length ? (
           <>
             {purchases.map((purchase) => (
-              <ItemlWrapper key={'item' + purchase.id}>
+              <ItemWrapper key={'item' + purchase.id}>
                 <Paper key={'paper' + purchase.id}>
                   <Row key={'row' + purchase.id}>
                     <Col key={'col' + purchase.id}>
@@ -120,14 +120,14 @@ const MyAccount = () => {
                     </Col>
                   </Row>
                 </Paper>
-              </ItemlWrapper>
+              </ItemWrapper>
             ))}
             <FlexWrapper>
-              <ItemlWrapper>
+              <ItemWrapper>
                 <Typography as='h4'>
                   Total {formatCurrency(getTotalValue(purchases))}
                 </Typography>
-              </ItemlWrapper>
+              </ItemWrapper>
               <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
             </FlexWrapper>
           </>
@@ -135,16 +135,16 @@ const MyAccount = () => {
           : (
             <>
               <FlexWrapper centered>
-                <ItemlWrapper>
+                <ItemWrapper>
                   <Typography as='h3'>
                     Nenhuma compra em aberto
                   </Typography>
-                </ItemlWrapper>
+                </ItemWrapper>
               </FlexWrapper>
               <FlexWrapper centered>
-                <ItemlWrapper>
+                <ItemWrapper>
                   <Button onClick={() => goBack()}>Voltar</Button>
-                </ItemlWrapper>
+                </ItemWrapper>
               </FlexWrapper>
             </>
           )}
