@@ -87,6 +87,7 @@ const RegisterCustomer = () => {
                     value={formValues.cpf}
                     onChange={e => handleChange(e)}
                     placeholder="Informe seu CPF"
+                    autoComplete='off'
                   />
                 </InputWrapper>
               </Col>
@@ -102,6 +103,7 @@ const RegisterCustomer = () => {
                     value={formValues.name}
                     onChange={e => handleChange(e)}
                     placeholder="Informe seu nome"
+                    autoComplete='off'
                   />
                 </InputWrapper>
               </Col>

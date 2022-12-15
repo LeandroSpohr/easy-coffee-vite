@@ -85,6 +85,7 @@ const Home = () => {
               name="cpf"
               onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"
+              autoComplete='off'
             />
           </FieldContainer>
           <Container displayBlock>

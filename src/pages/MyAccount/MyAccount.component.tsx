@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { Row, Col } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import {isMobile} from 'react-device-detect'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 import * as PurchaseService from '../../services/Purchase'
 import * as PaymentService from '../../services/Payment'
@@ -31,6 +33,7 @@ const MyAccount = () => {
 
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
   const [payValue, setPayValue] = useState<number>()
+  const [viewPIX, setViewPIX] = useState<string>('')
 
   const printTitle = (value: string) => (<Typography as='h4'>
     {value}
@@ -88,7 +91,19 @@ const MyAccount = () => {
             merchant='Facil Promotora de Vendas e Servicos Ltda'
             city='PASSO FUNDO'
             amount={payValue}
+            showQRCode={!isMobile}
+            onLoad={ payload => setViewPIX(payload) }
           />
+          {isMobile && (
+            <CopyToClipboard
+              text={viewPIX}              
+              onCopy={() => toast.success('PIX copiado com sucesso!')}
+            >
+              <Button>
+                Pix Copia e Cola
+              </Button>
+            </CopyToClipboard>
+          )}
         </FlexWrapper>
         <FlexWrapper centered>
           <ItemWrapper>

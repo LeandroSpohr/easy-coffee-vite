@@ -8,6 +8,8 @@ interface PixProps {
   merchant: string
   city: string
   amount?: number
+  onLoad?: (payload: string) => void
+  showQRCode?: boolean
 }
 
 const QRCodeComponent = ({
@@ -15,13 +17,18 @@ const QRCodeComponent = ({
   merchant,
   city,
   amount,
+  onLoad,
+  showQRCode = true,
 }: PixProps) => (
-  <Wrapper>
+  <Wrapper 
+    showQRCode={showQRCode}
+  >
     <PIX
       pixkey={pixkey}
       merchant={merchant}
       city={city}
       amount={amount}
+      onLoad={onLoad}
     />
   </Wrapper>
 )

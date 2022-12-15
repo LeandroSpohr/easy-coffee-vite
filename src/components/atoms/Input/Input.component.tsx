@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyledComponentPropsWithRef} from 'styled-components'
-import Input from './Input.style'
+import Input, {Container} from './Input.style'
 
 interface InputInterface extends StyledComponentPropsWithRef<typeof Input> {
   type: string
@@ -11,7 +11,9 @@ const InputComponent = ({
   type,
   ...rest
 }: InputInterface) => (
-  <Input type={type} {...rest} />
+  <Container>
+    <Input type={type} {...rest} />
+  </Container>
 )
 
 export default InputComponent
