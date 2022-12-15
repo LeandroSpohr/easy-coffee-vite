@@ -1,10 +1,18 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
 
 const { white } = colors
 const { size10 } = sizes
 
-export const Wrapper = styled.div`
+interface WrapperProps {
+  showQRCode: boolean
+}
+
+export const Wrapper = styled.div<WrapperProps>`
   border: ${size10} solid ${white};
+
+  ${({ showQRCode }) => !showQRCode && css`
+    display: none;
+  `}
 `
