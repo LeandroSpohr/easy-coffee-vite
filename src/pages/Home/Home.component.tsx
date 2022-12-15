@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
 import Container from '../../components/atoms/Container'
@@ -10,7 +10,7 @@ import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, FullScreenWrapper } from './Home.styles'
+import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
@@ -24,7 +24,7 @@ const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
   const navigate = useNavigate()
-  
+
   const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
@@ -77,12 +77,21 @@ const Home = () => {
             />
           </FieldContainer>
           <Container displayBlock>
-            <Button type="submit" onClick={(e) => {
-              e.preventDefault()
-              handleSubmit(cpf)
-            }}>
-            Entrar
-            </Button>
+            <ButtonWrapper>
+              <div>
+                <Button type="submit" onClick={(e) => {
+                  e.preventDefault()
+                  handleSubmit(cpf)
+                }}>
+                  Entrar
+                </Button>
+              </div>
+              <div>
+                <Link to="/cadastro">
+                  <Typography as='h4' color={brown}>Registre-se</Typography>
+                </Link>
+              </div>
+            </ButtonWrapper>
           </Container>
         </form>
       </Paper>

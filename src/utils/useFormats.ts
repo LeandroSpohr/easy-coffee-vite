@@ -13,9 +13,14 @@ export const useFormats = () => {
     `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`
   )
 
+  const formatDateYYYYMMDD = (data: Date) => (
+    `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`
+  )
+
   return {
     formatCurrency,
     getFirstName,
-    formatDateDDMMYYYY
+    formatDateDDMMYYYY,
+    formatDateYYYYMMDD
   }
 }
