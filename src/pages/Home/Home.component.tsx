@@ -55,6 +55,16 @@ const Home = () => {
     }
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    if (name === 'cpf' && value.length > 11) {
+      return
+    }
+
+    setCpf(value)
+  }
+
   return (
     <Container fullHeight fullCentered>
       <FullScreenWrapper>
@@ -70,9 +80,10 @@ const Home = () => {
           </Wrapper>
           <FieldContainer>
             <Input
-              type="text"
+              type="number"
               value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
+              name="cpf"
+              onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"
             />
           </FieldContainer>

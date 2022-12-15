@@ -34,10 +34,6 @@ const RegisterCustomer = () => {
 
   const [formValues, setFormValues] = useState<UserInputInterface>(initialFormValues)
 
-  const replaceMask = (value: string) => {
-    return value.replace(/\D/g, '')
-  }
-
   const handleSubmit = () => {
     if (!formValues.cpf || !formValues.name || !formValues.birthDate) {
       toast.warn('Preencha todos os campos')
@@ -61,14 +57,10 @@ const RegisterCustomer = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    if (name === 'cpf') {
-      const cpf = replaceMask(value)
-      setFormValues({
-        ...formValues,
-        [name]: cpf,
-      })
+    if (name === 'cpf' && value.length > 11) {
       return
     }
+
     setFormValues({
       ...formValues,
       [name]: value,
@@ -90,9 +82,8 @@ const RegisterCustomer = () => {
                 <InputWrapper>
                   <Typography as='h3' color={brown}>CPF</Typography>
                   <Input
-                    type="text"
+                    type="number"
                     name="cpf"
-                    maxLength={11}
                     value={formValues.cpf}
                     onChange={e => handleChange(e)}
                     placeholder="Informe seu CPF"
