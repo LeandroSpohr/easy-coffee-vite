@@ -6,7 +6,7 @@ interface WrapperInterface {
   centered?: boolean
 }
 
-export const ItemlWrapper = styled.div`
+export const ItemWrapper = styled.div`
   margin: ${sizes.size15};
 `
 

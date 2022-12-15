@@ -10,10 +10,13 @@ export const FieldContainer = styled.div`
   margin-block: ${sizes.size30};
 `
 
-export const FullScreenWrapper = styled.div`
-  position: fixed;
-  top: ${sizes.size10};
-  left: ${sizes.size10};
+export const InputWrapper = styled.div`
+  margin-block: ${sizes.size10};
+  text-align: left;
+
+  h3 {
+    margin-left: ${sizes.size10};
+  }
 `
 
 export const ButtonWrapper = styled.div`
