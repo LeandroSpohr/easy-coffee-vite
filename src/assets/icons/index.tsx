@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 import {
   MdOutlineShoppingCart, 
-  MdAdd, 
+  MdAdd,
+  MdRemove,
   MdOutlineExitToApp,
   MdArrowBackIosNew, 
   MdClose,
   MdOutlineAccountBox,
+  MdFullscreen,
+  MdFullscreenExit,
 } from 'react-icons/md'
 
 import { colors, sizes } from '../styles/variables'
@@ -35,6 +38,10 @@ export const AddIcon = styled(MdAdd).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `
 
+export const RemoveIcon = styled(MdRemove).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
 export const ExitIcon = styled(MdOutlineExitToApp).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `
@@ -48,5 +55,13 @@ export const CloseIcon = styled(MdClose).attrs(defaultConfig)`
 `
 
 export const AccountIcon = styled(MdOutlineAccountBox).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const FullScreenIcon = styled(MdFullscreen).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const FullScreenExitIcon = styled(MdFullscreenExit).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `

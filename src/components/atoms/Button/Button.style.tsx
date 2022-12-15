@@ -24,7 +24,7 @@ const Button = styled.button<ButtonInterface>`
   ${({ circle }: ButtonInterface) =>
     circle && css`
       min-height: auto;
-      padding: ${sizes.size10};
+      padding: ${sizes.size6};
       border-radius: 50%;
       display:flex;
 

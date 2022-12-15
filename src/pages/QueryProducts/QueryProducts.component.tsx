@@ -9,6 +9,7 @@ import CartInterface from '../../models/interfaces/Cart'
 
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
+import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
 import {ColWrapper, ContentWrapper} from './QueryProducts.styles'
 
@@ -22,13 +23,9 @@ const { brown } = colors
 
 const QueryProducts = () => {
   const { dispatch } = useUser()
-  const [products, setProducts] = useState<ProductInterface[]>([])
+  const [products, setProducts] = useState<CartInterface[]>([])
 
-  const addToCart = (product: ProductInterface) => {
-    const productCart: CartInterface = {
-      product,
-      quantity: 1,
-    }
+  const addToCart = (productCart: CartInterface) => {
     dispatch({
       type: 'ADD_PRODUCT_TO_CART',
       payload: productCart,
@@ -36,8 +33,25 @@ const QueryProducts = () => {
     toast.success('Produto adicionado ao carrinho!')
   }
 
+  const handleChangeProductQuantity = (productCart: CartInterface, value: string) => {
+    const updatedeProducts = products
+    const someProductIndex = updatedeProducts.findIndex(cartProduct => cartProduct.product.id === productCart.product.id)
+    if (someProductIndex !== -1) {
+      updatedeProducts[someProductIndex].quantity = +value
+    }
+
+    setProducts([...updatedeProducts])
+  }
+
   useEffect(() => {
-    ProductService.getAll().then(setProducts)
+    ProductService.getAll()
+      .then((response) => {
+        const productsCart: CartInterface[] = response.map((product: ProductInterface) => ({
+          product,
+          quantity: 1,
+        }))
+        setProducts(productsCart)
+      })
   }, [])
 
   return (
@@ -45,17 +59,25 @@ const QueryProducts = () => {
       <Typography color={brown}>Produtos</Typography>
       <ContentWrapper>
         <Row>
-          {products.map((product) => (
-            <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + product.id}>
+          {products.map((productCart) => (
+            <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>
               <ProductCard
-                key={'productCard' + product.id}
+                key={'productCard' + productCart.product.id}
                 fluid
-                imgUrl={product.imgUrl}
+                imgUrl={productCart.product.imgUrl}
                 imgMaxHeight={size150}
-                title={product.description}
-                price={product.value}
+                title={productCart.product.description}
+                price={productCart.product.value}
                 buttonText={<AddIcon size={size30} />}
-                handleSubmit={() => addToCart(product)}
+                inputQuantity={<NumericInput
+                  size={1}
+                  min={1}
+                  max={15}
+                  step={1}
+                  value={productCart.quantity}
+                  onChange={(event) => handleChangeProductQuantity(productCart, event.target.value)}
+                />}
+                handleSubmit={() => addToCart(productCart)}
               ></ProductCard>
             </ColWrapper>
           ))}

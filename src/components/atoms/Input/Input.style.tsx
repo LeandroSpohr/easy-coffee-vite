@@ -15,6 +15,19 @@ const {
   size100Percent,
 } = sizes
 
+export const Container = styled.div`
+  input[type="number"] {
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+`
+
 const Input = styled.input`
   border: none;
   background: ${brown};
