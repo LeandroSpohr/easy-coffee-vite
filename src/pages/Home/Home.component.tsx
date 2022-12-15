@@ -10,7 +10,9 @@ import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer } from './Home.styles'
+import { Wrapper, FieldContainer, FullScreenWrapper } from './Home.styles'
+
+import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
@@ -22,6 +24,8 @@ const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
   const navigate = useNavigate()
+  
+  const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
     UserService.getByCpf(cpf)
@@ -34,8 +38,30 @@ const Home = () => {
       .then(() => navigate('/produtos'))
   }
 
+  const handleToggleFullScreen = () => {
+    const doc = window.document
+    const docEl = doc.documentElement
+
+    const requestFullScreen =
+      docEl.requestFullscreen
+    const cancelFullScreen = doc.exitFullscreen
+
+    if (!doc.fullscreenElement) {
+      requestFullScreen.call(docEl)
+      setToggle(true)
+    } else {
+      cancelFullScreen.call(doc)
+      setToggle(false)
+    }
+  }
+
   return (
     <Container fullHeight fullCentered>
+      <FullScreenWrapper>
+        <Button onClick={handleToggleFullScreen} circle>
+          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
+        </Button>
+      </FullScreenWrapper>
       <Paper fullCentered>
         <form>
           <Wrapper>

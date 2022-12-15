@@ -9,3 +9,9 @@ export const Wrapper = styled.div`
 export const FieldContainer = styled.div`
   margin-block: ${sizes.size30};
 `
+
+export const FullScreenWrapper = styled.div`
+  position: fixed;
+  top: ${sizes.size10};
+  left: ${sizes.size10};
+`

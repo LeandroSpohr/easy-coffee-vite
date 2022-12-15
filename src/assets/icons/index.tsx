@@ -7,6 +7,8 @@ import {
   MdArrowBackIosNew, 
   MdClose,
   MdOutlineAccountBox,
+  MdFullscreen,
+  MdFullscreenExit,
 } from 'react-icons/md'
 
 import { colors, sizes } from '../styles/variables'
@@ -53,5 +55,13 @@ export const CloseIcon = styled(MdClose).attrs(defaultConfig)`
 `
 
 export const AccountIcon = styled(MdOutlineAccountBox).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const FullScreenIcon = styled(MdFullscreen).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => (color || white)};
+`
+
+export const FullScreenExitIcon = styled(MdFullscreenExit).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => (color || white)};
 `
