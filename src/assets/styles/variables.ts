@@ -123,20 +123,20 @@ interface ZIndexInterface {
 }
 
 export const colors: ColorsInterface = {
-  white: localStorage.getItem('white'),
-  veryLightGray: localStorage.getItem('veryLightGray'),
-  lightGrayOpacity: localStorage.getItem('lightGrayOpacity'),
-  lightGray: localStorage.getItem('lightGray'),
-  gray: localStorage.getItem('gray'),
-  darkGray: localStorage.getItem('darkGray'),
-  red: localStorage.getItem('red'),
-  transparentBrown: localStorage.getItem('transparentBrown'),
-  veryLightBrown: localStorage.getItem('veryLightBrown'),
-  lightBrown: localStorage.getItem('lightBrown'),
-  brown: localStorage.getItem('brown'),
-  veryDarkBrown: localStorage.getItem('veryDarkBrown'),
-  blackOpacity: localStorage.getItem('blackOpacity'),
-  black: localStorage.getItem('black'),
+  veryDarkBrown: '#240f04',
+  brown: '#565656',
+  transparentBrown: '#454545  ',
+  lightBrown: '#977452',
+  veryLightBrown: '#c0c0c0',
+  darkGray: '#676363',
+  gray: '#747778',
+  lightGray: '#a7a7a7',
+  lightGrayOpacity: '#a7a7a7ab',
+  white: '#FFF',
+  black: '#000',
+  blackOpacity: '#0000004D',
+  veryLightGray: '#dcdcdc', // fundo cafe
+  red: '#CC2727',
 }
 
 export const zIndex: ZIndexInterface = {

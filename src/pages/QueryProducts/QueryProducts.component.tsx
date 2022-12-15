@@ -10,7 +10,7 @@ import CartInterface from '../../models/interfaces/Cart'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import ProductCard from '../../components/molecules/ProductCard'
-import {ColWrapper, ContentWrapper} from './QueryProducts.styles'
+import { ColWrapper, ContentWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 

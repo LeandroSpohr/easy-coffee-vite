@@ -9,7 +9,7 @@ interface TypographyInterface {
 }
 
 const Typography = styled.h1<TypographyInterface>`
-  color: ${({color}: TypographyInterface) => (!color ? `${white}` : color)};
+  color: ${({ color }: TypographyInterface) => (!color ? `${white}` : color)};
 `
 
 export default Typography
