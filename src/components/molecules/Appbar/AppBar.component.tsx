@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import AppBar, { InfoWrapper, ActionsWrapper, IcoWrapper } from './AppBar.style'
 import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon } from '../../../assets/icons'
@@ -12,15 +12,12 @@ import { useUser } from '../../../context/User'
 
 import { useFormats } from '../../../utils/useFormats'
 import LogoutConfirm from '../LogoutConfirm'
+import { useNavigation } from '../../../utils/useNavigation'
 
 const AppBarComponent = () => {
   const { state } = useUser()
-  const navigate = useNavigate()
+  const { goBack } = useNavigation()
   const { getFirstName } = useFormats()
-
-  const goBack = () => {
-    navigate(-1)
-  }
 
   const logout = () =>
     document.getElementById('logoutConfirm')?.setAttribute('style', 'display: fixed')

@@ -1,20 +1,20 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ButtonsWrapper, LogoutConfirm, MessageWrapper } from './LogoutConfirm.styles'
 import { useUser } from '../../../context/User'
 import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'
+import { useNavigation } from '../../../utils/useNavigation'
 
 const LogoutConfirmComponent = () => {
   const { dispatch } = useUser()
-  const navigate = useNavigate()
+  const { goToHome } = useNavigation()
 
   const logout = () => {
     clearMessage()
     dispatch({
       type: 'CLEAR_USER',
     })
-    navigate('/')
+    goToHome()
   }
 
   const clearMessage = () => {
