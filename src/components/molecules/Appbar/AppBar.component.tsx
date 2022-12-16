@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import AppBar, {InfoWrapper, ActionsWrapper, IcoWrapper} from './AppBar.style'
-import {CartIcon, ExitIcon, LeftArrowIcon, AccountIcon} from '../../../assets/icons'
+import AppBar, { InfoWrapper, ActionsWrapper, IcoWrapper } from './AppBar.style'
+import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon } from '../../../assets/icons'
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
@@ -13,7 +13,7 @@ import { useUser } from '../../../context/User'
 import { useFormats } from '../../../utils/useFormats'
 
 const AppBarComponent = () => {
-  const {state, dispatch} = useUser()
+  const { state, dispatch } = useUser()
   const navigate = useNavigate()
   const { getFirstName } = useFormats()
 
@@ -23,7 +23,7 @@ const AppBarComponent = () => {
 
   const logout = () => {
     dispatch({
-      type: 'CLEAR_USER'
+      type: 'CLEAR_USER',
     })
     navigate('/')
   }
@@ -37,12 +37,10 @@ const AppBarComponent = () => {
   return (
     <AppBar>
       <InfoWrapper>
-        <span onClick={() => goBack()} >
+        <span onClick={() => goBack()}>
           <LeftArrowIcon size={sizes.size28} />
         </span>
-        <Typography>
-          Olá {getFirstName(state.user?.name)}
-        </Typography>
+        <Typography>Olá {getFirstName(state.user?.name)}</Typography>
       </InfoWrapper>
       <ActionsWrapper>
         <Link to="/minha-conta">
@@ -53,9 +51,7 @@ const AppBarComponent = () => {
         <Link to="/carrinho">
           <IcoWrapper>
             <CartIcon size={sizes.size30} />
-            <Badge className="badge">
-              {getBadgeNumber()}
-            </Badge>
+            <Badge className="badge">{getBadgeNumber()}</Badge>
           </IcoWrapper>
         </Link>
         <IcoWrapper>
