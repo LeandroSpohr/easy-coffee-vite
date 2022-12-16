@@ -20,7 +20,7 @@ const AppBarComponent = () => {
   const { getFirstName } = useFormats()
 
   const logout = () =>
-    document.getElementById('logoutConfirm')?.setAttribute('style', 'display: fixed')
+    document.getElementById('displayLogoutConfirm')?.setAttribute('style', 'display: fixed')
 
   const getBadgeNumber = () => {
     if (state.cart.length) {
