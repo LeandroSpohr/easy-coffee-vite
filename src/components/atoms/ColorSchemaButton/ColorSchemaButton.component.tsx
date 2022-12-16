@@ -2,7 +2,7 @@ import React from 'react'
 import { useColorSchema } from '../../../context/ColorSchema'
 import Button from '../Button'
 
-const ChangeColorSchemaButton = () => {
+const ColorSchemaButtonComponent = () => {
   const { dispatch } = useColorSchema()
 
   const changeColorSchema = () => {
@@ -14,4 +14,4 @@ const ChangeColorSchemaButton = () => {
   return <Button onClick={() => changeColorSchema()}>T</Button>
 }
 
-export default ChangeColorSchemaButton
+export default ColorSchemaButtonComponent

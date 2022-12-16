@@ -10,13 +10,19 @@ import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
+import {
+  Wrapper,
+  FieldContainer,
+  FullScreenWrapper,
+  ButtonWrapper,
+  ThemeButtonWrapper,
+} from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import ChangeThemeButton from '../../components/atoms/ChangeThemeButton'
+import ColorSchemaButton from '../../components/atoms/ColorSchemaButton'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -67,13 +73,15 @@ const Home = () => {
 
   return (
     <>
-      <ChangeThemeButton />
+      <ThemeButtonWrapper>
+        <ColorSchemaButton />
+      </ThemeButtonWrapper>
+      <FullScreenWrapper>
+        <Button onClick={handleToggleFullScreen} circle>
+          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
+        </Button>
+      </FullScreenWrapper>
       <Container fullHeight fullCentered>
-        <FullScreenWrapper>
-          <Button onClick={handleToggleFullScreen} circle>
-            {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
-          </Button>
-        </FullScreenWrapper>
         <Paper fullCentered>
           <form>
             <Wrapper>

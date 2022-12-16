@@ -2,7 +2,7 @@
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
 import ColorSchemaContextInterface from '../../models/interfaces/ColorSchema'
-import { defaultColorSchema, grayColorSchema } from './themes'
+import { defaultColorSchema, grayColorSchema } from './colorSchemas'
 
 export const reducer = (state: ColorSchemaContextInterface, action: ActionTypes) => {
   state.colorSchemaEnum = Number(localStorage.getItem('colorSchemaEnum'))
