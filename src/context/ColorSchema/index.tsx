@@ -2,10 +2,10 @@ import React, { useContext, createContext, useReducer } from 'react'
 import reducer from './reducer'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
-import ThemeContextInterface from '../../models/interfaces/Color'
+import ColorSchemaContextInterface from '../../models/interfaces/ColorSchema'
 
 type Context = {
-  state: ThemeContextInterface
+  state: ColorSchemaContextInterface
   dispatch: React.Dispatch<ActionTypes>
 }
 
@@ -13,9 +13,9 @@ type ContextProps = {
   children?: React.ReactNode
 }
 
-const ThemeContext = createContext<Context>({} as Context)
+const ColorSchemaContext = createContext<Context>({} as Context)
 
-export const ThemeProvider = ({ children }: ContextProps) => {
+export const ColorSchemaProvider = ({ children }: ContextProps) => {
   const [state, dispatch] = useReducer(reducer, initialValues)
 
   const value = {
@@ -23,11 +23,11 @@ export const ThemeProvider = ({ children }: ContextProps) => {
     dispatch,
   }
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  return <ColorSchemaContext.Provider value={value}>{children}</ColorSchemaContext.Provider>
 }
 
-export const useTheme = () => {
-  const context = useContext(ThemeContext)
+export const useColorSchema = () => {
+  const context = useContext(ColorSchemaContext)
   if (context === undefined) {
     throw new Error('useColor must be used within a ThemeProvider')
   }
