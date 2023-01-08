@@ -30,10 +30,12 @@ const Home = () => {
   const handleSubmit = (cpf: string) => {
     UserService.getByCpf(cpf)
       .then((response) => {
-        dispatch({
-          type: 'ADD_USER',
-          payload: response,
-        })
+        if (response) {
+          dispatch({
+            type: 'ADD_USER',
+            payload: response,
+          })
+        }
       })
       .then(() => navigate('/produtos'))
   }
@@ -42,8 +44,7 @@ const Home = () => {
     const doc = window.document
     const docEl = doc.documentElement
 
-    const requestFullScreen =
-      docEl.requestFullscreen
+    const requestFullScreen = docEl.requestFullscreen
     const cancelFullScreen = doc.exitFullscreen
 
     if (!doc.fullscreenElement) {
@@ -85,22 +86,27 @@ const Home = () => {
               name="cpf"
               onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"
-              autoComplete='off'
+              autoComplete="off"
             />
           </FieldContainer>
           <Container displayBlock>
             <ButtonWrapper>
               <div>
-                <Button type="submit" onClick={(e) => {
-                  e.preventDefault()
-                  handleSubmit(cpf)
-                }}>
+                <Button
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleSubmit(cpf)
+                  }}
+                >
                   Entrar
                 </Button>
               </div>
               <div>
                 <Link to="/cadastro">
-                  <Typography as='h4' color={brown}>Registre-se</Typography>
+                  <Typography as="h4" color={brown}>
+                    Registre-se
+                  </Typography>
                 </Link>
               </div>
             </ButtonWrapper>
