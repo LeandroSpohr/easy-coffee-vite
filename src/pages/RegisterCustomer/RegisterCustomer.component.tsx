@@ -18,6 +18,7 @@ import { UserInputInterface } from '../../models/interfaces/User'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import { useFormats } from '../../utils/useFormats'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -25,6 +26,7 @@ const { size200 } = sizes
 const RegisterCustomer = () => {
   const { dispatch } = useUser()
   const navigate = useNavigate()
+  const { setCpfMask, removeCpfMask } = useFormats()
 
   const initialFormValues: UserInputInterface = {
     cpf: '',
@@ -41,23 +43,31 @@ const RegisterCustomer = () => {
     }
 
     const newValues = { ...formValues }
-    
-    newValues.birthDate = new Date(formValues.birthDate)
 
-    UserService.save(newValues)
-      .then((response) => {
-        dispatch({
-          type: 'ADD_USER',
-          payload: response,
-        })
-        navigate('/produtos')
+    newValues.birthDate = new Date(formValues.birthDate)
+    newValues.cpf = removeCpfMask(formValues.cpf)
+
+    if (newValues.cpf.length != 11) {
+      toast.error(`${'Error: Formato de CPF inválido!'}`, {
+        theme: 'colored',
+        position: 'top-center',
       })
+      throw new Error('CPF inválido!')
+    }
+
+    UserService.save(newValues).then((response) => {
+      dispatch({
+        type: 'ADD_USER',
+        payload: response,
+      })
+      navigate('/produtos')
+    })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    if (name === 'cpf' && value.length > 11) {
+    if (name === 'cpf' && value.length > 14) {
       return
     }
 
@@ -80,14 +90,16 @@ const RegisterCustomer = () => {
             <Row>
               <Col>
                 <InputWrapper>
-                  <Typography as='h3' color={brown}>CPF</Typography>
+                  <Typography as="h3" color={brown}>
+                    CPF
+                  </Typography>
                   <Input
-                    type="number"
+                    type="text"
                     name="cpf"
-                    value={formValues.cpf}
-                    onChange={e => handleChange(e)}
+                    value={setCpfMask(formValues.cpf)}
+                    onChange={(e) => handleChange(e)}
                     placeholder="Informe seu CPF"
-                    autoComplete='off'
+                    autoComplete="off"
                   />
                 </InputWrapper>
               </Col>
@@ -95,15 +107,17 @@ const RegisterCustomer = () => {
             <Row>
               <Col>
                 <InputWrapper>
-                  <Typography as='h3' color={brown}>Nome</Typography>
+                  <Typography as="h3" color={brown}>
+                    Nome
+                  </Typography>
                   <Input
                     type="text"
                     name="name"
                     maxLength={100}
                     value={formValues.name}
-                    onChange={e => handleChange(e)}
+                    onChange={(e) => handleChange(e)}
                     placeholder="Informe seu nome"
-                    autoComplete='off'
+                    autoComplete="off"
                   />
                 </InputWrapper>
               </Col>
@@ -111,12 +125,14 @@ const RegisterCustomer = () => {
             <Row>
               <Col>
                 <InputWrapper>
-                  <Typography as='h3' color={brown}>Data de Nascimento</Typography>
+                  <Typography as="h3" color={brown}>
+                    Data de Nascimento
+                  </Typography>
                   <Input
                     type="date"
                     name="birthDate"
                     value={formValues.birthDate as string}
-                    onChange={e => handleChange(e)}
+                    onChange={(e) => handleChange(e)}
                     placeholder="Informe sua data de nascimento"
                   />
                 </InputWrapper>
@@ -126,16 +142,21 @@ const RegisterCustomer = () => {
           <Container displayBlock>
             <ButtonWrapper>
               <div>
-                <Button type="submit" onClick={(e) => {
-                  e.preventDefault()
-                  handleSubmit()
-                }}>
-              Enviar
+                <Button
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleSubmit()
+                  }}
+                >
+                  Enviar
                 </Button>
               </div>
               <div>
                 <Link to="/">
-                  <Typography as='h4' color={brown}>Cancelar</Typography>
+                  <Typography as="h4" color={brown}>
+                    Cancelar
+                  </Typography>
                 </Link>
               </div>
             </ButtonWrapper>

@@ -16,6 +16,8 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import { toast } from 'react-toastify'
+import { useFormats } from '../../utils/useFormats'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -25,9 +27,18 @@ const Home = () => {
   const [cpf, setCpf] = useState<string>('')
   const navigate = useNavigate()
 
+  const { setCpfMask, removeCpfMask } = useFormats()
+
   const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
+    cpf = removeCpfMask(cpf)
+
+    if (cpf.length != 11) {
+      triggerErrorToast('Error: Formato de CPF inválido!')
+      return
+    }
+
     UserService.getByCpf(cpf)
       .then((response) => {
         if (response) {
@@ -38,6 +49,7 @@ const Home = () => {
         }
       })
       .then(() => navigate('/produtos'))
+      .catch((error) => triggerErrorToast(error))
   }
 
   const handleToggleFullScreen = () => {
@@ -59,11 +71,15 @@ const Home = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    if (name === 'cpf' && value.length > 11) {
+    if (name === 'cpf' && value.length > 14) {
       return
     }
 
     setCpf(value)
+  }
+
+  const triggerErrorToast = (error: string) => {
+    toast.error(`${error}`, { theme: 'colored', position: 'top-center' })
   }
 
   return (
@@ -81,8 +97,8 @@ const Home = () => {
           </Wrapper>
           <FieldContainer>
             <Input
-              type="number"
-              value={cpf}
+              type="text"
+              value={setCpfMask(cpf)}
               name="cpf"
               onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"

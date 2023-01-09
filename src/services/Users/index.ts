@@ -9,7 +9,7 @@ const getByCpf = (cpf: string) =>
     .catch((error) => {
       switch (error.response.status) {
         case 500:
-          throw Error('User not found. ' + error)
+          throw Error('Usuário não encontrado!')
       }
     })
 
