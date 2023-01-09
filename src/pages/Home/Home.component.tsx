@@ -35,7 +35,14 @@ const Home = () => {
     cpf = removeCpfMask(cpf)
 
     if (cpf.length != 11) {
-      triggerErrorToast('Error: Formato de CPF inválido!')
+      if (cpf.length == 0) {
+        toast.warn('Preencha o campo abaixo com seu CPF!', {
+          theme: 'colored',
+          position: 'top-center',
+        })
+        return
+      }
+      triggerErrorToast('Formato de CPF inválido!')
       return
     }
 
