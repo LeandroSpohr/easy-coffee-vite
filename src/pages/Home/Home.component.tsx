@@ -56,7 +56,6 @@ const Home = () => {
         }
       })
       .then(() => navigate('/produtos'))
-      .catch((error) => triggerErrorToast(error))
   }
 
   const handleToggleFullScreen = () => {

@@ -55,24 +55,13 @@ const RegisterCustomer = () => {
       throw new Error('CPF inválido!')
     }
 
-    UserService.save(newValues)
-      .then((response) => {
-        dispatch({
-          type: 'ADD_USER',
-          payload: response,
-        })
-        navigate('/produtos')
+    UserService.save(newValues).then((response) => {
+      dispatch({
+        type: 'ADD_USER',
+        payload: response,
       })
-      .catch((error) => {
-        toast.error(
-          `${'Ocorreu algum erro. Verifique a existência de uma conta vinculada a este CPF e tente novamente.'}`,
-          {
-            theme: 'colored',
-            position: 'top-center',
-          },
-        )
-        throw new Error(error)
-      })
+      navigate('/produtos')
+    })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
