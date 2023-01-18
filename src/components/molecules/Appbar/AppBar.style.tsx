@@ -20,13 +20,13 @@ export const InfoWrapper = styled.div`
   align-items: center;
 `
 
-export const IcoWrapper = styled.div`
+export const IconWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  :active{
+  :active {
     transition: 100ms;
-    transform: scale(0.80);
+    transform: scale(0.8);
     border-radius: 50%;
   }
 
@@ -41,5 +41,19 @@ export const ActionsWrapper = styled.div`
   justify-content: space-around;
   width: ${sizes.size150};
 `
+export const LogoutModal = styled.div`
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+`
 
+export const LogoutConfButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    background-color: ${colors.veryLightBrown};
+  }
+`
 export default AppBar
