@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 import { CloseIcon } from '../../../assets/icons'
-import { BackgroundWrapper, CloseWrapper, ModalWrapper } from './Modal.styles'
+import { CloseWrapper, ModalWrapper } from './Modal.styles'
 import { useModal } from '../../../context/Modal'
+import Background from '../../atoms/Background/'
 
 interface ModalComponentInterface {
   children: ReactNode
@@ -18,14 +19,14 @@ const ModalComponent = ({ children, display }: ModalComponentInterface) => {
   }
 
   return (
-    <BackgroundWrapper style={{ display: display ? 'initial' : 'none' }}>
+    <Background display={display}>
       <ModalWrapper>
         <CloseWrapper>
           <CloseIcon onClick={() => closeModal()}></CloseIcon>
         </CloseWrapper>
         {children}
       </ModalWrapper>
-    </BackgroundWrapper>
+    </Background>
   )
 }
 
