@@ -30,7 +30,7 @@ const AppBarComponent = () => {
   const logout = () => {
     modalDispatch({
       type: 'SET_MODAL',
-      payload: { content: logoutModal(), display: true },
+      payload: { content: logoutModal() },
     })
   }
 
@@ -38,7 +38,6 @@ const AppBarComponent = () => {
     return (
       <LogoutModal>
         <Typography>Deseja mesmo sair?</Typography>
-        <br />
         <LogoutConfButtonsWrapper>
           <Button onClick={() => closeModal()}>Nao</Button>
           <Button onClick={() => clearUser()}>Sim</Button>

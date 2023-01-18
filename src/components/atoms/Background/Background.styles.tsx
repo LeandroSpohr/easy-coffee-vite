@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components'
 import { colors, zIndex } from '../../../assets/styles/variables'
 
 interface BackgroundInterface {
-  display: number
+  isVisible: boolean
 }
 export const Background = styled.div<BackgroundInterface>`
   display: none;
 
-  ${({ display }: BackgroundInterface) =>
-    display &&
+  ${({ isVisible }: BackgroundInterface) =>
+    isVisible &&
     css`
       display: flex;
       position: fixed;

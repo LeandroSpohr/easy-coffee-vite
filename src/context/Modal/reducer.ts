@@ -5,14 +5,17 @@ export const reducer = (state: ModalInterface, action: ActionTypes): ModalInterf
   switch (action.type) {
     case 'SET_MODAL':
       return {
-        display: action.payload.display,
+        isVisible: true,
         content: action.payload.content,
       }
     case 'CLOSE_MODAL':
       return {
-        display: false,
+        isVisible: false,
         content: null,
       }
+    default: {
+      return { ...state }
+    }
   }
 }
 export default reducer

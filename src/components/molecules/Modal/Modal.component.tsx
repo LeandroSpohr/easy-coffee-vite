@@ -6,10 +6,10 @@ import Background from '../../atoms/Background/'
 
 interface ModalComponentInterface {
   children: ReactNode
-  display: boolean
+  isVisible: boolean
 }
 
-const ModalComponent = ({ children, display }: ModalComponentInterface) => {
+const ModalComponent = ({ children, isVisible }: ModalComponentInterface) => {
   const { dispatch } = useModal()
 
   const closeModal = () => {
@@ -19,7 +19,7 @@ const ModalComponent = ({ children, display }: ModalComponentInterface) => {
   }
 
   return (
-    <Background display={display}>
+    <Background isVisible={isVisible}>
       <ModalWrapper>
         <CloseWrapper>
           <CloseIcon onClick={() => closeModal()}></CloseIcon>

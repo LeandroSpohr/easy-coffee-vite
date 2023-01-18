@@ -26,7 +26,7 @@ export const ModalProvider = ({ children }: ContextProps) => {
 
   return (
     <ModalContext.Provider value={value}>
-      <Modal display={state.display}>{state.content}</Modal>
+      <Modal isVisible={state.isVisible ? true : false}>{state.content}</Modal>
       {children}
     </ModalContext.Provider>
   )

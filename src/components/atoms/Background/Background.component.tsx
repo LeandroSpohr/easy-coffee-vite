@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react'
 import { Background } from './Background.styles'
 
 interface BackgroundComponentInterface {
-  display: boolean
+  isVisible: boolean
   children: ReactElement
 }
 
-const BackgroundComponent = ({ display, children }: BackgroundComponentInterface) => (
-  <Background display={+display}>{children}</Background>
+const BackgroundComponent = ({ isVisible, children }: BackgroundComponentInterface) => (
+  <Background isVisible={isVisible}>{children}</Background>
 )
 
 export default BackgroundComponent
