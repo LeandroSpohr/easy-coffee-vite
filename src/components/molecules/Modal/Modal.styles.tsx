@@ -1,9 +1,5 @@
 import styled from 'styled-components'
-import { sizes, zIndex, colors } from '../../../assets/styles/variables'
-
-export const DisplayControl = styled.div`
-  position: absolute;
-`
+import { colors, sizes, zIndex } from '../../../assets/styles/variables'
 
 export const BackgroundWrapper = styled.div`
   position: fixed;
@@ -12,7 +8,7 @@ export const BackgroundWrapper = styled.div`
   padding: ${sizes.size100Percent};
 `
 
-export const LogoutConfirm = styled.div`
+export const ModalWrapper = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -24,12 +20,8 @@ export const LogoutConfirm = styled.div`
   left: ${sizes.size5Percent};
   right: ${sizes.size5Percent};
 `
-
-export const ButtonsWrapper = styled.div`
+export const CloseWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  margin-top: ${sizes.size5Percent};
-  button {
-    background-color: ${colors.veryLightBrown};
-  }
+  justify-content: end;
+  cursor: pointer;
 `
