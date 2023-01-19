@@ -73,7 +73,7 @@ const Home = () => {
         </Button>
       </FullScreenWrapper>
       <Paper fullCentered>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <Wrapper>
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>
@@ -94,7 +94,6 @@ const Home = () => {
                 <Button
                   type="submit"
                   onClick={(e) => {
-                    e.preventDefault()
                     handleSubmit(cpf)
                   }}
                 >

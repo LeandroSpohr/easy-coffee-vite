@@ -70,7 +70,7 @@ const RegisterCustomer = () => {
   return (
     <Container fullHeight fullCentered>
       <Paper fullCentered>
-        <form>
+        <form onSubmit={(e) => e.preventDefault}>
           <Wrapper>
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>
@@ -135,7 +135,6 @@ const RegisterCustomer = () => {
                 <Button
                   type="submit"
                   onClick={(e) => {
-                    e.preventDefault()
                     handleSubmit()
                   }}
                 >
