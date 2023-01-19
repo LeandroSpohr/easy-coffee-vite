@@ -90,8 +90,11 @@ interface SizesInterface {
   size420: string
   size500: string
   size590: string
+  size2Percent: string
+  size5Percent: string
   size20Percent: string
   size25Percent: string
+  size30Percent: string
   size40Percent: string
   size50Percent: string
   size60Percent: string
@@ -136,7 +139,7 @@ export const colors: ColorsInterface = {
   black: '#000',
   blackOpacity: '#0000004D',
   veryLightGray: '#E7E7E7',
-  red: '#CC2727'
+  red: '#CC2727',
 }
 
 export const zIndex: ZIndexInterface = {
@@ -222,7 +225,10 @@ export const sizes: SizesInterface = {
   size420: '42rem',
   size500: '50rem',
   size590: '59rem',
+  size2Percent: '2%',
+  size5Percent: '5%',
   size20Percent: '20%',
+  size30Percent: '30%',
   size25Percent: '25%',
   size40Percent: '40%',
   size50Percent: '50%',
