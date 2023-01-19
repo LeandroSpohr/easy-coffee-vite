@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
 import Container from '../../components/atoms/Container'
@@ -17,6 +17,7 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { ButtonEnum } from '../../models/Enums/Button'
+import { useNavigation } from '../../utils/useNavigation'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -24,7 +25,7 @@ const { size200 } = sizes
 const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
-  const navigate = useNavigate()
+  const { goToProducts } = useNavigation()
 
   const [toggle, setToggle] = useState<boolean>(false)
 
@@ -36,7 +37,7 @@ const Home = () => {
           payload: response,
         })
       })
-      .then(() => navigate('/produtos'))
+      .then(() => goToProducts())
   }
 
   const handleToggleFullScreen = () => {
@@ -73,7 +74,7 @@ const Home = () => {
         </Button>
       </FullScreenWrapper>
       <Paper fullCentered>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <Wrapper>
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>
@@ -93,8 +94,7 @@ const Home = () => {
               <div>
                 <Button
                   type="submit"
-                  onClick={(e) => {
-                    e.preventDefault()
+                  onClick={() => {
                     handleSubmit(cpf)
                   }}
                 >

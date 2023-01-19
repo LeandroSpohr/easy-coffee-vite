@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-grid-system'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { isMobile } from 'react-device-detect'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -18,6 +17,7 @@ import QRCode from '../../components/atoms/QRCode'
 
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
+import { useNavigation } from '../../utils/useNavigation'
 
 import { ItemWrapper, ContentWrapper, FlexWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
@@ -26,8 +26,8 @@ const { brown } = colors
 
 const MyAccount = () => {
   const { formatCurrency } = useFormats()
-  const navigate = useNavigate()
   const { state } = useUser()
+  const { goBack } = useNavigation()
 
   const userId = state.user ? state.user.id : ''
 
@@ -42,10 +42,6 @@ const MyAccount = () => {
       {value}
     </Typography>
   )
-
-  const goBack = () => {
-    navigate(-1)
-  }
 
   const payPurchase = (purchaseId: string, value: number) => {
     const purchaseIds = [purchaseId]
