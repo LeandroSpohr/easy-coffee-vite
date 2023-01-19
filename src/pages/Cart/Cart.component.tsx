@@ -19,6 +19,7 @@ import { useFormats } from '../../utils/useFormats'
 import { ItemWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const { brown } = colors
 
@@ -31,7 +32,7 @@ const Cart = () => {
   const hasItems = !!state.cart.length
 
   const totalValue = state.cart.reduce((accumulator, cartProduct) => {
-    return +accumulator + (+cartProduct.product.value * +cartProduct.quantity)
+    return +accumulator + +cartProduct.product.value * +cartProduct.quantity
   }, 0)
 
   const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
@@ -102,14 +103,16 @@ const Cart = () => {
                     </Col>
                     <Col>
                       {printTitle('Qtd')}
-                      {<NumericInput
-                        size={1}
-                        min={1}
-                        max={15}
-                        step={1}
-                        value={cartProduct.quantity}
-                        onChange={(event) => changeOne(cartProduct, event.target.value)}
-                      />}
+                      {
+                        <NumericInput
+                          size={1}
+                          min={1}
+                          max={15}
+                          step={1}
+                          value={cartProduct.quantity}
+                          onChange={(event) => changeOne(cartProduct, event.target.value)}
+                        />
+                      }
                     </Col>
                     <Col>
                       {printTitle('Total')}
@@ -117,7 +120,10 @@ const Cart = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button circle onClick={() => removeOne(cartProduct.product.id)}>
+                        <Button
+                          buttonType={ButtonEnum.CircleButton}
+                          onClick={() => removeOne(cartProduct.product.id)}
+                        >
                           <CloseIcon />
                         </Button>
                       </FlexWrapper>
@@ -128,9 +134,7 @@ const Cart = () => {
             ))}
             <FlexWrapper>
               <ItemWrapper>
-                <Typography as="h4">
-                  Total: {formatCurrency(totalValue)}
-                </Typography>
+                <Typography as="h4">Total: {formatCurrency(totalValue)}</Typography>
               </ItemWrapper>
               <Button onClick={() => finalize()}>Finalizar Compra</Button>
             </FlexWrapper>

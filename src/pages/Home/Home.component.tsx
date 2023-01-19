@@ -16,6 +16,7 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -42,8 +43,7 @@ const Home = () => {
     const doc = window.document
     const docEl = doc.documentElement
 
-    const requestFullScreen =
-      docEl.requestFullscreen
+    const requestFullScreen = docEl.requestFullscreen
     const cancelFullScreen = doc.exitFullscreen
 
     if (!doc.fullscreenElement) {
@@ -68,7 +68,7 @@ const Home = () => {
   return (
     <Container fullHeight fullCentered>
       <FullScreenWrapper>
-        <Button onClick={handleToggleFullScreen} circle>
+        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
           {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
         </Button>
       </FullScreenWrapper>
@@ -85,22 +85,27 @@ const Home = () => {
               name="cpf"
               onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"
-              autoComplete='off'
+              autoComplete="off"
             />
           </FieldContainer>
           <Container displayBlock>
             <ButtonWrapper>
               <div>
-                <Button type="submit" onClick={(e) => {
-                  e.preventDefault()
-                  handleSubmit(cpf)
-                }}>
+                <Button
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleSubmit(cpf)
+                  }}
+                >
                   Entrar
                 </Button>
               </div>
               <div>
                 <Link to="/cadastro">
-                  <Typography as='h4' color={brown}>Registre-se</Typography>
+                  <Typography as="h4" color={brown}>
+                    Registre-se
+                  </Typography>
                 </Link>
               </div>
             </ButtonWrapper>

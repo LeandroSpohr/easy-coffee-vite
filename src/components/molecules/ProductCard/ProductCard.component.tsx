@@ -3,8 +3,9 @@ import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'
 import Image from '../../atoms/Image'
 
-import ProductCard, {InfoWrapper, ImageWrapper, ActionWrapper } from './ProductCard.style'
+import ProductCard, { InfoWrapper, ImageWrapper, ActionWrapper } from './ProductCard.style'
 import { useFormats } from '../../../utils/useFormats'
+import { ButtonEnum } from '../../../models/Enums/Button'
 
 type ProductCardComponentInterface = {
   fluid?: boolean
@@ -16,7 +17,7 @@ type ProductCardComponentInterface = {
   buttonText?: string | JSX.Element
   price: number
   handleSubmit: () => void
-  inputQuantity?: JSX.Element 
+  inputQuantity?: JSX.Element
 }
 
 const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
@@ -32,7 +33,7 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
   inputQuantity,
 }) => {
   const { formatCurrency } = useFormats()
- 
+
   return (
     <ProductCard fluid={fluid}>
       <ImageWrapper>
@@ -47,7 +48,9 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
         <div>
           <ActionWrapper>
             {inputQuantity}
-            <Button circle onClick={() => handleSubmit()}>{buttonText}</Button>
+            <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleSubmit()}>
+              {buttonText}
+            </Button>
           </ActionWrapper>
         </div>
       </InfoWrapper>
