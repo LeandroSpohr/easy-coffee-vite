@@ -1,6 +1,5 @@
 import React from 'react'
 import { Row, Col } from 'react-grid-system'
-import { useNavigate } from 'react-router-dom'
 
 import * as PurchaseService from '../../services/Purchase'
 
@@ -15,23 +14,25 @@ import NumericInput from '../../components/atoms/NumericInput'
 
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
+import { useNavigation } from '../../utils/useNavigation'
 
 import { ItemWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const { brown } = colors
 
 const Cart = () => {
   const { formatCurrency } = useFormats()
   const { state, dispatch } = useUser()
-  const navigate = useNavigate()
+  const { goBack, goToMyAccount } = useNavigation()
 
   const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
 
   const totalValue = state.cart.reduce((accumulator, cartProduct) => {
-    return +accumulator + (+cartProduct.product.value * +cartProduct.quantity)
+    return +accumulator + +cartProduct.product.value * +cartProduct.quantity
   }, 0)
 
   const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
@@ -65,10 +66,6 @@ const Cart = () => {
     })
   }
 
-  const goBack = () => {
-    navigate(-1)
-  }
-
   const finalize = () => {
     const input: PurchaseInputInterface[] = state.cart.map((cartProduct) => ({
       productId: cartProduct.product.id,
@@ -77,7 +74,7 @@ const Cart = () => {
 
     PurchaseService.savePurchases(userId, input).then(() => {
       clearCart()
-      navigate('/minha-conta')
+      goToMyAccount()
     })
   }
 
@@ -102,14 +99,16 @@ const Cart = () => {
                     </Col>
                     <Col>
                       {printTitle('Qtd')}
-                      {<NumericInput
-                        size={1}
-                        min={1}
-                        max={15}
-                        step={1}
-                        value={cartProduct.quantity}
-                        onChange={(event) => changeOne(cartProduct, event.target.value)}
-                      />}
+                      {
+                        <NumericInput
+                          size={1}
+                          min={1}
+                          max={15}
+                          step={1}
+                          value={cartProduct.quantity}
+                          onChange={(event) => changeOne(cartProduct, event.target.value)}
+                        />
+                      }
                     </Col>
                     <Col>
                       {printTitle('Total')}
@@ -117,7 +116,10 @@ const Cart = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button circle onClick={() => removeOne(cartProduct.product.id)}>
+                        <Button
+                          buttonType={ButtonEnum.CircleButton}
+                          onClick={() => removeOne(cartProduct.product.id)}
+                        >
                           <CloseIcon />
                         </Button>
                       </FlexWrapper>
@@ -128,9 +130,7 @@ const Cart = () => {
             ))}
             <FlexWrapper>
               <ItemWrapper>
-                <Typography as="h4">
-                  Total: {formatCurrency(totalValue)}
-                </Typography>
+                <Typography as="h4">Total: {formatCurrency(totalValue)}</Typography>
               </ItemWrapper>
               <Button onClick={() => finalize()}>Finalizar Compra</Button>
             </FlexWrapper>
@@ -147,7 +147,7 @@ const Cart = () => {
                 <Button onClick={() => goBack()}>Voltar</Button>
               </ItemWrapper>
               <ItemWrapper>
-                <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
+                <Button onClick={() => goToMyAccount()}>Ver Compras</Button>
               </ItemWrapper>
             </FlexWrapper>
           </>

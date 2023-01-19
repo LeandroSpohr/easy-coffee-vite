@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-grid-system'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import {isMobile} from 'react-device-detect'
-import {CopyToClipboard} from 'react-copy-to-clipboard'
+import { isMobile } from 'react-device-detect'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import * as PurchaseService from '../../services/Purchase'
 import * as PaymentService from '../../services/Payment'
@@ -16,18 +15,19 @@ import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import QRCode from '../../components/atoms/QRCode'
 
-import {useUser} from '../../context/User'
-import { useFormats } from '../../utils/useFormats' 
+import { useUser } from '../../context/User'
+import { useFormats } from '../../utils/useFormats'
+import { useNavigation } from '../../utils/useNavigation'
 
-import {ItemWrapper, ContentWrapper, FlexWrapper} from './MyAccount.styles'
+import { ItemWrapper, ContentWrapper, FlexWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 
 const { brown } = colors
 
 const MyAccount = () => {
-  const {formatCurrency} = useFormats()
-  const navigate = useNavigate()
-  const {state} = useUser()
+  const { formatCurrency } = useFormats()
+  const { state } = useUser()
+  const { goBack } = useNavigation()
 
   const userId = state.user ? state.user.id : ''
 
@@ -35,27 +35,22 @@ const MyAccount = () => {
   const [payValue, setPayValue] = useState<number>()
   const [viewPIX, setViewPIX] = useState<string>('')
 
-  const printTitle = (value: string) => (<Typography as='h4'>
-    {value}
-  </Typography>)
+  const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
 
-  const printValue = (value: string | number) => (<Typography color={brown} as='h4'>
-    {value}
-  </Typography>)
-
-  const goBack = () => {
-    navigate(-1)
-  }
+  const printValue = (value: string | number) => (
+    <Typography color={brown} as="h4">
+      {value}
+    </Typography>
+  )
 
   const payPurchase = (purchaseId: string, value: number) => {
     const purchaseIds = [purchaseId]
-    PaymentService.payPurchases(userId, purchaseIds)
-      .then(() => {
-        setPayValue(value)
-        toast.success('Status da compra alterado com sucesso, prossiga com o pagamento via PIX!')
-        const updatedPurchases = purchases.filter((purchase) => purchase.id !== purchaseId)
-        setPurchases(updatedPurchases)
-      })
+    PaymentService.payPurchases(userId, purchaseIds).then(() => {
+      setPayValue(value)
+      toast.success('Status da compra alterado com sucesso, prossiga com o pagamento via PIX!')
+      const updatedPurchases = purchases.filter((purchase) => purchase.id !== purchaseId)
+      setPurchases(updatedPurchases)
+    })
   }
 
   const getTotalValue = (purchases: PurchaseInterface[]) => {
@@ -67,14 +62,13 @@ const MyAccount = () => {
   const payAllPurchases = () => {
     const purchaseIds = purchases.map((purchase) => purchase.id)
     const purchasesValue = getTotalValue(purchases)
-    PaymentService.payPurchases(userId, purchaseIds)
-      .then(() => {
-        setPayValue(purchasesValue)
-        toast.success('Status das compras alterado com sucesso, prossiga com o pagamento via PIX!', {
-          autoClose: 5000
-        })
-        setPurchases([])
+    PaymentService.payPurchases(userId, purchaseIds).then(() => {
+      setPayValue(purchasesValue)
+      toast.success('Status das compras alterado com sucesso, prossiga com o pagamento via PIX!', {
+        autoClose: 5000,
       })
+      setPurchases([])
+    })
   }
 
   useEffect(() => {
@@ -86,30 +80,26 @@ const MyAccount = () => {
       <Typography color={brown}>Compras em aberto</Typography>
       <ContentWrapper>
         <FlexWrapper centered>
-          <QRCode 
-            pixkey='26442024000194'
-            merchant='Facil Promotora de Vendas e Servicos Ltda'
-            city='PASSO FUNDO'
+          <QRCode
+            pixkey="26442024000194"
+            merchant="Facil Promotora de Vendas e Servicos Ltda"
+            city="PASSO FUNDO"
             amount={payValue}
             showQRCode={!isMobile}
-            onLoad={ payload => setViewPIX(payload) }
+            onLoad={(payload) => setViewPIX(payload)}
           />
           {isMobile && (
             <CopyToClipboard
-              text={viewPIX}              
+              text={viewPIX}
               onCopy={() => toast.success('PIX copiado com sucesso!')}
             >
-              <Button>
-                Pix Copia e Cola
-              </Button>
+              <Button>Pix Copia e Cola</Button>
             </CopyToClipboard>
           )}
         </FlexWrapper>
         <FlexWrapper centered>
           <ItemWrapper>
-            <Typography as='h2'>
-              {formatCurrency(payValue)}
-            </Typography>
+            <Typography as="h2">{formatCurrency(payValue)}</Typography>
           </ItemWrapper>
         </FlexWrapper>
         {purchases.length ? (
@@ -132,7 +122,9 @@ const MyAccount = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button onClick={() => payPurchase(purchase.id, purchase.value)}>Pagar</Button>
+                        <Button onClick={() => payPurchase(purchase.id, purchase.value)}>
+                          Pagar
+                        </Button>
                       </FlexWrapper>
                     </Col>
                   </Row>
@@ -141,30 +133,25 @@ const MyAccount = () => {
             ))}
             <FlexWrapper>
               <ItemWrapper>
-                <Typography as='h4'>
-                  Total {formatCurrency(getTotalValue(purchases))}
-                </Typography>
+                <Typography as="h4">Total {formatCurrency(getTotalValue(purchases))}</Typography>
               </ItemWrapper>
               <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
             </FlexWrapper>
           </>
-        )
-          : (
-            <>
-              <FlexWrapper centered>
-                <ItemWrapper>
-                  <Typography as='h3'>
-                    Nenhuma compra em aberto
-                  </Typography>
-                </ItemWrapper>
-              </FlexWrapper>
-              <FlexWrapper centered>
-                <ItemWrapper>
-                  <Button onClick={() => goBack()}>Voltar</Button>
-                </ItemWrapper>
-              </FlexWrapper>
-            </>
-          )}
+        ) : (
+          <>
+            <FlexWrapper centered>
+              <ItemWrapper>
+                <Typography as="h3">Nenhuma compra em aberto</Typography>
+              </ItemWrapper>
+            </FlexWrapper>
+            <FlexWrapper centered>
+              <ItemWrapper>
+                <Button onClick={() => goBack()}>Voltar</Button>
+              </ItemWrapper>
+            </FlexWrapper>
+          </>
+        )}
       </ContentWrapper>
     </Container>
   )
