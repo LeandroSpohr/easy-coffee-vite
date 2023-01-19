@@ -16,6 +16,7 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
 
 const { brown } = colors
@@ -68,7 +69,7 @@ const Home = () => {
   return (
     <Container fullHeight fullCentered>
       <FullScreenWrapper>
-        <Button onClick={handleToggleFullScreen} circle>
+        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
           {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
         </Button>
       </FullScreenWrapper>
@@ -93,7 +94,7 @@ const Home = () => {
               <div>
                 <Button
                   type="submit"
-                  onClick={(e) => {
+                  onClick={() => {
                     handleSubmit(cpf)
                   }}
                 >

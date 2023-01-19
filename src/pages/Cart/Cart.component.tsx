@@ -19,6 +19,7 @@ import { useNavigation } from '../../utils/useNavigation'
 import { ItemWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const { brown } = colors
 
@@ -115,7 +116,10 @@ const Cart = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button circle onClick={() => removeOne(cartProduct.product.id)}>
+                        <Button
+                          buttonType={ButtonEnum.CircleButton}
+                          onClick={() => removeOne(cartProduct.product.id)}
+                        >
                           <CloseIcon />
                         </Button>
                       </FlexWrapper>
