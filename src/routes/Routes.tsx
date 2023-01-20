@@ -8,20 +8,19 @@ import MyAccount from '../pages/MyAccount'
 import RegisterCustomer from '../pages/RegisterCustomer'
 
 import MainTemplate from '../components/templates/MainTemplate'
-import useIdle from '../utils/useIdle'
-import { useUser } from '../context/User'
+
+import { useIdle } from '../utils/useIdle'
+
 interface PrivateRouteInterface {
   children: JSX.Element
 }
 
 const AppRoutes = () => {
   const PrivateRoute = ({ children }: PrivateRouteInterface): JSX.Element => {
-    const { state } = useUser()
+    const { timer } = useIdle(1000)
 
     useEffect(() => {
-      if (state.hasUser) {
-        useIdle()
-      }
+      document.ontouchstart = timer
     })
 
     return <MainTemplate>{children}</MainTemplate>
