@@ -21,7 +21,7 @@ const AppRoutes = () => {
 
   return (
     <BrowserRouter basename="/easy-coffee-vite/">
-      <IdleTimer leftTime={1000}>
+      <IdleTimer leftTime={30000}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="cadastro" element={<RegisterCustomer />} />

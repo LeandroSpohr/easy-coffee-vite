@@ -12,15 +12,15 @@ interface IdleTimerInterface {
   children: JSX.Element
 }
 
-export const IdleTimer = ({ leftTime, children }: IdleTimerInterface): JSX.Element => {
+export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
   const { state: userState } = useUser()
   const { dispatch: dispatchModal } = useModal()
   const { goToHome } = useNavigation()
   const { removeTimer, removeModal, removeUser } = useRemove()
 
   useEffect(() => {
-    setListeners(), setTimer()
-  })
+    userState.hasUser ? (setListeners(), setTimer()) : null
+  }, [userState])
 
   const setListeners = () => {
     userState.hasUser ? ((document.ontouchstart = setTimer), (document.onload = setTimer)) : null
@@ -28,12 +28,10 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface): JSX.Eleme
 
   const setTimer = () => {
     removeTimer()
-    if (userState.hasUser) {
-      setTimeout(() => timedOut(), leftTime)
-    }
+    setTimeout(() => timeOut(), leftTime)
   }
 
-  const timedOut = () => {
+  const timeOut = () => {
     removeUser()
     displayTimedOutModal()
   }
@@ -47,17 +45,21 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface): JSX.Eleme
     })
   }
 
+  const logoffIdleUser = () => {
+    removeModal()
+    goToHome()
+    location.reload()
+  }
+
   const disconnectModal = () => (
     <>
-      <Typography centralized> {userState.user?.name}, desconectado por Inatividade</Typography>
-      <Button
-        buttonType={ButtonEnum.SecondaryButton}
-        onClick={() => {
-          goToHome(), removeModal()
-        }}
-      >
-        <h3>Voltar ao menu inicial</h3>
+      <Typography centralized>{userState.user?.name}, desconectado por inatividade</Typography>
+      <Button buttonType={ButtonEnum.SecondaryButton} onClick={() => logoffIdleUser()}>
+        Voltar ao menu inicial
       </Button>
+      {setTimeout(() => {
+        logoffIdleUser()
+      }, 5000)}
     </>
   )
 
