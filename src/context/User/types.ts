@@ -1,5 +1,4 @@
 import CartInterface from '../../models/interfaces/Cart'
-import IdleInterface from '../../models/interfaces/Idle'
 import UserInterface from '../../models/interfaces/User'
 
 export const ADD_USER = 'ADD_USER'
@@ -8,8 +7,6 @@ export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 export const REMOVE_PRODUCT_TO_CART = 'REMOVE_PRODUCT_TO_CART'
 export const CLEAR_CART = 'CLEAR_CART'
 export const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
-export const SET_AS_IDLE = 'SET_AS_IDLE'
-export const SET_AS_NOT_IDLE = 'SET_AS_NOT_IDLE'
 
 interface AddUser {
   type: typeof ADD_USER
@@ -39,16 +36,6 @@ interface ChangeQuantity {
   payload: CartInterface
 }
 
-interface SetAsIdle {
-  type: typeof SET_AS_IDLE
-  payload: boolean
-}
-
-interface SetAsNotIdle {
-  type: typeof SET_AS_NOT_IDLE
-  payload: IdleInterface
-}
-
 export type ActionTypes =
   | AddUser
   | ClearUser
@@ -56,5 +43,3 @@ export type ActionTypes =
   | RemoveProductToCart
   | ClearProduct
   | ChangeQuantity
-  | SetAsIdle
-  | SetAsNotIdle

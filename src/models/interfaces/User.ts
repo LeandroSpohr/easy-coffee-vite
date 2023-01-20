@@ -1,5 +1,4 @@
 import CartInterface from './Cart'
-import IdleInterface from './Idle'
 
 export default interface UserInterface {
   id: string
@@ -14,7 +13,6 @@ export interface UserContextInterface {
   hasUser: boolean
   user: UserInterface | null
   cart: CartInterface[]
-  idle?: IdleInterface
 }
 
 export interface UserInputInterface {

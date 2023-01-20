@@ -4,9 +4,6 @@ const initialValues: UserContextInterface = {
   hasUser: false,
   user: null,
   cart: [],
-  idle: {
-    isIdle: false,
-  },
 }
 
 export default initialValues

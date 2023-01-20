@@ -57,16 +57,7 @@ export const reducer = (state: UserContextInterface, action: ActionTypes): UserC
           return item
         }),
       }
-    case 'SET_AS_IDLE':
-      return {
-        ...state,
-        idle: { isIdle: true },
-      }
-    case 'SET_AS_NOT_IDLE':
-      return {
-        ...state,
-        idle: { isIdle: false, timeLeft: 3000 },
-      }
+
     default:
       return state
   }
