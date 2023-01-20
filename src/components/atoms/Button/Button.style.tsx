@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/variables'
 
 const defaultConfig = styled.button`
@@ -26,8 +26,14 @@ export const OutlinedMainButton = styled(defaultConfig)`
   border: ${sizes.size2} solid ${colors.veryLightBrown};
 `
 
-export const ContainedMainButton = styled(defaultConfig)`
-  background-color: ${colors.veryLightBrown};
+export const SecondaryButton = styled(defaultConfig)`
+  background: ${colors.veryLightBrown};
+`
+export const OutlinedSecondaryButton = styled(defaultConfig)`
+  color: ${colors.veryLightBrown};
+  background-color: ${colors.white};
+  outline: ${sizes.size2} solid ${colors.veryLightBrown};
+  outline-offset: -5px;
 `
 
 export const CircleButton = styled(defaultConfig)`

@@ -52,8 +52,6 @@ export const LogoutConfButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-top: ${sizes.size10};
-  button {
-    background-color: ${colors.veryLightBrown};
-  }
 `
+
 export default AppBar
