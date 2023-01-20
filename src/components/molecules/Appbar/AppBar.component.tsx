@@ -8,7 +8,7 @@ import AppBar, {
   LogoutConfButtonsWrapper,
   LogoutModal,
 } from './AppBar.style'
-import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon } from '../../../assets/icons'
+import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon, CloseIcon } from '../../../assets/icons'
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
@@ -20,6 +20,8 @@ import { useFormats } from '../../../utils/useFormats'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import Button from '../../atoms/Button'
+import { CloseWrapper } from '../Modal/Modal.styles'
+import { ButtonEnum } from '../../../models/Enums/Button'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
@@ -37,10 +39,17 @@ const AppBarComponent = () => {
   const logoutModal = () => {
     return (
       <LogoutModal>
+        <CloseWrapper>
+          <CloseIcon onClick={() => closeModal()}></CloseIcon>
+        </CloseWrapper>
         <Typography>Deseja mesmo sair?</Typography>
         <LogoutConfButtonsWrapper>
-          <Button onClick={() => closeModal()}>Nao</Button>
-          <Button onClick={() => clearUser()}>Sim</Button>
+          <Button buttonType={ButtonEnum.OutlinedSecondaryButton} onClick={() => closeModal()}>
+            Nao
+          </Button>
+          <Button buttonType={ButtonEnum.SecondaryButton} onClick={() => clearUser()}>
+            Sim
+          </Button>
         </LogoutConfButtonsWrapper>
       </LogoutModal>
     )

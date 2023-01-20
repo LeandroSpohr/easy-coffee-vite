@@ -14,7 +14,7 @@ export interface UserContextInterface {
   hasUser: boolean
   user: UserInterface | null
   cart: CartInterface[]
-  idle: IdleInterface
+  idle?: IdleInterface
 }
 
 export interface UserInputInterface {

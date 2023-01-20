@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { colors, sizes, zIndex } from '../../../assets/styles/variables'
 
 export const ModalWrapper = styled.div`
+  display: flex;
   flex-direction: column;
   border-radius: ${sizes.size20};
   background-color: ${colors.brown};
