@@ -25,7 +25,7 @@ const { size200 } = sizes
 const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
-  const { goToProducts } = useNavigation()
+  const { goToProducts, goToRegister } = useNavigation()
 
   const [toggle, setToggle] = useState<boolean>(false)
 
@@ -92,6 +92,11 @@ const Home = () => {
           <Container displayBlock>
             <ButtonWrapper>
               <div>
+                <Link to="/cadastro">
+                  <Button buttonType={ButtonEnum.OutlinedMainButton} onClick={() => goToRegister()}>
+                    Registrar
+                  </Button>
+                </Link>
                 <Button
                   type="submit"
                   onClick={() => {
@@ -100,13 +105,6 @@ const Home = () => {
                 >
                   Entrar
                 </Button>
-              </div>
-              <div>
-                <Link to="/cadastro">
-                  <Typography as="h4" color={brown}>
-                    Registre-se
-                  </Typography>
-                </Link>
               </div>
             </ButtonWrapper>
           </Container>
