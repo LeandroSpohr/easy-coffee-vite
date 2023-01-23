@@ -11,7 +11,6 @@ import PurchaseInterface from '../../models/interfaces/Purchase'
 
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
-import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import QRCode from '../../components/atoms/QRCode'
 
@@ -19,7 +18,7 @@ import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 
-import { ItemWrapper, ContentWrapper, FlexWrapper } from './MyAccount.styles'
+import { ItemWrapper, FlexWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
 

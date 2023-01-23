@@ -8,7 +8,6 @@ import CartInterface from '../../models/interfaces/Cart'
 
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
-import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import NumericInput from '../../components/atoms/NumericInput'
 

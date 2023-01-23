@@ -7,25 +7,23 @@ import * as ProductService from '../../services/Product'
 import ProductInterface from '../../models/interfaces/Product'
 import CartInterface from '../../models/interfaces/Cart'
 
-import Typography from '../../components/atoms/Typography'
-import Container from '../../components/atoms/Container'
 import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
-import { ColWrapper, ContentWrapper } from './QueryProducts.styles'
+import { ColWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 
 import { AddIcon } from '../../assets/icons'
-import { sizes, colors } from '../../assets/styles/variables'
+import { sizes } from '../../assets/styles/variables'
 import ListTemplate from '../../components/templates/ListTemplate'
+import { useFormats } from '../../utils/useFormats'
 
 const { size150, size30 } = sizes
-const { brown } = colors
 
 const QueryProducts = () => {
-  const { dispatch } = useUser()
+  const { state, dispatch } = useUser()
   const [products, setProducts] = useState<CartInterface[]>([])
-
+  const { getFirstName } = useFormats()
   const addToCart = (productCart: CartInterface) => {
     dispatch({
       type: 'ADD_PRODUCT_TO_CART',
@@ -56,34 +54,38 @@ const QueryProducts = () => {
   }, [])
 
   return (
-    <ListTemplate title={'Lista de Produtos'}>
-      <Row>
-        {products.map((productCart) => (
-          <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>
-            <ProductCard
-              key={'productCard' + productCart.product.id}
-              fluid
-              imgUrl={productCart.product.imgUrl}
-              imgMaxHeight={size150}
-              title={productCart.product.description}
-              price={productCart.product.value}
-              buttonText={<AddIcon size={size30} />}
-              inputQuantity={
-                <NumericInput
-                  size={1}
-                  min={1}
-                  max={15}
-                  step={1}
-                  value={productCart.quantity}
-                  onChange={(event) => handleChangeProductQuantity(productCart, event.target.value)}
-                />
-              }
-              handleSubmit={() => addToCart(productCart)}
-            ></ProductCard>
-          </ColWrapper>
-        ))}
-      </Row>
-    </ListTemplate>
+    <>
+      <ListTemplate title={'Lista de Produtos'}>
+        <Row>
+          {products.map((productCart) => (
+            <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>
+              <ProductCard
+                key={'productCard' + productCart.product.id}
+                fluid
+                imgUrl={productCart.product.imgUrl}
+                imgMaxHeight={size150}
+                title={productCart.product.description}
+                price={productCart.product.value}
+                buttonText={<AddIcon size={size30} />}
+                inputQuantity={
+                  <NumericInput
+                    size={1}
+                    min={1}
+                    max={15}
+                    step={1}
+                    value={productCart.quantity}
+                    onChange={(event) =>
+                      handleChangeProductQuantity(productCart, event.target.value)
+                    }
+                  />
+                }
+                handleSubmit={() => addToCart(productCart)}
+              ></ProductCard>
+            </ColWrapper>
+          ))}
+        </Row>
+      </ListTemplate>
+    </>
   )
 }
 

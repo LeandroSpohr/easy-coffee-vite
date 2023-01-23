@@ -71,7 +71,7 @@ const AppBarComponent = () => {
           <span onClick={() => goBack()}>
             <LeftArrowIcon size={sizes.size28} />
           </span>
-          <Typography>EasyCoffee</Typography>
+          <Typography as="h2">EasyCoffee</Typography>
         </InfoWrapper>
         <ActionsWrapper>
           <Link to="/minha-conta">
