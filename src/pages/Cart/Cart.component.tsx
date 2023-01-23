@@ -1,47 +1,64 @@
 import React from 'react'
 import { Row, Col } from 'react-grid-system'
-import { useNavigate } from 'react-router-dom'
 
 import * as PurchaseService from '../../services/Purchase'
 
-import {PurchaseInputInterface} from '../../models/interfaces/Purchase'
+import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
+import CartInterface from '../../models/interfaces/Cart'
 
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
+import NumericInput from '../../components/atoms/NumericInput'
 
-import {useUser} from '../../context/User'
-import { useFormats } from '../../utils/useFormats' 
+import { useUser } from '../../context/User'
+import { useFormats } from '../../utils/useFormats'
+import { useNavigation } from '../../utils/useNavigation'
 
-import {ItemlWrapper, ContentWrapper, FlexWrapper} from './Cart.styles'
+import { ItemWrapper, ContentWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
 import { sizes } from '../../assets/styles/variables'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const { brown } = colors
 const { size150, size50, size10 } = sizes
 
 const Cart = () => {
-  const {formatCurrency} = useFormats()
-  const {state, dispatch} = useUser()
-  const navigate = useNavigate()
+  const { formatCurrency } = useFormats()
+  const { state, dispatch } = useUser()
+  const { goBack, goToMyAccount } = useNavigation()
 
   const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
 
-  const printTitle = (value: string) => (<Typography as='h4'>
-    {value}
-  </Typography>)
+  const totalValue = state.cart.reduce((accumulator, cartProduct) => {
+    return +accumulator + +cartProduct.product.value * +cartProduct.quantity
+  }, 0)
 
-  const printValue = (value: string | number) => (<Typography color={brown} as='h4'>
-    {value}
-  </Typography>)
+  const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
+
+  const printValue = (value: string | number) => (
+    <Typography color={brown} as="h4">
+      {value}
+    </Typography>
+  )
 
   const removeOne = (productId: string) => {
     dispatch({
       type: 'REMOVE_PRODUCT_TO_CART',
       payload: productId,
+    })
+  }
+
+  const changeOne = (cartProduct: CartInterface, value: string) => {
+    dispatch({
+      type: 'CHANGE_QUANTITY',
+      payload: {
+        product: cartProduct.product,
+        quantity: +value,
+      },
     })
   }
 
@@ -51,39 +68,41 @@ const Cart = () => {
     })
   }
 
-  const goBack = () => {
-    navigate(-1)
-  }
-
   const finalize = () => {
     const input: PurchaseInputInterface[] = state.cart.map((cartProduct) => ({
       productId: cartProduct.product.id,
       quantity: cartProduct.quantity,
     }))
 
-    PurchaseService.savePurchases(userId, input)
-      .then(() => {
-        clearCart()
-        navigate('/minha-conta')
-      })
+    PurchaseService.savePurchases(userId, input).then(() => {
+      clearCart()
+      goToMyAccount()
+    })
   }
 
   return (
     <Container displayBlock fullHeight>
-      <Paper style={{ width: size150, height: size50, padding: size10, backgroundColor: '#6b451ee6',
-        borderRadius: '1rem 1rem 0rem 0rem'}}>
+      <Paper
+        style={{
+          width: size150,
+          height: size50,
+          padding: size10,
+          backgroundColor: '#6b451ee6',
+          borderRadius: '1rem 1rem 0rem 0rem',
+        }}
+      >
         <Typography>Carrinho</Typography>
       </Paper>
-      <ContentWrapper style={{margin: '0rem', borderRadius: '0rem 1rem'}}>
+      <ContentWrapper style={{ margin: '0rem', borderRadius: '0rem 1rem' }}>
         {hasItems ? (
           <>
-            <ItemlWrapper>
+            <ItemWrapper>
               <FlexWrapper>
                 <Button onClick={() => clearCart()}>Limpar Carrinho</Button>
               </FlexWrapper>
-            </ItemlWrapper>
+            </ItemWrapper>
             {state.cart.map((cartProduct) => (
-              <ItemlWrapper key={'item' + cartProduct.product.id}>
+              <ItemWrapper key={'item' + cartProduct.product.id}>
                 <Paper key={'paper' + cartProduct.product.id}>
                   <Row key={'row' + cartProduct.product.id}>
                     <Col key={'col' + cartProduct.product.id}>
@@ -92,7 +111,16 @@ const Cart = () => {
                     </Col>
                     <Col>
                       {printTitle('Qtd')}
-                      {printValue(cartProduct.quantity)}
+                      {
+                        <NumericInput
+                          size={1}
+                          min={1}
+                          max={15}
+                          step={1}
+                          value={cartProduct.quantity}
+                          onChange={(event) => changeOne(cartProduct, event.target.value)}
+                        />
+                      }
                     </Col>
                     <Col>
                       {printTitle('Total')}
@@ -100,37 +128,42 @@ const Cart = () => {
                     </Col>
                     <Col>
                       <FlexWrapper>
-                        <Button circle onClick={() => removeOne(cartProduct.product.id)}><CloseIcon /></Button>
+                        <Button
+                          buttonType={ButtonEnum.CircleButton}
+                          onClick={() => removeOne(cartProduct.product.id)}
+                        >
+                          <CloseIcon />
+                        </Button>
                       </FlexWrapper>
                     </Col>
                   </Row>
                 </Paper>
-              </ItemlWrapper>
+              </ItemWrapper>
             ))}
             <FlexWrapper>
+              <ItemWrapper>
+                <Typography as="h4">Total: {formatCurrency(totalValue)}</Typography>
+              </ItemWrapper>
               <Button onClick={() => finalize()}>Finalizar Compra</Button>
             </FlexWrapper>
           </>
-        )
-          : (
-            <>
-              <FlexWrapper centered>
-                <ItemlWrapper>
-                  <Typography as='h3'>
-                    Seu carrinho está vazio
-                  </Typography>
-                </ItemlWrapper>
-              </FlexWrapper>
-              <FlexWrapper centered>
-                <ItemlWrapper>
-                  <Button onClick={() => goBack()}>Voltar</Button>
-                </ItemlWrapper>
-                <ItemlWrapper>
-                  <Button onClick={() => navigate('/minha-conta')}>Ver Compras</Button>
-                </ItemlWrapper>
-              </FlexWrapper>
-            </>
-          )}
+        ) : (
+          <>
+            <FlexWrapper centered>
+              <ItemWrapper>
+                <Typography as="h3">Seu carrinho está vazio</Typography>
+              </ItemWrapper>
+            </FlexWrapper>
+            <FlexWrapper centered>
+              <ItemWrapper>
+                <Button onClick={() => goBack()}>Voltar</Button>
+              </ItemWrapper>
+              <ItemWrapper>
+                <Button onClick={() => goToMyAccount()}>Ver Compras</Button>
+              </ItemWrapper>
+            </FlexWrapper>
+          </>
+        )}
       </ContentWrapper>
     </Container>
   )

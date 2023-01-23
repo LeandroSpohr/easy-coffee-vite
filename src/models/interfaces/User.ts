@@ -14,3 +14,9 @@ export interface UserContextInterface {
   user: UserInterface | null
   cart: CartInterface[]
 }
+
+export interface UserInputInterface {
+  cpf:  string
+  name: string
+  birthDate:  string | Date
+}
