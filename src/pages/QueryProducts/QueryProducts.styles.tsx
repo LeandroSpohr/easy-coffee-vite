@@ -13,4 +13,7 @@ export const ContentWrapper = styled.div`
   border-radius: ${sizes.size20} ${sizes.size20} 0 0;
   background-color: ${colors.transparentBrown};
   min-height: 100%;
+
+  outline: ${sizes.size5} solid ${colors.white};
+  outline-offset: -10px;
 `
