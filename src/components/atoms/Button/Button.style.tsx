@@ -17,22 +17,16 @@ const defaultConfig = styled.button`
   }
 `
 
-export const MainButton = styled(defaultConfig)`
-  outline: ${sizes.size2} solid ${colors.white};
-  outline-offset: -5px;
-`
+export const MainButton = styled(defaultConfig)``
 
 export const OutlinedMainButton = styled(defaultConfig)`
-  color: ${colors.brown};
+  color: ${colors.veryLightBrown};
   background-color: ${colors.white};
-  outline: ${sizes.size2} solid ${colors.brown};
-  outline-offset: -5px;
+  border: ${sizes.size2} solid ${colors.veryLightBrown};
 `
 
 export const SecondaryButton = styled(defaultConfig)`
   background: ${colors.veryLightBrown};
-  outline: ${sizes.size2} solid ${colors.white};
-  outline-offset: -2px;
 `
 export const OutlinedSecondaryButton = styled(defaultConfig)`
   color: ${colors.veryLightBrown};
