@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Home from '../pages/Home'
@@ -21,7 +21,7 @@ const AppRoutes = () => {
 
   return (
     <BrowserRouter basename="/easy-coffee-vite/">
-      <IdleTimer leftTime={30000}>
+      <IdleTimer leftTime={120000}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="cadastro" element={<RegisterCustomer />} />

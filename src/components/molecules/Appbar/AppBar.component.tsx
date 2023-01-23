@@ -1,14 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import AppBar, {
-  InfoWrapper,
-  ActionsWrapper,
-  IconWrapper,
-  LogoutConfButtonsWrapper,
-  LogoutModal,
-} from './AppBar.style'
-import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon, CloseIcon } from '../../../assets/icons'
+import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon } from '../../../assets/icons'
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
@@ -19,9 +13,7 @@ import { useUser } from '../../../context/User'
 import { useFormats } from '../../../utils/useFormats'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
-import Button from '../../atoms/Button'
-import { CloseWrapper } from '../Modal/Modal.styles'
-import { ButtonEnum } from '../../../models/Enums/Button'
+import TwoOptionsModal from '../TwoOptionsModal'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
@@ -29,7 +21,7 @@ const AppBarComponent = () => {
   const { getFirstName } = useFormats()
   const { dispatch: modalDispatch } = useModal()
 
-  const logout = () => {
+  const displayLogoutModal = () => {
     modalDispatch({
       type: 'SET_MODAL',
       payload: { content: logoutModal() },
@@ -38,20 +30,11 @@ const AppBarComponent = () => {
 
   const logoutModal = () => {
     return (
-      <LogoutModal>
-        <CloseWrapper>
-          <CloseIcon onClick={() => closeModal()}></CloseIcon>
-        </CloseWrapper>
-        <Typography>Deseja mesmo sair?</Typography>
-        <LogoutConfButtonsWrapper>
-          <Button buttonType={ButtonEnum.OutlinedSecondaryButton} onClick={() => closeModal()}>
-            Nao
-          </Button>
-          <Button buttonType={ButtonEnum.SecondaryButton} onClick={() => clearUser()}>
-            Sim
-          </Button>
-        </LogoutConfButtonsWrapper>
-      </LogoutModal>
+      <TwoOptionsModal
+        title="Deseja mesmo sair?"
+        mainButton={{ text: 'Sim', action: clearUser }}
+        secondaryButton={{ text: 'Nao', action: closeModal }}
+      ></TwoOptionsModal>
     )
   }
 
@@ -97,7 +80,7 @@ const AppBarComponent = () => {
             </IconWrapper>
           </Link>
           <IconWrapper>
-            <ExitIcon size={sizes.size30} onClick={() => logout()} />
+            <ExitIcon size={sizes.size30} onClick={() => displayLogoutModal()} />
           </IconWrapper>
         </ActionsWrapper>
       </AppBar>

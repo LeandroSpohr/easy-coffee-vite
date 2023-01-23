@@ -3,9 +3,7 @@ import { useUser } from '../../../context/User'
 import { useModal } from '../../../context/Modal'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useRemove } from '../../../utils/useRemove'
-import Button from '../Button'
-import Typography from '../Typography'
-import { ButtonEnum } from '../../../models/Enums/Button'
+import TwoOptionsModal from '../../molecules/TwoOptionsModal'
 
 interface IdleTimerInterface {
   leftTime: number
@@ -32,7 +30,6 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
   }
 
   const timeOut = () => {
-    removeUser()
     displayTimedOutModal()
   }
 
@@ -40,26 +37,34 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
     dispatchModal({
       type: 'SET_MODAL',
       payload: {
-        content: disconnectModal(),
+        content: timedOutModal(),
       },
     })
   }
 
-  const logoffIdleUser = () => {
-    removeModal()
+  const disconnect = () => {
+    removeUser()
     goToHome()
     location.reload()
+    removeModal()
   }
 
-  const disconnectModal = () => (
+  const timedOutModal = () => (
     <>
-      <Typography centralized>{userState.user?.name}, desconectado por inatividade</Typography>
-      <Button buttonType={ButtonEnum.SecondaryButton} onClick={() => logoffIdleUser()}>
-        Voltar ao menu inicial
-      </Button>
+      <TwoOptionsModal
+        title="Voce sera desconectado/a por inatividade"
+        mainButton={{
+          text: 'Continuar',
+          action: removeModal,
+        }}
+        secondaryButton={{
+          text: 'Home',
+          action: disconnect,
+        }}
+      ></TwoOptionsModal>
       {setTimeout(() => {
-        logoffIdleUser()
-      }, 5000)}
+        disconnect()
+      }, 10000)}
     </>
   )
 
