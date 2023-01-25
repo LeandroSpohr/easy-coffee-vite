@@ -11,10 +11,10 @@ export default interface UserInterface {
 }
 
 export interface UserContextInterface {
+  cart: CartInterface[]
   hasUser: boolean
   permissionLevel: UserEnum
   user: UserInterface | null
-  cart: CartInterface[]
 }
 
 export interface UserInputInterface {

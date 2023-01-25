@@ -8,25 +8,16 @@ interface ProductCardInterface {
   fluid?: boolean
 }
 
-const ProductCard = styled.div`
+const ProductCardPreview = styled.div`
   background-color: ${veryLightBrown};
   color: white;
   border-radius: ${sizes.size20};
-  padding: ${sizes.size10};
-  display: inline-grid;
-  flex-flow: column;
-
-  ${({ fluid }: ProductCardInterface) =>
-    fluid &&
-    css`
-      width: 100%;
-      height: 100%;
-    `};
+  height: 90%;
+  width: 70%;
 `
 
 export const ImageWrapper = styled.div`
   height: ${sizes.size150};
-  width: ${sizes.size150};
   text-align: center;
 `
 
@@ -43,4 +34,4 @@ export const InfoWrapper = styled.div`
   justify-content: space-between;
 `
 
-export default ProductCard
+export default ProductCardPreview

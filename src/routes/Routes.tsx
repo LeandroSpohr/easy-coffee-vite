@@ -48,14 +48,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-        <Route
-          path="registrar-produto"
-          element={
-            <PrivateRoute>
-              <RegisterProduct />
-            </PrivateRoute>
-          }
-        />
+        <Route path="registrar-produto" element={<RegisterProduct />} />
       </Routes>
     </BrowserRouter>
   )
