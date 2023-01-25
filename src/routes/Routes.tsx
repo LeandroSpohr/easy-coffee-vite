@@ -8,40 +8,54 @@ import MyAccount from '../pages/MyAccount'
 import RegisterCustomer from '../pages/RegisterCustomer'
 
 import MainTemplate from '../components/templates/MainTemplate'
+import RegisterProduct from '../pages/RegisterProduct'
 
 interface PrivateRouteInterface {
   children: JSX.Element
 }
 
 const AppRoutes = () => {
-  const PrivateRoute = (
-    { children }: PrivateRouteInterface,
-  ): JSX.Element => (
-    <MainTemplate>
-      { children }
-    </MainTemplate>
+  const PrivateRoute = ({ children }: PrivateRouteInterface): JSX.Element => (
+    <MainTemplate>{children}</MainTemplate>
   )
 
   return (
-    <BrowserRouter basename='/easy-coffee-vite/'>
+    <BrowserRouter basename="/easy-coffee-vite/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="cadastro" element={<RegisterCustomer />} />
-        <Route path="produtos" element={
-          <PrivateRoute>
-            <QueryProducts />
-          </PrivateRoute>
-        }/>
-        <Route path="carrinho" element={
-          <PrivateRoute>
-            <Cart />
-          </PrivateRoute>
-        }/>
-        <Route path="minha-conta" element={
-          <PrivateRoute>
-            <MyAccount />
-          </PrivateRoute>
-        }/>
+        <Route
+          path="produtos"
+          element={
+            <PrivateRoute>
+              <QueryProducts />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="carrinho"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="minha-conta"
+          element={
+            <PrivateRoute>
+              <MyAccount />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="registrar-produto"
+          element={
+            <PrivateRoute>
+              <RegisterProduct />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )
