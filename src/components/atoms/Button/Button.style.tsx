@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/variables'
 
 const defaultConfig = styled.button`

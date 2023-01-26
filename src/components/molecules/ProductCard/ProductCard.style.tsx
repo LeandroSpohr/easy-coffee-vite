@@ -26,7 +26,6 @@ const ProductCard = styled.div`
 
 export const ImageWrapper = styled.div`
   height: ${sizes.size150};
-  width: ${sizes.size150};
   text-align: center;
 `
 

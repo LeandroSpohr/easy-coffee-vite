@@ -3,6 +3,7 @@ import Typography from '../../atoms/Typography'
 
 import Input from '../../atoms/Input'
 import { InputComponentInterface } from '../../atoms/Input/Input.component'
+import { FormField } from './FormField.styles'
 
 interface FormFieldComponentInterface extends InputComponentInterface {
   label: string
@@ -11,10 +12,10 @@ interface FormFieldComponentInterface extends InputComponentInterface {
 
 const FormFieldComponent = ({ label, otherFormField, ...rest }: FormFieldComponentInterface) => {
   return (
-    <>
+    <FormField>
       <Typography as="h3">{label}</Typography>
       {otherFormField ? otherFormField : <Input {...rest} />}
-    </>
+    </FormField>
   )
 }
 
