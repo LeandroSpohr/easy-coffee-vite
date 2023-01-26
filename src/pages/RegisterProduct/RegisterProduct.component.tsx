@@ -1,7 +1,6 @@
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { RegisterProductInterface } from '../../models/interfaces/Product'
-import Input from '../../components/atoms/Input'
 import Typography from '../../components/atoms/Typography'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
@@ -20,7 +19,7 @@ import {
 } from './RegisterProduct.styles'
 import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
-import { ButtonEnum } from '../../models/Enums/Button'
+import FormField from '../../components/molecules/FormField'
 
 const ProductRegisterComponent = () => {
   const { control, register, handleSubmit, watch, setValue } = useForm<RegisterProductInterface>()
@@ -48,16 +47,12 @@ const ProductRegisterComponent = () => {
         <StyledPaper>
           <FormWrapper>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <RowWrapper>
-                <ColWrapper>
-                  <Controller
-                    name="title"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <Input placeholder="Nome do produto..." {...field} />}
-                  />
-                </ColWrapper>
-              </RowWrapper>
+              <Controller
+                name="title"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <FormField label={'Nome do produto'} {...field} />}
+              />
               <RowWrapper>
                 <ColWrapper lg={8} md={8} sm={8} xs={7.5}>
                   <Controller
@@ -65,16 +60,21 @@ const ProductRegisterComponent = () => {
                     control={control}
                     rules={{ required: true }}
                     render={({ field }) => (
-                      <NumericInputFormat
-                        type="tel"
-                        decimalSeparator=","
-                        displayType="input"
-                        {...field}
-                        allowLeadingZeros
-                        allowNegative={false}
-                        prefix="R$ "
-                        decimalScale={2}
-                        fixedDecimalScale={true}
+                      <FormField
+                        label={'Valor'}
+                        otherFormField={
+                          <NumericInputFormat
+                            type="tel"
+                            decimalSeparator=","
+                            displayType="input"
+                            allowLeadingZeros
+                            allowNegative={false}
+                            prefix="R$ "
+                            decimalScale={2}
+                            fixedDecimalScale={true}
+                            {...field}
+                          />
+                        }
                       />
                     )}
                     defaultValue={0}
@@ -100,7 +100,8 @@ const ProductRegisterComponent = () => {
                     control={control}
                     rules={{ required: true }}
                     render={({ field }) => (
-                      <Input
+                      <FormField
+                        label="Url da Imagem"
                         {...field}
                         value={field.value ? field.value.trim() : field.value}
                         placeholder="URL da imagem..."
@@ -112,7 +113,6 @@ const ProductRegisterComponent = () => {
               <ProductPreviewTitle>
                 <Typography as="h2">Product Preview</Typography>
               </ProductPreviewTitle>
-
               <ProductCardBackgroundWrapper>
                 <ProductCardBackground>
                   <ProductCard
