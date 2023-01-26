@@ -3,24 +3,24 @@ import { Controller, useForm } from 'react-hook-form'
 import { RegisterProductInterface } from '../../models/interfaces/Product'
 import Input from '../../components/atoms/Input'
 import Typography from '../../components/atoms/Typography'
-import Paper from '../../components/atoms/Paper'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import { toast } from 'react-toastify'
-// import { FormWrapper, ProductCardWrapper } from './ProductRegister.styles'
 import NumericInputFormat from '../../components/atoms/NumericInputFormat'
 import {
   ButtonWrapper,
+  ColWrapper,
   ContentWrapper,
-  FieldsWrapper,
   FormWrapper,
-  PaperWrapper,
+  ProductPreviewTitle,
   ProductCardBackground,
-  ProductCardWrapper,
+  ProductCardBackgroundWrapper,
+  RowWrapper,
   StyledPaper,
 } from './RegisterProduct.styles'
-import ProductCardPreview from '../../components/molecules/ProductCardPreview'
 import NumericInput from '../../components/atoms/NumericInput'
+import ProductCard from '../../components/molecules/ProductCard'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const ProductRegisterComponent = () => {
   const { control, register, handleSubmit, watch, setValue } = useForm<RegisterProductInterface>()
@@ -45,20 +45,21 @@ const ProductRegisterComponent = () => {
     <Container fullCentered fullHeight>
       <ContentWrapper>
         <Typography>Registro de Produto</Typography>
-        <PaperWrapper>
-          <StyledPaper>
-            <FormWrapper>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Controller
-                  name="title"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Input placeholder="Nome do produto" {...field} defaultValue={'a'} />
-                  )}
-                />
-                <br />
-                <FieldsWrapper>
+        <StyledPaper>
+          <FormWrapper>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <RowWrapper>
+                <ColWrapper>
+                  <Controller
+                    name="title"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => <Input placeholder="Nome do produto..." {...field} />}
+                  />
+                </ColWrapper>
+              </RowWrapper>
+              <RowWrapper>
+                <ColWrapper lg={8} md={8} sm={8} xs={7.5}>
                   <Controller
                     name="value"
                     control={control}
@@ -71,7 +72,6 @@ const ProductRegisterComponent = () => {
                         {...field}
                         allowLeadingZeros
                         allowNegative={false}
-                        value={'00,00'}
                         prefix="R$ "
                         decimalScale={2}
                         fixedDecimalScale={true}
@@ -79,52 +79,60 @@ const ProductRegisterComponent = () => {
                     )}
                     defaultValue={0}
                   />
+                </ColWrapper>
+                <ColWrapper lg={2} md={3} sm={4} xs={1}>
                   <Controller
                     name="imgUrl"
                     control={control}
                     rules={{ required: true }}
                     render={({ field }) => (
                       <Button type="button" onClick={(e) => pasteLink(e)} {...field}>
-                        Colar Imagem
+                        Colar
                       </Button>
                     )}
                   />
-                </FieldsWrapper>
-                <br />
-                <Controller
-                  name="imgUrl"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      value={field.value ? field.value.trim() : field.value}
-                      placeholder="URL da imagem"
-                    />
-                  )}
-                />
+                </ColWrapper>
+              </RowWrapper>
+              <RowWrapper>
+                <ColWrapper>
+                  <Controller
+                    name="imgUrl"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        value={field.value ? field.value.trim() : field.value}
+                        placeholder="URL da imagem..."
+                      />
+                    )}
+                  />
+                </ColWrapper>
+              </RowWrapper>
+              <ProductPreviewTitle>
+                <Typography as="h2">Product Preview</Typography>
+              </ProductPreviewTitle>
 
-                <br />
-                <br />
-                <Typography>Product Preview</Typography>
-                <ProductCardWrapper>
-                  <ProductCardBackground>
-                    <ProductCardPreview
-                      imgUrl={watch('imgUrl')}
-                      title={watch('title')}
-                      price={watch('value')}
-                      inputQuantity={<NumericInput value={'1'} />}
-                      buttonText={'+'}
-                    />
-                  </ProductCardBackground>
-                </ProductCardWrapper>
-                <ButtonWrapper>
-                  <Button type="submit">{'Submit'}</Button>
-                </ButtonWrapper>
-              </form>
-            </FormWrapper>
-          </StyledPaper>
-        </PaperWrapper>
+              <ProductCardBackgroundWrapper>
+                <ProductCardBackground>
+                  <ProductCard
+                    imgUrl={watch('imgUrl')}
+                    title={watch('title') != null ? watch('title') : 'Nome do produto'}
+                    price={watch('value')}
+                    inputQuantity={<NumericInput value={'1'} />}
+                    buttonText={'+'}
+                    handleSubmit={function (): void {
+                      throw new Error('Function not implemented.')
+                    }}
+                  />
+                </ProductCardBackground>
+              </ProductCardBackgroundWrapper>
+              <ButtonWrapper>
+                <Button type="submit">{'Submit'}</Button>
+              </ButtonWrapper>
+            </form>
+          </FormWrapper>
+        </StyledPaper>
       </ContentWrapper>
     </Container>
   )

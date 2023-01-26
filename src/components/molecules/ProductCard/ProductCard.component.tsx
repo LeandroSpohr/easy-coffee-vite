@@ -34,6 +34,11 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
 }) => {
   const { formatCurrency } = useFormats()
 
+  // const onErrorSetImage = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  //   e.target.src =
+  //     'https://static.vecteezy.com/ti/vetor-gratis/p3/3454900-error-404-with-the-cute-coffee-cup-mascot-gratis-vetor.jpg'
+  // }
+
   return (
     <ProductCard fluid={fluid}>
       <ImageWrapper>
