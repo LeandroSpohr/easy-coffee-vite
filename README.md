@@ -71,6 +71,10 @@ Dev Dependencies
 | Bruno Leal | Luana Heck | Luiz Gabriel | Maicon Giehl | Matheus Folliati |
 | :---: | :---: | :---: | :---: | :---: |
 | <a href="https://github.com/bruno918"><image src="https://avatars.githubusercontent.com/u/82423722?v=4" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/LuanaHeck"><image src="https://avatars.githubusercontent.com/u/106787285?v=4" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/LuizGabe"><image src="https://avatars.githubusercontent.com/u/64185835?v=4" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/MaiconGiehl"><image src="https://avatars.githubusercontent.com/u/97136100?v=4" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/MatheusFoliatti"><image src="https://avatars.githubusercontent.com/u/106719872?v=4" width="120" height="120" />&nbsp;</a> |
-
+  
+| NomePessoa1 | NomePessoa2 | Rafael Moura | NomePessoa4 |
+| :---: | :---: | :---: | :---: |
+| <a href="https://github.com/GITHUBPESSOA1"><image src="https://avatars.githubusercontent.com/u/AVATARPESSOA1" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/GITHUBPESSOA2"><image src="https://avatars.githubusercontent.com/u/AVATARPESSOA2" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/rafaelmzx"><image src="https://avatars.githubusercontent.com/u/92473829" width="120" height="120" />&nbsp;</a> | <a href="https://github.com/GITHUBPESSOA4"><image src="https://avatars.githubusercontent.com/u/AVATARPESSOA4" width="120" height="120" />&nbsp;</a> |
+  
 </div>
 
