@@ -1,4 +1,4 @@
-export default interface PaymentInterface {
+export default interface PaidPurchase {
   id: string
   totalValue: number
   dateHour: string | Date
