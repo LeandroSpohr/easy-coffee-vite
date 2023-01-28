@@ -8,7 +8,7 @@ export const ContentWrapper = styled.div`
   margin-top: ${sizes.size20};
   border-radius: ${sizes.size20} ${sizes.size20} 0 0;
   background-color: ${colors.transparentBrown};
-  min-height: 100%;
+  min-height: ${sizes.size100Percent};
 `
 
 export const TitleWrapper = styled.div`
