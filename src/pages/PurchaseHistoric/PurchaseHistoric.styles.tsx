@@ -1,5 +1,5 @@
 import { Col } from 'react-grid-system'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { colors, sizes } from '../../assets/styles/variables'
 
 export const ItemWrapper = styled.div``
@@ -19,4 +19,22 @@ export const ColWrapper = styled(Col)`
   display: flex;
   flex-direction: column;
   text-align: center;
+`
+
+export const IconColWrapper = styled(Col)`
+  display: flex;
+  text-align: end;
+`
+
+interface MoreDetailsInterface {
+  isVisible?: boolean | null
+}
+
+export const MoreDetailsWrapper = styled.div<MoreDetailsInterface>`
+  display: none;
+  ${({ isVisible }: MoreDetailsInterface) =>
+    isVisible &&
+    css`
+      display: flex;
+    `}
 `
