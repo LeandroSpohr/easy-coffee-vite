@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 
 import PaidPurchase from '../../models/interfaces/PaidPurchase'
 
@@ -30,12 +30,14 @@ const PurchaseHistoricComponent = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
   const [purchases, setPurchases] = useState<PaidPurchase[]>([])
   const { state } = useUser()
-  const [toggle, setToggle] = useState({
-    index: -1,
-  })
+  const [toggleList, setToggleList] = useState([-1])
+  const [, forceUpdate] = useReducer((x) => x + 1, 0)
 
   const handleToggle = (i: number) => {
-    i == toggle.index ? setToggle({ index: -1 }) : setToggle({ index: i })
+    const list: number[] = toggleList
+    list.includes(i) ? list.splice(list.indexOf(i), list.indexOf(i)) : list.push(i)
+    setToggleList(list)
+    forceUpdate()
   }
 
   useEffect(() => {
@@ -86,7 +88,7 @@ const PurchaseHistoricComponent = () => {
                         buttonType={ButtonEnum.CircleButton}
                         onClick={() => handleToggle(index)}
                       >
-                        {toggle.index == index ? (
+                        {toggleList.includes(index) ? (
                           <ArrowUpIcon size={sizes.size18} />
                         ) : (
                           <ArrowDownIcon size={sizes.size18} />
@@ -94,7 +96,7 @@ const PurchaseHistoricComponent = () => {
                       </Button>
                     </IconColWrapper>
                   </Row>
-                  <MoreDetailsWrapper isVisible={toggle.index == index ? true : false}>
+                  <MoreDetailsWrapper isVisible={toggleList.includes(index) ? true : false}>
                     <Row>
                       <ColWrapper xs={3}>
                         <Typography as="h3">Produto</Typography>
