@@ -22,15 +22,31 @@ export const IconColWrapper = styled(Col)`
   justify-content: flex-end;
 `
 
-interface MoreDetailsInterface {
-  isVisible?: boolean | null
+interface DetailsInterface {
+  isVisible?: boolean
 }
 
-export const MoreDetailsWrapper = styled.div<MoreDetailsInterface>`
+export const DetailsWrapper = styled.div<DetailsInterface>`
   display: none;
-  ${({ isVisible }: MoreDetailsInterface) =>
+  ${({ isVisible }: DetailsInterface) =>
     isVisible &&
     css`
-      display: initial;
+      display: inherit;
+      border: ${sizes.size5} solid ${colors.veryLightBrown};
+      border-radius: ${sizes.size5};
     `}
+`
+
+export const DetailsHeaderWrapper = styled.div`
+  background-color: ${colors.brown};
+  padding-top: ${sizes.size10};
+  padding-bottom: ${sizes.size10};
+  border-radius: ${sizes.size15} ${sizes.size15} 0 0;
+`
+
+export const DetailsInfoWrapper = styled.div`
+  background-color: ${colors.lightBrown};
+  border-radius: 0 0 ${sizes.size5} ${sizes.size5};
+  padding-top: ${sizes.size10};
+  padding-bottom: ${sizes.size10};
 `
