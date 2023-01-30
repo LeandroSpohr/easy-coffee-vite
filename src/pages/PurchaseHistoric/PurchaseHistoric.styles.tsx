@@ -15,15 +15,11 @@ export const TitleWrapper = styled.div`
   text-align: center;
 `
 
-export const ColWrapper = styled(Col)`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-`
+export const ColWrapper = styled(Col)``
 
 export const IconColWrapper = styled(Col)`
   display: flex;
-  text-align: end;
+  justify-content: flex-end;
 `
 
 interface MoreDetailsInterface {
@@ -35,6 +31,6 @@ export const MoreDetailsWrapper = styled.div<MoreDetailsInterface>`
   ${({ isVisible }: MoreDetailsInterface) =>
     isVisible &&
     css`
-      display: flex;
+      display: initial;
     `}
 `

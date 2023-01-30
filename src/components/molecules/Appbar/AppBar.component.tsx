@@ -26,6 +26,7 @@ import { useFormats } from '../../../utils/useFormats'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import Button from '../../atoms/Button'
+import Badge from '../../atoms/Badge'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
@@ -66,6 +67,12 @@ const AppBarComponent = () => {
     })
   }
 
+  const getBadgeNumber = () => {
+    if (state.cart.length) {
+      return state.cart.length
+    }
+  }
+
   return (
     <>
       <AppBar>
@@ -79,6 +86,7 @@ const AppBarComponent = () => {
           </IconWrapper>
           <IconWrapper onClick={() => goToCart()}>
             <CartIcon size={sizes.size30} />
+            <Badge className="badge">{getBadgeNumber()}</Badge>
           </IconWrapper>
           <IconWrapper onClick={() => goToPurchaseHistoric()}>
             <PurchaseHistoricIcon size={sizes.size30} />

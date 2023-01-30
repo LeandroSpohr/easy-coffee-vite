@@ -15,6 +15,7 @@ import { ItemWrapper } from '../Cart/Cart.styles'
 import {
   ColWrapper,
   ContentWrapper,
+  IconColWrapper,
   MoreDetailsWrapper,
   TitleWrapper,
 } from './PurchaseHistoric.styles'
@@ -22,30 +23,24 @@ import NoData from '../../components/molecules/NoData'
 import Container from '../../components/atoms/Container'
 import { colors, sizes } from '../../assets/styles/variables'
 import { ArrowDownIcon, ArrowUpIcon } from '../../assets/icons'
-import { IconWrapper } from '../../components/molecules/Appbar/AppBar.style'
+import Button from '../../components/atoms/Button'
+import { ButtonEnum } from '../../models/Enums/Button'
 
 const PurchaseHistoricComponent = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
   const [purchases, setPurchases] = useState<PaidPurchase[]>([])
   const { state } = useUser()
-  const [visibility, setVisibility] = useState({
-    isVisible: false,
-    component: { key: '', isDisplayed: false },
+  const [toggle, setToggle] = useState({
+    index: -1,
   })
+
+  const handleToggle = (i: number) => {
+    i == toggle.index ? setToggle({ index: -1 }) : setToggle({ index: i })
+  }
 
   useEffect(() => {
     PaymentService.getAll(state.user?.id).then(setPurchases)
   }, [])
-
-  const verifyVisibility = (id: string): boolean => {
-    return visibility.isVisible
-      ? visibility.component.key == id
-        ? visibility.component.isDisplayed
-          ? false
-          : true
-        : false
-      : false
-  }
 
   return (
     <Container displayBlock fullHeight>
@@ -56,50 +51,64 @@ const PurchaseHistoricComponent = () => {
               <Typography>Histórico de Compras</Typography>
             </TitleWrapper>
             <Row>
-              <ColWrapper>
-                <Typography as="h2">Data</Typography>
+              <ColWrapper sm={4} xs={6}>
+                <TitleWrapper>
+                  <Typography as="h2">Data</Typography>
+                </TitleWrapper>
               </ColWrapper>
-              <ColWrapper>
-                <Typography as="h2">Valor</Typography>
+              <ColWrapper sm={4} xs={0}>
+                <TitleWrapper>
+                  <Typography as="h2">Valor</Typography>
+                </TitleWrapper>
               </ColWrapper>
               <ColWrapper></ColWrapper>
             </Row>
-            {purchases.map((item) => (
+            {purchases.map((item, index) => (
               <ItemWrapper key={item.id}>
                 <Paper>
                   <Row key={item.id}>
-                    <ColWrapper>
-                      <Typography as="h3" color={colors.brown}>
-                        {formatDateDDMMYYYY(new Date(item.createdAt))}
-                      </Typography>
+                    <ColWrapper sm={4} xs={4}>
+                      <TitleWrapper>
+                        <Typography as="h3" color={colors.brown}>
+                          {formatDateDDMMYYYY(new Date(item.createdAt))}
+                        </Typography>
+                      </TitleWrapper>
                     </ColWrapper>
-                    <ColWrapper>
-                      <Typography as="h3" color={colors.brown}>
-                        {formatCurrency(item.totalValue)}
-                      </Typography>
+                    <ColWrapper sm={4} xs={6.8}>
+                      <TitleWrapper>
+                        <Typography as="h3" color={colors.brown}>
+                          {formatCurrency(item.totalValue)}
+                        </Typography>
+                      </TitleWrapper>
                     </ColWrapper>
-                    <ColWrapper
-                      onClick={() =>
-                        setVisibility({
-                          isVisible: true,
-                          component: {
-                            key: item.id,
-                            isDisplayed: !visibility.component.isDisplayed,
-                          },
-                        })
-                      }
-                    >
-                      <IconWrapper>
-                        {verifyVisibility(item.id) ? (
-                          <ArrowUpIcon size={sizes.size30} />
+                    <IconColWrapper sm={4} xs={1}>
+                      <Button
+                        buttonType={ButtonEnum.CircleButton}
+                        onClick={() => handleToggle(index)}
+                      >
+                        {toggle.index == index ? (
+                          <ArrowUpIcon size={sizes.size18} />
                         ) : (
-                          <ArrowDownIcon size={sizes.size30} />
+                          <ArrowDownIcon size={sizes.size18} />
                         )}
-                      </IconWrapper>
-                    </ColWrapper>
+                      </Button>
+                    </IconColWrapper>
                   </Row>
-                  <MoreDetailsWrapper isVisible={verifyVisibility(item.id)}>
-                    <Typography as="h2">Produtos</Typography>
+                  <MoreDetailsWrapper isVisible={toggle.index == index ? true : false}>
+                    <Row>
+                      <ColWrapper xs={3}>
+                        <Typography as="h3">Produto</Typography>
+                      </ColWrapper>
+                      <ColWrapper xs={3}>
+                        <Typography as="h3">Valor Uni</Typography>
+                      </ColWrapper>
+                      <ColWrapper xs={3}>
+                        <Typography as="h3">Quantidade</Typography>
+                      </ColWrapper>
+                      <ColWrapper xs={3}>
+                        <Typography as="h3">Total</Typography>
+                      </ColWrapper>
+                    </Row>
                   </MoreDetailsWrapper>
                 </Paper>
               </ItemWrapper>
