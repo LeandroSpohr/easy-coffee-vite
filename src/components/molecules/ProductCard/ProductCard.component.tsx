@@ -10,6 +10,7 @@ import ProductCard, {
   PayWrapper,
   StyledTypo,
 } from './ProductCard.style'
+
 import { useFormats } from '../../../utils/useFormats'
 import { ButtonEnum } from '../../../models/Enums/Button'
 import { AddToCartIcon } from '../../../assets/icons'
@@ -20,7 +21,8 @@ type ProductCardComponentInterface = {
   description?: string
   buttonText?: string | JSX.Element
   price: number
-  handleSubmit: () => void
+  handleCartSubmit: () => void
+  handleSingleItemSubmit: () => void
   inputQuantity?: JSX.Element
 }
 
@@ -28,7 +30,8 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
   imgUrl,
   title,
   price,
-  handleSubmit,
+  handleCartSubmit,
+  handleSingleItemSubmit,
   inputQuantity,
 }) => {
   const { formatCurrency } = useFormats()
@@ -44,11 +47,11 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
       </InfoWrapper>
       <ActionWrapper>
         {inputQuantity}
-        <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleSubmit()}>
+        <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleCartSubmit()}>
           <AddToCartIcon />
         </Button>
       </ActionWrapper>
-      <PayWrapper>
+      <PayWrapper onClick={handleSingleItemSubmit}>
         <Typography as="h3">Comprar agora</Typography>
       </PayWrapper>
     </ProductCard>

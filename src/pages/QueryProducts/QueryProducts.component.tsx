@@ -15,17 +15,25 @@ import { ColWrapper, ContentWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 
-import { sizes, colors } from '../../assets/styles/variables'
+import { colors } from '../../assets/styles/variables'
+import { useModal } from '../../context/Modal'
+import { useFormats } from '../../utils/useFormats'
+import Button from '../../components/atoms/Button'
+import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
+import * as PurchaseService from '../../services/Purchase'
+import { useNavigation } from '../../utils/useNavigation'
 
-const { size150 } = sizes
 const { brown } = colors
 
 const QueryProducts = () => {
-  const { dispatch } = useUser()
+  const { dispatch: userDispatch, state: userState } = useUser()
+  const { dispatch: modalDispatch } = useModal()
   const [products, setProducts] = useState<CartInterface[]>([])
+  const { formatCurrency } = useFormats()
+  const { goToMyAccount } = useNavigation()
 
   const addToCart = (productCart: CartInterface) => {
-    dispatch({
+    userDispatch({
       type: 'ADD_PRODUCT_TO_CART',
       payload: productCart,
     })
@@ -42,6 +50,59 @@ const QueryProducts = () => {
     }
 
     setProducts([...updatedeProducts])
+  }
+
+  const saveSinglePurchase = (input: PurchaseInputInterface) => {
+    userState.user
+      ? PurchaseService.savePurchases(userState.user?.id, [input]).then(() => {
+          goToMyAccount(), closeModal()
+        })
+      : null
+  }
+
+  const closeModal = () => {
+    modalDispatch({
+      type: 'CLOSE_MODAL',
+    })
+  }
+
+  const displaySinglePurchaseModal = (productCard: CartInterface) => {
+    modalDispatch({
+      type: 'SET_MODAL',
+      payload: {
+        content: singlePurchaseModal(
+          productCard.product.id,
+          productCard.product.description,
+          productCard.product.value,
+          productCard.quantity,
+        ),
+      },
+    })
+  }
+
+  const singlePurchaseModal = (
+    productId: string,
+    productDesc: string,
+    productValue: number,
+    quantity: number,
+  ) => {
+    const totalValue = productValue * quantity
+
+    return (
+      <>
+        <Typography>
+          Deseja comprar {quantity} unidade{quantity > 1 ? 's' : ''} de {productDesc.toLowerCase()}{' '}
+          por {formatCurrency(totalValue)}?
+        </Typography>
+        <Button
+          onClick={() => {
+            saveSinglePurchase({ productId, quantity })
+          }}
+        >
+          Sim
+        </Button>
+      </>
+    )
   }
 
   useEffect(() => {
@@ -64,7 +125,6 @@ const QueryProducts = () => {
               <ProductCard
                 key={'productCard' + productCart.product.id}
                 imgUrl={productCart.product.imgUrl}
-                imgMaxHeight={size150}
                 title={productCart.product.description}
                 price={productCart.product.value}
                 inputQuantity={
@@ -79,7 +139,8 @@ const QueryProducts = () => {
                     }
                   />
                 }
-                handleSubmit={() => addToCart(productCart)}
+                handleCartSubmit={() => addToCart(productCart)}
+                handleSingleItemSubmit={() => displaySinglePurchaseModal(productCart)}
               ></ProductCard>
             </ColWrapper>
           ))}
