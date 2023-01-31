@@ -10,7 +10,6 @@ import Badge from '../../atoms/Badge'
 
 import { useUser } from '../../../context/User'
 
-import { useFormats } from '../../../utils/useFormats'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import TwoOptionsModal from '../TwoOptionsModal'
@@ -18,7 +17,6 @@ import TwoOptionsModal from '../TwoOptionsModal'
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
   const { goBack, goToHome } = useNavigation()
-  const { getFirstName } = useFormats()
   const { dispatch: modalDispatch } = useModal()
 
   const displayLogoutModal = () => {
@@ -65,7 +63,7 @@ const AppBarComponent = () => {
           <span onClick={() => goBack()}>
             <LeftArrowIcon size={sizes.size28} />
           </span>
-          <Typography>Olá {getFirstName(state.user?.name)}</Typography>
+          <Typography as="h2">EasyCoffee</Typography>
         </InfoWrapper>
         <ActionsWrapper>
           <Link to="/minha-conta">
