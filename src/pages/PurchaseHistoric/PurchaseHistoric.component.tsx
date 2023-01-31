@@ -62,7 +62,7 @@ const PurchaseHistoricComponent = () => {
                       <Typography as="h2">Data</Typography>
                     </ColWrapper>
                     <ColWrapper md={5} sm={5} xs={3}>
-                      <Typography as="h2">Valor</Typography>
+                      <Typography as="h2">Total</Typography>
                     </ColWrapper>
                     <IconColWrapper lg={1} sm={1} xs={3}>
                       <Button
@@ -93,7 +93,7 @@ const PurchaseHistoricComponent = () => {
                 <DetailsWrapper isVisible={toggleList.includes(index) ? true : false}>
                   <DetailsHeaderWrapper>
                     <Row>
-                      <ColWrapper lg={3} md={3} sm={3} xs={3}>
+                      <ColWrapper lg={4} md={4} sm={4} xs={4}>
                         <Typography as="h3">Produto</Typography>
                       </ColWrapper>
                       <ColWrapper lg={3} md={3} sm={3} xs={3}>
@@ -103,13 +103,13 @@ const PurchaseHistoricComponent = () => {
                         <Typography as="h3">Qtd</Typography>
                       </ColWrapper>
                       <ColWrapper lg={3} md={3} sm={3} xs={3}>
-                        <Typography as="h3">Total</Typography>
+                        <Typography as="h3">Valor</Typography>
                       </ColWrapper>
                     </Row>
                   </DetailsHeaderWrapper>
                   <DetailsInfoWrapper>
                     <Row>
-                      <ColWrapper lg={3} md={3} sm={3} xs={3}>
+                      <ColWrapper lg={4} md={4} sm={4} xs={4}>
                         <Typography as="h4">Cafe c/ leite</Typography>
                       </ColWrapper>
                       <ColWrapper lg={3} md={3} sm={3} xs={3}>

@@ -26,6 +26,7 @@ import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import Button from '../../atoms/Button'
 import Badge from '../../atoms/Badge'
+import { useFormats } from '../../../utils/useFormats'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()

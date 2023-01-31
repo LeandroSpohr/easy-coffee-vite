@@ -31,9 +31,10 @@ export const DetailsWrapper = styled.div<DetailsInterface>`
   ${({ isVisible }: DetailsInterface) =>
     isVisible &&
     css`
-      display: inherit;
-      border: ${sizes.size5} solid ${colors.veryLightBrown};
-      border-radius: ${sizes.size5};
+      display: flex;
+      flex-direction: column;
+      margin-bottom: ${sizes.size30};
+      text-align: center;
     `}
 `
 
@@ -41,7 +42,7 @@ export const DetailsHeaderWrapper = styled.div`
   background-color: ${colors.brown};
   padding-top: ${sizes.size10};
   padding-bottom: ${sizes.size10};
-  border-radius: ${sizes.size15} ${sizes.size15} 0 0;
+  border-radius: ${sizes.size15} ${sizes.size15};
 `
 
 export const DetailsInfoWrapper = styled.div`
@@ -49,4 +50,5 @@ export const DetailsInfoWrapper = styled.div`
   border-radius: 0 0 ${sizes.size5} ${sizes.size5};
   padding-top: ${sizes.size10};
   padding-bottom: ${sizes.size10};
+  border-radius: ${sizes.size15} ${sizes.size15};
 `
