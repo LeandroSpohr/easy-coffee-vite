@@ -13,10 +13,11 @@ const App = () => {
   return (
     <ColorSchemaProvider>
       <UserProvider>
-        <Toast />
-        <PageLoader />
-        <AppRoutes />
-        <ModalProvider />
+        <ModalProvider>
+          <Toast />
+          <PageLoader />
+          <AppRoutes />
+        </ModalProvider>
       </UserProvider>
     </ColorSchemaProvider>
   )
