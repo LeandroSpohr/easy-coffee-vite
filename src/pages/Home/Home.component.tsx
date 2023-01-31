@@ -16,21 +16,23 @@ import {
   FullScreenWrapper,
   ButtonWrapper,
   ThemeButtonWrapper,
+  Home,
 } from './Home.styles'
 
-import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
+import { FullScreenIcon, FullScreenExitIcon, ChangeColorIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import ColorSchemaButton from '../../components/atoms/ColorSchemaButton'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
+import { useColorSchema } from '../../context/ColorSchema'
 
 const { brown } = colors
 const { size200 } = sizes
 
-const Home = () => {
+const HomeComponent = () => {
   const { dispatch } = useUser()
+  const { dispatch: colorDispatch } = useColorSchema()
   const [cpf, setCpf] = useState<string>('')
   const { goToProducts } = useNavigation()
 
@@ -63,6 +65,12 @@ const Home = () => {
     }
   }
 
+  const changeColorSchema = () => {
+    colorDispatch({
+      type: 'CHANGE_COLOR_SCHEMA',
+    })
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
@@ -74,13 +82,15 @@ const Home = () => {
   }
 
   return (
-    <>
+    <Home>
       <ThemeButtonWrapper>
-        <ColorSchemaButton />
+        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
+          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon size={sizes.size25} />}
+        </Button>
       </ThemeButtonWrapper>
       <FullScreenWrapper>
-        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
-          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
+        <Button buttonType={ButtonEnum.CircleButton} onClick={() => changeColorSchema()}>
+          <ChangeColorIcon size={sizes.size25} />
         </Button>
       </FullScreenWrapper>
       <Container fullHeight fullCentered>
@@ -90,7 +100,6 @@ const Home = () => {
               <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
               <Typography color={brown}>Easy Coffee</Typography>
             </Wrapper>
-
             <FieldContainer>
               <Input
                 type="number"
@@ -126,8 +135,8 @@ const Home = () => {
           </form>
         </Paper>
       </Container>
-    </>
+    </Home>
   )
 }
 
-export default Home
+export default HomeComponent
