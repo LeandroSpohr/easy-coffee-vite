@@ -3,15 +3,19 @@ import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'
 import Image from '../../atoms/Image'
 
-import ProductCard, { InfoWrapper, ImageWrapper, ActionWrapper } from './ProductCard.style'
+import ProductCard, {
+  InfoWrapper,
+  ImageWrapper,
+  ActionWrapper,
+  PayWrapper,
+  StyledTypo,
+} from './ProductCard.style'
 import { useFormats } from '../../../utils/useFormats'
 import { ButtonEnum } from '../../../models/Enums/Button'
+import { AddToCartIcon } from '../../../assets/icons'
 
 type ProductCardComponentInterface = {
-  fluid?: boolean
   imgUrl: string
-  imgMaxWidth?: number | string
-  imgMaxHeight?: number | string
   title: string
   description?: string
   buttonText?: string | JSX.Element
@@ -22,38 +26,31 @@ type ProductCardComponentInterface = {
 
 const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
   imgUrl,
-  imgMaxWidth,
-  imgMaxHeight,
   title,
-  description,
-  buttonText,
   price,
   handleSubmit,
-  fluid,
   inputQuantity,
 }) => {
   const { formatCurrency } = useFormats()
 
   return (
-    <ProductCard fluid={fluid}>
+    <ProductCard fluid>
       <ImageWrapper>
-        <Image source={imgUrl} maxWidth={imgMaxWidth} maxHeight={imgMaxHeight} />
+        <Image source={imgUrl} />
       </ImageWrapper>
       <InfoWrapper>
-        <div>
-          <Typography as="h3"> {title} </Typography>
-          <Typography as="p"> {description} </Typography>
-          <Typography as="p"> {formatCurrency(price)} </Typography>
-        </div>
-        <div>
-          <ActionWrapper>
-            {inputQuantity}
-            <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleSubmit()}>
-              {buttonText}
-            </Button>
-          </ActionWrapper>
-        </div>
+        <Typography as="h4"> {formatCurrency(price)} </Typography>
+        <StyledTypo as="h2"> {title} </StyledTypo>
       </InfoWrapper>
+      <ActionWrapper>
+        {inputQuantity}
+        <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleSubmit()}>
+          <AddToCartIcon />
+        </Button>
+      </ActionWrapper>
+      <PayWrapper>
+        <Typography as="h3">Comprar agora</Typography>
+      </PayWrapper>
     </ProductCard>
   )
 }

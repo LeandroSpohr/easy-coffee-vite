@@ -1,20 +1,19 @@
 import styled, { css } from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
-
-const { veryLightBrown } = colors
+import Typography from '../../atoms/Typography'
 
 interface ProductCardInterface {
   fluid?: boolean
 }
 
 const ProductCard = styled.div`
-  background-color: ${veryLightBrown};
-  color: white;
+  background: linear-gradient(180deg, transparent, ${colors.veryLightBrown} 50%);
   border-radius: ${sizes.size20};
-  padding: ${sizes.size10};
-  display: inline-grid;
-  flex-flow: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: -${sizes.size12} -${sizes.size5} ${sizes.size10} ${'#362511'};
 
   ${({ fluid }: ProductCardInterface) =>
     fluid &&
@@ -25,21 +24,38 @@ const ProductCard = styled.div`
 `
 
 export const ImageWrapper = styled.div`
-  height: ${sizes.size150};
+  min-height: ${sizes.size150};
   text-align: center;
+  max-height: ${sizes.size150};
+  border-radius: ${sizes.size20} ${sizes.size20} 0 0;
+  margin-top: ${sizes.size5};
 `
 
 export const ActionWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: ${sizes.size10};
+  justify-content: space-evenly;
+  margin-top: auto;
 `
 
 export const InfoWrapper = styled.div`
+  text-align: center;
+  border-radius: ${sizes.size20} ${sizes.size20} 0 0;
+  margin-top: ${sizes.size10Percent};
+  margin-bottom: ${sizes.size10};
+`
+
+export const PayWrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: space-between;
+  background-color: ${'#362511'};
+  border-radius: 0 0 ${sizes.size18} ${sizes.size18};
+  margin-top: 10%;
+  justify-content: center;
+  padding: 3%;
+`
+
+export const StyledTypo = styled(Typography)`
+  color: ${colors.transparentBrown};
 `
 
 export default ProductCard
