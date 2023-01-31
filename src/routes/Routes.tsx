@@ -20,11 +20,11 @@ const AppRoutes = () => {
     const { state } = useUser()
     const navigate = useNavigate()
 
-    useEffect(() => {
-      if (!state.hasUser) {
-        navigate('/')
-      }
-    }, [state.hasUser])
+    // useEffect(() => {
+    //   if (!state.hasUser) {
+    //     navigate('/')
+    //   }
+    // }, [state.hasUser])
 
     return <MainTemplate>{children}</MainTemplate>
   }

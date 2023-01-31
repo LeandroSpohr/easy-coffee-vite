@@ -9,7 +9,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
   border-radius: ${sizes.size20} ${sizes.size20} 0 0;
   background-color: ${colors.transparentBrown};
-  min-height: 102%;
+  min-height: ${sizes.size102Percent};
 `
 
 export const ProductCardBackgroundWrapper = styled.div`
