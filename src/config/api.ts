@@ -19,7 +19,7 @@ api.interceptors.response.use(
   },
 
   (error) => {
-    toast.error(error, { theme: 'colored' })
+    toast.error('error: ' + error)
     return Promise.reject(error)
   },
 )

@@ -48,11 +48,8 @@ const RegisterCustomer = () => {
     newValues.cpf = removeCpfMask(formValues.cpf)
 
     if (newValues.cpf.length != 11) {
-      toast.error(`${'Error: Formato de CPF inválido!'}`, {
-        theme: 'colored',
-        position: 'top-center',
-      })
-      throw new Error('CPF inválido!')
+      toast.error(`${'Error: Formato de CPF inválido!'}`)
+      return
     }
 
     UserService.save(newValues).then((response) => {
@@ -94,7 +91,7 @@ const RegisterCustomer = () => {
                     CPF
                   </Typography>
                   <Input
-                    type="text"
+                    type="tel"
                     name="cpf"
                     value={setCpfMask(formValues.cpf)}
                     onChange={(e) => handleChange(e)}

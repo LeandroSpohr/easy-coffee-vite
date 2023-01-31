@@ -36,13 +36,9 @@ const Home = () => {
 
     if (cpf.length != 11) {
       if (cpf.length == 0) {
-        toast.warn('Preencha o campo abaixo com seu CPF!', {
-          theme: 'colored',
-          position: 'top-center',
-        })
+        toast.warn('Preencha o campo abaixo com seu CPF!')
         return
       }
-      triggerErrorToast('Formato de CPF inválido!')
       return
     }
 
@@ -82,10 +78,6 @@ const Home = () => {
     }
 
     setCpf(value)
-  }
-
-  const triggerErrorToast = (error: string) => {
-    toast.error(`${error}`, { theme: 'colored', position: 'top-center' })
   }
 
   return (
