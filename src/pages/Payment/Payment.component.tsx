@@ -6,10 +6,10 @@ import * as PaymentService from '../../services/Payments'
 
 import { useFormats } from '../../utils/useFormats'
 
-import Typography from '../../components/atoms/Typography'
 import Table from '../../components/atoms/Table'
 
 import { useUser } from '../../context/User'
+import List from '../../components/templates/ListTemplate'
 
 const Payment = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
@@ -17,26 +17,21 @@ const Payment = () => {
   const { state } = useUser()
 
   useEffect(() => {
-    PaymentService.getAll(state.user?.id)
-      .then(setPayments)
+    PaymentService.getAll(state.user?.id).then(setPayments)
   }, [])
 
-  const data = payments.map((item) => (
-    [
-      formatDateDDMMYYYY(new Date(item.dateHour)),
-      formatCurrency(item.totalValue)
-    ]
-  ))
+  const data = payments.map((item) => [
+    formatDateDDMMYYYY(new Date(item.dateHour)),
+    formatCurrency(item.totalValue),
+  ])
 
   const columns = ['Data', 'Gastos']
-  
+
   return (
     <>
-      <Typography>Histórico de Pagamentos</Typography>
-      <Table
-        data={data}
-        columns={columns}
-      />
+      <List title="Histórico de Pagamentos">
+        <Table data={data} columns={columns} />
+      </List>
     </>
   )
 }

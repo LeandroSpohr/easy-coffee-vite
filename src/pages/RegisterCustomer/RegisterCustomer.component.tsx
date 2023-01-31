@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-grid-system'
 import { toast } from 'react-toastify'
 
@@ -19,14 +19,15 @@ import { UserInputInterface } from '../../models/interfaces/User'
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { useFormats } from '../../utils/useFormats'
+import { useNavigation } from '../../utils/useNavigation'
 
 const { brown } = colors
 const { size200 } = sizes
 
 const RegisterCustomer = () => {
   const { dispatch } = useUser()
-  const navigate = useNavigate()
   const { setCpfMask, removeCpfMask } = useFormats()
+  const { goToProducts } = useNavigation()
 
   const initialFormValues: UserInputInterface = {
     cpf: '',
@@ -52,12 +53,14 @@ const RegisterCustomer = () => {
       return
     }
 
+    newValues.birthDate = new Date(formValues.birthDate)
+
     UserService.save(newValues).then((response) => {
       dispatch({
         type: 'ADD_USER',
         payload: response,
       })
-      navigate('/produtos')
+      goToProducts()
     })
   }
 
@@ -77,7 +80,7 @@ const RegisterCustomer = () => {
   return (
     <Container fullHeight fullCentered>
       <Paper fullCentered>
-        <form>
+        <form onSubmit={(e) => e.preventDefault}>
           <Wrapper>
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>

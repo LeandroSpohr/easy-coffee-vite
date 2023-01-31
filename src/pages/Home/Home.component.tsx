@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
 import Container from '../../components/atoms/Container'
@@ -18,6 +18,8 @@ import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { toast } from 'react-toastify'
 import { useFormats } from '../../utils/useFormats'
+import { ButtonEnum } from '../../models/Enums/Button'
+import { useNavigation } from '../../utils/useNavigation'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -25,7 +27,7 @@ const { size200 } = sizes
 const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
-  const navigate = useNavigate()
+  const { goToProducts } = useNavigation()
 
   const { setCpfMask, removeCpfMask } = useFormats()
 
@@ -51,7 +53,7 @@ const Home = () => {
           })
         }
       })
-      .then(() => navigate('/produtos'))
+      .then(() => goToProducts())
   }
 
   const handleToggleFullScreen = () => {
@@ -83,12 +85,12 @@ const Home = () => {
   return (
     <Container fullHeight fullCentered>
       <FullScreenWrapper>
-        <Button onClick={handleToggleFullScreen} circle>
+        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
           {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
         </Button>
       </FullScreenWrapper>
       <Paper fullCentered>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <Wrapper>
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>
@@ -108,8 +110,7 @@ const Home = () => {
               <div>
                 <Button
                   type="submit"
-                  onClick={(e) => {
-                    e.preventDefault()
+                  onClick={() => {
                     handleSubmit(cpf)
                   }}
                 >
