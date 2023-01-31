@@ -1,5 +1,5 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import QueryProducts from '../pages/QueryProducts'
@@ -9,15 +9,25 @@ import RegisterCustomer from '../pages/RegisterCustomer'
 
 import MainTemplate from '../components/templates/MainTemplate'
 import PurchaseHistoric from '../pages/PurchaseHistoric'
+import { useUser } from '../context/User'
 
 interface PrivateRouteInterface {
   children: JSX.Element
 }
 
 const AppRoutes = () => {
-  const PrivateRoute = ({ children }: PrivateRouteInterface): JSX.Element => (
-    <MainTemplate>{children}</MainTemplate>
-  )
+  const PrivateRoute = ({ children }: PrivateRouteInterface): JSX.Element => {
+    const { state } = useUser()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      if (!state.hasUser) {
+        navigate('/')
+      }
+    }, [state.hasUser])
+
+    return <MainTemplate>{children}</MainTemplate>
+  }
 
   return (
     <BrowserRouter basename="/easy-coffee-vite/">

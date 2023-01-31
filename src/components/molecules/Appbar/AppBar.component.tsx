@@ -22,7 +22,6 @@ import Typography from '../../atoms/Typography'
 
 import { useUser } from '../../../context/User'
 
-import { useFormats } from '../../../utils/useFormats'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import Button from '../../atoms/Button'
