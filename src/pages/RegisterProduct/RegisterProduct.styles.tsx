@@ -1,14 +1,15 @@
 import { Col, Row } from 'react-grid-system'
 import styled from 'styled-components'
 import { colors, sizes } from '../../assets/styles/variables'
+import Paper from '../../components/atoms/Paper'
 
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${sizes.size15};
   border-radius: ${sizes.size20} ${sizes.size20} 0 0;
   background-color: ${colors.transparentBrown};
+  min-height: 102%;
 `
 
 export const ProductCardBackgroundWrapper = styled.div`
@@ -29,15 +30,15 @@ export const ProductCardBackground = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: ${sizes.size5Percent};
 `
 
 export const ProductPreviewTitle = styled.div`
   text-align: center;
   background-color: ${colors.brown};
-  border-radius: 2.5rem;
-  margin-block: 2rem;
-  margin-top: 5rem;
+  border-radius: ${sizes.size25};
+  margin-block: ${sizes.size10};
+  margin-top: ${sizes.size25};
 `
 
 export const RowWrapper = styled(Row)`
@@ -51,3 +52,7 @@ export const ColWrapper = styled(Col)`
 `
 
 export const PriceAndPasteWrapper = styled(Row)``
+
+export const PaperWrapper = styled(Paper)`
+  width: ${sizes.size90Percent};
+`

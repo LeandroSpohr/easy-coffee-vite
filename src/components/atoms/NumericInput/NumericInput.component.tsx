@@ -27,11 +27,11 @@ const NumericInputComponent = ({ ...rest }: NumericInputInterface) => {
 
   return (
     <Container>
-      <Button type="button" buttonType={ButtonEnum.CircleButton} onClick={() => handleStepDown()}>
+      <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleStepDown()}>
         <RemoveIcon />
       </Button>
       <NumericInput ref={inputRef} type="number" {...rest} />
-      <Button type="button" buttonType={ButtonEnum.CircleButton} onClick={() => handleStepUp()}>
+      <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleStepUp()}>
         <AddIcon />
       </Button>
     </Container>
