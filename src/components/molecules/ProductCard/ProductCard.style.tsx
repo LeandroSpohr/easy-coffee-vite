@@ -13,7 +13,7 @@ const ProductCard = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  box-shadow: -${sizes.size12} -${sizes.size5} ${sizes.size10} ${'#362511'};
+  box-shadow: -${sizes.size5} -${sizes.size5} ${sizes.size10} ${'#362511'};
 
   ${({ fluid }: ProductCardInterface) =>
     fluid &&

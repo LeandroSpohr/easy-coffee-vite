@@ -15,12 +15,11 @@ import { useUser } from '../../context/User'
 
 import { useModal } from '../../context/Modal'
 import { useFormats } from '../../utils/useFormats'
-import Button from '../../components/atoms/Button'
 import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
 import * as PurchaseService from '../../services/Purchase'
 import { useNavigation } from '../../utils/useNavigation'
-import Typography from '../../components/atoms/Typography'
 import ListTemplate from '../../components/templates/ListTemplate'
+import TwoOptionsModal from '../../components/molecules/TwoOptionsModal'
 
 const QueryProducts = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
@@ -51,8 +50,8 @@ const QueryProducts = () => {
   const saveSinglePurchase = (input: PurchaseInputInterface) => {
     userState.user
       ? PurchaseService.savePurchases(userState.user?.id, [input]).then(() => {
-          goToMyAccount(), closeModal()
-        })
+        goToMyAccount(), closeModal()
+      })
       : null
   }
 
@@ -85,19 +84,20 @@ const QueryProducts = () => {
     const totalValue = productValue * quantity
 
     return (
-      <>
-        <Typography>
-          Deseja comprar {quantity} unidade{quantity > 1 ? 's' : ''} de {productDesc.toLowerCase()}{' '}
-          por {formatCurrency(totalValue)}?
-        </Typography>
-        <Button
-          onClick={() => {
-            saveSinglePurchase({ productId, quantity })
-          }}
-        >
-          Sim
-        </Button>
-      </>
+      <TwoOptionsModal
+        title={'Fast Coffee'}
+        description={`Deseja comprar ${quantity} unidade${quantity > 1 ? 's' : ''
+          } de ${productDesc.toLowerCase()}${' '}
+        por ${formatCurrency(totalValue)}?`}
+        mainButton={{
+          text: 'Sim',
+          action: () => saveSinglePurchase({ productId, quantity }),
+        }}
+        secondaryButton={{
+          text: 'Nao',
+          action: () => closeModal(),
+        }}
+      />
     )
   }
 

@@ -38,7 +38,8 @@ const AppBarComponent = () => {
   const logoutModal = () => {
     return (
       <TwoOptionsModal
-        title="Deseja mesmo sair?"
+        title={'Saída'}
+        description={'Deseja mesmo sair de sua conta?'}
         mainButton={{ text: 'Sim', action: clearUser }}
         secondaryButton={{ text: 'Nao', action: closeModal }}
       ></TwoOptionsModal>

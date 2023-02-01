@@ -42,7 +42,7 @@ const NumericInput = styled.input`
   transition: border-color 0.25s;
   color: ${white};
   resize: horizontal;
-  width: ${sizes.size10};
+  width: ${sizes.size20};
   text-align: center;
 
   :focus {

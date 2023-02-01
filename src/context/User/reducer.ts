@@ -32,7 +32,7 @@ export const reducer = (state: UserContextInterface, action: ActionTypes): UserC
     case 'ADD_PRODUCT_TO_CART':
       return {
         ...state,
-        cart: getProductCarts(action.payload),
+        cart: getProductCarts({ ...action.payload }),
       }
 
     case 'REMOVE_PRODUCT_TO_CART':

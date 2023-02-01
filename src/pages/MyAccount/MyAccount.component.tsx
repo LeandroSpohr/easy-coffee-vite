@@ -21,7 +21,7 @@ import { useNavigation } from '../../utils/useNavigation'
 import { ItemWrapper, FlexWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
-
+import coffeeCup from '../../../public/favicon.svg'
 const { brown } = colors
 
 const MyAccount = () => {
@@ -83,14 +83,18 @@ const MyAccount = () => {
           merchant="Facil Promotora de Vendas e Servicos Ltda"
           city="PASSO FUNDO"
           amount={payValue}
-          showQRCode={!isMobile}
+          image={coffeeCup}
           onLoad={(payload) => setViewPIX(payload)}
         />
-        {isMobile && (
+      </FlexWrapper>
+      <FlexWrapper centered>
+        <ItemWrapper>
+          {/* {isMobile && ( */}
           <CopyToClipboard text={viewPIX} onCopy={() => toast.success('PIX copiado com sucesso!')}>
             <Button>Pix Copia e Cola</Button>
           </CopyToClipboard>
-        )}
+        </ItemWrapper>
+        {/* )} */}
       </FlexWrapper>
       <FlexWrapper centered>
         <ItemWrapper>

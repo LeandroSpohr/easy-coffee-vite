@@ -4,7 +4,8 @@ import Typography from '../../atoms/Typography'
 import { ButtonsWrapper, StyledButtons, TwoOptionsModal } from './TwoOptionsModal.styles'
 
 interface TwoOptionsModalComponentInterface {
-  title?: string
+  title: string
+  description?: string
   mainButton: {
     text: string
     action: () => void
@@ -17,12 +18,14 @@ interface TwoOptionsModalComponentInterface {
 
 const TwoOptionsModalComponent = ({
   title,
+  description,
   mainButton,
   secondaryButton,
 }: TwoOptionsModalComponentInterface) => {
   return (
     <TwoOptionsModal>
       <Typography>{title}</Typography>
+      <Typography as="h2">{description}</Typography>
       <ButtonsWrapper>
         <StyledButtons
           buttonType={ButtonEnum.SecondaryButton}
