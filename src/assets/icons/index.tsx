@@ -9,6 +9,7 @@ import {
   MdOutlineAccountBox,
   MdFullscreen,
   MdFullscreenExit,
+  MdOutlineInvertColors,
   MdOutlineHistoryEdu,
   MdKeyboardArrowDown,
   MdKeyboardArrowUp,
@@ -67,14 +68,19 @@ export const FullScreenExitIcon = styled(MdFullscreenExit).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => color || white};
 `
 
+export const ChangeColorIcon = styled(MdOutlineInvertColors).attrs(defaultConfig)`
+color: ${({ color }: IconInterface) => color || white};
+`
+
+
 export const PurchaseHistoricIcon = styled(MdOutlineHistoryEdu).attrs(defaultConfig)`
-  color: ${({ color }: IconInterface) => color || white};
+color: ${({ color }: IconInterface) => color || white};
 `
 
 export const ArrowDownIcon = styled(MdKeyboardArrowDown).attrs(defaultConfig)`
-  color: ${({ color }: IconInterface) => color || white};
+color: ${({ color }: IconInterface) => color || white};
 `
 
 export const ArrowUpIcon = styled(MdKeyboardArrowUp).attrs(defaultConfig)`
-  color: ${({ color }: IconInterface) => color || white};
+color: ${({ color }: IconInterface) => color || white};
 `

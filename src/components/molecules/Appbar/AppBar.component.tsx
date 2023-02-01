@@ -66,29 +66,28 @@ const AppBarComponent = () => {
   }
 
   return (
-    <>
-      <AppBar>
-        <InfoWrapper onClick={() => goBack()}>
-          <LeftArrowIcon size={sizes.size28} />
-          <Typography>Olá {getFirstName(state.user?.name)}</Typography>
-        </InfoWrapper>
-        <ActionsWrapper>
-          <IconWrapper onClick={() => goToMyAccount()}>
-            <AccountIcon size={sizes.size30} />
-          </IconWrapper>
-          <IconWrapper onClick={() => goToCart()}>
-            <CartIcon size={sizes.size30} />
-            <Badge className="badge">{getBadgeNumber()}</Badge>
-          </IconWrapper>
-          <IconWrapper onClick={() => goToPurchaseHistoric()}>
-            <PurchaseHistoricIcon size={sizes.size30} />
-          </IconWrapper>
-          <IconWrapper onClick={() => displayLogoutModal()}>
-            <ExitIcon size={sizes.size30} />
-          </IconWrapper>
-        </ActionsWrapper>
-      </AppBar>
-    </>
+    <AppBar>
+      <InfoWrapper onClick={() => goBack()}>
+        <LeftArrowIcon size={sizes.size28} />
+        <Typography>Olá {getFirstName(state.user?.name)}</Typography>
+      </InfoWrapper>
+      <ActionsWrapper>
+        <IconWrapper onClick={() => goToMyAccount()}>
+          <AccountIcon size={sizes.size30} />
+        </IconWrapper>
+        <IconWrapper onClick={() => goToCart()}>
+          <CartIcon size={sizes.size30} />
+          <Badge className="badge">{getBadgeNumber()}</Badge>
+        </IconWrapper>
+        <IconWrapper onClick={() => goToPurchaseHistoric()}>
+          <PurchaseHistoricIcon size={sizes.size30} />
+        </IconWrapper>
+        <IconWrapper onClick={() => displayLogoutModal()}>
+          <ExitIcon size={sizes.size30} />
+        </IconWrapper>
+      </ActionsWrapper>
+    </AppBar>
   )
 }
+
 export default AppBarComponent

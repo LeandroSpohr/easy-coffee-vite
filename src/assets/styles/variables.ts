@@ -1,18 +1,18 @@
-interface ColorsInterface {
-  veryDarkBorwn: string
-  darkGray: string
-  brown: string
-  transparentBrown: string
-  lightBrown: string
-  veryLightBrown: string
-  gray: string
-  lightGray: string
-  lightGrayOpacity: string
-  white: string
-  black: string
-  blackOpacity: string
-  veryLightGray: string
-  red: string
+export interface ColorsInterface {
+  white: string | null
+  lightGrayOpacity: string | null
+  veryLightGray: string | null
+  lightGray: string | null
+  gray: string | null
+  darkGray: string | null
+  red: string | null
+  transparentBrown: string | null
+  veryLightBrown: string | null
+  lightBrown: string | null
+  brown: string | null
+  veryDarkBrown: string | null
+  blackOpacity: string | null
+  black: string | null
 }
 
 interface FontSizesInterface {
@@ -101,7 +101,9 @@ interface SizesInterface {
   size60Percent: string
   size70Percent: string
   size80Percent: string
+  size85Percent: string
   size90Percent: string
+  size92dot5Percent: string
   size95Percent: string
   size100Percent: string
   size102Percent: string
@@ -129,20 +131,20 @@ interface ZIndexInterface {
 }
 
 export const colors: ColorsInterface = {
-  veryDarkBorwn: '#240f04',
-  brown: '#6b451e',
-  transparentBrown: '#6b451ee6',
-  lightBrown: '#977452',
-  veryLightBrown: '#ce9f6e',
-  darkGray: '#676363',
-  gray: '#747778',
-  lightGray: '#a7a7a7',
-  lightGrayOpacity: '#a7a7a7ab',
-  white: '#FFF',
-  black: '#000',
-  blackOpacity: '#0000004D',
-  veryLightGray: '#E7E7E7',
-  red: '#CC2727',
+  white: localStorage.getItem('white'),
+  lightGrayOpacity: localStorage.getItem('lightGrayOpacity'),
+  veryLightGray: localStorage.getItem('veryLightGray'),
+  lightGray: localStorage.getItem('lightGray'),
+  gray: localStorage.getItem('gray'),
+  darkGray: localStorage.getItem('darkGray'),
+  red: localStorage.getItem('red'),
+  transparentBrown: localStorage.getItem('transparentBrown'),
+  veryLightBrown: localStorage.getItem('veryLightBrown'),
+  lightBrown: localStorage.getItem('lightBrown'),
+  brown: localStorage.getItem('brown'),
+  veryDarkBrown: localStorage.getItem('veryDarkBrown'),
+  blackOpacity: localStorage.getItem('blackOpacity'),
+  black: localStorage.getItem('black'),
 }
 
 export const zIndex: ZIndexInterface = {
@@ -239,7 +241,9 @@ export const sizes: SizesInterface = {
   size60Percent: '60%',
   size70Percent: '70%',
   size80Percent: '80%',
+  size85Percent: '85%',
   size90Percent: '90%',
+  size92dot5Percent: '92.5%',
   size95Percent: '95%',
   size100Percent: '100%',
   size102Percent: '102%',

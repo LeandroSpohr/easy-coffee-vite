@@ -2,8 +2,12 @@ import { UserContextInterface } from '../../models/interfaces/User'
 import CartInterface from '../../models/interfaces/Cart'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
+import { useColorSchema } from '../ColorSchema'
+import { UserEnum } from '../../models/Enums/User'
 
 export const reducer = (state: UserContextInterface, action: ActionTypes): UserContextInterface => {
+  const { dispatch } = useColorSchema()
+
   const getProductCarts = (payloadCartProduct: CartInterface) => {
     const cart = state.cart
     const someProductIndex = state.cart.findIndex(
@@ -24,9 +28,13 @@ export const reducer = (state: UserContextInterface, action: ActionTypes): UserC
         hasUser: true,
         user: action.payload,
         cart: [],
+        permissionLevel: UserEnum.Client,
       }
 
     case 'CLEAR_USER':
+      dispatch({
+        type: 'CLEAR_COLOR_SCHEMA',
+      })
       return initialValues
 
     case 'ADD_PRODUCT_TO_CART':

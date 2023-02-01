@@ -16,14 +16,12 @@ import { useUser } from '../../context/User'
 import { AddIcon } from '../../assets/icons'
 import { sizes } from '../../assets/styles/variables'
 import ListTemplate from '../../components/templates/ListTemplate'
-import { useFormats } from '../../utils/useFormats'
 
 const { size150, size30 } = sizes
 
 const QueryProducts = () => {
-  const { state, dispatch } = useUser()
+  const { dispatch } = useUser()
   const [products, setProducts] = useState<CartInterface[]>([])
-  const { getFirstName } = useFormats()
   const addToCart = (productCart: CartInterface) => {
     dispatch({
       type: 'ADD_PRODUCT_TO_CART',

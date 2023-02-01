@@ -10,20 +10,29 @@ import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
+import {
+  Wrapper,
+  FieldContainer,
+  FullScreenWrapper,
+  ButtonWrapper,
+  ThemeButtonWrapper,
+  Home,
+} from './Home.styles'
 
-import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
+import { FullScreenIcon, FullScreenExitIcon, ChangeColorIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
+import { useColorSchema } from '../../context/ColorSchema'
 
 const { brown } = colors
 const { size200 } = sizes
 
-const Home = () => {
+const HomeComponent = () => {
   const { dispatch } = useUser()
+  const { dispatch: colorDispatch } = useColorSchema()
   const [cpf, setCpf] = useState<string>('')
   const { goToProducts } = useNavigation()
 
@@ -56,6 +65,12 @@ const Home = () => {
     }
   }
 
+  const changeColorSchema = () => {
+    colorDispatch({
+      type: 'CHANGE_COLOR_SCHEMA',
+    })
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
@@ -67,53 +82,61 @@ const Home = () => {
   }
 
   return (
-    <Container fullHeight fullCentered>
-      <FullScreenWrapper>
+    <Home>
+      <ThemeButtonWrapper>
         <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
-          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
+          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon size={sizes.size25} />}
+        </Button>
+      </ThemeButtonWrapper>
+      <FullScreenWrapper>
+        <Button buttonType={ButtonEnum.CircleButton} onClick={() => changeColorSchema()}>
+          <ChangeColorIcon size={sizes.size25} />
         </Button>
       </FullScreenWrapper>
-      <Paper fullCentered>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <Wrapper>
-            <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
-            <Typography color={brown}>Easy Coffee</Typography>
-          </Wrapper>
-          <FieldContainer>
-            <Input
-              type="number"
-              value={cpf}
-              name="cpf"
-              onChange={(e) => handleChange(e)}
-              placeholder="Informe seu CPF"
-              autoComplete="off"
-            />
-          </FieldContainer>
-          <Container displayBlock>
-            <ButtonWrapper>
-              <div>
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    handleSubmit(cpf)
-                  }}
-                >
-                  Entrar
-                </Button>
-              </div>
-              <div>
-                <Link to="/cadastro">
-                  <Typography as="h4" color={brown}>
-                    Registre-se
-                  </Typography>
-                </Link>
-              </div>
-            </ButtonWrapper>
-          </Container>
-        </form>
-      </Paper>
-    </Container>
+      <Container fullHeight fullCentered>
+        <Paper fullCentered>
+          <form>
+            <Wrapper>
+              <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+              <Typography color={brown}>Easy Coffee</Typography>
+            </Wrapper>
+            <FieldContainer>
+              <Input
+                type="number"
+                value={cpf}
+                name="cpf"
+                onChange={(e) => handleChange(e)}
+                placeholder="Informe seu CPF"
+                autoComplete="off"
+              />
+            </FieldContainer>
+            <Container displayBlock>
+              <ButtonWrapper>
+                <div>
+                  <Button
+                    type="submit"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleSubmit(cpf)
+                    }}
+                  >
+                    Entrar
+                  </Button>
+                </div>
+                <div>
+                  <Link to="/cadastro">
+                    <Typography as="h4" color={brown}>
+                      Registre-se
+                    </Typography>
+                  </Link>
+                </div>
+              </ButtonWrapper>
+            </Container>
+          </form>
+        </Paper>
+      </Container>
+    </Home>
   )
 }
 
-export default Home
+export default HomeComponent
