@@ -16,7 +16,7 @@ type ProductCardComponentInterface = {
   description?: string
   buttonText?: string | JSX.Element
   price: number
-  handleSubmit: () => void
+  handleSubmit?: () => void
   inputQuantity?: JSX.Element
 }
 
@@ -48,7 +48,10 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
         <div>
           <ActionWrapper>
             {inputQuantity}
-            <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleSubmit()}>
+            <Button
+              buttonType={ButtonEnum.CircleButton}
+              onClick={() => (handleSubmit ? handleSubmit() : null)}
+            >
               {buttonText}
             </Button>
           </ActionWrapper>

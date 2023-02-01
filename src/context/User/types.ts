@@ -36,4 +36,10 @@ interface ChangeQuantity {
   payload: CartInterface
 }
 
-export type ActionTypes = AddUser | ClearUser | AddProductToCart | RemoveProductToCart | ClearProduct | ChangeQuantity
+export type ActionTypes =
+  | AddUser
+  | ClearUser
+  | AddProductToCart
+  | RemoveProductToCart
+  | ClearProduct
+  | ChangeQuantity

@@ -3,6 +3,7 @@ import CartInterface from '../../models/interfaces/Cart'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
 import { useColorSchema } from '../ColorSchema'
+import { UserEnum } from '../../models/Enums/User'
 
 export const reducer = (state: UserContextInterface, action: ActionTypes): UserContextInterface => {
   const { dispatch } = useColorSchema()
@@ -27,6 +28,7 @@ export const reducer = (state: UserContextInterface, action: ActionTypes): UserC
         hasUser: true,
         user: action.payload,
         cart: [],
+        permissionLevel: UserEnum.Client,
       }
 
     case 'CLEAR_USER':

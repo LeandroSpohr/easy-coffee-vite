@@ -9,7 +9,7 @@ const AppBar = styled.header`
   align-items: center;
   background-color: ${transparentBrown};
   justify-content: space-between;
-  width: 100%;
+  width: ${sizes.size100Percent};
   border-radius: 0 0 ${sizes.size10} ${sizes.size10};
   padding: ${sizes.size5};
 `
@@ -27,7 +27,7 @@ export const IconWrapper = styled.div`
   :active {
     transition: 100ms;
     transform: scale(0.8);
-    border-radius: 50%;
+    border-radius: ${sizes.size50Percent};
   }
 
   .badge {
@@ -41,19 +41,5 @@ export const ActionsWrapper = styled.div`
   justify-content: space-around;
   width: ${sizes.size150};
 `
-export const LogoutModal = styled.div`
-  h1 {
-    display: flex;
-    justify-content: center;
-  }
-`
 
-export const LogoutConfButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: ${sizes.size10};
-  button {
-    background-color: ${colors.veryLightBrown};
-  }
-`
 export default AppBar
