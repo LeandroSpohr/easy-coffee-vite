@@ -6,3 +6,9 @@ export default interface ProductInterface {
   createdAt: string
   updatedAt: string
 }
+
+export interface RegisterProductInterface {
+  title: string
+  value: number
+  imgUrl: string
+}

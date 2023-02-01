@@ -1,26 +1,47 @@
 import React from 'react'
 import { StyledComponentPropsWithRef } from 'styled-components'
 import { ButtonEnum } from '../../../models/Enums/Button'
-import MainButton, { CircleButton, ContainedMainButton, OutlinedMainButton } from './Button.style'
+import MainButton, {
+  CircleButton,
+  OutlinedMainButton,
+  OutlinedSecondaryButton,
+  SecondaryButton,
+} from './Button.style'
 import Button from './Button.style'
 
 interface ButtonInterface extends StyledComponentPropsWithRef<typeof Button> {
   children?: JSX.Element | string
   buttonType?: ButtonEnum
+  behavior?: 'button' | 'submit' | 'reset'
 }
 
-const ButtonComponent = ({ children, buttonType, ...rest }: ButtonInterface) => {
+const ButtonComponent = ({
+  children,
+  buttonType,
+  behavior = 'button',
+  ...rest
+}: ButtonInterface) => {
   switch (buttonType) {
     case ButtonEnum.MainButton:
       return <MainButton {...rest}>{children}</MainButton>
-    case ButtonEnum.ContainedMainButton:
-      return <ContainedMainButton {...rest}>{children}</ContainedMainButton>
     case ButtonEnum.OutlinedMainButton:
       return <OutlinedMainButton {...rest}>{children}</OutlinedMainButton>
+    case ButtonEnum.SecondaryButton:
+      return <SecondaryButton {...rest}>{children}</SecondaryButton>
+    case ButtonEnum.OutlinedSecondaryButton:
+      return <OutlinedSecondaryButton {...rest}>{children}</OutlinedSecondaryButton>
     case ButtonEnum.CircleButton:
-      return <CircleButton {...rest}>{children}</CircleButton>
+      return (
+        <CircleButton type={behavior} {...rest}>
+          {children}
+        </CircleButton>
+      )
     default:
-      return <MainButton {...rest}>{children}</MainButton>
+      return (
+        <MainButton type={behavior} {...rest}>
+          {children}
+        </MainButton>
+      )
   }
 }
 

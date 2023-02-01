@@ -7,23 +7,20 @@ import * as ProductService from '../../services/Product'
 import ProductInterface from '../../models/interfaces/Product'
 import CartInterface from '../../models/interfaces/Cart'
 
-import Typography from '../../components/atoms/Typography'
-import Container from '../../components/atoms/Container'
 import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
-import { ColWrapper, ContentWrapper } from './QueryProducts.styles'
+import { ColWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 
-import { colors } from '../../assets/styles/variables'
 import { useModal } from '../../context/Modal'
 import { useFormats } from '../../utils/useFormats'
 import Button from '../../components/atoms/Button'
 import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
 import * as PurchaseService from '../../services/Purchase'
 import { useNavigation } from '../../utils/useNavigation'
-
-const { brown } = colors
+import Typography from '../../components/atoms/Typography'
+import ListTemplate from '../../components/templates/ListTemplate'
 
 const QueryProducts = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
@@ -48,7 +45,6 @@ const QueryProducts = () => {
     if (someProductIndex !== -1) {
       updatedeProducts[someProductIndex].quantity = +value
     }
-
     setProducts([...updatedeProducts])
   }
 
@@ -116,9 +112,8 @@ const QueryProducts = () => {
   }, [])
 
   return (
-    <Container displayBlock fullHeight>
-      <Typography color={brown}>Produtos</Typography>
-      <ContentWrapper>
+    <>
+      <ListTemplate title={'Lista de Produtos'}>
         <Row>
           {products.map((productCart) => (
             <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>
@@ -145,8 +140,8 @@ const QueryProducts = () => {
             </ColWrapper>
           ))}
         </Row>
-      </ContentWrapper>
-    </Container>
+      </ListTemplate>
+    </>
   )
 }
 

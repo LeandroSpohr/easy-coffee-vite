@@ -9,7 +9,9 @@ import {
   MdOutlineAccountBox,
   MdFullscreen,
   MdFullscreenExit,
-  MdMonetizationOn,
+  MdOutlineHistoryEdu,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
 } from 'react-icons/md'
 
 import { TbShoppingCartPlus } from 'react-icons/tb'
@@ -70,6 +72,15 @@ export const FullScreenIcon = styled(MdFullscreen).attrs(defaultConfig)`
 export const FullScreenExitIcon = styled(MdFullscreenExit).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => color || white};
 `
-export const DollarIcon = styled(MdMonetizationOn).attrs(defaultConfig)`
+
+export const PurchaseHistoricIcon = styled(MdOutlineHistoryEdu).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => color || white};
+`
+
+export const ArrowDownIcon = styled(MdKeyboardArrowDown).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => color || white};
+`
+
+export const ArrowUpIcon = styled(MdKeyboardArrowUp).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => color || white};
 `
