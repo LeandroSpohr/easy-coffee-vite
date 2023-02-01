@@ -1,6 +1,10 @@
 import { useCallback } from 'react'
 
 export const useFormats = () => {
+  const capitalizeFirstLetter = (content: string) => {
+    return content.charAt(0).toUpperCase() + content.slice(1)
+  }
+
   const formatCurrency = useCallback(
     (value?: number) =>
       !value ? 'R$ 0,00' : value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
@@ -18,6 +22,7 @@ export const useFormats = () => {
     `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`
 
   return {
+    capitalizeFirstLetter,
     formatCurrency,
     getFirstName,
     formatDateDDMMYYYY,

@@ -47,7 +47,7 @@ export const InfoWrapper = styled.div`
 
 export const PayWrapper = styled.div`
   display: flex;
-  background-color: ${'#362511'};
+  background-color: ${colors.darkerBrown};
   border-radius: 0 0 ${sizes.size18} ${sizes.size18};
   margin-top: 10%;
   justify-content: center;

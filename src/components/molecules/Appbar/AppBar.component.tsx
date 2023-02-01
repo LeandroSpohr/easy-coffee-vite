@@ -71,21 +71,21 @@ const AppBarComponent = () => {
       <AppBar>
         <InfoWrapper onClick={() => goBack()}>
           <LeftArrowIcon size={sizes.size28} />
-          <Typography>Olá {getFirstName(state.user?.name)}</Typography>
+          <Typography as="h2">Easy Coffee</Typography>
         </InfoWrapper>
         <ActionsWrapper>
           <IconWrapper onClick={() => goToMyAccount()}>
-            <AccountIcon size={sizes.size30} />
+            <AccountIcon size={sizes.size35} />
           </IconWrapper>
           <IconWrapper onClick={() => goToCart()}>
-            <CartIcon size={sizes.size30} />
+            <CartIcon size={sizes.size35} />
             <Badge className="badge">{getBadgeNumber()}</Badge>
           </IconWrapper>
           <IconWrapper onClick={() => goToPurchaseHistoric()}>
-            <PurchaseHistoricIcon size={sizes.size30} />
+            <PurchaseHistoricIcon size={sizes.size35} />
           </IconWrapper>
           <IconWrapper onClick={() => displayLogoutModal()}>
-            <ExitIcon size={sizes.size30} />
+            <ExitIcon size={sizes.size35} />
           </IconWrapper>
         </ActionsWrapper>
       </AppBar>

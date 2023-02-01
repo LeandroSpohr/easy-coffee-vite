@@ -9,7 +9,7 @@ import CartInterface from '../../models/interfaces/Cart'
 
 import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
-import { ColWrapper } from './QueryProducts.styles'
+import { ColWrapper, WelcomeWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 
@@ -20,13 +20,17 @@ import * as PurchaseService from '../../services/Purchase'
 import { useNavigation } from '../../utils/useNavigation'
 import ListTemplate from '../../components/templates/ListTemplate'
 import TwoOptionsModal from '../../components/molecules/TwoOptionsModal'
+import Typography from '../../components/atoms/Typography'
+import { useGreetings } from '../../utils/useGreetings'
 
 const QueryProducts = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
   const { dispatch: modalDispatch } = useModal()
   const [products, setProducts] = useState<CartInterface[]>([])
-  const { formatCurrency } = useFormats()
+  const { capitalizeFirstLetter, formatCurrency } = useFormats()
   const { goToMyAccount } = useNavigation()
+  const { greet } = useGreetings()
+
 
   const addToCart = (productCart: CartInterface) => {
     userDispatch({
@@ -113,6 +117,11 @@ const QueryProducts = () => {
 
   return (
     <>
+      <WelcomeWrapper>
+        <Typography as="h2">
+          {capitalizeFirstLetter(greet())}, {userState.user?.name}!
+        </Typography>
+      </WelcomeWrapper>
       <ListTemplate title={'Lista de Produtos'}>
         <Row>
           {products.map((productCart) => (

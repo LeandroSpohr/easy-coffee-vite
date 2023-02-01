@@ -13,6 +13,7 @@ interface ColorsInterface {
   blackOpacity: string
   veryLightGray: string
   red: string
+  darkerBrown: string
 }
 
 interface FontSizesInterface {
@@ -144,6 +145,7 @@ export const colors: ColorsInterface = {
   gray: '#747778',
   black: '#000',
   blackOpacity: '#0000004D',
+  darkerBrown: '#362511',
 }
 
 export const zIndex: ZIndexInterface = {
