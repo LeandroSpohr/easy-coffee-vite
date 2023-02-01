@@ -8,6 +8,7 @@ import MyAccount from '../pages/MyAccount'
 import RegisterCustomer from '../pages/RegisterCustomer'
 
 import MainTemplate from '../components/templates/MainTemplate'
+import RegisterProduct from '../pages/RegisterProduct'
 import IdleTimer from '../components/atoms/IdleTimer'
 import PurchaseHistoric from '../pages/PurchaseHistoric'
 import { useUser } from '../context/User'
@@ -65,6 +66,14 @@ const AppRoutes = () => {
             element={
               <PrivateRoute>
                 <PurchaseHistoric />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="registrar-produto"
+            element={
+              <PrivateRoute>
+                <RegisterProduct />
               </PrivateRoute>
             }
           />

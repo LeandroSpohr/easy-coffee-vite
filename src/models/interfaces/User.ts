@@ -1,3 +1,4 @@
+import { UserEnum } from '../Enums/User'
 import CartInterface from './Cart'
 
 export default interface UserInterface {
@@ -10,9 +11,10 @@ export default interface UserInterface {
 }
 
 export interface UserContextInterface {
-  hasUser: boolean
-  user: UserInterface | null
   cart: CartInterface[]
+  hasUser: boolean
+  permissionLevel: UserEnum
+  user: UserInterface | null
 }
 
 export interface UserInputInterface {
