@@ -12,6 +12,7 @@ export const useNavigation = () => {
   const goToProducts = () => navigate('/produtos')
   const goToCart = () => navigate('/carrinho')
   const goToMyAccount = () => navigate('/minha-conta')
+  const goToPurchaseHistoric = () => navigate('/historico-de-compras')
 
   return {
     goBack,
@@ -21,5 +22,6 @@ export const useNavigation = () => {
     goToProducts,
     goToCart,
     goToMyAccount,
+    goToPurchaseHistoric,
   }
 }
