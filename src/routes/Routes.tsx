@@ -8,6 +8,7 @@ import MyAccount from '../pages/MyAccount'
 import RegisterCustomer from '../pages/RegisterCustomer'
 
 import MainTemplate from '../components/templates/MainTemplate'
+import PurchaseHistoric from '../pages/PurchaseHistoric'
 import { useUser } from '../context/User'
 
 interface PrivateRouteInterface {
@@ -54,6 +55,14 @@ const AppRoutes = () => {
           element={
             <PrivateRoute>
               <MyAccount />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="historico-de-compras"
+          element={
+            <PrivateRoute>
+              <PurchaseHistoric />
             </PrivateRoute>
           }
         />
