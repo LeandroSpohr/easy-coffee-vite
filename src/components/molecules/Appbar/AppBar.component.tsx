@@ -1,12 +1,6 @@
 import React from 'react'
 
-import AppBar, {
-  InfoWrapper,
-  ActionsWrapper,
-  IconWrapper,
-  LogoutConfButtonsWrapper,
-  LogoutModal,
-} from './AppBar.style'
+import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
 
 import {
   CartIcon,
@@ -24,7 +18,7 @@ import { useUser } from '../../../context/User'
 
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
-import Button from '../../atoms/Button'
+import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
 import { useFormats } from '../../../utils/useFormats'
 
@@ -34,7 +28,7 @@ const AppBarComponent = () => {
   const { getFirstName } = useFormats()
   const { dispatch: modalDispatch } = useModal()
 
-  const logout = () => {
+  const displayLogoutModal = () => {
     modalDispatch({
       type: 'SET_MODAL',
       payload: { content: logoutModal() },
@@ -43,13 +37,11 @@ const AppBarComponent = () => {
 
   const logoutModal = () => {
     return (
-      <LogoutModal>
-        <Typography>Deseja mesmo sair?</Typography>
-        <LogoutConfButtonsWrapper>
-          <Button onClick={() => closeModal()}>Nao</Button>
-          <Button onClick={() => clearUser()}>Sim</Button>
-        </LogoutConfButtonsWrapper>
-      </LogoutModal>
+      <TwoOptionsModal
+        title="Deseja mesmo sair?"
+        mainButton={{ text: 'Sim', action: clearUser }}
+        secondaryButton={{ text: 'Nao', action: closeModal }}
+      ></TwoOptionsModal>
     )
   }
 
@@ -91,7 +83,7 @@ const AppBarComponent = () => {
           <IconWrapper onClick={() => goToPurchaseHistoric()}>
             <PurchaseHistoricIcon size={sizes.size30} />
           </IconWrapper>
-          <IconWrapper onClick={() => logout()}>
+          <IconWrapper onClick={() => displayLogoutModal()}>
             <ExitIcon size={sizes.size30} />
           </IconWrapper>
         </ActionsWrapper>

@@ -1,10 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/variables'
 
 const defaultConfig = styled.button`
   border: none;
-  padding: ${sizes.size14} ${sizes.size20};
-  min-height: ${sizes.size48};
+  padding: ${sizes.size14};
   background: ${colors.brown};
   border-radius: ${sizes.size15};
   text-transform: uppercase;
@@ -26,19 +25,23 @@ export const OutlinedMainButton = styled(defaultConfig)`
   border: ${sizes.size2} solid ${colors.veryLightBrown};
 `
 
-export const ContainedMainButton = styled(defaultConfig)`
-  background-color: ${colors.veryLightBrown};
+export const SecondaryButton = styled(defaultConfig)`
+  background: ${colors.veryLightBrown};
+`
+export const OutlinedSecondaryButton = styled(defaultConfig)`
+  color: ${colors.veryLightBrown};
+  background-color: ${colors.white};
+  outline: ${sizes.size2} solid ${colors.veryLightBrown};
 `
 
 export const CircleButton = styled(defaultConfig)`
   min-height: auto;
   padding: ${sizes.size6};
-  border-radius: 50%;
+  border-radius: ${sizes.size50Percent};
   display: flex;
   :active {
     transition: 100ms;
     transform: scale(0.8);
-    border-radius: 50%;
   }
 `
 export default MainButton
