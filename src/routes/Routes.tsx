@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import QueryProducts from '../pages/QueryProducts'
@@ -12,7 +12,6 @@ import RegisterProduct from '../pages/RegisterProduct'
 import IdleTimer from '../components/atoms/IdleTimer'
 import PurchaseHistoric from '../pages/PurchaseHistoric'
 import { useUser } from '../context/User'
-import { Link } from 'react-router-dom'
 
 
 interface PrivateRouteInterface {
@@ -22,10 +21,10 @@ interface PrivateRouteInterface {
 const AppRoutes = () => {
   const PrivateRoute = ({ children }: PrivateRouteInterface): JSX.Element => {
     const { state } = useUser()
-
+    const navigate = useNavigate()
     useEffect(() => {
       if (!state.hasUser) {
-        <Link to={'/'} />
+        navigate('/')
       }
     }, [state.hasUser])
 

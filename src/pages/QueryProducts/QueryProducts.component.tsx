@@ -118,12 +118,13 @@ const QueryProducts = () => {
 
   return (
     <>
-      <WelcomeWrapper>
-        <Typography as="h2">
-          {capitalizeFirstLetter(greet())}, {userState.user?.name}!
-        </Typography>
-      </WelcomeWrapper>
       <ListTemplate title={'Lista de Produtos'}>
+        <WelcomeWrapper>
+          <Typography as="h2">
+            {capitalizeFirstLetter(greet())}, {userState.user?.name}!
+          </Typography>
+        </WelcomeWrapper>
+        <br />
         <Row>
           {products.map((productCart) => (
             <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>

@@ -7,7 +7,7 @@ export const ColWrapper = styled(Col)`
   margin-block: ${sizes.size5};
 `
 export const WelcomeWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  text-align: center;
   background-color: ${colors.darkerBrown};
+  border-radius: ${sizes.size10};
 `

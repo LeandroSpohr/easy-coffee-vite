@@ -11,18 +11,18 @@ const AppBar = styled.header`
   justify-content: space-between;
   width: ${sizes.size100Percent};
   border-radius: 0 0 ${sizes.size10} ${sizes.size10};
-  padding: ${sizes.size5};
+  height: ${sizes.size50};
 `
 
 export const InfoWrapper = styled.div`
   display: flex;
+  margin-left: ${sizes.size20};
   justify-content: space-around;
   align-items: center;
 `
 
 export const IconWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
 
   :active {
     transition: 100ms;
@@ -38,8 +38,9 @@ export const IconWrapper = styled.div`
 
 export const ActionsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: ${sizes.size150};
+  justify-content: space-between;
+  width: ${sizes.size50Percent};
+  margin-right: ${sizes.size10};
 `
 
 export default AppBar

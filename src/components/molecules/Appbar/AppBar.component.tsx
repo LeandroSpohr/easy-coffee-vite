@@ -67,34 +67,42 @@ const AppBarComponent = () => {
     }
   }
 
-  const isProduct = pathname === '/produtos'
-
-  const returnArrow = () => !isProduct && < LeftArrowIcon size={sizes.size28} />
+  const pageHandler = () => {
+    switch (pathname) {
+      case '/produtos':
+        return (
+          <InfoWrapper >
+            <Typography as="h2">EasyCoffee</Typography>
+          </InfoWrapper >
+        )
+      default:
+        return (
+          <InfoWrapper onClick={() => goBack()}>
+            < LeftArrowIcon size={sizes.size28} />
+          </InfoWrapper>
+        )
+    }
+  }
 
   return (
-    <>
-      <AppBar>
-        <InfoWrapper onClick={() => goBack()}>
-          {returnArrow()}
-          <Typography as="h2">EasyCoffee</Typography>
-        </InfoWrapper>
-        <ActionsWrapper>
-          <IconWrapper onClick={() => goToMyAccount()}>
-            <AccountIcon size={sizes.size35} />
-          </IconWrapper>
-          <IconWrapper onClick={() => goToCart()}>
-            <CartIcon size={sizes.size35} />
-            <Badge className="badge">{getBadgeNumber()}</Badge>
-          </IconWrapper>
-          <IconWrapper onClick={() => goToPurchaseHistoric()}>
-            <PurchaseHistoricIcon size={sizes.size35} />
-          </IconWrapper>
-          <IconWrapper onClick={() => displayLogoutModal()}>
-            <ExitIcon size={sizes.size35} />
-          </IconWrapper>
-        </ActionsWrapper>
-      </AppBar>
-    </>
+    <AppBar>
+      {pageHandler()}
+      <ActionsWrapper>
+        <IconWrapper onClick={() => goToMyAccount()}>
+          <AccountIcon size={sizes.size32} />
+        </IconWrapper>
+        <IconWrapper onClick={() => goToCart()}>
+          <CartIcon size={sizes.size32} />
+          <Badge className="badge">{getBadgeNumber()}</Badge>
+        </IconWrapper>
+        <IconWrapper onClick={() => goToPurchaseHistoric()}>
+          <PurchaseHistoricIcon size={sizes.size32} />
+        </IconWrapper>
+        <IconWrapper onClick={() => displayLogoutModal()}>
+          <ExitIcon size={sizes.size32} />
+        </IconWrapper>
+      </ActionsWrapper>
+    </AppBar>
   )
 }
 export default AppBarComponent
