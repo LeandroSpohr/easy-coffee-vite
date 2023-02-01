@@ -9,6 +9,8 @@ import RegisterCustomer from '../pages/RegisterCustomer'
 
 import MainTemplate from '../components/templates/MainTemplate'
 import RegisterProduct from '../pages/RegisterProduct'
+import IdleTimer from '../components/atoms/IdleTimer'
+import PurchaseHistoric from '../pages/PurchaseHistoric'
 import { useUser } from '../context/User'
 
 interface PrivateRouteInterface {
@@ -31,42 +33,52 @@ const AppRoutes = () => {
 
   return (
     <BrowserRouter basename="/easy-coffee-vite/">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="cadastro" element={<RegisterCustomer />} />
-        <Route
-          path="produtos"
-          element={
-            <PrivateRoute>
-              <QueryProducts />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="carrinho"
-          element={
-            <PrivateRoute>
-              <Cart />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="minha-conta"
-          element={
-            <PrivateRoute>
-              <MyAccount />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="registrar-produto"
-          element={
-            <PrivateRoute>
-              <RegisterProduct />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      <IdleTimer leftTime={120000}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="cadastro" element={<RegisterCustomer />} />
+          <Route
+            path="produtos"
+            element={
+              <PrivateRoute>
+                <QueryProducts />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="carrinho"
+            element={
+              <PrivateRoute>
+                <Cart />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="minha-conta"
+            element={
+              <PrivateRoute>
+                <MyAccount />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="historico-de-compras"
+            element={
+              <PrivateRoute>
+                <PurchaseHistoric />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="registrar-produto"
+            element={
+              <PrivateRoute>
+                <RegisterProduct />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </IdleTimer>
     </BrowserRouter>
   )
 }

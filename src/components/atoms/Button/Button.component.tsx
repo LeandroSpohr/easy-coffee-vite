@@ -1,7 +1,12 @@
 import React from 'react'
 import { StyledComponentPropsWithRef } from 'styled-components'
 import { ButtonEnum } from '../../../models/Enums/Button'
-import MainButton, { CircleButton, ContainedMainButton, OutlinedMainButton } from './Button.style'
+import MainButton, {
+  CircleButton,
+  OutlinedMainButton,
+  OutlinedSecondaryButton,
+  SecondaryButton,
+} from './Button.style'
 import Button from './Button.style'
 
 interface ButtonInterface extends StyledComponentPropsWithRef<typeof Button> {
@@ -18,23 +23,13 @@ const ButtonComponent = ({
 }: ButtonInterface) => {
   switch (buttonType) {
     case ButtonEnum.MainButton:
-      return (
-        <MainButton type={behavior} {...rest}>
-          {children}
-        </MainButton>
-      )
-    case ButtonEnum.ContainedMainButton:
-      return (
-        <ContainedMainButton type={behavior} {...rest}>
-          {children}
-        </ContainedMainButton>
-      )
+      return <MainButton {...rest}>{children}</MainButton>
     case ButtonEnum.OutlinedMainButton:
-      return (
-        <OutlinedMainButton type={behavior} {...rest}>
-          {children}
-        </OutlinedMainButton>
-      )
+      return <OutlinedMainButton {...rest}>{children}</OutlinedMainButton>
+    case ButtonEnum.SecondaryButton:
+      return <SecondaryButton {...rest}>{children}</SecondaryButton>
+    case ButtonEnum.OutlinedSecondaryButton:
+      return <OutlinedSecondaryButton {...rest}>{children}</OutlinedSecondaryButton>
     case ButtonEnum.CircleButton:
       return (
         <CircleButton type={behavior} {...rest}>

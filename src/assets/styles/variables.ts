@@ -96,8 +96,10 @@ interface SizesInterface {
   size25Percent: string
   size30Percent: string
   size40Percent: string
+  size45Percent: string
   size50Percent: string
   size60Percent: string
+  size70Percent: string
   size80Percent: string
   size90Percent: string
   size95Percent: string
@@ -232,8 +234,10 @@ export const sizes: SizesInterface = {
   size30Percent: '30%',
   size25Percent: '25%',
   size40Percent: '40%',
+  size45Percent: '45%',
   size50Percent: '50%',
   size60Percent: '60%',
+  size70Percent: '70%',
   size80Percent: '80%',
   size90Percent: '90%',
   size95Percent: '95%',
