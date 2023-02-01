@@ -1,6 +1,8 @@
 import React from 'react'
 
 import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import { useLocation } from 'react-router-dom'
+
 
 import {
   CartIcon,
@@ -20,13 +22,12 @@ import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
-import { useFormats } from '../../../utils/useFormats'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
   const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
-  const { getFirstName } = useFormats()
   const { dispatch: modalDispatch } = useModal()
+  const { pathname } = useLocation()
 
   const displayLogoutModal = () => {
     modalDispatch({
@@ -66,12 +67,16 @@ const AppBarComponent = () => {
     }
   }
 
+  const isProduct = pathname === '/produtos'
+
+  const returnArrow = () => !isProduct && < LeftArrowIcon size={sizes.size28} />
+
   return (
     <>
       <AppBar>
         <InfoWrapper onClick={() => goBack()}>
-          <LeftArrowIcon size={sizes.size28} />
-          <Typography as="h2">Easy Coffee</Typography>
+          {returnArrow()}
+          <Typography as="h2">EasyCoffee</Typography>
         </InfoWrapper>
         <ActionsWrapper>
           <IconWrapper onClick={() => goToMyAccount()}>

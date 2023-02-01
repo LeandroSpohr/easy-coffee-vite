@@ -31,13 +31,13 @@ const QueryProducts = () => {
   const { goToMyAccount } = useNavigation()
   const { greet } = useGreetings()
 
-
   const addToCart = (productCart: CartInterface) => {
     userDispatch({
       type: 'ADD_PRODUCT_TO_CART',
-      payload: productCart,
+      payload: { ...productCart },
     })
-    toast.success('Produto adicionado ao carrinho!')
+    toast.success('Produto adicionado no carrinho')
+
   }
 
   const handleChangeProductQuantity = (productCart: CartInterface, value: string) => {
@@ -52,6 +52,7 @@ const QueryProducts = () => {
   }
 
   const saveSinglePurchase = (input: PurchaseInputInterface) => {
+    toast.success('Produto comprado!')
     userState.user
       ? PurchaseService.savePurchases(userState.user?.id, [input]).then(() => {
         goToMyAccount(), closeModal()

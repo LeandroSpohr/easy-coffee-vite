@@ -18,7 +18,7 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
 
   useEffect(() => {
     userState.hasUser ? (setListeners(), setTimer()) : null
-  }, [userState])
+  }, [userState.hasUser])
 
   const setListeners = () => {
     userState.hasUser ? ((document.ontouchstart = setTimer), (document.onload = setTimer)) : null

@@ -14,6 +14,7 @@ import ProductCard, {
 import { useFormats } from '../../../utils/useFormats'
 import { ButtonEnum } from '../../../models/Enums/Button'
 import { AddToCartIcon } from '../../../assets/icons'
+import { sizes } from '../../../assets/styles/variables'
 
 type ProductCardComponentInterface = {
   imgUrl: string
@@ -37,7 +38,7 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
   const { formatCurrency } = useFormats()
 
   return (
-    <ProductCard fluid>
+    <ProductCard>
       <ImageWrapper>
         <Image source={imgUrl} />
       </ImageWrapper>
@@ -48,7 +49,7 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
       <ActionWrapper>
         {inputQuantity}
         <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleCartSubmit()}>
-          <AddToCartIcon />
+          <AddToCartIcon size={sizes.size30} />
         </Button>
       </ActionWrapper>
       <PayWrapper onClick={handleSingleItemSubmit}>

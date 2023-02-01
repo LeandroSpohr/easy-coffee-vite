@@ -44,7 +44,7 @@ const PurchaseHistoricComponent = () => {
 
   useEffect(() => {
     PaymentService.getAll(state.user?.id).then(setPurchases)
-  }, [])
+  }, [state.user])
 
   return (
     <Container displayBlock fullHeight>

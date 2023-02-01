@@ -1,26 +1,18 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
 import Typography from '../../atoms/Typography'
 
-interface ProductCardInterface {
-  fluid?: boolean
-}
 
 const ProductCard = styled.div`
-  background: linear-gradient(180deg, transparent, ${colors.veryLightBrown} 50%);
-  border-radius: ${sizes.size20};
   display: flex;
   justify-content: center;
   flex-direction: column;
-  box-shadow: -${sizes.size5} -${sizes.size5} ${sizes.size10} ${'#362511'};
-
-  ${({ fluid }: ProductCardInterface) =>
-    fluid &&
-    css`
-      width: 100%;
-      height: 100%;
-    `};
+  border-radius: ${sizes.size20};
+  background: linear-gradient(180deg, transparent, ${colors.veryLightBrown} ${sizes.size50Percent});
+  box-shadow: -${sizes.size5} -${sizes.size5} ${sizes.size10} ${colors.darkerBrown};
+  width: ${sizes.size100Percent};
+  height: ${sizes.size100Percent};
 `
 
 export const ImageWrapper = styled.div`
@@ -49,9 +41,14 @@ export const PayWrapper = styled.div`
   display: flex;
   background-color: ${colors.darkerBrown};
   border-radius: 0 0 ${sizes.size18} ${sizes.size18};
-  margin-top: 10%;
+  margin-top: ${sizes.size10Percent};
   justify-content: center;
-  padding: 3%;
+  padding: ${sizes.size3};
+
+  :active {
+    transition: 50ms;
+    transform: scale(0.95);
+  }
 `
 
 export const StyledTypo = styled(Typography)`

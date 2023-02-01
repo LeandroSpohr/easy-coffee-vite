@@ -2,6 +2,7 @@ import { UserContextInterface } from '../../models/interfaces/User'
 import CartInterface from '../../models/interfaces/Cart'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
+import { UserEnum } from '../../models/Enums/User'
 
 export const reducer = (state: UserContextInterface, action: ActionTypes): UserContextInterface => {
   const getProductCarts = (payloadCartProduct: CartInterface) => {
@@ -23,6 +24,7 @@ export const reducer = (state: UserContextInterface, action: ActionTypes): UserC
       return {
         hasUser: true,
         user: action.payload,
+        permissionLevel: UserEnum.Client,
         cart: [],
       }
 
