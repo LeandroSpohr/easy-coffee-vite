@@ -101,7 +101,6 @@ const Cart = () => {
                       <NumericInput
                         size={1}
                         min={1}
-                        max={15}
                         step={1}
                         value={cartProduct.quantity}
                         onChange={(event) => changeOne(cartProduct, event.target.value)}

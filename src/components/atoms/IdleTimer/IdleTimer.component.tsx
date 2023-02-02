@@ -18,7 +18,7 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
 
   useEffect(() => {
     userState.hasUser ? (setListeners(), setTimer()) : null
-  }, [userState])
+  }, [userState.hasUser])
 
   const setListeners = () => {
     userState.hasUser ? ((document.ontouchstart = setTimer), (document.onload = setTimer)) : null
@@ -52,13 +52,14 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
   const timedOutModal = () => (
     <>
       <TwoOptionsModal
-        title="Voce sera desconectado/a por inatividade"
+        title="Inatividade"
+        description='Você será desconectado por inatividade'
         mainButton={{
           text: 'Continuar',
           action: removeModal,
         }}
         secondaryButton={{
-          text: 'Home',
+          text: 'Sair',
           action: disconnect,
         }}
       ></TwoOptionsModal>

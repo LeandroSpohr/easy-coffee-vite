@@ -13,6 +13,7 @@ import IdleTimer from '../components/atoms/IdleTimer'
 import PurchaseHistoric from '../pages/PurchaseHistoric'
 import { useUser } from '../context/User'
 
+
 interface PrivateRouteInterface {
   children: JSX.Element
 }
@@ -21,7 +22,6 @@ const AppRoutes = () => {
   const PrivateRoute = ({ children }: PrivateRouteInterface): JSX.Element => {
     const { state } = useUser()
     const navigate = useNavigate()
-
     useEffect(() => {
       if (!state.hasUser) {
         navigate('/')
@@ -79,7 +79,7 @@ const AppRoutes = () => {
           />
         </Routes>
       </IdleTimer>
-    </BrowserRouter>
+    </BrowserRouter >
   )
 }
 

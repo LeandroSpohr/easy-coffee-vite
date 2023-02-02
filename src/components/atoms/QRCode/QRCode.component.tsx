@@ -1,7 +1,7 @@
 import React from 'react'
 import PIX from 'react-qrcode-pix'
 
-import {Wrapper} from './QRCode.style'
+import { Wrapper } from './QRCode.style'
 
 interface PixProps {
   pixkey: string
@@ -10,6 +10,7 @@ interface PixProps {
   amount?: number
   onLoad?: (payload: string) => void
   showQRCode?: boolean
+  image?: string
 }
 
 const QRCodeComponent = ({
@@ -19,16 +20,16 @@ const QRCodeComponent = ({
   amount,
   onLoad,
   showQRCode = true,
+  image,
 }: PixProps) => (
-  <Wrapper 
-    showQRCode={showQRCode}
-  >
+  <Wrapper showQRCode={showQRCode}>
     <PIX
       pixkey={pixkey}
       merchant={merchant}
       city={city}
       amount={amount}
       onLoad={onLoad}
+      image={image}
     />
   </Wrapper>
 )

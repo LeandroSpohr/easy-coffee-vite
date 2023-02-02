@@ -14,6 +14,8 @@ import {
   MdKeyboardArrowUp,
 } from 'react-icons/md'
 
+import { TbShoppingCartPlus } from 'react-icons/tb'
+
 import { colors, sizes } from '../styles/variables'
 
 const { white } = colors
@@ -36,6 +38,10 @@ export const CartIcon = styled(MdOutlineShoppingCart).attrs(defaultConfig)`
 `
 
 export const AddIcon = styled(MdAdd).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => color || white};
+`
+
+export const AddToCartIcon = styled(TbShoppingCartPlus).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => color || white};
 `
 
