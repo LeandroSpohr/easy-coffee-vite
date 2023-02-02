@@ -40,7 +40,7 @@ export const ActionsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: ${sizes.size50Percent};
+  max-width: ${sizes.size200};
   margin-right: ${sizes.size10};
 `
-
 export default AppBar
