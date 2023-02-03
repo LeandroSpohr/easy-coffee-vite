@@ -58,7 +58,7 @@ const RegisterCustomer = () => {
         })
         goToProducts()
       })
-    }
+    } else toast.error(`${'CPF inválido'}`)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

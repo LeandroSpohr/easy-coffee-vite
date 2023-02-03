@@ -20,6 +20,7 @@ import { useFormats } from '../../utils/useFormats'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
 import { useValidate } from '../../utils/useValidate'
+import { toast } from 'react-toastify'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -47,6 +48,7 @@ const Home = () => {
         })
         .then(() => goToProducts())
     }
+    else toast.error(`${'CPF inválido'}`)
   }
 
   const handleToggleFullScreen = () => {
