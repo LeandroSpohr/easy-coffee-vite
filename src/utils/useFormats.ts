@@ -16,6 +16,8 @@ export const useFormats = () => {
     [],
   )
 
+  const removeCPFMask = (cpf: string) => cpf.replace(/\D/g, '')
+
   const formatDateDDMMYYYY = (data: Date) => `${data.toLocaleDateString('pt-BR')}`
 
   const formatDateYYYYMMDD = (data: Date) =>
@@ -25,6 +27,7 @@ export const useFormats = () => {
     capitalizeFirstLetter,
     formatCurrency,
     getFirstName,
+    removeCPFMask,
     formatDateDDMMYYYY,
     formatDateYYYYMMDD,
   }
