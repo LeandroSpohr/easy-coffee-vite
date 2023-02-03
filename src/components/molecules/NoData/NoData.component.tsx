@@ -17,7 +17,7 @@ const NoDataComponent = ({ text }: NoDataInterface) => {
         <Typography as="h2">{text}</Typography>
         <ButtonsWrapper>
           <Button onClick={() => goBack()}>Voltar</Button>
-          <Button buttonType={ButtonEnum.ContainedMainButton} onClick={() => goToProducts()}>
+          <Button buttonType={ButtonEnum.MainButton} onClick={() => goToProducts()}>
             Comprar
           </Button>
         </ButtonsWrapper>
