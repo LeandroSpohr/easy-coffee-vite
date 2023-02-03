@@ -16,10 +16,11 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import { toast } from 'react-toastify'
 import { useFormats } from '../../utils/useFormats'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
+import { useValidate } from '../../utils/useValidate'
+import { toast } from 'react-toastify'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -28,32 +29,26 @@ const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
   const { goToProducts } = useNavigation()
-
+  const { validateCPF } = useValidate()
   const { setCpfMask, removeCpfMask } = useFormats()
 
   const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
     cpf = removeCpfMask(cpf)
-
-    if (cpf.length != 11) {
-      if (cpf.length == 0) {
-        toast.warn('Preencha o campo abaixo com seu CPF!')
-        return
-      }
-      return
+    if (validateCPF(cpf)) {
+      UserService.getByCpf(cpf)
+        .then((response) => {
+          if (response) {
+            dispatch({
+              type: 'ADD_USER',
+              payload: response,
+            })
+          }
+        })
+        .then(() => goToProducts())
     }
-
-    UserService.getByCpf(cpf)
-      .then((response) => {
-        if (response) {
-          dispatch({
-            type: 'ADD_USER',
-            payload: response,
-          })
-        }
-      })
-      .then(() => goToProducts())
+    else toast.error(`${'CPF inválido'}`)
   }
 
   const handleToggleFullScreen = () => {
