@@ -24,8 +24,7 @@ export const useFormats = () => {
     return cpf.replace(/\D/g, '')
   }
 
-  const formatDateDDMMYYYY = (data: Date) =>
-    `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`
+  const formatDateDDMMYYYY = (data: Date) => `${data.toLocaleDateString('pt-BR')}`
 
   const formatDateYYYYMMDD = (data: Date) =>
     `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`
