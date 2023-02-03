@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const api = axios.create({
-  baseURL: 'https://acerta-easy-coffee.uc.r.appspot.com'
+  baseURL: 'https://acerta-easy-coffee.uc.r.appspot.com',
 })
 
 api.interceptors.request.use((config) => {
@@ -11,5 +12,16 @@ api.interceptors.request.use((config) => {
 
   return config
 })
+
+api.interceptors.response.use(
+  (response) => {
+    return response
+  },
+
+  (error) => {
+    toast.error('error: ' + error)
+    return Promise.reject(error)
+  },
+)
 
 export default api

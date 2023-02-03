@@ -16,6 +16,8 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import { toast } from 'react-toastify'
+import { useFormats } from '../../utils/useFormats'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
 
@@ -27,15 +29,29 @@ const Home = () => {
   const [cpf, setCpf] = useState<string>('')
   const { goToProducts } = useNavigation()
 
+  const { setCpfMask, removeCpfMask } = useFormats()
+
   const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
+    cpf = removeCpfMask(cpf)
+
+    if (cpf.length != 11) {
+      if (cpf.length == 0) {
+        toast.warn('Preencha o campo abaixo com seu CPF!')
+        return
+      }
+      return
+    }
+
     UserService.getByCpf(cpf)
       .then((response) => {
-        dispatch({
-          type: 'ADD_USER',
-          payload: response,
-        })
+        if (response) {
+          dispatch({
+            type: 'ADD_USER',
+            payload: response,
+          })
+        }
       })
       .then(() => goToProducts())
   }
@@ -59,7 +75,7 @@ const Home = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    if (name === 'cpf' && value.length > 11) {
+    if (name === 'cpf' && value.length > 14) {
       return
     }
 
@@ -81,8 +97,8 @@ const Home = () => {
           </Wrapper>
           <FieldContainer>
             <Input
-              type="number"
-              value={cpf}
+              type="text"
+              value={setCpfMask(cpf)}
               name="cpf"
               onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"

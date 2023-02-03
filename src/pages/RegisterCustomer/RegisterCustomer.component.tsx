@@ -18,6 +18,7 @@ import { UserInputInterface } from '../../models/interfaces/User'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
+import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 
 const { brown } = colors
@@ -25,6 +26,7 @@ const { size200 } = sizes
 
 const RegisterCustomer = () => {
   const { dispatch } = useUser()
+  const { setCpfMask, removeCpfMask } = useFormats()
   const { goToProducts } = useNavigation()
 
   const initialFormValues: UserInputInterface = {
@@ -44,6 +46,14 @@ const RegisterCustomer = () => {
     const newValues = { ...formValues }
 
     newValues.birthDate = new Date(formValues.birthDate)
+    newValues.cpf = removeCpfMask(formValues.cpf)
+
+    if (newValues.cpf.length != 11) {
+      toast.error(`${'Error: Formato de CPF inválido!'}`)
+      return
+    }
+
+    newValues.birthDate = new Date(formValues.birthDate)
 
     UserService.save(newValues).then((response) => {
       dispatch({
@@ -57,7 +67,7 @@ const RegisterCustomer = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    if (name === 'cpf' && value.length > 11) {
+    if (name === 'cpf' && value.length > 14) {
       return
     }
 
@@ -84,9 +94,9 @@ const RegisterCustomer = () => {
                     CPF
                   </Typography>
                   <Input
-                    type="number"
+                    type="tel"
                     name="cpf"
-                    value={formValues.cpf}
+                    value={setCpfMask(formValues.cpf)}
                     onChange={(e) => handleChange(e)}
                     placeholder="Informe seu CPF"
                     autoComplete="off"
@@ -135,6 +145,7 @@ const RegisterCustomer = () => {
                 <Button
                   type="submit"
                   onClick={(e) => {
+                    e.preventDefault()
                     handleSubmit()
                   }}
                 >
