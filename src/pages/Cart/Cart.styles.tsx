@@ -1,24 +1,24 @@
+import { Row } from 'react-grid-system'
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../assets/styles/variables'
+import { sizes } from '../../assets/styles/variables'
 
 interface WrapperInterface {
   centered?: boolean
 }
 
 export const ItemWrapper = styled.div`
-  margin: ${sizes.size15};
+  margin-bottom: ${sizes.size15};
 `
 
 export const FlexWrapper = styled.div<WrapperInterface>`
   display: flex;
-  justify-content: ${({centered}: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
+  justify-content: ${({ centered }: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
 `
 
-export const ContentWrapper = styled.div`
-  margin-top: ${sizes.size20};
-  padding: ${sizes.size15};
-  border-radius: ${sizes.size20} ${sizes.size20} 0 0;
-  background-color: ${colors.transparentBrown};
-  min-height: 100%;
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
 `
+
+export const RowWrapper = styled(Row)``

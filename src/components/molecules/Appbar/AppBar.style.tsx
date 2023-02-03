@@ -9,25 +9,25 @@ const AppBar = styled.header`
   align-items: center;
   background-color: ${transparentBrown};
   justify-content: space-between;
-  width: 100%;
+  width: ${sizes.size100Percent};
   border-radius: 0 0 ${sizes.size10} ${sizes.size10};
-  padding: ${sizes.size5};
+  height: ${sizes.size50};
 `
 
 export const InfoWrapper = styled.div`
   display: flex;
+  margin-left: ${sizes.size20};
   justify-content: space-around;
   align-items: center;
 `
 
-export const IcoWrapper = styled.div`
+export const IconWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
 
-  :active{
+  :active {
     transition: 100ms;
-    transform: scale(0.80);
-    border-radius: 50%;
+    transform: scale(0.8);
+    border-radius: ${sizes.size50Percent};
   }
 
   .badge {
@@ -38,8 +38,10 @@ export const IcoWrapper = styled.div`
 
 export const ActionsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: ${sizes.size150};
+  justify-content: space-between;
+  width: ${sizes.size50Percent};
+  max-width: ${sizes.size200};
+  margin-right: ${sizes.size10};
 `
 
 export default AppBar

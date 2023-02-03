@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {AxiosError} from 'axios'
+import React, { useState } from 'react'
+import { AxiosError } from 'axios'
 
 import api from '../../../config/api'
 
@@ -22,7 +22,7 @@ const PageLoader = () => {
     return config
   }, (error: AxiosError) => {
     setShowLoader(false)
-  
+
     throw error
   })
 
@@ -34,6 +34,7 @@ const PageLoader = () => {
         </Container>
       )}
     </>
-  )}
+  )
+}
 
 export default PageLoader

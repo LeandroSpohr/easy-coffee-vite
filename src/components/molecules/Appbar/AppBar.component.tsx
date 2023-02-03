@@ -1,31 +1,64 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 
-import AppBar, {InfoWrapper, ActionsWrapper, IcoWrapper} from './AppBar.style'
-import {CartIcon, ExitIcon, LeftArrowIcon, AccountIcon} from '../../../assets/icons'
+import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import { useLocation } from 'react-router-dom'
+
+
+import {
+  CartIcon,
+  ExitIcon,
+  LeftArrowIcon,
+  AccountIcon,
+  PurchaseHistoricIcon,
+} from '../../../assets/icons'
+
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
-import Badge from '../../atoms/Badge'
 
 import { useUser } from '../../../context/User'
 
-import { useFormats } from '../../../utils/useFormats'
+import { useNavigation } from '../../../utils/useNavigation'
+import { useModal } from '../../../context/Modal'
+import TwoOptionsModal from '../TwoOptionsModal'
+import Badge from '../../atoms/Badge'
 
 const AppBarComponent = () => {
-  const {state, dispatch} = useUser()
-  const navigate = useNavigate()
-  const { getFirstName } = useFormats()
+  const { state, dispatch: userDispatch } = useUser()
+  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
+  const { dispatch: modalDispatch } = useModal()
+  const { pathname } = useLocation()
 
-  const goBack = () => {
-    navigate(-1)
+  const displayLogoutModal = () => {
+    modalDispatch({
+      type: 'SET_MODAL',
+      payload: { content: logoutModal() },
+    })
   }
 
-  const logout = () => {
-    dispatch({
-      type: 'CLEAR_USER'
+  const logoutModal = () => {
+    return (
+      <TwoOptionsModal
+        title={'Saída'}
+        description={'Deseja mesmo sair de sua conta?'}
+        mainButton={{ text: 'Sim', action: clearUser }}
+        secondaryButton={{ text: 'Nao', action: closeModal }}
+      ></TwoOptionsModal>
+    )
+  }
+
+  const clearUser = () => {
+    closeModal()
+    userDispatch({
+      type: 'CLEAR_USER',
     })
-    navigate('/')
+    goToHome()
+  }
+
+  const closeModal = () => {
+    modalDispatch({
+      type: 'CLOSE_MODAL',
+    })
   }
 
   const getBadgeNumber = () => {
@@ -34,33 +67,40 @@ const AppBarComponent = () => {
     }
   }
 
+  const pageHandler = () => {
+    switch (pathname) {
+      case '/produtos':
+        return (
+          <InfoWrapper >
+            <Typography as="h2">EasyCoffee</Typography>
+          </InfoWrapper >
+        )
+      default:
+        return (
+          <InfoWrapper onClick={() => goBack()}>
+            < LeftArrowIcon size={sizes.size28} />
+          </InfoWrapper>
+        )
+    }
+  }
+
   return (
     <AppBar>
-      <InfoWrapper>
-        <span onClick={() => goBack()} >
-          <LeftArrowIcon size={sizes.size28} />
-        </span>
-        <Typography>
-          Olá {getFirstName(state.user?.name)}
-        </Typography>
-      </InfoWrapper>
+      {pageHandler()}
       <ActionsWrapper>
-        <Link to="/minha-conta">
-          <IcoWrapper>
-            <AccountIcon size={sizes.size30} />
-          </IcoWrapper>
-        </Link>
-        <Link to="/carrinho">
-          <IcoWrapper>
-            <CartIcon size={sizes.size30} />
-            <Badge className="badge">
-              {getBadgeNumber()}
-            </Badge>
-          </IcoWrapper>
-        </Link>
-        <IcoWrapper>
-          <ExitIcon size={sizes.size30} onClick={() => logout()} />
-        </IcoWrapper>
+        <IconWrapper onClick={() => goToMyAccount()}>
+          <AccountIcon size={sizes.size32} />
+        </IconWrapper>
+        <IconWrapper onClick={() => goToCart()}>
+          <CartIcon size={sizes.size32} />
+          <Badge className="badge">{getBadgeNumber()}</Badge>
+        </IconWrapper>
+        <IconWrapper onClick={() => goToPurchaseHistoric()}>
+          <PurchaseHistoricIcon size={sizes.size32} />
+        </IconWrapper>
+        <IconWrapper onClick={() => displayLogoutModal()}>
+          <ExitIcon size={sizes.size32} />
+        </IconWrapper>
       </ActionsWrapper>
     </AppBar>
   )

@@ -1,0 +1,11 @@
+{
+  "name": "EasyCoffee",
+  "description": "EasyCoffee PWA",
+  "short_name": "EasyCoffee",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/"
+}
