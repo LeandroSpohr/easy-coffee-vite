@@ -20,6 +20,7 @@ import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
+import { useValidate } from '../../utils/useValidate'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -28,6 +29,7 @@ const RegisterCustomer = () => {
   const { dispatch } = useUser()
   const { setCpfMask, removeCpfMask } = useFormats()
   const { goToProducts } = useNavigation()
+  const { validateCPF } = useValidate()
 
   const initialFormValues: UserInputInterface = {
     cpf: '',
@@ -45,23 +47,18 @@ const RegisterCustomer = () => {
 
     const newValues = { ...formValues }
 
-    newValues.birthDate = new Date(formValues.birthDate)
     newValues.cpf = removeCpfMask(formValues.cpf)
+    if (validateCPF(newValues.cpf)) {
+      newValues.birthDate = new Date(formValues.birthDate)
 
-    if (newValues.cpf.length != 11) {
-      toast.error(`${'Error: Formato de CPF inválido!'}`)
-      return
-    }
-
-    newValues.birthDate = new Date(formValues.birthDate)
-
-    UserService.save(newValues).then((response) => {
-      dispatch({
-        type: 'ADD_USER',
-        payload: response,
+      UserService.save(newValues).then((response) => {
+        dispatch({
+          type: 'ADD_USER',
+          payload: response,
+        })
+        goToProducts()
       })
-      goToProducts()
-    })
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
