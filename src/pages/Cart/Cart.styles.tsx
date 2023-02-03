@@ -1,3 +1,4 @@
+import { Row } from 'react-grid-system'
 import styled from 'styled-components'
 
 import { sizes } from '../../assets/styles/variables'
@@ -14,3 +15,10 @@ export const FlexWrapper = styled.div<WrapperInterface>`
   display: flex;
   justify-content: ${({ centered }: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
 `
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`
+
+export const RowWrapper = styled(Row)``
