@@ -7,7 +7,7 @@ interface WrapperInterface {
 }
 
 export const ItemWrapper = styled.div`
-  margin: ${sizes.size15};
+  margin-bottom: ${sizes.size15};
 `
 
 export const FlexWrapper = styled.div<WrapperInterface>`
