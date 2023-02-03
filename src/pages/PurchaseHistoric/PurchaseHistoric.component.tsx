@@ -65,7 +65,7 @@ const PurchaseHistoricComponent = () => {
                       <Typography as="h2">Total</Typography>
                     </ColWrapper>
                     <IconColWrapper lg={1} sm={1} xs={3}>
-                      <Button
+                      {/* <Button
                         buttonType={ButtonEnum.CircleButton}
                         onClick={() => handleToggle(index)}
                       >
@@ -74,7 +74,7 @@ const PurchaseHistoricComponent = () => {
                         ) : (
                           <ArrowDownIcon size={sizes.size18} />
                         )}
-                      </Button>
+                      </Button> */}
                     </IconColWrapper>
                   </Row>
                   <Row key={item.id}>
@@ -90,7 +90,7 @@ const PurchaseHistoricComponent = () => {
                     </ColWrapper>
                   </Row>
                 </Paper>
-                <DetailsWrapper isVisible={toggleList.includes(index) ? true : false}>
+                {/* <DetailsWrapper isVisible={toggleList.includes(index) ? true : false}>
                   <DetailsHeaderWrapper>
                     <Row>
                       <ColWrapper lg={4} md={4} sm={4} xs={4}>
@@ -123,7 +123,7 @@ const PurchaseHistoricComponent = () => {
                       </ColWrapper>
                     </Row>
                   </DetailsInfoWrapper>
-                </DetailsWrapper>
+                </DetailsWrapper> */}
               </ItemWrapper>
             ))}
           </>
