@@ -10,8 +10,8 @@ const { fontSize18 } = fontSizes
 
 const {
   size8,
-  size12, 
-  size20, 
+  size12,
+  size20,
   size100Percent,
 } = sizes
 
@@ -38,7 +38,8 @@ const Input = styled.input`
   font-size: ${fontSize18};
   transition: border-color .25s;
   color: ${white};
-
+  text-align: center;
+  
   :focus {
     border-color: ${brown};
   }

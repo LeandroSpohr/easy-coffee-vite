@@ -21,7 +21,7 @@ import { useNavigation } from '../../utils/useNavigation'
 import { ItemWrapper, FlexWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
-import coffeeCup from '../../../public/favicon.svg'
+import coffeeCup from '../../assets/images/favicon.svg'
 const { brown } = colors
 
 const MyAccount = () => {
