@@ -12,10 +12,11 @@ const CPFInput = styled(InputMask)`
   font-size: ${fontSizes.fontSize18};
   color: ${colors.white};
   text-align: center;
+  text-transform: capitalize;
 
   ::placeholder {
     color: ${colors.white};
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   :active {

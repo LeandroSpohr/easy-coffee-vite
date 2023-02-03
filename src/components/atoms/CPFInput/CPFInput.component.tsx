@@ -7,7 +7,9 @@ const CPFInputComponent = (props: any) => (
     id="cpf"
     name="cpf"
     type="tel"
+    maskChar={null}
     placeholder='Informe seu CPF'
+    autoComplete='off'
     {...props}
   />
 )

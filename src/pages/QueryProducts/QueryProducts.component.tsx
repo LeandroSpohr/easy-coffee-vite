@@ -27,7 +27,7 @@ const QueryProducts = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
   const { dispatch: modalDispatch } = useModal()
   const [products, setProducts] = useState<CartInterface[]>([])
-  const { capitalizeFirstLetter, formatCurrency } = useFormats()
+  const { capitalizeFirstLetter, formatCurrency, getFirstName } = useFormats()
   const { goToMyAccount } = useNavigation()
   const { greet } = useGreetings()
 
@@ -121,7 +121,7 @@ const QueryProducts = () => {
       <ListTemplate title={'Lista de Produtos'}>
         <WelcomeWrapper>
           <Typography as="h2">
-            {capitalizeFirstLetter(greet())}, {userState.user?.name}!
+            {capitalizeFirstLetter(greet())}, {getFirstName(userState.user?.name)}!
           </Typography>
         </WelcomeWrapper>
         <br />
