@@ -6,7 +6,7 @@ import { InputComponentInterface } from '../../atoms/Input/Input.component'
 import { FormField } from './FormField.styles'
 
 interface FormFieldComponentInterface extends InputComponentInterface {
-  label: string
+  label?: string
   otherFormField?: JSX.Element
 }
 

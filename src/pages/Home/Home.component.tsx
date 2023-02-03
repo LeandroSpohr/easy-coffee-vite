@@ -8,20 +8,19 @@ import Typography from '../../components/atoms/Typography'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, FullScreenWrapper, ButtonsWrapper } from './Home.styles'
+import { Wrapper, FieldContainer, FullScreenWrapper, ButtonsWrapper, ContentWrapper } from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import { useFormats } from '../../utils/useFormats'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import CPFInput from '../../components/atoms/CPFInput'
 import { useValidate } from '../../utils/useValidate'
-import { useRemove } from '../../utils/useRemove'
+import FormField from '../../components/molecules/FormField'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -30,7 +29,6 @@ const Home = () => {
   const { dispatch } = useUser()
   const { goToProducts, goToRegister } = useNavigation()
   const { validateCPF } = useValidate()
-  const { removeCPFMask } = useRemove()
 
   const [toggle, setToggle] = useState<boolean>(false)
 
@@ -46,7 +44,6 @@ const Home = () => {
       })
       .then(() => goToProducts())
   }
-
 
   const handleToggleFullScreen = () => {
     const doc = window.document
@@ -78,28 +75,34 @@ const Home = () => {
 
   return (
     <Container fullHeight fullCentered>
-      <FullScreenWrapper>
-        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
-          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
-        </Button>
-      </FullScreenWrapper>
-      <Paper fullCentered>
-        <Wrapper>
-          <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
-          <Typography color={brown}>Easy Coffee</Typography>
-        </Wrapper>
-        <form onSubmit={formik.handleSubmit}>
-          <FieldContainer>
-            <CPFInput onChange={formik.handleChange} />
-          </FieldContainer >
-          <ButtonsWrapper>
-            <Button buttonType={ButtonEnum.OutlinedMainButton} halfButton onClick={goToRegister}>
-              Cadastro
-            </Button>
-            <Button type='submit' halfButton>Entrar</Button>
-          </ButtonsWrapper>
-        </form >
-      </Paper >
+      <ContentWrapper>
+        <FullScreenWrapper>
+          <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
+            {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
+          </Button>
+        </FullScreenWrapper>
+        <Paper fullCentered>
+          <Wrapper>
+            <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+            <Typography color={brown}>Easy Coffee</Typography>
+            <Typography as="h2" color={colors.white}></Typography>
+
+          </Wrapper>
+          <form onSubmit={formik.handleSubmit}>
+            <FieldContainer>
+              <FormField otherFormField={
+                <CPFInput onChange={formik.handleChange} />
+              } />
+            </FieldContainer >
+            <ButtonsWrapper>
+              <Button fluid buttonType={ButtonEnum.OutlinedMainButton} onClick={goToRegister}>
+                Cadastro
+              </Button>
+              <Button fluid type='submit'>Entrar</Button>
+            </ButtonsWrapper>
+          </form >
+        </Paper >
+      </ContentWrapper>
     </Container >
   )
 }

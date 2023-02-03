@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/variables'
 
 interface ButtonInterface {
-  halfButton: boolean
+  fluid?: boolean
 }
 
 const defaultConfig = styled.button`
@@ -16,9 +16,10 @@ const defaultConfig = styled.button`
   color: ${colors.white};
 
 
-  ${({ halfButton }: ButtonInterface) =>
-    halfButton && css`
-      width: 50%;
+  ${({ fluid }: ButtonInterface) =>
+    fluid && css`
+      width: ${sizes.size100Percent};
+      height: ${sizes.size100Percent};
     `};
 
   :active {

@@ -15,8 +15,7 @@ const CPFInput = styled(InputMask)`
   text-transform: capitalize;
 
   ::placeholder {
-    color: ${colors.white};
-    opacity: 0.6;
+    color: ${colors.veryLightBrown};
   }
 
   :active {

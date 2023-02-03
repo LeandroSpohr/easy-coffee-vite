@@ -12,8 +12,8 @@ import Button from './Button.style'
 interface ButtonInterface extends StyledComponentPropsWithRef<typeof Button> {
   children?: JSX.Element | string
   buttonType?: ButtonEnum
+  fluid?: boolean
   behavior?: 'button' | 'submit' | 'reset'
-  halfButton?: boolean
 }
 
 const ButtonComponent = ({
