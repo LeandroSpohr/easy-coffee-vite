@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `
 
 export const FieldContainer = styled.div`
-  margin-block: ${sizes.size30};
+  margin-block: ${sizes.size10};
 `
 
 export const InputWrapper = styled.div`

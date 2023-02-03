@@ -67,11 +67,12 @@ const Home = () => {
   const formik = useFormik({
     initialValues: { cpf: '' },
     onSubmit: () => {
-      const unmaskedCPF = removeCPFMask(formik.values.cpf)
-      if (validateCPF(formik.values.cpf)) {
-        handleSubmit(unmaskedCPF)
-      } else
-        toast.error('CPF inválido')
+      const cpf = formik.values.cpf
+      if (validateCPF(cpf)) {
+        handleSubmit(cpf)
+      } else if (cpf.length < 1) {
+        toast.warn('Insira seu CPF para acessar')
+      } else toast.error('CPF inválido')
     }
   })
 

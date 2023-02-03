@@ -19,11 +19,13 @@ export const useRemove = () => {
     }
   }
 
+  const removeCPFMask = (cpf: string) => cpf.replace(/\D/g, '')
+
   const removeUser = () => {
     userDispatch({
       type: 'CLEAR_USER',
     })
   }
 
-  return { removeModal, removeTimer, removeUser }
+  return { removeModal, removeTimer, removeCPFMask, removeUser }
 }

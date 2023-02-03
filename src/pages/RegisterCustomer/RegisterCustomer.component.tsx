@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Row, Col } from 'react-grid-system'
+import React from 'react'
 import { toast } from 'react-toastify'
 
 import * as UserService from '../../services/Users'
@@ -8,159 +6,133 @@ import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
-import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, InputWrapper, ButtonWrapper } from './RegisterCustomer.styles'
+import { Wrapper, FieldContainer } from './RegisterCustomer.styles'
 
 import { UserInputInterface } from '../../models/interfaces/User'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 import { useValidate } from '../../utils/useValidate'
+import { useRemove } from '../../utils/useRemove'
+import CPFInput from '../../components/atoms/CPFInput'
+import { Formik, useFormik } from 'formik'
+import { ButtonEnum } from '../../models/Enums/Button'
+import FormField from '../../components/molecules/FormField'
 
 const { brown } = colors
 const { size200 } = sizes
 
 const RegisterCustomer = () => {
   const { dispatch } = useUser()
-  const { setCpfMask, removeCpfMask } = useFormats()
   const { goToProducts } = useNavigation()
   const { validateCPF } = useValidate()
-
-  const initialFormValues: UserInputInterface = {
-    cpf: '',
-    name: '',
-    birthDate: '',
-  }
-
-  const [formValues, setFormValues] = useState<UserInputInterface>(initialFormValues)
+  const { removeCPFMask } = useRemove()
 
   const handleSubmit = () => {
-    if (!formValues.cpf || !formValues.name || !formValues.birthDate) {
-      toast.warn('Preencha todos os campos')
-      return
-    }
+    if (validateCPF(formik.values.cpf)) {
+      const newUser: UserInputInterface = { ...formik.values }
+      newUser.cpf = removeCPFMask(formik.values.cpf)
+      newUser.birthDate = new Date(formik.values.birthDate)
 
-    const newValues = { ...formValues }
-
-    newValues.cpf = removeCpfMask(formValues.cpf)
-    if (validateCPF(newValues.cpf)) {
-      newValues.birthDate = new Date(formValues.birthDate)
-
-      UserService.save(newValues).then((response) => {
+      UserService.save(newUser).then((response) => {
         dispatch({
           type: 'ADD_USER',
           payload: response,
         })
-        goToProducts()
-      })
+      }).then(() => goToProducts())
     } else toast.error(`${'CPF inválido'}`)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
 
-    if (name === 'cpf' && value.length > 14) {
-      return
+  const formik = useFormik({
+    initialValues: { cpf: '', name: '', birthDate: new Date() },
+    onSubmit: () => {
+      if (!formik.values.cpf || !formik.values.name || !formik.values.birthDate) {
+        toast.warn('Preencha todos os campos')
+        return
+      }
+      if (validateCPF(formik.values.cpf)) {
+        handleSubmit()
+      } else toast.error('CPF inválido')
     }
-
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    })
-  }
+  })
 
   return (
     <Container fullHeight fullCentered>
       <Paper fullCentered>
-        <form onSubmit={(e) => e.preventDefault}>
-          <Wrapper>
-            <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
-            <Typography color={brown}>Easy Coffee</Typography>
-          </Wrapper>
-          <FieldContainer>
-            <Typography color={brown}>Registre-se</Typography>
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <Typography as="h3" color={brown}>
-                    CPF
-                  </Typography>
-                  <Input
+        <Wrapper>
+          <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+          <Typography color={brown}>Easy Coffee</Typography>
+        </Wrapper>
+        <Formik
+          initialValues={{ cpf: '', name: '', birthDate: '' }}
+          validate={values => {
+            if (!values.cpf) {
+              console.log('no')
+            }
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2))
+              setSubmitting(false)
+            }, 400)
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <FieldContainer>
+
+                <FormField label='CPF' otherFormField={
+                  <CPFInput
                     type="tel"
                     name="cpf"
-                    value={setCpfMask(formValues.cpf)}
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Informe seu CPF"
-                    autoComplete="off"
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <Typography as="h3" color={brown}>
-                    Nome
-                  </Typography>
-                  <Input
-                    type="text"
-                    name="name"
-                    maxLength={100}
-                    value={formValues.name}
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Informe seu nome"
-                    autoComplete="off"
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <Typography as="h3" color={brown}>
-                    Data de Nascimento
-                  </Typography>
-                  <Input
-                    type="date"
-                    name="birthDate"
-                    value={formValues.birthDate as string}
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Informe sua data de nascimento"
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-          </FieldContainer>
-          <Container displayBlock>
-            <ButtonWrapper>
-              <div>
-                <Button
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleSubmit()
-                  }}
-                >
-                  Enviar
-                </Button>
-              </div>
-              <div>
-                <Link to="/">
-                  <Typography as="h4" color={brown}>
-                    Cancelar
-                  </Typography>
-                </Link>
-              </div>
-            </ButtonWrapper>
-          </Container>
-        </form>
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cpf}
+                  />} />
+              </FieldContainer>
+              {errors.cpf && touched.cpf && errors.cpf}
+              <FieldContainer>
+                <FormField
+                  label='Nome'
+                  name="name"
+                  placeholder='Digite seu nome'
+                  onChange={handleChange}
+                  value={values.name}
+                />
+              </FieldContainer>
+              <FieldContainer>
+                <FormField
+                  label='Data de Nascimento'
+                  name="birthDate"
+                  type="date"
+                  onChange={handleChange}
+                  value={values.birthDate}
+                />
+              </FieldContainer>
+              {errors.birthDate && touched.birthDate && errors.birthDate}
+              <Button buttonType={ButtonEnum.OutlinedMainButton}>Voltar</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                Registrar
+              </Button>
+            </form>
+          )}
+        </Formik>
       </Paper>
-    </Container>
+    </Container >
   )
 }
 
