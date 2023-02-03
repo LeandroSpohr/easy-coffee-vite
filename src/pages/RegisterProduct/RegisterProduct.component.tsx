@@ -2,7 +2,6 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { RegisterProductInterface } from '../../models/interfaces/Product'
 import Typography from '../../components/atoms/Typography'
-import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import { toast } from 'react-toastify'
 import NumericInputFormat from '../../components/atoms/NumericInputFormat'
@@ -32,8 +31,8 @@ const ProductRegisterComponent = () => {
       text.length > 0
         ? setValue('imgUrl', text)
         : toast.error(
-            'Sua área de transferência está vazia ou seu navegador não suporta este recurso.',
-          )
+          'Sua área de transferência está vazia ou seu navegador não suporta este recurso.',
+        )
     })
   }
 
@@ -133,6 +132,8 @@ const ProductRegisterComponent = () => {
                 price={watch('value')}
                 inputQuantity={<NumericInput defaultValue={1} />}
                 buttonText={'+'}
+                handleCartSubmit={() => null}
+                handleSingleItemSubmit={() => null}
               />
             </ProductCardBackground>
           </ProductCardBackgroundWrapper>
