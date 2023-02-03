@@ -30,7 +30,12 @@ export const useFormats = () => {
   const formatDateYYYYMMDD = (data: Date) =>
     `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`
 
+  const capitalizeFirstLetter = (content: string) => {
+    return content.charAt(0).toUpperCase() + content.slice(1)
+  }
+
   return {
+    capitalizeFirstLetter,
     formatCurrency,
     getFirstName,
     setCpfMask,

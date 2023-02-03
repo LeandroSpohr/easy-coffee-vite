@@ -13,6 +13,7 @@ interface ColorsInterface {
   blackOpacity: string
   veryLightGray: string
   red: string
+  darkerBrown: string
 }
 
 interface FontSizesInterface {
@@ -92,16 +93,21 @@ interface SizesInterface {
   size590: string
   size2Percent: string
   size5Percent: string
+  size10Percent: string
   size20Percent: string
   size25Percent: string
   size30Percent: string
+  size35Percent: string
   size40Percent: string
+  size45Percent: string
   size50Percent: string
   size60Percent: string
+  size70Percent: string
   size80Percent: string
   size90Percent: string
   size95Percent: string
   size100Percent: string
+  size102Percent: string
   size100vh: string
   size100vw: string
 }
@@ -126,20 +132,21 @@ interface ZIndexInterface {
 }
 
 export const colors: ColorsInterface = {
-  veryDarkBorwn: '#240f04',
-  brown: '#6b451e',
+  white: '#FFF',
+  red: '#CC2727',
   transparentBrown: '#6b451ee6',
   lightBrown: '#977452',
+  brown: '#6b451e',
   veryLightBrown: '#ce9f6e',
   darkGray: '#676363',
-  gray: '#747778',
-  lightGray: '#a7a7a7',
+  veryDarkBorwn: '#240f04',
+  veryLightGray: '#E7E7E7',
   lightGrayOpacity: '#a7a7a7ab',
-  white: '#FFF',
+  lightGray: '#a7a7a7',
+  gray: '#747778',
   black: '#000',
   blackOpacity: '#0000004D',
-  veryLightGray: '#E7E7E7',
-  red: '#CC2727',
+  darkerBrown: '#362511',
 }
 
 export const zIndex: ZIndexInterface = {
@@ -227,16 +234,21 @@ export const sizes: SizesInterface = {
   size590: '59rem',
   size2Percent: '2%',
   size5Percent: '5%',
+  size10Percent: '10%',
   size20Percent: '20%',
   size30Percent: '30%',
+  size35Percent: '35%',
   size25Percent: '25%',
   size40Percent: '40%',
+  size45Percent: '45%',
   size50Percent: '50%',
   size60Percent: '60%',
+  size70Percent: '70%',
   size80Percent: '80%',
   size90Percent: '90%',
   size95Percent: '95%',
   size100Percent: '100%',
+  size102Percent: '102%',
   size100vh: '100vh',
   size100vw: '100vw',
 }

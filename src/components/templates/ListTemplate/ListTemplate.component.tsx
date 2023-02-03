@@ -12,9 +12,8 @@ const List = ({ title, children }: ListInterface) => {
   return (
     <Container displayBlock fullHeight>
       <TitleWrapper>
-        <Typography as="h2">{title}</Typography>
+        <Typography as="h1">{title}</Typography>
       </TitleWrapper>
-
       <ContentWrapper>{children}</ContentWrapper>
     </Container>
   )

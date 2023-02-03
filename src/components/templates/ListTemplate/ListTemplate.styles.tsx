@@ -11,10 +11,8 @@ export const ContentWrapper = styled.div`
 export const TitleWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: ${sizes.size20} ${sizes.size20} 0 0;
   background-color: ${colors.brown};
-  border-radius: '1rem 1rem 0rem 0rem';
+  border-radius: ${sizes.size10} ${sizes.size10} 0 0;
   margin-top: ${sizes.size20};
-  height: 8%;
+  height: ${sizes.size40};
 `

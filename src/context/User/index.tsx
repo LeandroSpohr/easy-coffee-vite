@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useReducer } from 'react'
 import reducer from './reducer'
 import { UserContextInterface } from '../../models/interfaces/User'
-import {ActionTypes} from './types'
+import { ActionTypes } from './types'
 import initialValues from './initialValues'
 
 type Context = {
@@ -15,9 +15,8 @@ type ContextProps = {
 
 const UserContext = createContext<Context>({} as Context)
 
-export const UserProvider = ({children}: ContextProps) => {
+export const UserProvider = ({ children }: ContextProps) => {
   const [state, dispatch] = useReducer(reducer, initialValues)
-
   const value = {
     state,
     dispatch,

@@ -1,31 +1,35 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-import AppBar, {
-  InfoWrapper,
-  ActionsWrapper,
-  IconWrapper,
-  LogoutConfButtonsWrapper,
-  LogoutModal,
-} from './AppBar.style'
-import { CartIcon, ExitIcon, LeftArrowIcon, AccountIcon } from '../../../assets/icons'
+import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import { useLocation } from 'react-router-dom'
+
+
+import {
+  CartIcon,
+  ExitIcon,
+  LeftArrowIcon,
+  AccountIcon,
+  PurchaseHistoricIcon,
+} from '../../../assets/icons'
+
 import { sizes } from '../../../assets/styles/variables'
 
 import Typography from '../../atoms/Typography'
-import Badge from '../../atoms/Badge'
 
 import { useUser } from '../../../context/User'
 
 import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
-import Button from '../../atoms/Button'
+import TwoOptionsModal from '../TwoOptionsModal'
+import Badge from '../../atoms/Badge'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
-  const { goBack, goToHome } = useNavigation()
+  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
   const { dispatch: modalDispatch } = useModal()
+  const { pathname } = useLocation()
 
-  const logout = () => {
+  const displayLogoutModal = () => {
     modalDispatch({
       type: 'SET_MODAL',
       payload: { content: logoutModal() },
@@ -34,13 +38,12 @@ const AppBarComponent = () => {
 
   const logoutModal = () => {
     return (
-      <LogoutModal>
-        <Typography>Deseja mesmo sair?</Typography>
-        <LogoutConfButtonsWrapper>
-          <Button onClick={() => closeModal()}>Nao</Button>
-          <Button onClick={() => clearUser()}>Sim</Button>
-        </LogoutConfButtonsWrapper>
-      </LogoutModal>
+      <TwoOptionsModal
+        title={'Saída'}
+        description={'Deseja mesmo sair de sua conta?'}
+        mainButton={{ text: 'Sim', action: clearUser }}
+        secondaryButton={{ text: 'Nao', action: closeModal }}
+      ></TwoOptionsModal>
     )
   }
 
@@ -64,33 +67,42 @@ const AppBarComponent = () => {
     }
   }
 
+  const pageHandler = () => {
+    switch (pathname) {
+      case '/produtos':
+        return (
+          <InfoWrapper >
+            <Typography as="h2">EasyCoffee</Typography>
+          </InfoWrapper >
+        )
+      default:
+        return (
+          <InfoWrapper onClick={() => goBack()}>
+            < LeftArrowIcon size={sizes.size28} />
+          </InfoWrapper>
+        )
+    }
+  }
+
   return (
-    <>
-      <AppBar>
-        <InfoWrapper>
-          <span onClick={() => goBack()}>
-            <LeftArrowIcon size={sizes.size28} />
-          </span>
-          <Typography as="h2">EasyCoffee</Typography>
-        </InfoWrapper>
-        <ActionsWrapper>
-          <Link to="/minha-conta">
-            <IconWrapper>
-              <AccountIcon size={sizes.size30} />
-            </IconWrapper>
-          </Link>
-          <Link to="/carrinho">
-            <IconWrapper>
-              <CartIcon size={sizes.size30} />
-              <Badge className="badge">{getBadgeNumber()}</Badge>
-            </IconWrapper>
-          </Link>
-          <IconWrapper>
-            <ExitIcon size={sizes.size30} onClick={() => logout()} />
-          </IconWrapper>
-        </ActionsWrapper>
-      </AppBar>
-    </>
+    <AppBar>
+      {pageHandler()}
+      <ActionsWrapper>
+        <IconWrapper onClick={() => goToMyAccount()}>
+          <AccountIcon size={sizes.size32} />
+        </IconWrapper>
+        <IconWrapper onClick={() => goToCart()}>
+          <CartIcon size={sizes.size32} />
+          <Badge className="badge">{getBadgeNumber()}</Badge>
+        </IconWrapper>
+        <IconWrapper onClick={() => goToPurchaseHistoric()}>
+          <PurchaseHistoricIcon size={sizes.size32} />
+        </IconWrapper>
+        <IconWrapper onClick={() => displayLogoutModal()}>
+          <ExitIcon size={sizes.size32} />
+        </IconWrapper>
+      </ActionsWrapper>
+    </AppBar>
   )
 }
 export default AppBarComponent

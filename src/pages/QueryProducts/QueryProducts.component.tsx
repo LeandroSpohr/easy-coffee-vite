@@ -9,27 +9,35 @@ import CartInterface from '../../models/interfaces/Cart'
 
 import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
-import { ColWrapper } from './QueryProducts.styles'
+import { ColWrapper, WelcomeWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 
-import { AddIcon } from '../../assets/icons'
-import { sizes } from '../../assets/styles/variables'
-import ListTemplate from '../../components/templates/ListTemplate'
+import { useModal } from '../../context/Modal'
 import { useFormats } from '../../utils/useFormats'
-
-const { size150, size30 } = sizes
+import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
+import * as PurchaseService from '../../services/Purchase'
+import { useNavigation } from '../../utils/useNavigation'
+import ListTemplate from '../../components/templates/ListTemplate'
+import TwoOptionsModal from '../../components/molecules/TwoOptionsModal'
+import Typography from '../../components/atoms/Typography'
+import { useGreetings } from '../../utils/useGreetings'
 
 const QueryProducts = () => {
-  const { state, dispatch } = useUser()
+  const { dispatch: userDispatch, state: userState } = useUser()
+  const { dispatch: modalDispatch } = useModal()
   const [products, setProducts] = useState<CartInterface[]>([])
-  const { getFirstName } = useFormats()
+  const { capitalizeFirstLetter, formatCurrency } = useFormats()
+  const { goToMyAccount } = useNavigation()
+  const { greet } = useGreetings()
+
   const addToCart = (productCart: CartInterface) => {
-    dispatch({
+    userDispatch({
       type: 'ADD_PRODUCT_TO_CART',
-      payload: productCart,
+      payload: { ...productCart },
     })
-    toast.success('Produto adicionado ao carrinho!')
+    toast.success('Produto adicionado no carrinho')
+
   }
 
   const handleChangeProductQuantity = (productCart: CartInterface, value: string) => {
@@ -41,6 +49,61 @@ const QueryProducts = () => {
       updatedeProducts[someProductIndex].quantity = +value
     }
     setProducts([...updatedeProducts])
+  }
+
+  const saveSinglePurchase = (input: PurchaseInputInterface) => {
+    toast.success('Produto comprado!')
+    userState.user
+      ? PurchaseService.savePurchases(userState.user?.id, [input]).then(() => {
+        goToMyAccount(), closeModal()
+      })
+      : null
+  }
+
+  const closeModal = () => {
+    modalDispatch({
+      type: 'CLOSE_MODAL',
+    })
+  }
+
+  const displaySinglePurchaseModal = (productCard: CartInterface) => {
+    modalDispatch({
+      type: 'SET_MODAL',
+      payload: {
+        content: singlePurchaseModal(
+          productCard.product.id,
+          productCard.product.description,
+          productCard.product.value,
+          productCard.quantity,
+        ),
+      },
+    })
+  }
+
+  const singlePurchaseModal = (
+    productId: string,
+    productDesc: string,
+    productValue: number,
+    quantity: number,
+  ) => {
+    const totalValue = productValue * quantity
+
+    return (
+      <TwoOptionsModal
+        title={'Fast Coffee'}
+        description={`Deseja comprar ${quantity} unidade${quantity > 1 ? 's' : ''
+          } de ${productDesc.toLowerCase()}${' '}
+        por ${formatCurrency(totalValue)}?`}
+        mainButton={{
+          text: 'Sim',
+          action: () => saveSinglePurchase({ productId, quantity }),
+        }}
+        secondaryButton={{
+          text: 'Nao',
+          action: () => closeModal(),
+        }}
+      />
+    )
   }
 
   useEffect(() => {
@@ -56,17 +119,20 @@ const QueryProducts = () => {
   return (
     <>
       <ListTemplate title={'Lista de Produtos'}>
+        <WelcomeWrapper>
+          <Typography as="h2">
+            {capitalizeFirstLetter(greet())}, {userState.user?.name}!
+          </Typography>
+        </WelcomeWrapper>
+        <br />
         <Row>
           {products.map((productCart) => (
             <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>
               <ProductCard
                 key={'productCard' + productCart.product.id}
-                fluid
                 imgUrl={productCart.product.imgUrl}
-                imgMaxHeight={size150}
                 title={productCart.product.description}
                 price={productCart.product.value}
-                buttonText={<AddIcon size={size30} />}
                 inputQuantity={
                   <NumericInput
                     size={1}
@@ -79,7 +145,8 @@ const QueryProducts = () => {
                     }
                   />
                 }
-                handleSubmit={() => addToCart(productCart)}
+                handleCartSubmit={() => addToCart(productCart)}
+                handleSingleItemSubmit={() => displaySinglePurchaseModal(productCart)}
               ></ProductCard>
             </ColWrapper>
           ))}
