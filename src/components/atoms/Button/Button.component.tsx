@@ -13,6 +13,7 @@ interface ButtonInterface extends StyledComponentPropsWithRef<typeof Button> {
   children?: JSX.Element | string
   buttonType?: ButtonEnum
   behavior?: 'button' | 'submit' | 'reset'
+  halfButton?: boolean
 }
 
 const ButtonComponent = ({

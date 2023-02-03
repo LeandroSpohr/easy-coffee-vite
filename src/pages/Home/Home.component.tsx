@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
-import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
+import { Wrapper, FieldContainer, FullScreenWrapper, ButtonsWrapper } from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
@@ -18,15 +16,18 @@ import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
+import { useFormik } from 'formik'
+import { useFormats } from '../../utils/useFormats'
+import { toast } from 'react-toastify'
+import CPFInput from '../../components/atoms/CPFInput'
 
 const { brown } = colors
 const { size200 } = sizes
 
 const Home = () => {
   const { dispatch } = useUser()
-  const [cpf, setCpf] = useState<string>('')
-  const { goToProducts } = useNavigation()
-
+  const { goToProducts, goToRegister } = useNavigation()
+  const { removeCPFMask } = useFormats()
   const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
@@ -56,15 +57,23 @@ const Home = () => {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-
-    if (name === 'cpf' && value.length > 11) {
-      return
+  const formik = useFormik({
+    initialValues: { cpf: '' },
+    onSubmit: () => {
+      const unmaskedCPF = removeCPFMask(formik.values.cpf)
+      switch (true) {
+        case unmaskedCPF.length == 11:
+          handleSubmit(unmaskedCPF)
+          break
+        case unmaskedCPF.length < 1:
+          toast.error('Insira seu CPF para acessar o aplicativo')
+          break
+        default:
+          toast.warn('Preencha todos os números para acessar o aplicativo')
+          break
+      }
     }
-
-    setCpf(value)
-  }
+  })
 
   return (
     <Container fullHeight fullCentered>
@@ -74,45 +83,23 @@ const Home = () => {
         </Button>
       </FullScreenWrapper>
       <Paper fullCentered>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <Wrapper>
-            <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
-            <Typography color={brown}>Easy Coffee</Typography>
-          </Wrapper>
+        <Wrapper>
+          <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
+          <Typography color={brown}>Easy Coffee</Typography>
+        </Wrapper>
+        <form onSubmit={formik.handleSubmit}>
           <FieldContainer>
-            <Input
-              type="number"
-              value={cpf}
-              name="cpf"
-              onChange={(e) => handleChange(e)}
-              placeholder="Informe seu CPF"
-              autoComplete="off"
-            />
+            <CPFInput onChange={formik.handleChange} />
           </FieldContainer>
-          <Container displayBlock>
-            <ButtonWrapper>
-              <div>
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    handleSubmit(cpf)
-                  }}
-                >
-                  Entrar
-                </Button>
-              </div>
-              <div>
-                <Link to="/cadastro">
-                  <Typography as="h4" color={brown}>
-                    Registre-se
-                  </Typography>
-                </Link>
-              </div>
-            </ButtonWrapper>
-          </Container>
+          <ButtonsWrapper>
+            <Button buttonType={ButtonEnum.OutlinedMainButton} halfButton onClick={goToRegister}>
+              Cadastro
+            </Button>
+            <Button type='submit' halfButton>Entrar</Button>
+          </ButtonsWrapper>
         </form>
       </Paper>
-    </Container>
+    </Container >
   )
 }
 

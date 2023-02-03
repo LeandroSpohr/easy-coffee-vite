@@ -1,5 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/variables'
+
+interface ButtonInterface {
+  halfButton: boolean
+}
 
 const defaultConfig = styled.button`
   border: none;
@@ -10,6 +14,12 @@ const defaultConfig = styled.button`
   font-weight: ${fontWeights.size700};
   font-size: ${fontSizes.fontSize18};
   color: ${colors.white};
+
+
+  ${({ halfButton }: ButtonInterface) =>
+    halfButton && css`
+      width: 50%;
+    `};
 
   :active {
     transition: 100ms;

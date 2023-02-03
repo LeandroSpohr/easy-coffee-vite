@@ -16,10 +16,8 @@ export const FullScreenWrapper = styled.div`
   left: ${sizes.size10};
 `
 
-export const ButtonWrapper = styled.div`
-  margin-block: ${sizes.size10};
+export const ButtonsWrapper = styled.div`
   display: flex;
-  flex-flow: column;
   justify-content: space-around;
   gap: ${sizes.size10};
 `
