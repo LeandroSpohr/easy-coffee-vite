@@ -14,18 +14,19 @@ import { Row } from 'react-grid-system'
 import { ItemWrapper } from '../Cart/Cart.styles'
 import {
   ColWrapper,
-  DetailsHeaderWrapper,
-  DetailsInfoWrapper,
+  // DetailsHeaderWrapper,
+  // DetailsInfoWrapper,
   IconColWrapper,
-  DetailsWrapper,
+  // DetailsWrapper,
 } from './PurchaseHistoric.styles'
 import NoData from '../../components/molecules/NoData'
-import Container from '../../components/atoms/Container'
+// import Container from '../../components/atoms/Container'
 import { colors, sizes } from '../../assets/styles/variables'
-import { ArrowDownIcon, ArrowUpIcon } from '../../assets/icons'
-import Button from '../../components/atoms/Button'
-import { ButtonEnum } from '../../models/Enums/Button'
+// import { ArrowDownIcon, ArrowUpIcon } from '../../assets/icons'
+// import Button from '../../components/atoms/Button'
+// import { ButtonEnum } from '../../models/Enums/Button'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
+import { useNavigation } from '../../utils/useNavigation'
 
 const PurchaseHistoricComponent = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
@@ -33,6 +34,7 @@ const PurchaseHistoricComponent = () => {
   const { state } = useUser()
   const [toggleList, setToggleList] = useState([-1])
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
+  const { goToProducts, goToMyAccount } = useNavigation()
 
   const handleToggle = (i: number) => {
     const list: number[] = toggleList
@@ -123,7 +125,13 @@ const PurchaseHistoricComponent = () => {
         ))
 
       ) : (
-        <NoData text={'Nenhuma compra ainda'} />
+        <NoData text={'Nenhuma compra ainda'} mainOption={{
+          text: 'Em aberto',
+          action: goToMyAccount
+        }} secondaryOption={{
+          text: 'Comprar',
+          action: goToProducts
+        }} />
       )
       }
     </List >

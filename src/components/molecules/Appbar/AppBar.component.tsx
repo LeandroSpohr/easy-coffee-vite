@@ -115,8 +115,6 @@ const AppBarComponent = () => {
         }
       })}
       <ActionsWrapper>
-
-
         <IconWrapper onClick={() => goToMyAccount()}>
           <AccountIcon size={sizes.size32} />
         </IconWrapper>

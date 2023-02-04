@@ -20,13 +20,14 @@ import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
 import { ButtonEnum } from '../../models/Enums/Button'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
+import NoData from '../../components/molecules/NoData'
 
 const { brown } = colors
 
 const Cart = () => {
   const { formatCurrency } = useFormats()
   const { state, dispatch } = useUser()
-  const { goBack, goToMyAccount } = useNavigation()
+  const { goToProducts, goToMyAccount } = useNavigation()
 
   const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
@@ -135,18 +136,14 @@ const Cart = () => {
       ) : (
         <>
           <FlexWrapper centered>
-            <ItemWrapper>
-              <Typography as="h3">Seu carrinho está vazio</Typography>
-            </ItemWrapper>
           </FlexWrapper>
-          <FlexWrapper centered>
-            <ItemWrapper>
-              <Button onClick={() => goBack()}>Voltar</Button>
-            </ItemWrapper>
-            <ItemWrapper>
-              <Button onClick={() => goToMyAccount()}>Ver Compras</Button>
-            </ItemWrapper>
-          </FlexWrapper>
+          <NoData text='Seu carrinho está vazio' mainOption={{
+            text: 'Em aberto',
+            action: goToMyAccount
+          }} secondaryOption={{
+            text: 'Comprar',
+            action: goToProducts
+          }} />
         </>
       )}
     </List>
