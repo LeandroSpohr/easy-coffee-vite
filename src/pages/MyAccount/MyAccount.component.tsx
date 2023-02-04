@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-grid-system'
 import { toast } from 'react-toastify'
-import { isMobile } from 'react-device-detect'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import * as PurchaseService from '../../services/Purchase'
 import * as PaymentService from '../../services/Payment'
@@ -18,7 +16,7 @@ import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 
-import { ItemWrapper, FlexWrapper } from './MyAccount.styles'
+import { ItemWrapper, FlexWrapper, ColWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
 import coffeeCup from '../../assets/images/favicon.svg'
@@ -77,81 +75,81 @@ const MyAccount = () => {
 
   return (
     <List title={'Compras em Aberto'}>
-      <FlexWrapper centered>
-        <QRCode
-          pixkey="26442024000194"
-          merchant="Facil Promotora de Vendas e Servicos Ltda"
-          city="PASSO FUNDO"
-          amount={payValue}
-          image={coffeeCup}
-          onLoad={(payload) => setViewPIX(payload)}
-        />
+      <Typography as="h2" centralized>Valor atual no pix<br />{formatCurrency(payValue)}</Typography>
+      <Typography as="h4" centralized>Clique para copiar o pix</Typography>
+      <br />
+      <FlexWrapper
+        centered
+      >
+        <div
+          onClick={() => { navigator.clipboard.writeText(viewPIX), toast.success('PIX copiado com sucesso!') }}
+        >
+          <QRCode
+            pixkey="26442024000194"
+            merchant="Facil Promotora de Vendas e Servicos Ltda"
+            city="PASSO FUNDO"
+            amount={payValue}
+            image={coffeeCup}
+            onLoad={(payload) => setViewPIX(payload)}
+          />
+        </div>
       </FlexWrapper>
-      <FlexWrapper centered>
-        <ItemWrapper>
-          {/* {isMobile && ( */}
-          <CopyToClipboard text={viewPIX} onCopy={() => toast.success('PIX copiado com sucesso!')}>
-            <Button>Pix Copia e Cola</Button>
-          </CopyToClipboard>
-        </ItemWrapper>
-        {/* )} */}
-      </FlexWrapper>
-      <FlexWrapper centered>
-        <ItemWrapper>
-          <Typography as="h2">{formatCurrency(payValue)}</Typography>
-        </ItemWrapper>
-      </FlexWrapper>
-      {purchases.length ? (
-        <>
-          {purchases.map((purchase) => (
-            <ItemWrapper key={'item' + purchase.id}>
-              <Paper key={'paper' + purchase.id}>
-                <Row key={'row' + purchase.id}>
-                  <Col key={'col' + purchase.id}>
-                    {printTitle('Produto')}
-                    {printValue(purchase.product.description)}
-                  </Col>
-                  <Col>
-                    {printTitle('Qtd')}
-                    {printValue(purchase.quantity)}
-                  </Col>
-                  <Col>
-                    {printTitle('Total')}
-                    {printValue(formatCurrency(purchase.value))}
-                  </Col>
-                  <Col>
-                    <FlexWrapper>
-                      <Button onClick={() => payPurchase(purchase.id, purchase.value)}>
-                        Pagar
-                      </Button>
-                    </FlexWrapper>
-                  </Col>
-                </Row>
-              </Paper>
-            </ItemWrapper>
-          ))}
-          <FlexWrapper>
-            <ItemWrapper>
-              <Typography as="h4">Total {formatCurrency(getTotalValue(purchases))}</Typography>
-            </ItemWrapper>
-            <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
-          </FlexWrapper>
-        </>
-      ) : (
-        <>
-          <FlexWrapper centered>
-            <ItemWrapper>
-              <Typography as="h3">Nenhuma compra em aberto</Typography>
-            </ItemWrapper>
-          </FlexWrapper>
-          <FlexWrapper centered>
-            <ItemWrapper>
-              <Button onClick={() => goBack()}>Voltar</Button>
-            </ItemWrapper>
-          </FlexWrapper>
-        </>
-      )}
-    </List>
+      <br />
+      <Row>
+        <ColWrapper xs={6} sm={12} md={12} lg={12}>
+          <Button onClick={() => payAllPurchases()}>Pagar Tudo</Button>
+        </ColWrapper>
+        <ColWrapper xs={6} sm={12} md={12} lg={12}>
+          <Typography centralized as="h4">Total em aberto {formatCurrency(getTotalValue(purchases))}</Typography>
+        </ColWrapper>
+      </Row>
+      {
+        purchases.length ? (
+          <>
+            {purchases.map((purchase) => (
+              <ItemWrapper key={'item' + purchase.id}>
+                <Paper key={'paper' + purchase.id}>
+                  <Row key={'row' + purchase.id}>
+                    <Col xs={2.8} key={'col' + purchase.id}>
+                      {printTitle('Produto')}
+                      {printValue(purchase.product.description)}
+                    </Col>
+                    <Col xs={1.8}>
+                      {printTitle('Qtd')}
+                      {printValue(purchase.quantity)}
+                    </Col>
+                    <Col xs={4.4}>
+                      {printTitle('Total')}
+                      {printValue(formatCurrency(purchase.value))}
+                    </Col>
+                    <Col xs={3}>
+                      <FlexWrapper>
+                        <Button onClick={() => payPurchase(purchase.id, purchase.value)}>
+                          Pagar
+                        </Button>
+                      </FlexWrapper>
+                    </Col>
+                  </Row>
+                </Paper>
+              </ItemWrapper>
+            ))}
+          </>
+        ) : (
+          <>
+            <FlexWrapper centered>
+              <ItemWrapper>
+                <Typography as="h3">Nenhuma compra em aberto</Typography>
+              </ItemWrapper>
+            </FlexWrapper>
+            <FlexWrapper centered>
+              <ItemWrapper>
+                <Button onClick={() => goBack()}>Voltar</Button>
+              </ItemWrapper>
+            </FlexWrapper>
+          </>
+        )
+      }
+    </List >
   )
 }
 
