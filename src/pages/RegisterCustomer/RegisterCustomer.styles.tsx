@@ -14,11 +14,9 @@ export const InputWrapper = styled.div`
   text-align: left;
 `
 
-export const ButtonWrapper = styled.div`
-  margin-block: ${sizes.size10};
+export const ButtonsWrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: space-around;
+  margin-top: ${sizes.size20};
   gap: ${sizes.size10};
 `
 

@@ -95,10 +95,10 @@ const Home = () => {
               } />
             </FieldContainer >
             <ButtonsWrapper>
-              <Button fluid buttonType={ButtonEnum.OutlinedMainButton} onClick={goToRegister}>
+              <Button fluid onClick={goToRegister}>
                 Cadastro
               </Button>
-              <Button fluid type='submit'>Entrar</Button>
+              <Button fluid type='submit' buttonType={ButtonEnum.OutlinedMainButton}>Entrar</Button>
             </ButtonsWrapper>
           </form >
         </Paper >

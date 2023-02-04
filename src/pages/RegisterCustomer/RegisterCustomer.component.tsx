@@ -22,7 +22,7 @@ import CPFInput from '../../components/atoms/CPFInput'
 import { Formik } from 'formik'
 import { ButtonEnum } from '../../models/Enums/Button'
 import FormField from '../../components/molecules/FormField'
-import { ButtonsWrapper } from '../Home/Home.styles'
+import { ButtonsWrapper } from './RegisterCustomer.styles'
 
 const { brown } = colors
 const { size200 } = sizes

@@ -9,6 +9,11 @@ export const ColWrapper = styled(Col)`
 export const WelcomeWrapper = styled.div`
   display: flex;
   justify-content: center;
+`
+
+export const TitleWrapper = styled.div`
+  width: ${sizes.size100Percent};
   background-color: ${colors.darkerBrown};
   border-radius: ${sizes.size10};
+  max-width: ${sizes.size590};
 `

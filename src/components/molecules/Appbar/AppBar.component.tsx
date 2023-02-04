@@ -10,6 +10,7 @@ import {
   LeftArrowIcon,
   AccountIcon,
   PurchaseHistoricIcon,
+  QueryProductIcon,
 } from '../../../assets/icons'
 
 import { sizes } from '../../../assets/styles/variables'
@@ -22,10 +23,11 @@ import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
+import { Row } from 'react-grid-system'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
-  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
+  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric, goToProducts } = useNavigation()
   const { dispatch: modalDispatch } = useModal()
   const { pathname } = useLocation()
 
@@ -67,34 +69,71 @@ const AppBarComponent = () => {
     }
   }
 
-  const pageHandler = () => {
-    switch (pathname) {
-      case '/produtos':
-        return (
-          <InfoWrapper >
-            <Typography as="h2">EasyCoffee</Typography>
-          </InfoWrapper >
-        )
-      default:
-        return (
-          <InfoWrapper onClick={() => goBack()}>
-            < LeftArrowIcon size={sizes.size28} />
-          </InfoWrapper>
-        )
+  interface IPageHandler {
+    path: string,
+    display: {
+      isTrue: JSX.Element | null
+      isFalse: JSX.Element | null
     }
   }
 
+  const pageHandler = ({ path, display }: IPageHandler) => {
+    if (path === pathname) {
+      return display.isTrue
+    }
+    else return display.isFalse
+
+    // switch (true) {
+    //   case pathname === pathname:
+    //     return (
+    //       <InfoWrapper >
+    //         <Typography as="h2">EasyCoffee</Typography>
+    //       </InfoWrapper >
+    //     )
+    //   default:
+    //     return (
+    //       <InfoWrapper onClick={() => goBack()}>
+    //         < LeftArrowIcon size={sizes.size28} />
+    //       </InfoWrapper>
+    //     )
+    // }
+  }
+
+
   return (
     <AppBar>
-      {pageHandler()}
+      {pageHandler({
+        path: '/produtos', display: {
+          isTrue:
+            <InfoWrapper >
+              <Typography as="h2">EasyCoffee</Typography>
+            </InfoWrapper >,
+          isFalse:
+            <InfoWrapper onClick={() => goBack()}>
+              < LeftArrowIcon size={sizes.size28} />
+            </InfoWrapper>
+        }
+      })}
       <ActionsWrapper>
+
+
         <IconWrapper onClick={() => goToMyAccount()}>
           <AccountIcon size={sizes.size32} />
         </IconWrapper>
-        <IconWrapper onClick={() => goToCart()}>
-          <CartIcon size={sizes.size32} />
-          <Badge className="badge">{getBadgeNumber()}</Badge>
-        </IconWrapper>
+        {pageHandler({
+          path: '/carrinho', display: {
+            isTrue:
+              <IconWrapper onClick={() => goToProducts()}>
+                <QueryProductIcon size={sizes.size32} />
+              </IconWrapper>,
+            isFalse:
+              <IconWrapper onClick={() => goToCart()}>
+                <CartIcon size={sizes.size32} />
+                <Badge className="badge">{getBadgeNumber()}</Badge>
+              </IconWrapper>
+          }
+        })}
+
         <IconWrapper onClick={() => goToPurchaseHistoric()}>
           <PurchaseHistoricIcon size={sizes.size32} />
         </IconWrapper>
@@ -102,7 +141,7 @@ const AppBarComponent = () => {
           <ExitIcon size={sizes.size32} />
         </IconWrapper>
       </ActionsWrapper>
-    </AppBar>
+    </AppBar >
   )
 }
 export default AppBarComponent
