@@ -6,8 +6,9 @@ module.exports = {
   },
   extends: [
     // 'react-app',
-    'airbnb',
     'plugin:@typescript-eslint/recommended',
+    'plugin:import/recommended',
+    'airbnb',
     'prettier',
     // 'plugin:storybook/recommended',
   ],
@@ -25,6 +26,13 @@ module.exports = {
   },
   plugins: ['react', 'import'],
   rules: {
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     'import/no-extraneous-dependencies': [
       'error',
       {
