@@ -1,1 +1,1 @@
-export { default } from './RegisterTemplate.component'
+export { default as RegisterTemplate } from './RegisterTemplate.component'

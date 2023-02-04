@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyledComponentPropsWithRef } from 'styled-components'
-import Button from '../../atoms/Button'
-import Container from '../../atoms/Container/'
+import { Button } from '../../atoms/Button'
+import { Container } from '../../atoms/Container'
 import FilterBox from './FilterBox.style'
 
 interface FilterBoxComponentInterface extends StyledComponentPropsWithRef<typeof FilterBox> {

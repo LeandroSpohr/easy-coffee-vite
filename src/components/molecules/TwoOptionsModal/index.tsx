@@ -1,1 +1,1 @@
-export { default } from './TwoOptionsModal.component'
+export { default as TwoOptionsModal } from './TwoOptionsModal.component'

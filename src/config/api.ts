@@ -4,7 +4,8 @@ const api = axios.create({
   baseURL: 'https://acerta-easy-coffee.uc.r.appspot.com'
 })
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use((_config) => {
+  const config = _config
   if (config.headers) {
     config.headers['x-api-auth'] = import.meta.env.VITE_API_KEY
   }

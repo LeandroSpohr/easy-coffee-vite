@@ -1,7 +1,7 @@
 import { Col, Row } from 'react-grid-system'
 import styled from 'styled-components'
 import { colors, sizes } from '../../assets/styles/variables'
-import Paper from '../../components/atoms/Paper'
+import { Paper } from '../../components/atoms/Paper'
 
 export const ContentWrapper = styled.div`
   display: flex;

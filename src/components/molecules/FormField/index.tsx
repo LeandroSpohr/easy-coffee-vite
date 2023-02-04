@@ -1,1 +1,1 @@
-export { default } from './FormField.component'
+export { default as FormField } from './FormField.component'

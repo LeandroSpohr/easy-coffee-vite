@@ -1,1 +1,1 @@
-export { default } from './Paper.component'
+export { default as Paper } from './Paper.component'

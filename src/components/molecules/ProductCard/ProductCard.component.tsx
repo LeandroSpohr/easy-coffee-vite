@@ -1,7 +1,9 @@
 import React from 'react'
-import Button from '../../atoms/Button'
-import Typography from '../../atoms/Typography'
-import Image from '../../atoms/Image'
+import { Button } from '../../atoms/Button'
+import { Typography } from '../../atoms/Typography'
+import { Image } from '../../atoms/Image'
+
+import ButtonEnum from '../../../models/Enums/Button'
 
 import ProductCard, {
   InfoWrapper,
@@ -12,7 +14,6 @@ import ProductCard, {
 } from './ProductCard.style'
 
 import { useFormats } from '../../../utils/useFormats'
-import { ButtonEnum } from '../../../models/Enums/Button'
 import { AddToCartIcon } from '../../../assets/icons'
 import { sizes } from '../../../assets/styles/variables'
 

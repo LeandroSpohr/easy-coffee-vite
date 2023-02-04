@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
-import Container from '../../components/atoms/Container'
-import Button from '../../components/atoms/Button'
-import Paper from '../../components/atoms/Paper'
-import Typography from '../../components/atoms/Typography'
-import Input from '../../components/atoms/Input'
-import Image from '../../components/atoms/Image'
+import { Container } from '../../components/atoms/Container'
+import { Button } from '../../components/atoms/Button'
+import { Paper } from '../../components/atoms/Paper'
+import { Typography } from '../../components/atoms/Typography'
+import { Input } from '../../components/atoms/Input'
+import { Image } from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
 import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
@@ -16,7 +16,7 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import { ButtonEnum } from '../../models/Enums/Button'
+import ButtonEnum from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
 
 const { brown } = colors
@@ -29,7 +29,7 @@ const Home = () => {
 
   const [toggle, setToggle] = useState<boolean>(false)
 
-  const handleSubmit = (cpf: string) => {
+  const handleSubmit = () => {
     UserService.getByCpf(cpf)
       .then((response) => {
         dispatch({
@@ -95,7 +95,7 @@ const Home = () => {
                 <Button
                   type="submit"
                   onClick={() => {
-                    handleSubmit(cpf)
+                    handleSubmit()
                   }}
                 >
                   Entrar

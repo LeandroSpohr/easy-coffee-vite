@@ -10,8 +10,8 @@ const { fontSize18 } = fontSizes
 
 const {
   size8,
-  size12, 
-  size20, 
+  size12,
+  size20,
   size100Percent,
 } = sizes
 

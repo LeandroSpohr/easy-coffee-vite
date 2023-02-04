@@ -2,7 +2,9 @@ import { Col } from 'react-grid-system'
 import styled, { css } from 'styled-components'
 import { colors, sizes } from '../../assets/styles/variables'
 
-export const ItemWrapper = styled.div``
+export const ItemWrapper = styled.div`
+  margin: ${sizes.size15};
+`
 
 export const ContentWrapper = styled.div`
   margin-top: ${sizes.size20};

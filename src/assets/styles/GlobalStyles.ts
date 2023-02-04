@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import coffeBean from '../images/coffee_bean.svg'
 
-import { colors, sizes, fontSizes } from '../styles/variables'
+import { colors, sizes, fontSizes } from './variables'
 import { device } from '../../config/device'
 
 const { veryLightGray } = colors

@@ -1,4 +1,6 @@
-export enum UserEnum {
+enum UserEnum {
   Client,
   Admin,
 }
+
+export default UserEnum

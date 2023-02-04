@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
-import Typography from '../../atoms/Typography'
+import { Typography } from '../../atoms/Typography'
 
 
 const ProductCard = styled.div`

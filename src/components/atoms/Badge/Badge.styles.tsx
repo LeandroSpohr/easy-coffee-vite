@@ -1,6 +1,6 @@
 import styled, { CSSProperties } from 'styled-components'
 
-import { colors, fontSizes, sizes } from '../.././../assets/styles/variables'
+import { colors, fontSizes, sizes } from "../../../assets/styles/variables"
 
 const { red, white } = colors
 const { fontSize11 } = fontSizes

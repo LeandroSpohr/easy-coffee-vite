@@ -1,11 +1,15 @@
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { RegisterProductInterface } from '../../models/interfaces/Product'
-import Typography from '../../components/atoms/Typography'
-import Container from '../../components/atoms/Container'
-import Button from '../../components/atoms/Button'
 import { toast } from 'react-toastify'
-import NumericInputFormat from '../../components/atoms/NumericInputFormat'
+import { Controller, useForm } from 'react-hook-form'
+
+import { RegisterProductInterface } from '../../models/interfaces/Product'
+import { Typography } from '../../components/atoms/Typography'
+import { Button } from '../../components/atoms/Button'
+import { NumericInputFormat } from '../../components/atoms/NumericInputFormat'
+import { NumericInput } from '../../components/atoms/NumericInput'
+import { ProductCard } from '../../components/molecules/ProductCard'
+import { FormField } from '../../components/molecules/FormField'
+
 import {
   ButtonWrapper,
   ColWrapper,
@@ -16,9 +20,6 @@ import {
   RowWrapper,
   PaperWrapper,
 } from './RegisterProduct.styles'
-import NumericInput from '../../components/atoms/NumericInput'
-import ProductCard from '../../components/molecules/ProductCard'
-import FormField from '../../components/molecules/FormField'
 
 const ProductRegisterComponent = () => {
   const { control, handleSubmit, watch, setValue } = useForm<RegisterProductInterface>()
@@ -29,11 +30,10 @@ const ProductRegisterComponent = () => {
 
   const pasteLink = () => {
     navigator.clipboard.readText().then((text) => {
-      text.length > 0
-        ? setValue('imgUrl', text)
-        : toast.error(
-            'Sua área de transferência está vazia ou seu navegador não suporta este recurso.',
-          )
+      if (text.length > 0) setValue('imgUrl', text)
+      else toast.error(
+        'Sua área de transferência está vazia ou seu navegador não suporta este recurso.',
+      )
     })
   }
 
@@ -50,7 +50,7 @@ const ProductRegisterComponent = () => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <FormField label={'Nome do produto'} placeholder={'Café com leite...'} {...field} />
+              <FormField label="Nome do produto" placeholder="Café com leite..." {...field} />
             )}
           />
           <RowWrapper>
@@ -61,7 +61,7 @@ const ProductRegisterComponent = () => {
                 rules={{ required: true }}
                 render={({ field }) => (
                   <FormField
-                    label={'Valor'}
+                    label="Valor"
                     otherFormField={
                       <NumericInputFormat
                         type="tel"
@@ -71,7 +71,7 @@ const ProductRegisterComponent = () => {
                         allowNegative={false}
                         prefix="R$ "
                         decimalScale={2}
-                        fixedDecimalScale={true}
+                        fixedDecimalScale
                         {...field}
                       />
                     }
@@ -116,32 +116,29 @@ const ProductRegisterComponent = () => {
           <ProductCardBackgroundWrapper>
             <ProductCardBackground>
               <ProductCard
-                imgUrl={
-                  watch('imgUrl')
-                    ? watch('imgUrl').length >= 1
-                      ? watch('imgUrl')
-                      : defaultImage
+                imgUrl={watch('imgUrl')
+                  ? watch('imgUrl').length >= 1
+                    ? watch('imgUrl')
                     : defaultImage
-                }
-                title={
-                  watch('title')
-                    ? watch('title').length >= 1
-                      ? watch('title')
-                      : 'Nome do Produto'
+                  : defaultImage}
+                title={watch('title')
+                  ? watch('title').length >= 1
+                    ? watch('title')
                     : 'Nome do Produto'
-                }
+                  : 'Nome do Produto'}
                 price={watch('value')}
                 inputQuantity={<NumericInput defaultValue={1} />}
-                buttonText={'+'}
-              />
+                buttonText="+" handleCartSubmit={() => null}
+                handleSingleItemSubmit={() => null} />
             </ProductCardBackground>
           </ProductCardBackgroundWrapper>
           <ButtonWrapper>
-            <Button behavior={'submit'}>{'Submit'}</Button>
+            <Button behavior="submit">Submit</Button>
           </ButtonWrapper>
         </form>
       </PaperWrapper>
     </ContentWrapper>
   )
 }
+
 export default ProductRegisterComponent

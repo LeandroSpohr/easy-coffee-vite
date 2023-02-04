@@ -1,8 +1,15 @@
 import React from 'react'
-
-import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
+import { Typography } from '../../atoms/Typography'
+
+import { Badge } from '../../atoms/Badge'
+import { TwoOptionsModal } from '../TwoOptionsModal'
+
+import { useNavigation } from '../../../utils/useNavigation'
+
+import { useUser } from '../../../context/User'
+import { useModal } from '../../../context/Modal'
 
 import {
   CartIcon,
@@ -11,17 +18,8 @@ import {
   AccountIcon,
   PurchaseHistoricIcon,
 } from '../../../assets/icons'
-
 import { sizes } from '../../../assets/styles/variables'
-
-import Typography from '../../atoms/Typography'
-
-import { useUser } from '../../../context/User'
-
-import { useNavigation } from '../../../utils/useNavigation'
-import { useModal } from '../../../context/Modal'
-import TwoOptionsModal from '../TwoOptionsModal'
-import Badge from '../../atoms/Badge'
+import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
@@ -29,24 +27,11 @@ const AppBarComponent = () => {
   const { dispatch: modalDispatch } = useModal()
   const { pathname } = useLocation()
 
-  const displayLogoutModal = () => {
+  const closeModal = () => {
     modalDispatch({
-      type: 'SET_MODAL',
-      payload: { content: logoutModal() },
+      type: 'CLOSE_MODAL',
     })
   }
-
-  const logoutModal = () => {
-    return (
-      <TwoOptionsModal
-        title={'Saída'}
-        description={'Deseja mesmo sair de sua conta?'}
-        mainButton={{ text: 'Sim', action: clearUser }}
-        secondaryButton={{ text: 'Nao', action: closeModal }}
-      ></TwoOptionsModal>
-    )
-  }
-
   const clearUser = () => {
     closeModal()
     userDispatch({
@@ -55,9 +40,19 @@ const AppBarComponent = () => {
     goToHome()
   }
 
-  const closeModal = () => {
+  const logoutModal = () => (
+    <TwoOptionsModal
+      title="Saída"
+      description="Deseja mesmo sair de sua conta?"
+      mainButton={{ text: 'Sim', action: clearUser }}
+      secondaryButton={{ text: 'Nao', action: closeModal }}
+    />
+  )
+
+  const displayLogoutModal = () => {
     modalDispatch({
-      type: 'CLOSE_MODAL',
+      type: 'SET_MODAL',
+      payload: { content: logoutModal() },
     })
   }
 
@@ -65,6 +60,7 @@ const AppBarComponent = () => {
     if (state.cart.length) {
       return state.cart.length
     }
+    return null
   }
 
   const pageHandler = () => {

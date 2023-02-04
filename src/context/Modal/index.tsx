@@ -1,9 +1,9 @@
 import React, { useContext, createContext, useReducer } from 'react'
-import reducer from './reducer'
+import { reducer } from './reducer'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
 import ModalInterface from '../../models/interfaces/Modal'
-import Modal from '../../components/molecules/Modal'
+import { Modal } from '../../components/molecules/Modal'
 
 type Context = {
   state: ModalInterface
@@ -26,7 +26,7 @@ export const ModalProvider = ({ children }: ContextProps) => {
 
   return (
     <ModalContext.Provider value={value}>
-      <Modal isVisible={state.isVisible ? true : false}>{state.content}</Modal>
+      <Modal isVisible={!!state.isVisible}>{state.content}</Modal>
       {children}
     </ModalContext.Provider>
   )

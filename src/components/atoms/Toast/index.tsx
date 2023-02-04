@@ -1,1 +1,1 @@
-export { default } from './Toast.component'
+export { default as Toast } from './Toast.component'

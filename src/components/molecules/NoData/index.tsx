@@ -1,1 +1,1 @@
-export { default } from './NoData.component'
+export { default as NoData } from './NoData.component'

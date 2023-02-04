@@ -1,1 +1,1 @@
-export { default } from './NumericInputFormat.component'
+export { default as NumericInputFormat } from './NumericInputFormat.component'

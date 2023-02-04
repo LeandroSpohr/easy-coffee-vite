@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../assets/styles/variables'
+import { sizes } from '../../assets/styles/variables'
 
 interface WrapperInterface {
   centered?: boolean

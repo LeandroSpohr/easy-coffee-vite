@@ -16,6 +16,7 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     BigInt: true,
+    JSX: true,
   },
   parserOptions: {
     ecmaFeatures: {
@@ -26,6 +27,9 @@ module.exports = {
   },
   plugins: ['react', 'import'],
   rules: {
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
     'react/function-component-definition': [
       2,
       {

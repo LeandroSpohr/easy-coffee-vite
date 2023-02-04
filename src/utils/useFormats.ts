@@ -1,9 +1,7 @@
 import { useCallback } from 'react'
 
 export const useFormats = () => {
-  const capitalizeFirstLetter = (content: string) => {
-    return content.charAt(0).toUpperCase() + content.slice(1)
-  }
+  const capitalizeFirstLetter = (content: string) => content.charAt(0).toUpperCase() + content.slice(1)
 
   const formatCurrency = useCallback(
     (value?: number) =>

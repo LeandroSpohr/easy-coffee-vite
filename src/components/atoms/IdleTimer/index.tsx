@@ -1,1 +1,1 @@
-export { default } from './IdleTimer.component'
+export { default as IdleTimer } from './IdleTimer.component'

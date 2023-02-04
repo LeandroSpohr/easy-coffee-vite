@@ -1,1 +1,1 @@
-export { default } from './Badge.styles'
+export { default as Badge } from './Badge.styles'

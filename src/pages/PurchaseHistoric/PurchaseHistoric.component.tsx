@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react'
+import { Row } from 'react-grid-system'
 
 import PaidPurchase from '../../models/interfaces/PaidPurchase'
 
@@ -6,12 +7,13 @@ import * as PaymentService from '../../services/Payments'
 
 import { useFormats } from '../../utils/useFormats'
 
-import Typography from '../../components/atoms/Typography'
-
+import { Typography } from '../../components/atoms/Typography'
+import { Paper } from '../../components/atoms/Paper'
+import { Button } from '../../components/atoms/Button'
+import { NoData } from '../../components/molecules/NoData'
+import { Container } from '../../components/atoms/Container'
 import { useUser } from '../../context/User'
-import Paper from '../../components/atoms/Paper'
-import { Row } from 'react-grid-system'
-import { ItemWrapper } from '../Cart/Cart.styles'
+
 import {
   ColWrapper,
   ContentWrapper,
@@ -20,13 +22,12 @@ import {
   IconColWrapper,
   DetailsWrapper,
   TitleWrapper,
+  ItemWrapper
 } from './PurchaseHistoric.styles'
-import NoData from '../../components/molecules/NoData'
-import Container from '../../components/atoms/Container'
+
 import { colors, sizes } from '../../assets/styles/variables'
 import { ArrowDownIcon, ArrowUpIcon } from '../../assets/icons'
-import Button from '../../components/atoms/Button'
-import { ButtonEnum } from '../../models/Enums/Button'
+import ButtonEnum from '../../models/Enums/Button'
 
 const PurchaseHistoricComponent = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
@@ -37,7 +38,9 @@ const PurchaseHistoricComponent = () => {
 
   const handleToggle = (i: number) => {
     const list: number[] = toggleList
-    list.includes(i) ? list.splice(list.indexOf(i), list.indexOf(i)) : list.push(i)
+    if (list.includes(i)) {
+      list.splice(list.indexOf(i), list.indexOf(i))
+    } else list.push(i)
     setToggleList(list)
     forceUpdate()
   }
@@ -49,7 +52,7 @@ const PurchaseHistoricComponent = () => {
   return (
     <Container displayBlock fullHeight>
       <ContentWrapper>
-        {purchases.length != 0 ? (
+        {purchases.length !== 0 ? (
           <>
             <TitleWrapper>
               <Typography>Histórico de Compras</Typography>
@@ -90,7 +93,7 @@ const PurchaseHistoricComponent = () => {
                     </ColWrapper>
                   </Row>
                 </Paper>
-                <DetailsWrapper isVisible={toggleList.includes(index) ? true : false}>
+                <DetailsWrapper isVisible={!!toggleList.includes(index)}>
                   <DetailsHeaderWrapper>
                     <Row>
                       <ColWrapper lg={4} md={4} sm={4} xs={4}>
@@ -128,7 +131,7 @@ const PurchaseHistoricComponent = () => {
             ))}
           </>
         ) : (
-          <NoData text={'Nenhuma compra ainda'} />
+          <NoData text="Nenhuma compra ainda" />
         )}
       </ContentWrapper>
     </Container>

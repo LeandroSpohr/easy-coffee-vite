@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
+
+import { TwoOptionsModal } from '../../molecules/TwoOptionsModal'
+
 import { useUser } from '../../../context/User'
 import { useModal } from '../../../context/Modal'
 import { useNavigation } from '../../../utils/useNavigation'
 import { useRemove } from '../../../utils/useRemove'
-import TwoOptionsModal from '../../molecules/TwoOptionsModal'
 
 interface IdleTimerInterface {
   leftTime: number
@@ -16,36 +18,10 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
   const { goToHome } = useNavigation()
   const { removeTimer, removeModal, removeUser } = useRemove()
 
-  useEffect(() => {
-    userState.hasUser ? (setListeners(), setTimer()) : null
-  }, [userState.hasUser])
-
-  const setListeners = () => {
-    userState.hasUser ? ((document.ontouchstart = setTimer), (document.onload = setTimer)) : null
-  }
-
-  const setTimer = () => {
-    removeTimer()
-    setTimeout(() => timeOut(), leftTime)
-  }
-
-  const timeOut = () => {
-    displayTimedOutModal()
-  }
-
-  const displayTimedOutModal = () => {
-    dispatchModal({
-      type: 'SET_MODAL',
-      payload: {
-        content: timedOutModal(),
-      },
-    })
-  }
-
   const disconnect = () => {
     removeUser()
     goToHome()
-    location.reload()
+    window.location.reload()
     removeModal()
   }
 
@@ -62,14 +38,47 @@ export const IdleTimer = ({ leftTime, children }: IdleTimerInterface) => {
           text: 'Sair',
           action: disconnect,
         }}
-      ></TwoOptionsModal>
+      />
       {setTimeout(() => {
         disconnect()
       }, 10000)}
     </>
   )
 
-  return <>{children}</>
+  const displayTimedOutModal = () => {
+    dispatchModal({
+      type: 'SET_MODAL',
+      payload: {
+        content: timedOutModal(),
+      },
+    })
+  }
+
+  const timeOut = () => {
+    displayTimedOutModal()
+  }
+
+  const setTimer = () => {
+    removeTimer()
+    setTimeout(() => timeOut(), leftTime)
+  }
+
+  const setListeners = () => {
+    if (
+      userState.hasUser
+    ) {
+      document.ontouchstart = setTimer
+      document.onload = setTimer
+    }
+  }
+
+  const onLoad = () => userState.hasUser ? (setListeners(), setTimer()) : null
+
+  useEffect(() => {
+    onLoad()
+  }, [userState.hasUser])
+
+  return children
 }
 
 export default IdleTimer

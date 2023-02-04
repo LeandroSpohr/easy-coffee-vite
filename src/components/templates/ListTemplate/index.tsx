@@ -1,1 +1,1 @@
-export { default } from './ListTemplate.component'
+export { default as ListTemplate } from './ListTemplate.component'

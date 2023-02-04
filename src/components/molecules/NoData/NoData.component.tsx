@@ -1,8 +1,7 @@
 import React from 'react'
-import { ButtonEnum } from '../../../models/Enums/Button'
 import { useNavigation } from '../../../utils/useNavigation'
-import Button from '../../atoms/Button'
-import Typography from '../../atoms/Typography'
+import { Button } from '../../atoms/Button'
+import { Typography } from '../../atoms/Typography'
 import { ButtonsWrapper, ContentWrapper, NoData } from './NoData.styles'
 
 interface NoDataInterface {
@@ -17,7 +16,7 @@ const NoDataComponent = ({ text }: NoDataInterface) => {
         <Typography as="h2">{text}</Typography>
         <ButtonsWrapper>
           <Button onClick={() => goBack()}>Voltar</Button>
-          <Button buttonType={ButtonEnum.ContainedMainButton} onClick={() => goToProducts()}>
+          <Button onClick={() => goToProducts()}>
             Comprar
           </Button>
         </ButtonsWrapper>

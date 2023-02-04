@@ -1,1 +1,1 @@
-export { default } from './QueryProducts.component'
+export { default as QueryProducts } from './QueryProducts.component'

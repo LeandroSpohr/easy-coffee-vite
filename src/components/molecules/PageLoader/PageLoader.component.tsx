@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 
 import api from '../../../config/api'
 
-import Loader from '../../atoms/Loader'
+import { Loader } from '../../atoms/Loader'
 
 import { Container } from './PageLoader.style'
 
@@ -27,13 +27,11 @@ const PageLoader = () => {
   })
 
   return (
-    <>
-      {showLoader && (
-        <Container>
-          <Loader />
-        </Container>
-      )}
-    </>
+    showLoader && (
+      <Container>
+        <Loader />
+      </Container>
+    )
   )
 }
 

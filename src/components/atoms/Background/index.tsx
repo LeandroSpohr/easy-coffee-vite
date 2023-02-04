@@ -1,1 +1,1 @@
-export { default } from './Background.component'
+export { default as Background } from './Background.component'
