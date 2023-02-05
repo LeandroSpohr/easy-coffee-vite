@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper, ColWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
 
@@ -10,6 +10,7 @@ import {
   LeftArrowIcon,
   AccountIcon,
   PurchaseHistoricIcon,
+  MenuIcon,
 } from '../../../assets/icons'
 
 import { sizes } from '../../../assets/styles/variables'
@@ -22,12 +23,16 @@ import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
+import { Hamburguer } from '../../organisms/Hamburguer'
+import { useHamburguer } from '../../../context/Hamburguer'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
   const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
   const { dispatch: modalDispatch } = useModal()
+  const { dispatch: hamburguerDispatch } = useHamburguer()
   const { pathname } = useLocation()
+  const [isHamburguerVisible, setIsHamburguerVisible] = useState(false)
 
   const displayLogoutModal = () => {
     modalDispatch({
@@ -67,19 +72,52 @@ const AppBarComponent = () => {
     }
   }
 
+  const displayHamburguer = () => {
+    setIsHamburguerVisible(!!isHamburguerVisible)
+    hamburguerDispatch({
+      type: 'SET_HAMBURGUER',
+      payload: { content: appBarHamburguer() },
+    })
+  }
+
+  const appBarHamburguer = () => <>
+    <h1>a</h1>
+  </>
+
   const pageHandler = () => {
     switch (pathname) {
       case '/produtos':
         return (
-          <InfoWrapper >
+          <><InfoWrapper>
             <Typography as="h2">EasyCoffee</Typography>
-          </InfoWrapper >
+          </InfoWrapper><ActionsWrapper>
+              <IconWrapper onClick={() => goToMyAccount()}>
+                <AccountIcon size={sizes.size32} />
+              </IconWrapper>
+              <IconWrapper onClick={() => goToCart()}>
+                <CartIcon size={sizes.size32} />
+                <Badge className="badge">{getBadgeNumber()}</Badge>
+              </IconWrapper>
+              <IconWrapper onClick={() => goToPurchaseHistoric()}>
+                <PurchaseHistoricIcon size={sizes.size32} />
+              </IconWrapper>
+              <IconWrapper onClick={() => displayLogoutModal()}>
+                <ExitIcon size={sizes.size32} />
+              </IconWrapper>
+            </ActionsWrapper></>
         )
       default:
         return (
-          <InfoWrapper onClick={() => goBack()}>
-            < LeftArrowIcon size={sizes.size28} />
-          </InfoWrapper>
+          <>
+            <ColWrapper xs={1}>
+              <InfoWrapper onClick={() => goBack()}>
+                <LeftArrowIcon size={sizes.size28} />
+              </InfoWrapper>
+            </ColWrapper>
+            <ColWrapper >
+              <MenuIcon size={sizes.size28} onClick={() => displayHamburguer()} />
+            </ColWrapper>
+          </>
         )
     }
   }
@@ -87,7 +125,7 @@ const AppBarComponent = () => {
   return (
     <AppBar>
       {pageHandler()}
-      <ActionsWrapper>
+      {/* <ActionsWrapper>
         <IconWrapper onClick={() => goToMyAccount()}>
           <AccountIcon size={sizes.size32} />
         </IconWrapper>
@@ -101,7 +139,7 @@ const AppBarComponent = () => {
         <IconWrapper onClick={() => displayLogoutModal()}>
           <ExitIcon size={sizes.size32} />
         </IconWrapper>
-      </ActionsWrapper>
+      </ActionsWrapper> */}
     </AppBar>
   )
 }

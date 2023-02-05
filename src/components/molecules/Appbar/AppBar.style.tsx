@@ -1,3 +1,4 @@
+import { Col } from 'react-grid-system'
 import styled from 'styled-components'
 import { colors, sizes } from '../../../assets/styles/variables'
 
@@ -41,6 +42,12 @@ export const ActionsWrapper = styled.div`
   justify-content: space-between;
   width: ${sizes.size50Percent};
   max-width: ${sizes.size200};
+  margin-right: ${sizes.size10};
+`
+
+export const ColWrapper = styled(Col)`
+  display: flex;
+  justify-content: end;
   margin-right: ${sizes.size10};
 `
 

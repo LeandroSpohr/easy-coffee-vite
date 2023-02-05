@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Background from '../../atoms/Background/'
-import { ModalWrapper } from './Modal.styles'
+import { Modal, ModalWrapper } from './Modal.styles'
 
 interface ModalComponentInterface {
   children: ReactNode
@@ -9,9 +9,11 @@ interface ModalComponentInterface {
 
 const ModalComponent = ({ children, isVisible }: ModalComponentInterface) => {
   return (
-    <Background isVisible={isVisible}>
-      <ModalWrapper>{children}</ModalWrapper>
-    </Background>
+    <Modal isVisible={isVisible}>
+      <Background>
+        <ModalWrapper>{children}</ModalWrapper>
+      </Background>
+    </Modal>
   )
 }
 

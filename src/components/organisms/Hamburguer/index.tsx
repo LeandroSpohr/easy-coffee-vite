@@ -1,0 +1,1 @@
+export { default as Hamburguer } from './Hamburguer.component'
