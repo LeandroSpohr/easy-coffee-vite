@@ -1,5 +1,5 @@
 
-export default interface HamburguerInterface {
+export default interface IHamburguer {
   content: JSX.Element
-  isVisible: boolean
+  isVisible?: boolean
 }

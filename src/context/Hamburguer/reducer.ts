@@ -1,12 +1,12 @@
-import HamburguerInterface from '../../models/interfaces/Hamburguer'
+import IHamburguer from '../../models/interfaces/Hamburguer'
 import { ActionTypes } from './types'
 
-export const reducer = (state: HamburguerInterface, action: ActionTypes): HamburguerInterface => {
+export const reducer = (state: IHamburguer, action: ActionTypes): IHamburguer => {
   switch (action.type) {
     case 'SET_HAMBURGUER':
       return {
         isVisible: true,
-        content: action.payload.content,
+        content: action.payload,
       }
     case 'CLOSE_HAMBURGUER':
       return {

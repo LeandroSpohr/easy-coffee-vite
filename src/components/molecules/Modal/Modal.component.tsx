@@ -10,7 +10,7 @@ interface ModalComponentInterface {
 const ModalComponent = ({ children, isVisible }: ModalComponentInterface) => {
   return (
     <Modal isVisible={isVisible}>
-      <Background>
+      <Background centerItems fillScreen>
         <ModalWrapper>{children}</ModalWrapper>
       </Background>
     </Modal>

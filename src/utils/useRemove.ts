@@ -1,13 +1,21 @@
+import { useHamburguer } from '../context/Hamburguer'
 import { useModal } from '../context/Modal'
 import { useUser } from '../context/User'
 
 export const useRemove = () => {
   const { dispatch: modalDispatch } = useModal()
   const { dispatch: userDispatch } = useUser()
+  const { dispatch: hamburguerModal } = useHamburguer()
 
   const removeModal = () => {
     modalDispatch({
       type: 'CLOSE_MODAL',
+    })
+  }
+
+  const removeHamburguer = () => {
+    hamburguerModal({
+      type: 'CLOSE_HAMBURGUER'
     })
   }
 
@@ -25,5 +33,5 @@ export const useRemove = () => {
     })
   }
 
-  return { removeModal, removeTimer, removeUser }
+  return { removeModal, removeHamburguer, removeTimer, removeUser }
 }

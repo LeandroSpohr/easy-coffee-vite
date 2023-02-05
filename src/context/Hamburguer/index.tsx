@@ -25,7 +25,7 @@ export const HamburguerProvider = ({ children }: ContextProps) => {
 
   return (
     <HamburguerContext.Provider value={value}>
-      <Hamburguer isVisible={state.isVisible}>{state.content}</Hamburguer>
+      <Hamburguer isVisible={state.isVisible || false}>{state.content}</Hamburguer>
       {children}
     </HamburguerContext.Provider>
   )

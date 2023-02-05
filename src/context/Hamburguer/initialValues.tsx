@@ -1,7 +1,7 @@
 import React from 'react'
-import HamburguerInterface from '../../models/interfaces/Hamburguer'
+import IHamburguer from '../../models/interfaces/Hamburguer'
 
-const initialValues: HamburguerInterface = {
+const initialValues: IHamburguer = {
   content: <div />,
   isVisible: false
 }

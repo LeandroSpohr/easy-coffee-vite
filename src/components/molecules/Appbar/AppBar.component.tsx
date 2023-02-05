@@ -23,16 +23,17 @@ import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
-import { Hamburguer } from '../../organisms/Hamburguer'
 import { useHamburguer } from '../../../context/Hamburguer'
+import { useRemove } from '../../../utils/useRemove'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
-  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
   const { dispatch: modalDispatch } = useModal()
   const { dispatch: hamburguerDispatch } = useHamburguer()
   const { pathname } = useLocation()
   const [isHamburguerVisible, setIsHamburguerVisible] = useState(false)
+  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
+  const { removeHamburguer } = useRemove()
 
   const displayLogoutModal = () => {
     modalDispatch({
@@ -72,12 +73,14 @@ const AppBarComponent = () => {
     }
   }
 
-  const displayHamburguer = () => {
-    setIsHamburguerVisible(!!isHamburguerVisible)
-    hamburguerDispatch({
-      type: 'SET_HAMBURGUER',
-      payload: { content: appBarHamburguer() },
-    })
+  const onChangeHamburguer = () => {
+    setIsHamburguerVisible(!isHamburguerVisible)
+    isHamburguerVisible ? removeHamburguer() : (
+      hamburguerDispatch({
+        type: 'SET_HAMBURGUER',
+        payload: appBarHamburguer()
+      })
+    )
   }
 
   const appBarHamburguer = () => <>
@@ -115,7 +118,7 @@ const AppBarComponent = () => {
               </InfoWrapper>
             </ColWrapper>
             <ColWrapper >
-              <MenuIcon size={sizes.size28} onClick={() => displayHamburguer()} />
+              <MenuIcon size={sizes.size28} onClick={() => onChangeHamburguer()} />
             </ColWrapper>
           </>
         )

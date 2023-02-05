@@ -10,7 +10,7 @@ interface IHamburguerComponentProps {
 const HamburguerComponent = ({ isVisible, children }: IHamburguerComponentProps) => {
   return (
     <Hamburguer isVisible={isVisible} >
-      <Background >
+      <Background depth={5} >
         {children}
       </Background>
     </Hamburguer>
