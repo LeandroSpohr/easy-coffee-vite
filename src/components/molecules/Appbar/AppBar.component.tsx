@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper, ColWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
-
 import {
   CartIcon,
   ExitIcon,
@@ -25,6 +24,7 @@ import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
 import { useHamburguer } from '../../../context/Hamburguer'
 import { useRemove } from '../../../utils/useRemove'
+import HamburguerAppbar from '../HamburguerAppbar'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
@@ -78,14 +78,16 @@ const AppBarComponent = () => {
     isHamburguerVisible ? removeHamburguer() : (
       hamburguerDispatch({
         type: 'SET_HAMBURGUER',
-        payload: appBarHamburguer()
+        payload: <HamburguerAppbar />
       })
     )
   }
 
-  const appBarHamburguer = () => <>
-    <h1>a</h1>
-  </>
+  // const appBarHamburguer = () =>
+  //   <div>
+  //     <HamburguerOption text="Conta" icon={AccountIcon} action={() => goToMyAccount()} />
+  //   </div>
+
 
   const pageHandler = () => {
     switch (pathname) {
