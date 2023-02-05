@@ -32,7 +32,7 @@ const AppRoutes = () => {
   }
 
   return (
-    <BrowserRouter basename="/easy-coffee-vite/">
+    <BrowserRouter basename="/easy-coffee/">
       <IdleTimer leftTime={120000}>
         <Routes>
           <Route path="/" element={<Home />} />
