@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+import ButtonEnum from '../../models/Enums/Button'
 
 import * as UserService from '../../services/Users'
+
 import { Container } from '../../components/atoms/Container'
 import { Button } from '../../components/atoms/Button'
 import { Paper } from '../../components/atoms/Paper'
@@ -16,8 +20,9 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import ButtonEnum from '../../models/Enums/Button'
+import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
+import { useValidate } from '../../utils/useValidate'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -26,18 +31,26 @@ const Home = () => {
   const { dispatch } = useUser()
   const [cpf, setCpf] = useState<string>('')
   const { goToProducts } = useNavigation()
+  const { validateCPF } = useValidate()
+  const { setCpfMask, removeCpfMask } = useFormats()
 
   const [toggle, setToggle] = useState<boolean>(false)
 
-  const handleSubmit = () => {
-    UserService.getByCpf(cpf)
-      .then((response) => {
-        dispatch({
-          type: 'ADD_USER',
-          payload: response,
+  const handleSubmit = (handleCpf: string) => {
+    const cpfUnmasked = removeCpfMask(handleCpf)
+    if (validateCPF(cpfUnmasked)) {
+      UserService.getByCpf(cpfUnmasked)
+        .then((response) => {
+          if (response) {
+            dispatch({
+              type: 'ADD_USER',
+              payload: response,
+            })
+          }
         })
-      })
-      .then(() => goToProducts())
+        .then(() => goToProducts())
+    }
+    else toast.error(`${'CPF inválido'}`)
   }
 
   const handleToggleFullScreen = () => {
@@ -59,7 +72,7 @@ const Home = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    if (name === 'cpf' && value.length > 11) {
+    if (name === 'cpf' && value.length > 14) {
       return
     }
 
@@ -81,8 +94,8 @@ const Home = () => {
           </Wrapper>
           <FieldContainer>
             <Input
-              type="number"
-              value={cpf}
+              type="text"
+              value={setCpfMask(cpf)}
               name="cpf"
               onChange={(e) => handleChange(e)}
               placeholder="Informe seu CPF"
@@ -95,7 +108,7 @@ const Home = () => {
                 <Button
                   type="submit"
                   onClick={() => {
-                    handleSubmit()
+                    handleSubmit(cpf)
                   }}
                 >
                   Entrar

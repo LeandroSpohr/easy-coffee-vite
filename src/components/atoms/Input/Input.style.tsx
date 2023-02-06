@@ -38,7 +38,8 @@ const Input = styled.input`
   font-size: ${fontSize18};
   transition: border-color .25s;
   color: ${white};
-
+  text-align: center;
+  
   :focus {
     border-color: ${brown};
   }

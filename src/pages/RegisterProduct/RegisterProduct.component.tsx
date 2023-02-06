@@ -6,8 +6,8 @@ import { RegisterProductInterface } from '../../models/interfaces/Product'
 import { Typography } from '../../components/atoms/Typography'
 import { Button } from '../../components/atoms/Button'
 import { NumericInputFormat } from '../../components/atoms/NumericInputFormat'
-import { NumericInput } from '../../components/atoms/NumericInput'
-import { ProductCard } from '../../components/molecules/ProductCard'
+// import { NumericInput } from '../../components/atoms/NumericInput'
+// import { ProductCard } from '../../components/molecules/ProductCard'
 import { FormField } from '../../components/molecules/FormField'
 
 import {
@@ -15,14 +15,14 @@ import {
   ColWrapper,
   ContentWrapper,
   ProductPreviewTitle,
-  ProductCardBackground,
-  ProductCardBackgroundWrapper,
+  // ProductCardBackground,
+  // ProductCardBackgroundWrapper,
   RowWrapper,
   PaperWrapper,
 } from './RegisterProduct.styles'
 
 const ProductRegisterComponent = () => {
-  const { control, handleSubmit, watch, setValue } = useForm<RegisterProductInterface>()
+  const { control, handleSubmit, setValue } = useForm<RegisterProductInterface>()
 
   const onSubmit = (data: RegisterProductInterface) => {
     toast.success(`O produto ${data.title} de valor R$ ${data.value} foi salvo!`)
@@ -37,8 +37,8 @@ const ProductRegisterComponent = () => {
     })
   }
 
-  const defaultImage =
-    'https://storage.googleapis.com/grandchef-apps/gc10362/images/products/62f54e9f74b4d.png'
+  // const defaultImage =
+  //   'https://storage.googleapis.com/grandchef-apps/gc10362/images/products/62f54e9f74b4d.png'
 
   return (
     <ContentWrapper>
@@ -113,7 +113,7 @@ const ProductRegisterComponent = () => {
           <ProductPreviewTitle>
             <Typography as="h2">Preview do Produto</Typography>
           </ProductPreviewTitle>
-          <ProductCardBackgroundWrapper>
+          {/* <ProductCardBackgroundWrapper>
             <ProductCardBackground>
               <ProductCard
                 imgUrl={watch('imgUrl')
@@ -128,10 +128,12 @@ const ProductRegisterComponent = () => {
                   : 'Nome do Produto'}
                 price={watch('value')}
                 inputQuantity={<NumericInput defaultValue={1} />}
-                buttonText="+" handleCartSubmit={() => null}
-                handleSingleItemSubmit={() => null} />
+                buttonText="+"
+                handleCartSubmit={() => null}
+                handleSingleItemSubmit={() => null}
+              />
             </ProductCardBackground>
-          </ProductCardBackgroundWrapper>
+          </ProductCardBackgroundWrapper> */}
           <ButtonWrapper>
             <Button behavior="submit">Submit</Button>
           </ButtonWrapper>

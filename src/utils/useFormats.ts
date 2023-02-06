@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 
 export const useFormats = () => {
+
   const capitalizeFirstLetter = (content: string) => content.charAt(0).toUpperCase() + content.slice(1)
 
   const formatCurrency = useCallback(
@@ -14,6 +15,16 @@ export const useFormats = () => {
     [],
   )
 
+  const setCpfMask = (cpf: string) =>
+    cpf
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1')
+
+  const removeCpfMask = (cpf: string) => cpf.replace(/\D/g, '')
+
   const formatDateDDMMYYYY = (data: Date) => `${data.toLocaleDateString('pt-BR')}`
 
   const formatDateYYYYMMDD = (data: Date) =>
@@ -23,6 +34,8 @@ export const useFormats = () => {
     capitalizeFirstLetter,
     formatCurrency,
     getFirstName,
+    setCpfMask,
+    removeCpfMask,
     formatDateDDMMYYYY,
     formatDateYYYYMMDD,
   }

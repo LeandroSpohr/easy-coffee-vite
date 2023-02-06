@@ -27,6 +27,7 @@ module.exports = {
   },
   plugins: ['react', 'import'],
   rules: {
+    'react/require-default-props': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
