@@ -5,20 +5,27 @@ import coffeeCup from '../../../assets/images/favicon.svg'
 import { toast } from 'react-toastify'
 import { useFormats } from '../../../utils/useFormats'
 import Typography from '../../atoms/Typography'
-import { PayQR, QRWrapper } from './PayQR.styles'
+import { ButtonWrapper, PayQR, QRWrapper } from './PayQR.styles'
+import { useUser } from '../../../context/User'
+import Button from '../../atoms/Button'
+import { useRemove } from '../../../utils/useRemove'
+import { ButtonEnum } from '../../../models/Enums/Button'
 
-interface PayQRComponentInterface {
-  amount: number
-}
 
-const PayQRComponent = ({ amount }: PayQRComponentInterface) => {
+const PayQRComponent = () => {
   const { formatCurrency } = useFormats()
   const [viewPIX, setViewPIX] = useState<string>('')
+  const { state } = useUser()
+  const { removePaymentValue } = useRemove()
+
+  const clearPaymentValue = () => {
+    removePaymentValue()
+    toast.success('Suas compras foram pagas! Você não está com um peso na consciência, certo?')
+  }
 
   return (
     <PayQR>
-      <Typography as="h2" centralized>Valor atual no QR<br />{formatCurrency(amount)}</Typography>
-      <Typography as="h4" centralized>Clique para copiar o pix</Typography>
+      <Typography as="h2" centralized>QR com {formatCurrency(state.paymentValue)}</Typography>
       <QRWrapper
         onClick={() => { navigator.clipboard.writeText(viewPIX), toast.success('PIX copiado com sucesso!') }}
       >
@@ -26,11 +33,16 @@ const PayQRComponent = ({ amount }: PayQRComponentInterface) => {
           pixkey="26442024000194"
           merchant="Facil Promotora de Vendas e Servicos Ltda"
           city="PASSO FUNDO"
-          amount={amount || 0.001}
+          amount={state.paymentValue || 0.001}
           image={coffeeCup}
           onLoad={(payload) => setViewPIX(payload)}
         />
       </QRWrapper>
+      <Typography as="h4" centralized>Clique para copiar o pix</Typography>
+      <br />
+      <ButtonWrapper onClick={clearPaymentValue}>
+        <Button buttonType={ButtonEnum.OutlinedMainButton}>Clique ao pagar</Button>
+      </ButtonWrapper>
     </PayQR >
   )
 }

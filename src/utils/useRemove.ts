@@ -27,5 +27,11 @@ export const useRemove = () => {
     })
   }
 
-  return { removeModal, removeTimer, removeCPFMask, removeUser }
+  const removePaymentValue = () => {
+    userDispatch({
+      type: 'CLEAR_PAYMENT_VALUE'
+    })
+  }
+
+  return { removeModal, removeTimer, removeCPFMask, removeUser, removePaymentValue }
 }

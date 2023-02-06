@@ -109,8 +109,8 @@ const RegisterCustomer = () => {
                 </FieldContainer>
                 {errors.birthDate && touched.birthDate && errors.birthDate}
                 <ButtonsWrapper>
-                  <Button type='button' fluid buttonType={ButtonEnum.OutlinedMainButton} onClick={goBack}>Voltar</Button>
-                  <Button type="submit" fluid >
+                  <Button type='button' fluid onClick={goBack}>Voltar</Button>
+                  <Button type="submit" fluid buttonType={ButtonEnum.OutlinedMainButton}>
                     Registrar
                   </Button>
                 </ButtonsWrapper>

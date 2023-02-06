@@ -16,16 +16,17 @@ export const FlexWrapper = styled.div<WrapperInterface>`
   justify-content: ${({ centered }: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
 `
 
-export const TotalWrapper = styled.div`
+export const ColWrapper = styled(Col)``
+
+export const OpenValueWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  margin-bottom: ${sizes.size10};
-  margin-top: ${sizes.size15};
-  padding-top: ${sizes.size10};
-  padding-bottom: ${sizes.size10};
+  justify-content: end;
+  height: ${sizes.size100Percent};
+  align-items: center;
 `
 
-export const ColWrapper = styled(Col)`
+export const PayAllWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  height: ${sizes.size100Percent};
+  align-items: center;
 `

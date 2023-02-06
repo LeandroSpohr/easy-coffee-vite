@@ -10,6 +10,10 @@ export const PayQR = styled.div`
 export const QRWrapper = styled.div`
   display: flex;
   align-self: center;
-  margin-top: ${sizes.size10};
+  margin-top: ${sizes.size5};
   margin-bottom: ${sizes.size5};
+`
+
+export const ButtonWrapper = styled.div`
+  align-self: center;
 `
