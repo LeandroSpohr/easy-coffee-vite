@@ -15,7 +15,7 @@ import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 
-import { ItemWrapper, FlexWrapper, TotalWrapper, FlexEndWrapper } from './Cart.styles'
+import { ItemWrapper, FlexWrapper, FlexEndWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
 import { ButtonEnum } from '../../models/Enums/Button'

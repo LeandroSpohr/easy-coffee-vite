@@ -14,22 +14,18 @@ import Button from '../../components/atoms/Button'
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
-import { useRemove } from '../../utils/useRemove'
 
-import { ItemWrapper, FlexWrapper, ColWrapper, OpenValueWrapper, PayAllWrapper } from './MyAccount.styles'
-import { colors, sizes } from '../../assets/styles/variables'
+import { ItemWrapper, ColWrapper, OpenValueWrapper, PayAllWrapper } from './MyAccount.styles'
+import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
 import PayQR from '../../components/molecules/PayQR'
 import NoData from '../../components/molecules/NoData'
-import { ButtonEnum } from '../../models/Enums/Button'
-import { ArrowDownIcon } from '../../assets/icons'
 const { brown } = colors
 
 const MyAccount = () => {
   const { formatCurrency } = useFormats()
   const { state, dispatch } = useUser()
   const { goToProducts, goToPurchaseHistoric } = useNavigation()
-  const { removePaymentValue } = useRemove()
   const userId = state.user ? state.user.id : ''
 
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
@@ -122,7 +118,7 @@ const MyAccount = () => {
               <Row>
                 <ColWrapper xs={8} >
                   <PayAllWrapper>
-                    <Button>Pagar tudo</Button>
+                    <Button onClick={() => payAllPurchases()}>Pagar tudo</Button>
                   </PayAllWrapper>
                 </ColWrapper>
                 <ColWrapper xs={4}>
@@ -131,8 +127,6 @@ const MyAccount = () => {
                   </OpenValueWrapper>
                 </ColWrapper>
               </Row>
-              <OpenValueWrapper>
-              </OpenValueWrapper>
               {purchases.map((purchase) => purchaseItem(purchase))}
             </>
           ) : <NoData text={'Nenhuma compra em aberto'} mainOption={{

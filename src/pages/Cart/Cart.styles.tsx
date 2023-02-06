@@ -15,15 +15,6 @@ export const FlexWrapper = styled.div<WrapperInterface>`
   justify-content: ${({ centered }: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
 `
 
-export const TitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-export const TotalWrapper = styled.div`
-  text-align: center;
-`
-
 export const FlexEndWrapper = styled.div`
   text-align: end;
 `
