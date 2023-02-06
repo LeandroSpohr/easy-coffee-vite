@@ -15,7 +15,7 @@ import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 
-import { ItemWrapper, FlexWrapper } from './Cart.styles'
+import { ItemWrapper, FlexWrapper, TotalWrapper, FlexEndWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
 import { ButtonEnum } from '../../models/Enums/Button'
@@ -36,13 +36,6 @@ const Cart = () => {
     return +accumulator + +cartProduct.product.value * +cartProduct.quantity
   }, 0)
 
-  const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
-
-  const printValue = (value: string | number) => (
-    <Typography color={brown} as="h4">
-      {value}
-    </Typography>
-  )
 
   const removeOne = (productId: string) => {
     dispatch({
@@ -83,36 +76,52 @@ const Cart = () => {
     <List title="Carrinho de Compras">
       {hasItems ? (
         <>
-          <ItemWrapper>
-            <FlexWrapper>
-              <Button onClick={() => clearCart()}>Limpar Carrinho</Button>
-            </FlexWrapper>
-          </ItemWrapper>
+          <FlexEndWrapper>
+            <Typography as="h4">Total: {formatCurrency(totalValue)}</Typography>
+
+          </FlexEndWrapper>
+          <Row>
+            <Col xs={6}>
+              <Button onClick={() => clearCart()} >Limpar Carrinho</Button>
+            </Col>
+            <Col>
+              <FlexEndWrapper>
+                <Button onClick={() => finalize()} buttonType={ButtonEnum.OutlinedMainButton}>Finalizar Compra</Button>
+              </FlexEndWrapper>
+            </Col>
+          </Row>
           {state.cart.map((cartProduct) => (
             <ItemWrapper key={'item' + cartProduct.product.id}>
               <Paper key={'paper' + cartProduct.product.id}>
                 <Row key={'row' + cartProduct.product.id}>
-                  <Col key={'col' + cartProduct.product.id}>
-                    {printTitle(cartProduct.product.description)}
-                    {printValue(formatCurrency(cartProduct.product.value))}
-                  </Col>
                   <Col>
-                    {printTitle('Qtd')}
-                    {
-                      <NumericInput
-                        size={1}
-                        min={1}
-                        step={1}
-                        value={cartProduct.quantity}
-                        onChange={(event) => changeOne(cartProduct, event.target.value)}
-                      />
-                    }
+                    <Row>
+                      <Col key={'col' + cartProduct.product.id} xs={10} sm={4}>
+                        <Typography as='h2'>{cartProduct.product.description}</Typography>
+                        <Typography as='h3' color={brown}>{formatCurrency(cartProduct.product.value)} und</Typography>
+                        <br />
+                      </Col>
+                      <Col xs={6} sm={3}>
+                        <Typography as='h3' >Qtd</Typography>
+                        {
+                          <NumericInput
+                            size={1}
+                            min={1}
+                            step={1}
+                            value={cartProduct.quantity}
+                            onChange={(event) => changeOne(cartProduct, event.target.value)}
+                          />
+                        }
+                      </Col>
+                      <Col xs={6} sm={4}>
+                        <FlexEndWrapper>
+                          <Typography as='h3'>Total</Typography>
+                          <Typography as='h2' color={brown}>{formatCurrency(cartProduct.product.value * cartProduct.quantity)}</Typography>
+                        </FlexEndWrapper>
+                      </Col>
+                    </Row>
                   </Col>
-                  <Col>
-                    {printTitle('Total')}
-                    {printValue(formatCurrency(cartProduct.product.value * cartProduct.quantity))}
-                  </Col>
-                  <Col>
+                  <Col xs={2}>
                     <FlexWrapper>
                       <Button
                         buttonType={ButtonEnum.CircleButton}
@@ -126,12 +135,6 @@ const Cart = () => {
               </Paper>
             </ItemWrapper>
           ))}
-          <FlexWrapper>
-            <ItemWrapper>
-              <Typography as="h4">Total: {formatCurrency(totalValue)}</Typography>
-            </ItemWrapper>
-            <Button onClick={() => finalize()}>Finalizar Compra</Button>
-          </FlexWrapper>
         </>
       ) : (
         <>
@@ -145,8 +148,9 @@ const Cart = () => {
             action: goToProducts
           }} />
         </>
-      )}
-    </List>
+      )
+      }
+    </List >
   )
 }
 

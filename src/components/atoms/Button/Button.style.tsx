@@ -33,7 +33,8 @@ export const MainButton = styled(defaultConfig)``
 export const OutlinedMainButton = styled(defaultConfig)`
   color: ${colors.veryLightBrown};
   background-color: ${colors.white};
-  border: ${sizes.size2} solid ${colors.veryLightBrown};
+  outline: ${sizes.size2} solid ${colors.veryLightBrown};
+  outline-offset: -${sizes.size2};
 `
 
 export const SecondaryButton = styled(defaultConfig)`

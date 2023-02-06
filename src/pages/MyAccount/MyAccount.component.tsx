@@ -80,26 +80,24 @@ const MyAccount = () => {
     <ItemWrapper key={'item' + purchase.id}>
       <Paper key={'paper' + purchase.id}>
         <Row key={'row' + purchase.id}>
-          <Col xs={4} key={'col' + purchase.id} sm={3}>
+          <Col xs={3} key={'col' + purchase.id} sm={3}>
             {printTitle('Produto')}
             {printValue(purchase.product.description)}
           </Col>
-          <Col xs={4} sm={3}>
+          <Col xs={2} sm={3}>
             {printTitle('Qtd')}
             {printValue(purchase.quantity)}
           </Col>
-          <Col xs={4} sm={3}>
+          <Col xs={2.8} sm={3}>
             {printTitle('Total')}
             {printValue(formatCurrency(purchase.value))}
           </Col>
-          <Col xs={12} sm={3}>
-            <FlexWrapper>
-              {!state.paymentValue ?
-                <Button onClick={() => { payPurchase(purchase.id, purchase.value), scrollToQR() }}>Pagar</Button>
-                :
-                <Button onClick={() => payPurchase(purchase.id, purchase.value)}>Adicionar</Button>
-              }
-            </FlexWrapper>
+          <Col xs={0}>
+            {!state.paymentValue ?
+              <Button onClick={() => { payPurchase(purchase.id, purchase.value), scrollToQR() }}>Pagar</Button>
+              :
+              <Button onClick={() => payPurchase(purchase.id, purchase.value)}>Pagar junto</Button>
+            }
           </Col>
         </Row>
       </Paper>
@@ -114,7 +112,7 @@ const MyAccount = () => {
   }
 
   return (
-    <List title={'Compras em Aberto'}>
+    <List title={'Compras'}>
       {state.paymentValue ? <><PayQR /><br /><br /></> : <></>
       }
       {

@@ -48,9 +48,8 @@ const PurchaseHistoricComponent = () => {
   }, [state.user])
 
   return (
-    <List title={'Histórico de Compras'} >
+    <List title={'Pagamentos'} >
       {purchases.length != 0 ? (
-
         purchases.map((item, index) => (
           <ItemWrapper key={item.id}>
             <Paper>
