@@ -16,11 +16,11 @@ import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
-import { useFormik } from 'formik'
+import { Formik, useFormik } from 'formik'
 import { toast } from 'react-toastify'
-import CPFInput from '../../components/atoms/CPFInput'
 import { useValidate } from '../../utils/useValidate'
 import FormField from '../../components/molecules/FormField'
+import MaskInput from '../../components/atoms/MaskInput'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -86,21 +86,49 @@ const Home = () => {
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>
             <Typography as="h2" color={colors.white}></Typography>
-
           </Wrapper>
-          <form onSubmit={formik.handleSubmit}>
-            <FieldContainer>
-              <FormField otherFormField={
-                <CPFInput onChange={formik.handleChange} />
-              } />
-            </FieldContainer >
-            <ButtonsWrapper>
-              <Button fluid onClick={goToRegister}>
-                Cadastro
-              </Button>
-              <Button fluid type='submit' buttonType={ButtonEnum.OutlinedMainButton}>Entrar</Button>
-            </ButtonsWrapper>
-          </form >
+          <Formik
+            initialValues={{ cpf: '' }}
+            onSubmit={(values) => {
+              if (!values.cpf) {
+                toast.warn('Preencha todos os campos')
+                return
+              }
+              if (!validateCPF(values.cpf)) {
+                toast.error('CPF inválido')
+                return
+              }
+              handleSubmit(values.cpf)
+            }}
+          >
+            {({
+              values,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <FieldContainer>
+                  <MaskInput
+                    type="tel"
+                    name="cpf"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cpf}
+                    placeholder={'Informe seu CPF'}
+
+                    mask={'999.999.999-99'}
+                  />
+                </FieldContainer>
+                <ButtonsWrapper>
+                  <Button fluid onClick={goToRegister}>
+                    Cadastro
+                  </Button>
+                  <Button fluid type='submit' buttonType={ButtonEnum.OutlinedMainButton}>Entrar</Button>
+                </ButtonsWrapper>
+              </form>
+            )}
+          </Formik>
         </Paper >
       </ContentWrapper>
     </Container >

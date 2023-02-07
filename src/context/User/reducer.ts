@@ -3,7 +3,6 @@ import CartInterface from '../../models/interfaces/Cart'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
 import { UserEnum } from '../../models/Enums/User'
-import { payload } from 'react-qrcode-pix'
 
 export const reducer = (state: UserContextInterface, action: ActionTypes): UserContextInterface => {
   const getProductCarts = (payloadCartProduct: CartInterface) => {

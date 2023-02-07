@@ -20,7 +20,7 @@ const PayQRComponent = () => {
 
   const clearPaymentValue = () => {
     removePaymentValue()
-    toast.success('Suas compras foram pagas! Você não está com um peso na consciência, certo?')
+    toast.success('O status de todas as compras foi alterado com sucesso')
   }
 
   return (
@@ -30,10 +30,10 @@ const PayQRComponent = () => {
         onClick={() => { navigator.clipboard.writeText(viewPIX), toast.success('PIX copiado com sucesso!') }}
       >
         <QRCode
-          pixkey="26442024000194"
-          merchant="Facil Promotora de Vendas e Servicos Ltda"
-          city="PASSO FUNDO"
-          amount={state.paymentValue || 0.001}
+          pixkey={import.meta.env.VITE_PIX_KEY}
+          merchant={import.meta.env.VITE_MERCHANT}
+          city={import.meta.env.VITE_MERCHANT_CITY}
+          amount={state.paymentValue}
           image={coffeeCup}
           onLoad={(payload) => setViewPIX(payload)}
         />

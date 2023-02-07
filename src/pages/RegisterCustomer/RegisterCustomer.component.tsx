@@ -18,11 +18,11 @@ import { colors, sizes } from '../../assets/styles/variables'
 import { useNavigation } from '../../utils/useNavigation'
 import { useValidate } from '../../utils/useValidate'
 import { useRemove } from '../../utils/useRemove'
-import CPFInput from '../../components/atoms/CPFInput'
 import { Formik } from 'formik'
 import { ButtonEnum } from '../../models/Enums/Button'
 import FormField from '../../components/molecules/FormField'
 import { ButtonsWrapper } from './RegisterCustomer.styles'
+import MaskInput from '../../components/atoms/MaskInput'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -80,12 +80,15 @@ const RegisterCustomer = () => {
                 <FieldContainer>
 
                   <FormField label='CPF' otherFormField={
-                    <CPFInput
+                    <MaskInput
                       type="tel"
                       name="cpf"
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.cpf}
+                      placeholder={'Informe seu CPF'}
+
+                      mask={'999.999.999-99'}
                     />} />
                 </FieldContainer>
                 {errors.cpf && touched.cpf && errors.cpf}
