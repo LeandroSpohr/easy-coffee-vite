@@ -22,6 +22,7 @@ import ListTemplate from '../../components/templates/ListTemplate'
 import TwoOptionsModal from '../../components/molecules/TwoOptionsModal'
 import Typography from '../../components/atoms/Typography'
 import { useGreetings } from '../../utils/useGreetings'
+import { useRemove } from '../../utils/useRemove'
 
 const QueryProducts = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
@@ -30,6 +31,7 @@ const QueryProducts = () => {
   const { capitalizeFirstLetter, formatCurrency } = useFormats()
   const { goToMyAccount } = useNavigation()
   const { greet } = useGreetings()
+  const { removeModal } = useRemove()
 
   const addToCart = (productCart: CartInterface) => {
     userDispatch({
@@ -60,6 +62,30 @@ const QueryProducts = () => {
       : null
   }
 
+  const payNowModal = (productCard: PurchaseInputInterface) => (
+    <TwoOptionsModal
+      title="Pagamento"
+      description='Quando deseja pagar o produto?'
+      mainButton={{
+        text: 'Pagar',
+        action: () => removeModal
+      }}
+      secondaryButton={{
+        text: 'Depois',
+        action: () => saveSinglePurchase(productCard),
+      }} />
+  )
+
+
+  const displayPayNowModal = (productCard: PurchaseInputInterface) => {
+    modalDispatch({
+      type: 'SET_MODAL',
+      payload: {
+        content: payNowModal(productCard)
+      }
+    })
+  }
+
   const closeModal = () => {
     modalDispatch({
       type: 'CLOSE_MODAL',
@@ -70,33 +96,23 @@ const QueryProducts = () => {
     modalDispatch({
       type: 'SET_MODAL',
       payload: {
-        content: singlePurchaseModal(
-          productCard.product.id,
-          productCard.product.description,
-          productCard.product.value,
-          productCard.quantity,
-        ),
+        content: singlePurchaseModal(productCard),
       },
     })
   }
 
-  const singlePurchaseModal = (
-    productId: string,
-    productDesc: string,
-    productValue: number,
-    quantity: number,
-  ) => {
-    const totalValue = productValue * quantity
+  const singlePurchaseModal = (productCard: CartInterface) => {
+    const { product, quantity } = productCard
 
     return (
       <TwoOptionsModal
         title={'Fast Coffee'}
         description={`Deseja comprar ${quantity} unidade${quantity > 1 ? 's' : ''
-          } de ${productDesc.toLowerCase()}${' '}
-        por ${formatCurrency(totalValue)}?`}
+          } de ${product.description.toLowerCase()}${' '}
+        por ${formatCurrency(product.value * quantity)}?`}
         mainButton={{
           text: 'Sim',
-          action: () => saveSinglePurchase({ productId, quantity }),
+          action: () => { closeModal(), goToMyAccount(), displayPayNowModal({ productId: product.id, quantity }) },
         }}
         secondaryButton={{
           text: 'Nao',
