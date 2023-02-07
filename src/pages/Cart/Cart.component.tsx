@@ -18,7 +18,7 @@ import { useNavigation } from '../../utils/useNavigation'
 import { ItemWrapper, FlexWrapper } from './Cart.styles'
 import { colors } from '../../assets/styles/variables'
 import { CloseIcon } from '../../assets/icons'
-import { ButtonEnum } from '../../models/Enums/Button'
+import ButtonEnum from '../../models/Enums/Button'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
 
 const { brown } = colors
@@ -31,9 +31,7 @@ const Cart = () => {
   const userId = state.user ? state.user.id : ''
   const hasItems = !!state.cart.length
 
-  const totalValue = state.cart.reduce((accumulator, cartProduct) => {
-    return +accumulator + +cartProduct.product.value * +cartProduct.quantity
-  }, 0)
+  const totalValue = state.cart.reduce((accumulator, cartProduct) => +accumulator + +cartProduct.product.value * +cartProduct.quantity, 0)
 
   const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
 
@@ -88,24 +86,22 @@ const Cart = () => {
             </FlexWrapper>
           </ItemWrapper>
           {state.cart.map((cartProduct) => (
-            <ItemWrapper key={'item' + cartProduct.product.id}>
-              <Paper key={'paper' + cartProduct.product.id}>
-                <Row key={'row' + cartProduct.product.id}>
-                  <Col key={'col' + cartProduct.product.id}>
+            <ItemWrapper key={`item${cartProduct.product.id}`}>
+              <Paper key={`paper${cartProduct.product.id}`}>
+                <Row key={`row${cartProduct.product.id}`}>
+                  <Col key={`col${cartProduct.product.id}`}>
                     {printTitle(cartProduct.product.description)}
                     {printValue(formatCurrency(cartProduct.product.value))}
                   </Col>
                   <Col>
                     {printTitle('Qtd')}
-                    {
-                      <NumericInput
-                        size={1}
-                        min={1}
-                        step={1}
-                        value={cartProduct.quantity}
-                        onChange={(event) => changeOne(cartProduct, event.target.value)}
-                      />
-                    }
+                    <NumericInput
+                      size={1}
+                      min={1}
+                      step={1}
+                      value={cartProduct.quantity}
+                      onChange={(event) => changeOne(cartProduct, event.target.value)}
+                    />
                   </Col>
                   <Col>
                     {printTitle('Total')}

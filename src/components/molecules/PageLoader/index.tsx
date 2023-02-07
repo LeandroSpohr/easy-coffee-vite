@@ -1,1 +1,1 @@
-export {default} from './PageLoader.component'
+export { default } from './PageLoader.component'

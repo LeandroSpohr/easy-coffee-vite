@@ -1,15 +1,15 @@
 import React from 'react'
 import { StyledComponentPropsWithRef } from 'styled-components'
-import { ButtonEnum } from '../../../models/Enums/Button'
-import MainButton, {
+import ButtonEnum from '../../../models/Enums/Button'
+import {
+  MainButton,
   CircleButton,
   OutlinedMainButton,
   OutlinedSecondaryButton,
   SecondaryButton,
 } from './Button.style'
-import Button from './Button.style'
 
-interface ButtonInterface extends StyledComponentPropsWithRef<typeof Button> {
+interface ButtonInterface extends StyledComponentPropsWithRef<typeof MainButton> {
   children?: JSX.Element | string
   buttonType?: ButtonEnum
   behavior?: 'button' | 'submit' | 'reset'

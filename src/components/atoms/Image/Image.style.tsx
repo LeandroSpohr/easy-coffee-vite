@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
-import {sizes, colors} from '../../../assets/styles/variables'
+import { sizes, colors } from '../../../assets/styles/variables'
 
-const {size5} = sizes
-const {brown} = colors
+const { size5 } = sizes
+const { brown } = colors
 
 interface ImageInterface {
   maxWidth?: number | string
@@ -11,7 +11,7 @@ interface ImageInterface {
 }
 
 const Image = styled.img<ImageInterface>`
-  max-width: ${({maxWidth}: ImageInterface) => (!maxWidth ? '100%' : maxWidth)};
+  max-width: ${({ maxWidth }: ImageInterface) => (!maxWidth ? '100%' : maxWidth)};
   width: 150px;
   -webkit-filter: drop-shadow(${size5} ${size5} ${size5} ${brown});
   filter: drop-shadow(${size5} ${size5} ${size5} ${brown});

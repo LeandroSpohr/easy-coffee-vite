@@ -1,4 +1,4 @@
-import { UserEnum } from '../Enums/User'
+import UserEnum from '../Enums/User'
 import CartInterface from './Cart'
 
 export default interface UserInterface {

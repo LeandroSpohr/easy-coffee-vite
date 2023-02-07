@@ -1,4 +1,4 @@
-import { UserEnum } from '../../models/Enums/User'
+import UserEnum from '../../models/Enums/User'
 import { UserContextInterface } from '../../models/interfaces/User'
 
 const initialValues: UserContextInterface = {

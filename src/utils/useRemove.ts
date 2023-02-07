@@ -15,7 +15,7 @@ export const useRemove = () => {
     let id = window.setTimeout(() => 0)
     while (id) {
       window.clearTimeout(id)
-      id--
+      id -= 1
     }
   }
 

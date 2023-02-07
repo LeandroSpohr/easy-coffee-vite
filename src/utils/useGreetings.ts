@@ -1,7 +1,16 @@
 export const useGreetings = () => {
   const greet = () => {
-    const currentTime = new Date().getHours()
-    return currentTime > 12 ? (currentTime > 18 ? 'boa noite' : 'boa tarde') : 'bom dia'
+    const currentHour = new Date().getHours()
+    switch (true) {
+      case currentHour > 18:
+        return "boa noite"
+      case currentHour > 12:
+        return "boa tarde"
+      case currentHour < 12:
+        return "bom dia"
+      default:
+        return "boas vindas"
+    }
   }
 
   return { greet }

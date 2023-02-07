@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
 
@@ -16,3 +16,5 @@ export const Wrapper = styled.div<WrapperProps>`
     display: none;
   `}
 `
+
+export default Wrapper

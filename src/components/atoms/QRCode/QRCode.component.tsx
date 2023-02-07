@@ -1,7 +1,7 @@
 import React from 'react'
 import PIX from 'react-qrcode-pix'
 
-import { Wrapper } from './QRCode.style'
+import Wrapper from './QRCode.style'
 
 interface PixProps {
   pixkey: string

@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyledComponentPropsWithRef} from 'styled-components'
+import { StyledComponentPropsWithRef } from 'styled-components'
 import Paper from './Paper.style'
 
 interface PaperComponentInterface extends StyledComponentPropsWithRef<typeof Paper> {
@@ -15,13 +15,13 @@ const PaperComponent: React.FC<
   fullCentered,
   ...rest
 }) => (
-  <Paper
-    fluid={fluid}
-    fullCentered={fullCentered}
-    {...rest}
-  >
-    {children}
-  </Paper>
-)
+    <Paper
+      fluid={fluid}
+      fullCentered={fullCentered}
+      {...rest}
+    >
+      {children}
+    </Paper>
+  )
 
 export default PaperComponent

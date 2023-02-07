@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-grid-system'
 import { toast } from 'react-toastify'
-import { isMobile } from 'react-device-detect'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import * as PurchaseService from '../../services/Purchase'
@@ -21,7 +20,9 @@ import { useNavigation } from '../../utils/useNavigation'
 import { ItemWrapper, FlexWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
+
 import coffeeCup from '../../assets/images/favicon.svg'
+
 const { brown } = colors
 
 const MyAccount = () => {
@@ -53,17 +54,12 @@ const MyAccount = () => {
     })
   }
 
-  const getTotalValue = (purchases: PurchaseInterface[]) => {
-    return purchases.reduce((accumulator, purchase) => {
-      return +accumulator + +purchase.value
-    }, 0)
-  }
+  const getTotalValue = () => purchases.reduce((accumulator, purchase) => +accumulator + +purchase.value, 0)
 
   const payAllPurchases = () => {
     const purchaseIds = purchases.map((purchase) => purchase.id)
-    const purchasesValue = getTotalValue(purchases)
     PaymentService.payPurchases(userId, purchaseIds).then(() => {
-      setPayValue(purchasesValue)
+      setPayValue(getTotalValue())
       toast.success('Status das compras alterado com sucesso, prossiga com o pagamento via PIX!', {
         autoClose: 5000,
       })
@@ -76,7 +72,7 @@ const MyAccount = () => {
   }, [])
 
   return (
-    <List title={'Compras em Aberto'}>
+    <List title="Compras em Aberto">
       <FlexWrapper centered>
         <QRCode
           pixkey="26442024000194"
@@ -104,10 +100,10 @@ const MyAccount = () => {
       {purchases.length ? (
         <>
           {purchases.map((purchase) => (
-            <ItemWrapper key={'item' + purchase.id}>
-              <Paper key={'paper' + purchase.id}>
-                <Row key={'row' + purchase.id}>
-                  <Col key={'col' + purchase.id}>
+            <ItemWrapper key={`item${purchase.id}`}>
+              <Paper key={`paper${purchase.id}`}>
+                <Row key={`row${purchase.id}`}>
+                  <Col key={`col${purchase.id}`}>
                     {printTitle('Produto')}
                     {printValue(purchase.product.description)}
                   </Col>
@@ -132,7 +128,7 @@ const MyAccount = () => {
           ))}
           <FlexWrapper>
             <ItemWrapper>
-              <Typography as="h4">Total {formatCurrency(getTotalValue(purchases))}</Typography>
+              <Typography as="h4">Total {formatCurrency(getTotalValue())}</Typography>
             </ItemWrapper>
             <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
           </FlexWrapper>

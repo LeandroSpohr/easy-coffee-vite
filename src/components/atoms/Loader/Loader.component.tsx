@@ -4,7 +4,7 @@ import coffeeLoveJson from '../../../assets/lottie/coffee-love.json'
 
 import { sizes } from '../../../assets/styles/variables'
 
-const {size300} = sizes
+const { size300 } = sizes
 
 const Loader = () => (
   <Player

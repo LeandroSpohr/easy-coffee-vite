@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonEnum } from '../../../models/Enums/Button'
+import ButtonEnum from '../../../models/Enums/Button'
 import { useNavigation } from '../../../utils/useNavigation'
 import Button from '../../atoms/Button'
 import Typography from '../../atoms/Typography'

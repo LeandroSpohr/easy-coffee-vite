@@ -27,13 +27,11 @@ const PageLoader = () => {
   })
 
   return (
-    <>
-      {showLoader && (
-        <Container>
-          <Loader />
-        </Container>
-      )}
-    </>
+    showLoader ? (
+      <Container>
+        <Loader />
+      </Container>
+    ) : <> </>
   )
 }
 

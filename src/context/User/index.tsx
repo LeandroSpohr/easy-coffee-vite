@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useReducer } from 'react'
-import reducer from './reducer'
+import { reducer } from './reducer'
 import { UserContextInterface } from '../../models/interfaces/User'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'

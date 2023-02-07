@@ -6,7 +6,7 @@ import NumericInput, { Container } from './NumericInput.style'
 import Button from '../Button'
 
 import { RemoveIcon, AddIcon } from '../../../assets/icons'
-import { ButtonEnum } from '../../../models/Enums/Button'
+import ButtonEnum from '../../../models/Enums/Button'
 
 interface NumericInputInterface extends StyledComponentPropsWithRef<typeof NumericInput> {
   name?: string

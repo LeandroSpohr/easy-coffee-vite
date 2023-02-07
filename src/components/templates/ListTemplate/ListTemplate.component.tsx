@@ -8,15 +8,13 @@ interface ListInterface {
   children: JSX.Element | JSX.Element[]
 }
 
-const List = ({ title, children }: ListInterface) => {
-  return (
-    <Container displayBlock fullHeight>
-      <TitleWrapper>
-        <Typography as="h1">{title}</Typography>
-      </TitleWrapper>
-      <ContentWrapper>{children}</ContentWrapper>
-    </Container>
-  )
-}
+const List = ({ title, children }: ListInterface) => (
+  <Container displayBlock fullHeight>
+    <TitleWrapper>
+      <Typography as="h1">{title}</Typography>
+    </TitleWrapper>
+    <ContentWrapper>{children}</ContentWrapper>
+  </Container>
+)
 
 export default List

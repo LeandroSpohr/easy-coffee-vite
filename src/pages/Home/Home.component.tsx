@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+import ButtonEnum from '../../models/Enums/Button'
 
 import * as UserService from '../../services/Users'
+
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
-import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
-
+import Input from '../../components/atoms/Input'
 import coffeeCup from '../../assets/images/coffeeCup.svg'
+
 import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
@@ -17,10 +21,8 @@ import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
 import { useFormats } from '../../utils/useFormats'
-import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
 import { useValidate } from '../../utils/useValidate'
-import { toast } from 'react-toastify'
 
 const { brown } = colors
 const { size200 } = sizes
@@ -34,10 +36,10 @@ const Home = () => {
 
   const [toggle, setToggle] = useState<boolean>(false)
 
-  const handleSubmit = (cpf: string) => {
-    cpf = removeCpfMask(cpf)
-    if (validateCPF(cpf)) {
-      UserService.getByCpf(cpf)
+  const handleSubmit = (handleCpf: string) => {
+    const cpfUnmasked = removeCpfMask(handleCpf)
+    if (validateCPF(cpfUnmasked)) {
+      UserService.getByCpf(cpfUnmasked)
         .then((response) => {
           if (response) {
             dispatch({

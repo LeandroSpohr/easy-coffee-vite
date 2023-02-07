@@ -10,13 +10,12 @@ interface FormFieldComponentInterface extends InputComponentInterface {
   otherFormField?: JSX.Element
 }
 
-const FormFieldComponent = ({ label, otherFormField, ...rest }: FormFieldComponentInterface) => {
-  return (
-    <FormField>
-      <Typography as="h3">{label}</Typography>
-      {otherFormField ? otherFormField : <Input {...rest} />}
-    </FormField>
-  )
-}
+const FormFieldComponent = ({ label, otherFormField, ...rest }: FormFieldComponentInterface) => (
+  <FormField>
+    <Typography as="h3">{label}</Typography>
+    {otherFormField || <Input {...rest} />}
+  </FormField>
+)
+
 
 export default FormFieldComponent

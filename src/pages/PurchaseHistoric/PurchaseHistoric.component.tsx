@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Row } from 'react-grid-system'
 
 import PaidPurchase from '../../models/interfaces/PaidPurchase'
 
@@ -7,49 +8,52 @@ import * as PaymentService from '../../services/Payments'
 import { useFormats } from '../../utils/useFormats'
 
 import Typography from '../../components/atoms/Typography'
-
-import { useUser } from '../../context/User'
 import Paper from '../../components/atoms/Paper'
-import { Row } from 'react-grid-system'
-import { ItemWrapper } from '../Cart/Cart.styles'
+// import { Button } from '../../components/atoms/Button'
+import NoData from '../../components/molecules/NoData'
+// import { Container } from '../../components/atoms/Container'
+import { useUser } from '../../context/User'
+
 import {
   ColWrapper,
-  DetailsHeaderWrapper,
-  DetailsInfoWrapper,
+  // DetailsHeaderWrapper,
+  // DetailsInfoWrapper,
   IconColWrapper,
-  DetailsWrapper,
+  // DetailsWrapper,
+  ItemWrapper,
 } from './PurchaseHistoric.styles'
-import NoData from '../../components/molecules/NoData'
-import Container from '../../components/atoms/Container'
-import { colors, sizes } from '../../assets/styles/variables'
-import { ArrowDownIcon, ArrowUpIcon } from '../../assets/icons'
-import Button from '../../components/atoms/Button'
-import { ButtonEnum } from '../../models/Enums/Button'
+
+import { colors } from '../../assets/styles/variables'
+// import { ArrowDownIcon, ArrowUpIcon } from '../../assets/icons'
+// import Button from '../../components/atoms/Button'
+// import { ButtonEnum } from '../../models/Enums/Button'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
 
 const PurchaseHistoricComponent = () => {
   const { formatDateDDMMYYYY, formatCurrency } = useFormats()
   const [purchases, setPurchases] = useState<PaidPurchase[]>([])
   const { state } = useUser()
-  const [toggleList, setToggleList] = useState([-1])
-  const [, forceUpdate] = useReducer((x) => x + 1, 0)
+  // const [toggleList, setToggleList] = useState([-1])
+  // const [, forceUpdate] = useReducer((x) => x + 1, 0)
 
-  const handleToggle = (i: number) => {
-    const list: number[] = toggleList
-    list.includes(i) ? list.splice(list.indexOf(i), list.indexOf(i)) : list.push(i)
-    setToggleList(list)
-    forceUpdate()
-  }
+  // const handleToggle = (i: number) => {
+  //   const list: number[] = toggleList
+  //   if (list.includes(i)) {
+  //     list.splice(list.indexOf(i), list.indexOf(i))
+  //   } else list.push(i)
+  //   setToggleList(list)
+  //   forceUpdate()
+  // }
 
   useEffect(() => {
     PaymentService.getAll(state.user?.id).then(setPurchases)
   }, [state.user])
 
   return (
-    <List title={'Histórico de Compras'} >
-      {purchases.length != 0 ? (
+    <List title="Histórico de Compras" >
+      {purchases.length !== 0 ? (
 
-        purchases.map((item, index) => (
+        purchases.map((item) => (
           <ItemWrapper key={item.id}>
             <Paper>
               <Row>
@@ -123,7 +127,7 @@ const PurchaseHistoricComponent = () => {
         ))
 
       ) : (
-        <NoData text={'Nenhuma compra ainda'} />
+        <NoData text="Nenhuma compra ainda" />
       )
       }
     </List >

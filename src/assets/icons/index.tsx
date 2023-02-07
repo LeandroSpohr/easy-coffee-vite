@@ -22,14 +22,15 @@ const { white } = colors
 
 const { size22 } = sizes
 
-const defaultConfig = (props: IconInterface) => ({
-  size: props.size ? props.size : size22,
-})
-
 interface IconInterface {
   color?: string
   size?: string
 }
+
+const defaultConfig = (props: IconInterface) => ({
+  size: props.size ? props.size : size22,
+})
+
 
 // SGV icons
 

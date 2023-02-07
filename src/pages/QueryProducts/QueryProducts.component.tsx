@@ -51,19 +51,45 @@ const QueryProducts = () => {
     setProducts([...updatedeProducts])
   }
 
-  const saveSinglePurchase = (input: PurchaseInputInterface) => {
-    toast.success('Produto comprado!')
-    userState.user
-      ? PurchaseService.savePurchases(userState.user?.id, [input]).then(() => {
-        goToMyAccount(), closeModal()
-      })
-      : null
-  }
-
   const closeModal = () => {
     modalDispatch({
       type: 'CLOSE_MODAL',
     })
+  }
+
+  const saveSinglePurchase = (input: PurchaseInputInterface) => {
+    toast.success('Produto comprado!')
+    if (userState.user) {
+      PurchaseService.savePurchases(userState.user?.id, [input]).then(() => {
+        goToMyAccount()
+        closeModal()
+      })
+    }
+  }
+
+  const singlePurchaseModal = (
+    productId: string,
+    productDesc: string,
+    productValue: number,
+    quantity: number,
+  ) => {
+    const totalValue = productValue * quantity
+    return (
+      <TwoOptionsModal
+        title="Fast Coffee"
+        description={`Deseja comprar ${quantity} unidade${quantity > 1 ? 's' : ''
+          } de ${productDesc.toLowerCase()}${' '}
+        por ${formatCurrency(totalValue)}?`}
+        mainButton={{
+          text: 'Sim',
+          action: () => saveSinglePurchase({ productId, quantity }),
+        }}
+        secondaryButton={{
+          text: 'Nao',
+          action: () => closeModal(),
+        }}
+      />
+    )
   }
 
   const displaySinglePurchaseModal = (productCard: CartInterface) => {
@@ -80,31 +106,7 @@ const QueryProducts = () => {
     })
   }
 
-  const singlePurchaseModal = (
-    productId: string,
-    productDesc: string,
-    productValue: number,
-    quantity: number,
-  ) => {
-    const totalValue = productValue * quantity
 
-    return (
-      <TwoOptionsModal
-        title={'Fast Coffee'}
-        description={`Deseja comprar ${quantity} unidade${quantity > 1 ? 's' : ''
-          } de ${productDesc.toLowerCase()}${' '}
-        por ${formatCurrency(totalValue)}?`}
-        mainButton={{
-          text: 'Sim',
-          action: () => saveSinglePurchase({ productId, quantity }),
-        }}
-        secondaryButton={{
-          text: 'Nao',
-          action: () => closeModal(),
-        }}
-      />
-    )
-  }
 
   useEffect(() => {
     ProductService.getAll().then((response) => {
@@ -117,42 +119,40 @@ const QueryProducts = () => {
   }, [])
 
   return (
-    <>
-      <ListTemplate title={'Lista de Produtos'}>
-        <WelcomeWrapper>
-          <Typography as="h2">
-            {capitalizeFirstLetter(greet())}, {userState.user?.name}!
-          </Typography>
-        </WelcomeWrapper>
-        <br />
-        <Row>
-          {products.map((productCart) => (
-            <ColWrapper lg={2} md={3} sm={4} xs={6} key={'col' + productCart.product.id}>
-              <ProductCard
-                key={'productCard' + productCart.product.id}
-                imgUrl={productCart.product.imgUrl}
-                title={productCart.product.description}
-                price={productCart.product.value}
-                inputQuantity={
-                  <NumericInput
-                    size={1}
-                    min={1}
-                    max={15}
-                    step={1}
-                    value={productCart.quantity}
-                    onChange={(event) =>
-                      handleChangeProductQuantity(productCart, event.target.value)
-                    }
-                  />
-                }
-                handleCartSubmit={() => addToCart(productCart)}
-                handleSingleItemSubmit={() => displaySinglePurchaseModal(productCart)}
-              ></ProductCard>
-            </ColWrapper>
-          ))}
-        </Row>
-      </ListTemplate>
-    </>
+    <ListTemplate title="Lista de Produtos">
+      <WelcomeWrapper>
+        <Typography as="h2">
+          {capitalizeFirstLetter(greet())}, {userState.user?.name}!
+        </Typography>
+      </WelcomeWrapper>
+      <br />
+      <Row>
+        {products.map((productCart) => (
+          <ColWrapper lg={2} md={3} sm={4} xs={6} key={`col${productCart.product.id}`}>
+            <ProductCard
+              key={`productCard${productCart.product.id}`}
+              imgUrl={productCart.product.imgUrl}
+              title={productCart.product.description}
+              price={productCart.product.value}
+              inputQuantity={
+                <NumericInput
+                  size={1}
+                  min={1}
+                  max={15}
+                  step={1}
+                  value={productCart.quantity}
+                  onChange={(event) =>
+                    handleChangeProductQuantity(productCart, event.target.value)
+                  }
+                />
+              }
+              handleCartSubmit={() => addToCart(productCart)}
+              handleSingleItemSubmit={() => displaySinglePurchaseModal(productCart)}
+            />
+          </ColWrapper>
+        ))}
+      </Row>
+    </ListTemplate>
   )
 }
 
