@@ -15,9 +15,7 @@ api.interceptors.request.use((_config) => {
 })
 
 api.interceptors.response.use(
-  (response) => {
-    return response
-  },
+  (response) => response,
 
   (error) => {
     toast.error(error.response.data.userMessage)

@@ -1,1 +1,1 @@
-export { default as PurchaseHistoric } from './PurchaseHistoric.component'
+export { default } from './PurchaseHistoric.component'

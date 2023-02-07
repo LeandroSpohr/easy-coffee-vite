@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Container } from '../../atoms/Container'
-import { AppBar } from '../../molecules/Appbar'
+import Container from '../../atoms/Container'
+import AppBar from '../../molecules/Appbar'
 import { ContentWrapper } from './MainTemplate.styles'
 
 type MainTemplateComponentInterface = {

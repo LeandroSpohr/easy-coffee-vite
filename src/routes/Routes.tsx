@@ -1,15 +1,15 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { Home } from '../pages/Home'
-import { QueryProducts } from '../pages/QueryProducts'
-import { Cart } from '../pages/Cart'
-import { MyAccount } from '../pages/MyAccount'
-import { RegisterCustomer } from '../pages/RegisterCustomer'
+import Home from '../pages/Home'
+import QueryProducts from '../pages/QueryProducts'
+import Cart from '../pages/Cart'
+import MyAccount from '../pages/MyAccount'
+import RegisterCustomer from '../pages/RegisterCustomer'
 
-import { RegisterProduct } from '../pages/RegisterProduct'
-import { IdleTimer } from '../components/atoms/IdleTimer'
-import { PurchaseHistoric } from '../pages/PurchaseHistoric'
+import RegisterProduct from '../pages/RegisterProduct'
+import IdleTimer from '../components/atoms/IdleTimer'
+import PurchaseHistoric from '../pages/PurchaseHistoric'
 
 import { PrivateRoute } from './PrivateRoute'
 

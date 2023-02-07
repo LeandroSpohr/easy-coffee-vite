@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '../../atoms/Container'
+import Container from '../../atoms/Container'
 
 type RegisterTemplateComponentInterface = {
   children?: JSX.Element | JSX.Element[]

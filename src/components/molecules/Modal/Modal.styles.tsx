@@ -18,3 +18,5 @@ export const CloseWrapper = styled.div`
   justify-content: end;
   cursor: pointer;
 `
+
+export default ModalWrapper

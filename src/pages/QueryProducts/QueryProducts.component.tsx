@@ -7,8 +7,8 @@ import * as ProductService from '../../services/Product'
 import ProductInterface from '../../models/interfaces/Product'
 import CartInterface from '../../models/interfaces/Cart'
 
-import { NumericInput } from '../../components/atoms/NumericInput'
-import { ProductCard } from '../../components/molecules/ProductCard'
+import NumericInput from '../../components/atoms/NumericInput'
+import ProductCard from '../../components/molecules/ProductCard'
 import { ColWrapper, WelcomeWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
@@ -18,9 +18,9 @@ import { useFormats } from '../../utils/useFormats'
 import { PurchaseInputInterface } from '../../models/interfaces/Purchase'
 import * as PurchaseService from '../../services/Purchase'
 import { useNavigation } from '../../utils/useNavigation'
-import { ListTemplate } from '../../components/templates/ListTemplate'
-import { TwoOptionsModal } from '../../components/molecules/TwoOptionsModal'
-import { Typography } from '../../components/atoms/Typography'
+import ListTemplate from '../../components/templates/ListTemplate'
+import TwoOptionsModal from '../../components/molecules/TwoOptionsModal'
+import Typography from '../../components/atoms/Typography'
 import { useGreetings } from '../../utils/useGreetings'
 
 const QueryProducts = () => {

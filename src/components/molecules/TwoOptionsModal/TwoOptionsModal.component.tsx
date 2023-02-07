@@ -2,7 +2,7 @@ import React from 'react'
 
 import ButtonEnum from '../../../models/Enums/Button'
 
-import { Typography } from '../../atoms/Typography'
+import Typography from '../../atoms/Typography'
 import { ButtonsWrapper, StyledButtons, TwoOptionsModal } from './TwoOptionsModal.styles'
 
 interface TwoOptionsModalComponentInterface {

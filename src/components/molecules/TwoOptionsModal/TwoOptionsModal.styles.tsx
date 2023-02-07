@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { sizes } from '../../../assets/styles/variables'
-import { Button } from '../../atoms/Button'
+import Button from '../../atoms/Button'
 import { ModalWrapper } from '../Modal/Modal.styles'
 
 export const TwoOptionsModal = styled(ModalWrapper)``

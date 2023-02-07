@@ -3,12 +3,12 @@ import { toast } from 'react-toastify'
 import { Controller, useForm } from 'react-hook-form'
 
 import { RegisterProductInterface } from '../../models/interfaces/Product'
-import { Typography } from '../../components/atoms/Typography'
-import { Button } from '../../components/atoms/Button'
-import { NumericInputFormat } from '../../components/atoms/NumericInputFormat'
+import Typography from '../../components/atoms/Typography'
+import Button from '../../components/atoms/Button'
+// import NumericInputFormat from '../../components/atoms/NumericInputFormat'
 // import { NumericInput } from '../../components/atoms/NumericInput'
 // import { ProductCard } from '../../components/molecules/ProductCard'
-import { FormField } from '../../components/molecules/FormField'
+import FormField from '../../components/molecules/FormField'
 
 import {
   ButtonWrapper,
@@ -54,7 +54,7 @@ const ProductRegisterComponent = () => {
             )}
           />
           <RowWrapper>
-            <ColWrapper lg={7} md={7} sm={7} xs={7}>
+            {/* <ColWrapper lg={7} md={7} sm={7} xs={7}>
               <Controller
                 name="value"
                 control={control}
@@ -62,24 +62,24 @@ const ProductRegisterComponent = () => {
                 render={({ field }) => (
                   <FormField
                     label="Valor"
-                    otherFormField={
-                      <NumericInputFormat
-                        type="tel"
-                        decimalSeparator=","
-                        displayType="input"
-                        allowLeadingZeros
-                        allowNegative={false}
-                        prefix="R$ "
-                        decimalScale={2}
-                        fixedDecimalScale
-                        {...field}
-                      />
-                    }
+                  otherFormField={
+                    <NumericInputFormat
+                      type="tel"
+                      decimalSeparator=","
+                      displayType="input"
+                      allowLeadingZeros
+                      allowNegative={false}
+                      prefix="R$ "
+                      decimalScale={2}
+                      fixedDecimalScale
+                      {...field}
+                    />
+                  }
                   />
                 )}
                 defaultValue={0}
               />
-            </ColWrapper>
+            </ColWrapper> */}
             <ColWrapper lg={5} md={5} sm={5} xs={5}>
               <Controller
                 name="imgUrl"

@@ -7,10 +7,10 @@ import * as PaymentService from '../../services/Payments'
 
 import { useFormats } from '../../utils/useFormats'
 
-import { Typography } from '../../components/atoms/Typography'
-import { Paper } from '../../components/atoms/Paper'
+import Typography from '../../components/atoms/Typography'
+import Paper from '../../components/atoms/Paper'
 // import { Button } from '../../components/atoms/Button'
-import { NoData } from '../../components/molecules/NoData'
+import NoData from '../../components/molecules/NoData'
 // import { Container } from '../../components/atoms/Container'
 import { useUser } from '../../context/User'
 

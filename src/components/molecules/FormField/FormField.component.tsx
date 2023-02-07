@@ -1,7 +1,7 @@
 import React from 'react'
-import { Typography } from '../../atoms/Typography'
+import Typography from '../../atoms/Typography'
 
-import { Input } from '../../atoms/Input'
+import Input from '../../atoms/Input'
 import { InputComponentInterface } from '../../atoms/Input/Input.component'
 import { FormField } from './FormField.styles'
 

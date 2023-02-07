@@ -1,1 +1,1 @@
-export { default as MyAccount } from './MyAccount.component'
+export { default } from './MyAccount.component'

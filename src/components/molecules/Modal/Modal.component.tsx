@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import { Background } from '../../atoms/Background'
-import { ModalWrapper } from './Modal.styles'
+import Background from '../../atoms/Background'
+import ModalWrapper from './Modal.styles'
 
 interface ModalComponentInterface {
   children: ReactNode

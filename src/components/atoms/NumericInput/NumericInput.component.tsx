@@ -3,7 +3,7 @@ import { StyledComponentPropsWithRef } from 'styled-components'
 
 import NumericInput, { Container } from './NumericInput.style'
 
-import { Button } from '../Button'
+import Button from '../Button'
 
 import { RemoveIcon, AddIcon } from '../../../assets/icons'
 import ButtonEnum from '../../../models/Enums/Button'

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { TwoOptionsModal } from '../../molecules/TwoOptionsModal'
+import TwoOptionsModal from '../../molecules/TwoOptionsModal'
 
 import { useUser } from '../../../context/User'
 import { useModal } from '../../../context/Modal'

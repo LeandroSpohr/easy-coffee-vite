@@ -1,10 +1,10 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 
-import { Typography } from '../../atoms/Typography'
+import Typography from '../../atoms/Typography'
 
-import { Badge } from '../../atoms/Badge'
-import { TwoOptionsModal } from '../TwoOptionsModal'
+import Badge from '../../atoms/Badge'
+import TwoOptionsModal from '../TwoOptionsModal'
 
 import { useNavigation } from '../../../utils/useNavigation'
 

@@ -3,7 +3,7 @@ import { reducer } from './reducer'
 import { ActionTypes } from './types'
 import initialValues from './initialValues'
 import ModalInterface from '../../models/interfaces/Modal'
-import { Modal } from '../../components/molecules/Modal'
+import Modal from '../../components/molecules/Modal'
 
 type Context = {
   state: ModalInterface

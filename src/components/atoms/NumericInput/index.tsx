@@ -1,1 +1,1 @@
-export { default as NumericInput } from './NumericInput.component'
+export { default } from './NumericInput.component'

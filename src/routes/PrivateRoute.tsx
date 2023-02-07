@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { MainTemplate } from '../components/templates/MainTemplate'
+import MainTemplate from '../components/templates/MainTemplate'
 
 import { useUser } from '../context/User'
 

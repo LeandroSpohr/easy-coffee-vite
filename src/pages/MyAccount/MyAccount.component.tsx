@@ -8,10 +8,10 @@ import * as PaymentService from '../../services/Payment'
 
 import PurchaseInterface from '../../models/interfaces/Purchase'
 
-import { Paper } from '../../components/atoms/Paper'
-import { Typography } from '../../components/atoms/Typography'
-import { Button } from '../../components/atoms/Button'
-import { QRCode } from '../../components/atoms/QRCode'
+import Paper from '../../components/atoms/Paper'
+import Typography from '../../components/atoms/Typography'
+import Button from '../../components/atoms/Button'
+import QRCode from '../../components/atoms/QRCode'
 
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'

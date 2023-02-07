@@ -20,3 +20,6 @@ export const Background = styled.div<BackgroundInterface>`
       justify-content: center;
     `}
 `
+
+
+export default Background

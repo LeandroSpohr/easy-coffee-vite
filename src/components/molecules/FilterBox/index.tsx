@@ -1,1 +1,1 @@
-export { default as FilterBox } from './FilterBox.component'
+export { default } from './FilterBox.component'

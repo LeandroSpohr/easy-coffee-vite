@@ -6,14 +6,14 @@ import ButtonEnum from '../../models/Enums/Button'
 
 import * as UserService from '../../services/Users'
 
-import { Container } from '../../components/atoms/Container'
-import { Button } from '../../components/atoms/Button'
-import { Paper } from '../../components/atoms/Paper'
-import { Typography } from '../../components/atoms/Typography'
-import { Input } from '../../components/atoms/Input'
-import { Image } from '../../components/atoms/Image'
-
+import Container from '../../components/atoms/Container'
+import Button from '../../components/atoms/Button'
+import Paper from '../../components/atoms/Paper'
+import Typography from '../../components/atoms/Typography'
+import Image from '../../components/atoms/Image'
+import Input from '../../components/atoms/Input'
 import coffeeCup from '../../assets/images/coffeeCup.svg'
+
 import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'

@@ -1,1 +1,1 @@
-export { default as QRCode } from './QRCode.component'
+export { default } from './QRCode.component'

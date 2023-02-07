@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Background } from './Background.styles'
+import Background from './Background.styles'
 
 interface BackgroundComponentInterface {
   isVisible: boolean

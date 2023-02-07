@@ -1,1 +1,1 @@
-export { default as RegisterProduct } from './RegisterProduct.component'
+export { default } from './RegisterProduct.component'
