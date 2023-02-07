@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import AppBar, { InfoWrapper, IconWrapper, ActionsWrapper, ColWrapper, TitleWrapper, AppBarWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
 
@@ -23,6 +23,8 @@ import { useNavigation } from '../../../utils/useNavigation'
 import { useModal } from '../../../context/Modal'
 import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
+import { Col, Row } from 'react-grid-system'
+import { RowWrapper } from '../../../pages/RegisterProduct/RegisterProduct.styles'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
@@ -68,81 +70,52 @@ const AppBarComponent = () => {
       return state.cart.length
     }
   }
-  interface IPageHandler {
-    path: string,
-    display: JSX.Element
-  }
 
-  const iconHandler = ({ path, display }: IPageHandler) => {
+  const goBackHandler = (path: string) => {
     if (path === pathname) {
-      return <QueryProductIcon size={sizes.size32} onClick={() => goToProducts()} />
+      return (
+        <IconWrapper>
+          <Typography as='h2'>EasyCoffee</Typography>
+        </IconWrapper>
+      )
     }
-    else return display
-  }
-
-
-  interface IControlledIcon {
-    path: string
-    children: JSX.Element
-  }
-
-  const ControlledIcon = ({ path, children }: IControlledIcon) => {
-
-    setIsProducts(!isProducts)
-
-    return (
-      <IconWrapper>
-        {isProducts ? <QueryProductIcon /> : children}
+    else return <>
+      <IconWrapper onClick={() => goToProducts()}>
+        < LeftArrowIcon onClick={goBack} size={sizes.size28} />
       </IconWrapper>
-    )
+    </>
   }
 
   return (
+
     <AppBar>
-      <ControlledIcon path={'minha-conta'} >
-        <AccountIcon size={sizes.size32} />
-      </ControlledIcon>
-      {/* {pageHandler({
-        path: '/produtos', display: {
-          isTrue:
-            <InfoWrapper >
-              <Typography as="h2">EasyCoffee</Typography>
-            </InfoWrapper >,
-          isFalse:
-            <InfoWrapper onClick={() => goBack()}>
-              < LeftArrowIcon size={sizes.size28} />
-            </InfoWrapper>
-        }
-      })} */}
-
-      {/* <ControlledIcon path={'/minha-conta'}>
-        {<AccountIcon size={sizes.size32} onClick={() => goToMyAccount()} />}
-      </ControlledIcon> */}
-      {/* <ActionsWrapper>
-
-        {iconHandler({
-          path: '/minha-conta',
-          display:
-            <IconWrapper >
-              <AccountIcon size={sizes.size32} onClick={() => goToMyAccount()} />
-            </IconWrapper>
-        })}
-        {iconHandler({
-          path: '/carrinho',
-          display:
-            <IconWrapper >
+      <RowWrapper>
+        <ColWrapper xs={4.5}>
+          <TitleWrapper>
+            {goBackHandler('/produtos')}
+          </TitleWrapper>
+        </ColWrapper>
+        <Col xs={6}>
+          <Row>
+            {pathname !== '/produtos' ? <ColWrapper xs={2.4} onClick={() => goToProducts()}>
+              <QueryProductIcon size={sizes.size32} />
+            </ColWrapper> : <ColWrapper />}
+            <ColWrapper xs={2.4} onClick={() => goToCart()}>
               <CartIcon size={sizes.size32} />
               <Badge className="badge">{getBadgeNumber()}</Badge>
-            </IconWrapper>
-        })}
-        {iconHandler}
-        <IconWrapper onClick={() => goToPurchaseHistoric()}>
-          <PurchaseHistoricIcon size={sizes.size32} />
-        </IconWrapper>
-        <IconWrapper onClick={() => displayLogoutModal()}>
-          <ExitIcon size={sizes.size32} />
-        </IconWrapper>
-      </ActionsWrapper> */}
+            </ColWrapper>
+            <ColWrapper xs={2.4} onClick={() => goToMyAccount()} >
+              <AccountIcon size={sizes.size32} />
+            </ColWrapper>
+            <ColWrapper xs={2.4} onClick={() => goToPurchaseHistoric()}>
+              <PurchaseHistoricIcon size={sizes.size32} />
+            </ColWrapper>
+            <ColWrapper xs={2.4} onClick={() => displayLogoutModal()}>
+              <ExitIcon size={sizes.size32} />
+            </ColWrapper>
+          </Row>
+        </Col>
+      </RowWrapper>
     </AppBar >
   )
 }
