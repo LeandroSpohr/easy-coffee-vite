@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
+import AppBar, { IconWrapper, ColWrapper, IconColWrapper, RowWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
 
@@ -10,6 +10,7 @@ import {
   LeftArrowIcon,
   AccountIcon,
   PurchaseHistoricIcon,
+  ProductIcon,
 } from '../../../assets/icons'
 
 import { sizes } from '../../../assets/styles/variables'
@@ -25,7 +26,7 @@ import Badge from '../../atoms/Badge'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
-  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric } = useNavigation()
+  const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric, goToProducts } = useNavigation()
   const { dispatch: modalDispatch } = useModal()
   const { pathname } = useLocation()
 
@@ -71,15 +72,72 @@ const AppBarComponent = () => {
     switch (pathname) {
       case '/produtos':
         return (
-          <InfoWrapper >
-            <Typography as="h2">EasyCoffee</Typography>
-          </InfoWrapper >
+          <RowWrapper>
+            <ColWrapper xs={4}>
+              <Typography as="h2">EasyCoffee</Typography>
+            </ColWrapper>
+            <ColWrapper xs={6}>
+              <ColWrapper xs={4}>
+                <IconWrapper onClick={() => goToCart()}>
+                  <CartIcon size={sizes.size32} />
+                  <Badge className="badge">{getBadgeNumber()}</Badge>
+                </IconWrapper>
+              </ColWrapper>
+              <ColWrapper xs={4}>
+                <IconWrapper onClick={() => goToMyAccount()}>
+                  <AccountIcon size={sizes.size32} />
+                </IconWrapper>
+              </ColWrapper>
+              <ColWrapper xs={4}>
+                <IconWrapper onClick={() => goToPurchaseHistoric()}>
+                  <PurchaseHistoricIcon size={sizes.size32} />
+                </IconWrapper>
+              </ColWrapper>
+            </ColWrapper>
+            <ColWrapper ended>
+              <IconWrapper onClick={() => displayLogoutModal()}>
+                <ExitIcon size={sizes.size32} />
+              </IconWrapper>
+            </ColWrapper>
+          </RowWrapper>
         )
       default:
         return (
-          <InfoWrapper onClick={() => goBack()}>
-            < LeftArrowIcon size={sizes.size28} />
-          </InfoWrapper>
+          <RowWrapper>
+            <ColWrapper xs={2} sm={4}>
+              <IconWrapper onClick={() => goBack()}>
+                < LeftArrowIcon size={sizes.size28} />
+              </IconWrapper>
+            </ColWrapper>
+            <ColWrapper xs={8} sm={4}>
+              <IconColWrapper xs={3}>
+                <IconWrapper onClick={() => goToProducts()}>
+                  <ProductIcon size={sizes.size32} />
+                </IconWrapper>
+              </IconColWrapper>
+              <IconColWrapper xs={3} >
+                <IconWrapper onClick={() => goToCart()}>
+                  <CartIcon size={sizes.size32} />
+                  <Badge className="badge">{getBadgeNumber()}</Badge>
+                </IconWrapper>
+              </IconColWrapper>
+              <IconColWrapper xs={3} >
+                <IconWrapper onClick={() => goToMyAccount()}>
+                  <AccountIcon size={sizes.size32} />
+                </IconWrapper>
+              </IconColWrapper>
+              <IconColWrapper xs={3}>
+                <IconWrapper onClick={() => goToPurchaseHistoric()}>
+                  <PurchaseHistoricIcon size={sizes.size32} />
+                </IconWrapper>
+              </IconColWrapper>
+            </ColWrapper>
+            <ColWrapper xs={2} sm={4} ended>
+              <IconWrapper onClick={() => displayLogoutModal()}>
+                <ExitIcon size={sizes.size32} />
+              </IconWrapper>
+            </ColWrapper>
+          </RowWrapper>
         )
     }
   }
@@ -87,21 +145,6 @@ const AppBarComponent = () => {
   return (
     <AppBar>
       {pageHandler()}
-      <ActionsWrapper>
-        <IconWrapper onClick={() => goToMyAccount()}>
-          <AccountIcon size={sizes.size32} />
-        </IconWrapper>
-        <IconWrapper onClick={() => goToCart()}>
-          <CartIcon size={sizes.size32} />
-          <Badge className="badge">{getBadgeNumber()}</Badge>
-        </IconWrapper>
-        <IconWrapper onClick={() => goToPurchaseHistoric()}>
-          <PurchaseHistoricIcon size={sizes.size32} />
-        </IconWrapper>
-        <IconWrapper onClick={() => displayLogoutModal()}>
-          <ExitIcon size={sizes.size32} />
-        </IconWrapper>
-      </ActionsWrapper>
     </AppBar>
   )
 }
