@@ -51,8 +51,7 @@ export const IconColWrapper = styled(Col)`
 `
 
 export const RowWrapper = styled(Row)`
-   width: ${sizes.size100Percent};
-   background-color: 'black'
+  width: ${sizes.size100Percent};
 `
 
 export default AppBar
