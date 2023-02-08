@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import AppBar, { InfoWrapper, IconWrapper, ActionsWrapper, ColWrapper, TitleWrapper, AppBarWrapper } from './AppBar.style'
+import AppBar, { InfoWrapper, IconWrapper, ActionsWrapper, ColWrapper, TitleWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
 
@@ -25,13 +25,15 @@ import TwoOptionsModal from '../TwoOptionsModal'
 import Badge from '../../atoms/Badge'
 import { Col, Row } from 'react-grid-system'
 import { RowWrapper } from '../../../pages/RegisterProduct/RegisterProduct.styles'
+import { isMobile } from 'react-device-detect'
+import Button from '../../atoms/Button'
 
 const AppBarComponent = () => {
   const { state, dispatch: userDispatch } = useUser()
   const { goBack, goToMyAccount, goToCart, goToHome, goToPurchaseHistoric, goToProducts } = useNavigation()
   const { dispatch: modalDispatch } = useModal()
   const { pathname } = useLocation()
-  const [isProducts, setIsProducts] = useState(false)
+  const [showAppbar, setShowAppbar] = useState(true)
 
   const displayLogoutModal = () => {
     modalDispatch({
@@ -73,49 +75,61 @@ const AppBarComponent = () => {
 
   const goBackHandler = (path: string) => {
     if (path === pathname) {
-      return (
-        <IconWrapper>
-          <Typography as='h2'>EasyCoffee</Typography>
-        </IconWrapper>
-      )
+      return <Typography as='h2'>EasyCoffee</Typography>
+
     }
-    else return <>
-      <IconWrapper onClick={() => goToProducts()}>
-        < LeftArrowIcon onClick={goBack} size={sizes.size28} />
-      </IconWrapper>
-    </>
+    else return < LeftArrowIcon onClick={goBack} size={sizes.size28} />
+
   }
 
-  return (
+  const onScroll = async () => {
+    if (window.pageYOffset > window.innerHeight / 4) {
+      setShowAppbar(false)
 
-    <AppBar>
-      <RowWrapper>
-        <ColWrapper xs={4.5}>
-          <TitleWrapper>
+    } else {
+      setShowAppbar(true)
+    }
+  }
+
+  const position = () => {
+    window.addEventListener('scroll', () => onScroll())
+  }
+
+  useState(() => {
+    position()
+  })
+
+
+  return (
+    <AppBar isVisible={showAppbar} >
+      <Row>
+        <ColWrapper xs={4} sm={1}>
+          <InfoWrapper onClick={() => goToProducts()}>
             {goBackHandler('/produtos')}
-          </TitleWrapper>
+          </InfoWrapper>
         </ColWrapper>
-        <Col xs={6}>
-          <Row>
+        <Col xs={4} sm={11}>
+          <Button onClick={() => position()} ></Button>
+          <ActionsWrapper>
             {pathname !== '/produtos' ? <ColWrapper xs={2.4} onClick={() => goToProducts()}>
               <QueryProductIcon size={sizes.size32} />
             </ColWrapper> : <ColWrapper />}
-            <ColWrapper xs={2.4} onClick={() => goToCart()}>
+            <ColWrapper xs={2.4} sm={1} onClick={() => goToCart()}>
               <CartIcon size={sizes.size32} />
               <Badge className="badge">{getBadgeNumber()}</Badge>
             </ColWrapper>
-            <ColWrapper xs={2.4} onClick={() => goToMyAccount()} >
+            <ColWrapper xs={2.4} sm={1} onClick={() => goToMyAccount()} >
               <AccountIcon size={sizes.size32} />
             </ColWrapper>
-            <ColWrapper xs={2.4} onClick={() => goToPurchaseHistoric()}>
+            <ColWrapper xs={2.4} sm={1} onClick={() => goToPurchaseHistoric()}>
               <PurchaseHistoricIcon size={sizes.size32} />
             </ColWrapper>
-            <ColWrapper xs={2.4} onClick={() => displayLogoutModal()}>
+            <ColWrapper xs={2.4} sm={1} onClick={() => displayLogoutModal()}>
               <ExitIcon size={sizes.size32} />
             </ColWrapper>
-          </Row>
+          </ActionsWrapper>
         </Col>
-      </RowWrapper>
+      </Row>
     </AppBar >
   )
 }
