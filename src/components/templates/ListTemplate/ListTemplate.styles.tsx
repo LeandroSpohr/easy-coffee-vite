@@ -14,5 +14,6 @@ export const TitleWrapper = styled.div`
   background-color: ${colors.brown};
   border-radius: ${sizes.size10} ${sizes.size10} 0 0;
   margin-top: ${sizes.size20};
-  height: ${sizes.size40};
+  align-items: center;
+  height: ${sizes.size50};
 `

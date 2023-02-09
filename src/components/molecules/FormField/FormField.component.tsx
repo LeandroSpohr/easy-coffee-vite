@@ -6,7 +6,7 @@ import { InputComponentInterface } from '../../atoms/Input/Input.component'
 import { FormField } from './FormField.styles'
 
 interface FormFieldComponentInterface extends InputComponentInterface {
-  label: string
+  label?: string
   otherFormField?: JSX.Element
 }
 
@@ -14,7 +14,7 @@ const FormFieldComponent = ({ label, otherFormField, ...rest }: FormFieldCompone
   return (
     <FormField>
       <Typography as="h3">{label}</Typography>
-      {otherFormField ? otherFormField : <Input {...rest} />}
+      {otherFormField ? otherFormField : <Input autoComplete='off' {...rest} />}
     </FormField>
   )
 }

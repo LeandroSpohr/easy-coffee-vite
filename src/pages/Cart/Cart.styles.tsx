@@ -14,3 +14,7 @@ export const FlexWrapper = styled.div<WrapperInterface>`
   display: flex;
   justify-content: ${({ centered }: WrapperInterface) => (!centered ? 'flex-end' : 'center')};
 `
+
+export const FlexEndWrapper = styled.div`
+  text-align: end;
+`
