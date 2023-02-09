@@ -19,7 +19,6 @@ import { useNavigation } from '../../utils/useNavigation'
 import { Formik, useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import { useValidate } from '../../utils/useValidate'
-import FormField from '../../components/molecules/FormField'
 import MaskInput from '../../components/atoms/MaskInput'
 
 const { brown } = colors

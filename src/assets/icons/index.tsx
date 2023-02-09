@@ -85,6 +85,7 @@ export const ArrowDownIcon = styled(MdKeyboardArrowDown).attrs(defaultConfig)`
 export const ArrowUpIcon = styled(MdKeyboardArrowUp).attrs(defaultConfig)`
   color: ${({ color }: IconInterface) => color || white};
 `
-export const QueryProductIcon = styled(MdCoffee).attrs(defaultConfig)`
-color: ${({ color }: IconInterface) => color || white};
+
+export const ProductIcon = styled(MdCoffee).attrs(defaultConfig)`
+  color: ${({ color }: IconInterface) => color || white};
 `

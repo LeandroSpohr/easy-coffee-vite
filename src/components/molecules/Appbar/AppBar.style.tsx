@@ -1,46 +1,59 @@
+import { Col, Row } from 'react-grid-system'
 import styled from 'styled-components'
-import { colors, sizes } from '../../../assets/styles/variables'
+import { colors, sizes, zIndex } from '../../../assets/styles/variables'
 
-const { transparentBrown } = colors
 
 const AppBar = styled.header`
   display: flex;
-  position: absolute;
+  position: fixed;
   align-items: center;
-  background-color: ${transparentBrown};
-  justify-content: space-between;
+  background-color: ${colors.brown};
+  justify-content: center;
   width: ${sizes.size100Percent};
   border-radius: 0 0 ${sizes.size10} ${sizes.size10};
   height: ${sizes.size50};
+  z-index: ${zIndex.firstLayer};
+  box-shadow: 0 ${sizes.size5} ${sizes.size5} ${colors.darkerBrown};
 `
 
-export const InfoWrapper = styled.div`
-  display: flex;
-  margin-left: ${sizes.size20};
-  justify-content: space-around;
-  align-items: center;
-`
+
 
 export const IconWrapper = styled.div`
-  display: flex;
-
-  :active {
-    transition: 100ms;
+display: flex;
+align-items: center;
+:active {
+  transition: 100ms;
     transform: scale(0.8);
     border-radius: ${sizes.size50Percent};
   }
-
+  
   .badge {
     position: absolute;
     top: ${sizes.size4};
   }
+  `
+
+interface ColWrapperInterface {
+  centeralized?: boolean
+  ended?: string
+}
+
+export const ColWrapper = styled(Col) <ColWrapperInterface>`
+  display: flex;
+  justify-content: ${({ centeralized }: ColWrapperInterface) => (!centeralized ? '' : 'center')};
+  justify-content: ${({ ended }: ColWrapperInterface) => (!ended ? '' : 'flex-end')};
+
 `
 
-export const ActionsWrapper = styled.div`
+export const IconColWrapper = styled(Col)`
   display: flex;
-  justify-content: space-between;
-  width: ${sizes.size50Percent};
-  max-width: ${sizes.size200};
-  margin-right: ${sizes.size10};
+  justify-content: center;
+`
+
+export const RowWrapper = styled(Row)`
+  width: ${sizes.size100Percent};
 `
 export default AppBar
+
+
+
