@@ -13,7 +13,7 @@ const AppBar = styled.header`
   border-radius: 0 0 ${sizes.size10} ${sizes.size10};
   height: ${sizes.size50};
   z-index: ${zIndex.firstLayer};
-  box-shadow: 0 ${sizes.size10} ${sizes.size10} ${colors.darkerBrown};
+  box-shadow: 0 ${sizes.size5} ${sizes.size5} ${colors.darkerBrown};
 `
 
 
@@ -35,7 +35,7 @@ align-items: center;
 
 interface ColWrapperInterface {
   centeralized?: boolean
-  ended?: boolean
+  ended?: string
 }
 
 export const ColWrapper = styled(Col) <ColWrapperInterface>`

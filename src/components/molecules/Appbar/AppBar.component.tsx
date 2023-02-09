@@ -94,7 +94,7 @@ const AppBarComponent = () => {
                 </IconWrapper>
               </ColWrapper>
             </ColWrapper>
-            <ColWrapper ended>
+            <ColWrapper ended={'true'}>
               <IconWrapper onClick={() => displayLogoutModal()}>
                 <ExitIcon size={sizes.size32} />
               </IconWrapper>
@@ -132,7 +132,7 @@ const AppBarComponent = () => {
                 </IconWrapper>
               </IconColWrapper>
             </ColWrapper>
-            <ColWrapper xs={2} sm={4} ended>
+            <ColWrapper xs={2} sm={4} ended={'true'}>
               <IconWrapper onClick={() => displayLogoutModal()}>
                 <ExitIcon size={sizes.size32} />
               </IconWrapper>
