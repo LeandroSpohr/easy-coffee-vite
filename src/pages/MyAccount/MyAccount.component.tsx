@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-grid-system'
 import { toast } from 'react-toastify'
-import { isMobile } from 'react-device-detect'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import * as PurchaseService from '../../services/Purchase'
 import * as PaymentService from '../../services/Payment'
@@ -12,28 +10,25 @@ import PurchaseInterface from '../../models/interfaces/Purchase'
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
 import Button from '../../components/atoms/Button'
-import QRCode from '../../components/atoms/QRCode'
 
 import { useUser } from '../../context/User'
 import { useFormats } from '../../utils/useFormats'
 import { useNavigation } from '../../utils/useNavigation'
 
-import { ItemWrapper, FlexWrapper } from './MyAccount.styles'
+import { ItemWrapper, ColWrapper, OpenValueWrapper, PayAllWrapper } from './MyAccount.styles'
 import { colors } from '../../assets/styles/variables'
 import List from '../../components/templates/ListTemplate/ListTemplate.component'
-import coffeeCup from '../../assets/images/favicon.svg'
+import PayQR from '../../components/molecules/PayQR'
+import NoData from '../../components/molecules/NoData'
 const { brown } = colors
 
 const MyAccount = () => {
   const { formatCurrency } = useFormats()
-  const { state } = useUser()
-  const { goBack } = useNavigation()
-
+  const { state, dispatch } = useUser()
+  const { goToProducts, goToPurchaseHistoric } = useNavigation()
   const userId = state.user ? state.user.id : ''
 
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
-  const [payValue, setPayValue] = useState<number>()
-  const [viewPIX, setViewPIX] = useState<string>('')
 
   const printTitle = (value: string) => <Typography as="h4">{value}</Typography>
 
@@ -46,7 +41,10 @@ const MyAccount = () => {
   const payPurchase = (purchaseId: string, value: number) => {
     const purchaseIds = [purchaseId]
     PaymentService.payPurchases(userId, purchaseIds).then(() => {
-      setPayValue(value)
+      dispatch({
+        type: 'ADD_PAYMENT_VALUE',
+        payload: value
+      })
       toast.success('Status da compra alterado com sucesso, prossiga com o pagamento via PIX!')
       const updatedPurchases = purchases.filter((purchase) => purchase.id !== purchaseId)
       setPurchases(updatedPurchases)
@@ -63,7 +61,10 @@ const MyAccount = () => {
     const purchaseIds = purchases.map((purchase) => purchase.id)
     const purchasesValue = getTotalValue(purchases)
     PaymentService.payPurchases(userId, purchaseIds).then(() => {
-      setPayValue(purchasesValue)
+      dispatch({
+        type: 'ADD_PAYMENT_VALUE',
+        payload: purchasesValue
+      })
       toast.success('Status das compras alterado com sucesso, prossiga com o pagamento via PIX!', {
         autoClose: 5000,
       })
@@ -71,87 +72,72 @@ const MyAccount = () => {
     })
   }
 
+  const purchaseItem = (purchase: PurchaseInterface) =>
+    <ItemWrapper key={'item' + purchase.id}>
+      <Paper key={'paper' + purchase.id}>
+        <Row key={'row' + purchase.id}>
+          <Col xs={3} key={'col' + purchase.id} sm={3}>
+            {printTitle('Produto')}
+            {printValue(purchase.product.description)}
+          </Col>
+          <Col xs={2} sm={3}>
+            {printTitle('Qtd')}
+            {printValue(purchase.quantity)}
+          </Col>
+          <Col xs={2.8} sm={3}>
+            {printTitle('Total')}
+            {printValue(formatCurrency(purchase.value))}
+          </Col>
+          <Col xs={0}>
+            {!state.paymentValue ?
+              <Button onClick={() => { payPurchase(purchase.id, purchase.value), scrollToQR() }}>Pagar</Button>
+              :
+              <Button onClick={() => payPurchase(purchase.id, purchase.value)}>Pagar junto</Button>
+            }
+          </Col>
+        </Row>
+      </Paper>
+    </ItemWrapper >
+
   useEffect(() => {
     PurchaseService.getAllOpen(userId).then(setPurchases)
   }, [])
 
+  const scrollToQR = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <List title={'Compras em Aberto'}>
-      <FlexWrapper centered>
-        <QRCode
-          pixkey="26442024000194"
-          merchant="Facil Promotora de Vendas e Servicos Ltda"
-          city="PASSO FUNDO"
-          amount={payValue}
-          image={coffeeCup}
-          onLoad={(payload) => setViewPIX(payload)}
-        />
-      </FlexWrapper>
-      <FlexWrapper centered>
-        <ItemWrapper>
-          {/* {isMobile && ( */}
-          <CopyToClipboard text={viewPIX} onCopy={() => toast.success('PIX copiado com sucesso!')}>
-            <Button>Pix Copia e Cola</Button>
-          </CopyToClipboard>
-        </ItemWrapper>
-        {/* )} */}
-      </FlexWrapper>
-      <FlexWrapper centered>
-        <ItemWrapper>
-          <Typography as="h2">{formatCurrency(payValue)}</Typography>
-        </ItemWrapper>
-      </FlexWrapper>
-      {purchases.length ? (
-        <>
-          {purchases.map((purchase) => (
-            <ItemWrapper key={'item' + purchase.id}>
-              <Paper key={'paper' + purchase.id}>
-                <Row key={'row' + purchase.id}>
-                  <Col key={'col' + purchase.id}>
-                    {printTitle('Produto')}
-                    {printValue(purchase.product.description)}
-                  </Col>
-                  <Col>
-                    {printTitle('Qtd')}
-                    {printValue(purchase.quantity)}
-                  </Col>
-                  <Col>
-                    {printTitle('Total')}
-                    {printValue(formatCurrency(purchase.value))}
-                  </Col>
-                  <Col>
-                    <FlexWrapper>
-                      <Button onClick={() => payPurchase(purchase.id, purchase.value)}>
-                        Pagar
-                      </Button>
-                    </FlexWrapper>
-                  </Col>
-                </Row>
-              </Paper>
-            </ItemWrapper>
-          ))}
-          <FlexWrapper>
-            <ItemWrapper>
-              <Typography as="h4">Total {formatCurrency(getTotalValue(purchases))}</Typography>
-            </ItemWrapper>
-            <Button onClick={() => payAllPurchases()}>Pagar Todas</Button>
-          </FlexWrapper>
-        </>
-      ) : (
-        <>
-          <FlexWrapper centered>
-            <ItemWrapper>
-              <Typography as="h3">Nenhuma compra em aberto</Typography>
-            </ItemWrapper>
-          </FlexWrapper>
-          <FlexWrapper centered>
-            <ItemWrapper>
-              <Button onClick={() => goBack()}>Voltar</Button>
-            </ItemWrapper>
-          </FlexWrapper>
-        </>
-      )}
-    </List>
+    <List title={'Compras'}>
+      {state.paymentValue ? <><PayQR /><br /><br /></> : <></>
+      }
+      {
+        purchases.length ?
+          (
+            <>
+              <Row>
+                <ColWrapper xs={8} >
+                  <PayAllWrapper>
+                    <Button onClick={() => payAllPurchases()}>Pagar tudo</Button>
+                  </PayAllWrapper>
+                </ColWrapper>
+                <ColWrapper xs={4}>
+                  <OpenValueWrapper>
+                    <Typography as="h3">Em aberto {formatCurrency(getTotalValue(purchases))}</Typography>
+                  </OpenValueWrapper>
+                </ColWrapper>
+              </Row>
+              {purchases.map((purchase) => purchaseItem(purchase))}
+            </>
+          ) : <NoData text={'Nenhuma compra em aberto'} mainOption={{
+            text: 'Historico',
+            action: goToPurchaseHistoric
+          }} secondaryOption={{
+            text: 'Comprar',
+            action: goToProducts
+          }} />
+      }
+    </List >
   )
 }
 

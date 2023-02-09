@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { colors, sizes } from '../../../assets/styles/variables'
 
@@ -15,4 +15,9 @@ export const Wrapper = styled.div<WrapperProps>`
   ${({ showQRCode }) => !showQRCode && css`
     display: none;
   `}
+
+  :active {
+    transition: 200ms;
+    transform: scale(0.95);
+  }
 `

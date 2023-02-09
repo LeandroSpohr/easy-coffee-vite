@@ -43,5 +43,4 @@ export const ActionsWrapper = styled.div`
   max-width: ${sizes.size200};
   margin-right: ${sizes.size10};
 `
-
 export default AppBar

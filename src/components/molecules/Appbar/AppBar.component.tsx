@@ -3,7 +3,6 @@ import React from 'react'
 import AppBar, { InfoWrapper, ActionsWrapper, IconWrapper } from './AppBar.style'
 import { useLocation } from 'react-router-dom'
 
-
 import {
   CartIcon,
   ExitIcon,
