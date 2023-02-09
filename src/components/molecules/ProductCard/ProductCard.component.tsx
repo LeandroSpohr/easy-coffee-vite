@@ -49,7 +49,7 @@ const ProductCardComponent: React.FC<ProductCardComponentInterface> = ({
       <ActionWrapper>
         {inputQuantity}
         <Button buttonType={ButtonEnum.CircleButton} onClick={() => handleCartSubmit()}>
-          <AddToCartIcon size={sizes.size30} />
+          <AddToCartIcon size={sizes.size28} />
         </Button>
       </ActionWrapper>
       <PayWrapper onClick={handleSingleItemSubmit}>
