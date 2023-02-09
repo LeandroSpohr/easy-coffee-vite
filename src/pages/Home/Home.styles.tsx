@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { sizes } from '../../assets/styles/variables'
+import { colors, sizes } from '../../assets/styles/variables'
 
 export const Wrapper = styled.div`
-  margin-bottom: ${sizes.size50};
+  margin-bottom: ${sizes.size40};
 `
 
 export const FieldContainer = styled.div`
-  margin-block: ${sizes.size30};
+  margin-bottom: ${sizes.size30};
 `
 
 export const FullScreenWrapper = styled.div`
@@ -16,10 +16,14 @@ export const FullScreenWrapper = styled.div`
   left: ${sizes.size10};
 `
 
-export const ButtonWrapper = styled.div`
-  margin-block: ${sizes.size10};
+export const ButtonsWrapper = styled.div`
   display: flex;
-  flex-flow: column;
   justify-content: space-around;
-  gap: ${sizes.size10};
+  gap: ${sizes.size10}
+`
+
+export const ContentWrapper = styled.div`
+  padding: ${sizes.size15};
+  background-color: ${colors.transparentBrown};
+  border-radius: ${sizes.size20};
 `

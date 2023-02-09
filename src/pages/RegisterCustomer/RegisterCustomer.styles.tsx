@@ -1,28 +1,27 @@
 import styled from 'styled-components'
 
-import { sizes } from '../../assets/styles/variables'
+import { colors, sizes } from '../../assets/styles/variables'
 
 export const Wrapper = styled.div`
-  margin-bottom: ${sizes.size50};
 `
 
 export const FieldContainer = styled.div`
-  margin-block: ${sizes.size30};
+  margin-block: ${sizes.size10};
 `
 
 export const InputWrapper = styled.div`
   margin-block: ${sizes.size10};
   text-align: left;
-
-  h3 {
-    margin-left: ${sizes.size10};
-  }
 `
 
-export const ButtonWrapper = styled.div`
-  margin-block: ${sizes.size10};
+export const ButtonsWrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: space-around;
+  margin-top: ${sizes.size20};
   gap: ${sizes.size10};
+`
+
+export const ContentWrapper = styled.div`
+  padding: ${sizes.size15};
+  background-color: ${colors.transparentBrown};
+  border-radius: ${sizes.size20};
 `

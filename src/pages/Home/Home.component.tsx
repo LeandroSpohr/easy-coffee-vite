@@ -1,54 +1,47 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import * as UserService from '../../services/Users'
 import Container from '../../components/atoms/Container'
 import Button from '../../components/atoms/Button'
 import Paper from '../../components/atoms/Paper'
 import Typography from '../../components/atoms/Typography'
-import Input from '../../components/atoms/Input'
 import Image from '../../components/atoms/Image'
 
 import coffeeCup from '../../assets/images/coffeeCup.svg'
-import { Wrapper, FieldContainer, FullScreenWrapper, ButtonWrapper } from './Home.styles'
+import { Wrapper, FieldContainer, FullScreenWrapper, ButtonsWrapper, ContentWrapper } from './Home.styles'
 
 import { FullScreenIcon, FullScreenExitIcon } from '../../assets/icons'
 
 import { useUser } from '../../context/User'
 import { colors, sizes } from '../../assets/styles/variables'
-import { useFormats } from '../../utils/useFormats'
 import { ButtonEnum } from '../../models/Enums/Button'
 import { useNavigation } from '../../utils/useNavigation'
-import { useValidate } from '../../utils/useValidate'
+import { Formik, useFormik } from 'formik'
 import { toast } from 'react-toastify'
+import { useValidate } from '../../utils/useValidate'
+import MaskInput from '../../components/atoms/MaskInput'
 
 const { brown } = colors
 const { size200 } = sizes
 
 const Home = () => {
   const { dispatch } = useUser()
-  const [cpf, setCpf] = useState<string>('')
-  const { goToProducts } = useNavigation()
+  const { goToProducts, goToRegister } = useNavigation()
   const { validateCPF } = useValidate()
-  const { setCpfMask, removeCpfMask } = useFormats()
 
   const [toggle, setToggle] = useState<boolean>(false)
 
   const handleSubmit = (cpf: string) => {
-    cpf = removeCpfMask(cpf)
-    if (validateCPF(cpf)) {
-      UserService.getByCpf(cpf)
-        .then((response) => {
-          if (response) {
-            dispatch({
-              type: 'ADD_USER',
-              payload: response,
-            })
-          }
-        })
-        .then(() => goToProducts())
-    }
-    else toast.error(`${'CPF inválido'}`)
+    UserService.getByCpf(cpf)
+      .then((response) => {
+        if (response) {
+          dispatch({
+            type: 'ADD_USER',
+            payload: response,
+          })
+        } else toast.error('User not found')
+      })
+      .then(() => goToProducts())
   }
 
   const handleToggleFullScreen = () => {
@@ -67,63 +60,77 @@ const Home = () => {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-
-    if (name === 'cpf' && value.length > 14) {
-      return
+  const formik = useFormik({
+    initialValues: { cpf: '' },
+    onSubmit: () => {
+      const cpf = formik.values.cpf
+      if (validateCPF(cpf)) {
+        handleSubmit(cpf)
+      } else if (cpf.length < 1) {
+        toast.warn('Insira seu CPF para acessar')
+      } else toast.error('CPF inválido')
     }
-
-    setCpf(value)
-  }
+  })
 
   return (
     <Container fullHeight fullCentered>
-      <FullScreenWrapper>
-        <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
-          {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
-        </Button>
-      </FullScreenWrapper>
-      <Paper fullCentered>
-        <form onSubmit={(e) => e.preventDefault()}>
+      <ContentWrapper>
+        <FullScreenWrapper>
+          <Button buttonType={ButtonEnum.CircleButton} onClick={handleToggleFullScreen}>
+            {toggle ? <FullScreenExitIcon /> : <FullScreenIcon />}
+          </Button>
+        </FullScreenWrapper>
+        <Paper fullCentered>
           <Wrapper>
             <Image src={coffeeCup} maxHeight={size200} maxWidth={3} />
             <Typography color={brown}>Easy Coffee</Typography>
+            <Typography as="h2" color={colors.white}></Typography>
           </Wrapper>
-          <FieldContainer>
-            <Input
-              type="text"
-              value={setCpfMask(cpf)}
-              name="cpf"
-              onChange={(e) => handleChange(e)}
-              placeholder="Informe seu CPF"
-              autoComplete="off"
-            />
-          </FieldContainer>
-          <Container displayBlock>
-            <ButtonWrapper>
-              <div>
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    handleSubmit(cpf)
-                  }}
-                >
-                  Entrar
-                </Button>
-              </div>
-              <div>
-                <Link to="/cadastro">
-                  <Typography as="h4" color={brown}>
-                    Registre-se
-                  </Typography>
-                </Link>
-              </div>
-            </ButtonWrapper>
-          </Container>
-        </form>
-      </Paper>
-    </Container>
+          <Formik
+            initialValues={{ cpf: '' }}
+            onSubmit={(values) => {
+              if (!values.cpf) {
+                toast.warn('Preencha todos os campos')
+                return
+              }
+              if (!validateCPF(values.cpf)) {
+                toast.error('CPF inválido')
+                return
+              }
+              handleSubmit(values.cpf)
+            }}
+          >
+            {({
+              values,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <FieldContainer>
+                  <MaskInput
+                    type="tel"
+                    name="cpf"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cpf}
+                    placeholder={'Informe seu CPF'}
+
+                    mask={'999.999.999-99'}
+                  />
+                </FieldContainer>
+                <ButtonsWrapper>
+                  <Button fluid onClick={goToRegister}>
+                    Cadastro
+                  </Button>
+                  <Button fluid type='submit' buttonType={ButtonEnum.OutlinedMainButton}>Entrar</Button>
+                </ButtonsWrapper>
+              </form>
+            )}
+          </Formik>
+        </Paper >
+      </ContentWrapper>
+    </Container >
   )
 }
 

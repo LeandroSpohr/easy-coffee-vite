@@ -13,6 +13,7 @@ export default interface UserInterface {
 export interface UserContextInterface {
   cart: CartInterface[]
   hasUser: boolean
+  paymentValue: number
   permissionLevel: UserEnum
   user: UserInterface | null
 }

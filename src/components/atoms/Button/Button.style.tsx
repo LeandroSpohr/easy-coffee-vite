@@ -1,5 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { sizes, colors, fontSizes, fontWeights } from '../../../assets/styles/variables'
+
+interface ButtonInterface {
+  fluid?: boolean
+}
 
 const defaultConfig = styled.button`
   border: none;
@@ -10,6 +14,13 @@ const defaultConfig = styled.button`
   font-weight: ${fontWeights.size700};
   font-size: ${fontSizes.fontSize18};
   color: ${colors.white};
+
+
+  ${({ fluid }: ButtonInterface) =>
+    fluid && css`
+      width: ${sizes.size100Percent};
+      height: ${sizes.size100Percent};
+    `};
 
   :active {
     transition: 100ms;
@@ -22,7 +33,8 @@ export const MainButton = styled(defaultConfig)``
 export const OutlinedMainButton = styled(defaultConfig)`
   color: ${colors.veryLightBrown};
   background-color: ${colors.white};
-  border: ${sizes.size2} solid ${colors.veryLightBrown};
+  outline: ${sizes.size2} solid ${colors.veryLightBrown};
+  outline-offset: -${sizes.size2};
 `
 
 export const SecondaryButton = styled(defaultConfig)`

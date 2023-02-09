@@ -7,6 +7,8 @@ export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 export const REMOVE_PRODUCT_TO_CART = 'REMOVE_PRODUCT_TO_CART'
 export const CLEAR_CART = 'CLEAR_CART'
 export const CHANGE_QUANTITY = 'CHANGE_QUANTITY'
+export const ADD_PAYMENT_VALUE = 'ADD_PAYMENT_VALUE'
+export const CLEAR_PAYMENT_VALUE = 'CLEAR_PAYMENT_VALUE'
 
 interface AddUser {
   type: typeof ADD_USER
@@ -36,6 +38,15 @@ interface ChangeQuantity {
   payload: CartInterface
 }
 
+interface AddPaymentValue {
+  type: typeof ADD_PAYMENT_VALUE
+  payload: number
+}
+
+interface ClearPaymentValue {
+  type: typeof CLEAR_PAYMENT_VALUE
+}
+
 export type ActionTypes =
   | AddUser
   | ClearUser
@@ -43,3 +54,5 @@ export type ActionTypes =
   | RemoveProductToCart
   | ClearProduct
   | ChangeQuantity
+  | AddPaymentValue
+  | ClearPaymentValue

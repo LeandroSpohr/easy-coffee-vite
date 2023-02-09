@@ -9,7 +9,7 @@ import CartInterface from '../../models/interfaces/Cart'
 
 import NumericInput from '../../components/atoms/NumericInput'
 import ProductCard from '../../components/molecules/ProductCard'
-import { ColWrapper, WelcomeWrapper } from './QueryProducts.styles'
+import { ColWrapper, TitleWrapper, WelcomeWrapper } from './QueryProducts.styles'
 
 import { useUser } from '../../context/User'
 
@@ -28,7 +28,7 @@ const QueryProducts = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
   const { dispatch: modalDispatch } = useModal()
   const [products, setProducts] = useState<CartInterface[]>([])
-  const { capitalizeFirstLetter, formatCurrency } = useFormats()
+  const { capitalizeFirstLetter, formatCurrency, getFirstName } = useFormats()
   const { goToMyAccount } = useNavigation()
   const { greet } = useGreetings()
   const { removeModal } = useRemove()
@@ -136,9 +136,11 @@ const QueryProducts = () => {
     <>
       <ListTemplate title={'Lista de Produtos'}>
         <WelcomeWrapper>
-          <Typography as="h2">
-            {capitalizeFirstLetter(greet())}, {userState.user?.name}!
-          </Typography>
+          <TitleWrapper>
+            <Typography as="h2" centralized>
+              {capitalizeFirstLetter(greet())}, {getFirstName(userState.user?.name)}!
+            </Typography>
+          </TitleWrapper>
         </WelcomeWrapper>
         <br />
         <Row>
